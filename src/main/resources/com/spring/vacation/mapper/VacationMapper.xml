@@ -64,7 +64,7 @@
 	</insert>
 	
 	<!--사용자 페이지 보여주는 구문-->
-	<select id="showUser" resultType="VecationVO">
+	<select id="showUser" resultType="com.spring.vacation.domain.VacationVO">
 		select vacationAppNum , userid, type,startterm,state,applicationDate,approvaldate
 		from vacationApplicationTable where userid=#{userid} 
 	</select >
