@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.board.mapper.ODMapper">
+	<!-- 공문 작성 -->
+	<insert id="write">
+		INSERT INTO DOC_TAB (docNum,title,contents,authority,sign,attachFile,retentDate,send,dest,review,state,storage,message,regDate)
+		VALUES(docNum.NEXTVAL,#{title},#{contents},#{authority},#{sign},#{attachFile},#{retentDate},#{send},#{dest},#{review},#{state},#{storage},#{message},SYSDATE);
+	</insert>
+	<!-- 공문 결재/반려 -->
+	<update id="return">
+		UPDATE DOC_TAB SET state = #{state}, message = #{message}
+		WHERE docNum = #{docNum};
+	</update>
+	<update id="approve">
+		UPDATE DOC_TAB SET state = #{state}, storage = #{storage}
+		WHERE docNum = #{docNum};
+	</update>
+	<!-- 공문 보기 화면 -->
+	<select id="read" resultType="com.spring.od.domain.OfficeNoticeVO">
+		SELECT * FROM DOC_TAB WHERE title = #{title};
+	</select>
+</mapper>
