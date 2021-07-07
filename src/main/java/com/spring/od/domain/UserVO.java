@@ -19,4 +19,6 @@ public class UserVO {
 	private String telNum;
 	private String email;
 	private int deptno;
+	
+	private AuthVO authority; 
 }

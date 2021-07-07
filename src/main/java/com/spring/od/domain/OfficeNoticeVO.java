@@ -1,6 +1,7 @@
 package com.spring.od.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,4 +30,8 @@ public class OfficeNoticeVO {
 	private String storage; // 공문보관함
 	private String message; // 결재/반려시 메세지 추가
 	private Date regDate; //수신일자
+	
+	private List<AttachFileDTO> attach;
+	private List<AttachFileDTO> signattach;
+	
 }

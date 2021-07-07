@@ -7,16 +7,16 @@
 		VALUES(docNum.NEXTVAL,#{title},#{contents},#{authority},#{sign},#{attachFile},#{retentDate},#{send},#{dest},#{review},#{state},#{storage},#{message},SYSDATE);
 	</insert>
 	<!-- 공문 결재/반려 -->
-	<update id="return">
+	<update id="returned">
 		UPDATE DOC_TAB SET state = #{state}, message = #{message}
 		WHERE docNum = #{docNum};
 	</update>
 	<update id="approve">
-		UPDATE DOC_TAB SET state = #{state}, storage = #{storage}
+		UPDATE DOC_TAB SET state = #{state}, message = #{message}, storage = #{storage} , sign = #{sign}
 		WHERE docNum = #{docNum};
 	</update>
 	<!-- 공문 보기 화면 -->
 	<select id="read" resultType="com.spring.od.domain.OfficeNoticeVO">
-		SELECT * FROM DOC_TAB WHERE title = #{title};
+		SELECT * FROM DOC_TAB WHERE docNum = #{docNum};
 	</select>
 </mapper>

@@ -13,5 +13,5 @@ import lombok.ToString;
 @NoArgsConstructor
 public class AuthVO {
 	private String authority;
-	private int id;
+	private String id;
 }

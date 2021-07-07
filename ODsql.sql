@@ -36,3 +36,14 @@ CREATE TABLE AUTH_TAB(
 
 CREATE SEQUENCE docNum;
 
+--첨부파일 테이블 생성
+create table doc_attach(
+	uuid varchar2(100) not null,
+	uploadPath varchar2(200) not null,
+	fileName varchar2(100) not null,
+	fileType char(1) default 'I',
+	docNum NUMBER(10)
+);
+
+alter table doc_attach add constraint pk_attach primary key(uuid);
+alter table doc_attach add constraint fk_doc_attach foreign key(docNum) references DOC_TAB(docNum);
