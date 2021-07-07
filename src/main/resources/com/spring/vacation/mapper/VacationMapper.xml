@@ -1,3 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.board.mapper.VacationMapper"></mapper>
+<mapper namespace="com.spring.board.mapper.VacationMapper">
+
+	
+	<!-- 관리자 -->
+	<!--신청서 보기 ilst(관리자가 보는방법-전체)  -->
+<!-- 	<select  id="selectAll" resultType="com.spring.vacation.domain.VacationVO">
+		select holidayAppNum,userid,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
+		from vacationApplicationTable at1, vacationScedule hs
+		where at1.userid=hs.id and state not in('신청') 
+		order by holidayAppNum;
+	</select> -->
+	<!-- 관리자가 처음으로 보는 페이지 -->
+	<select  id="selectMonth" resultType="com.spring.vacation.domain.VacationVO">
+	<![CDATA[
+		select vacationAppNum,userid,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
+		from applicationTable at1,vacationScedule hs
+		where at1.userid=hs.id and startterm>=#{nowMonth} and startterm< #{nextMonth} and state not in('신청') 
+		order by vacationAppNum
+		]]>	
+
+	</select>
+	<!--  -->
+	<select  id="countApp" resultType="Inteager">
+		select count(*)
+		from vacationApplicationTable at1, vacationScedule hs
+		where at1.userid=hs.id and at1.state like '신청';
+	</select>
+	<!-- type이 '신청'인 리스트만 조회 -->
+	<select  id="applicationList" resultType="com.spring.vacation.domain.VacationVO">
+		select vacationAppNum,userid,name,type,startterm,endterm,reason,state
+		from vacationApplicationTable at1, vacationScedule hs
+		where at1.userid=hs.id and at1.state like '신청';
+	</select>
+	<!-- 휴가신청 승인해주기 -->
+	<!-- 승인 -->
+	<update id="ok">
+		update vacationApplicationTable 
+		set approvalDate=sysdate, state='승인'  
+		where vacationAppNum=#{vacationAppNum};
+	</update>
+	<!-- 거절 -->
+	<update id="no">
+		update applicationTable 
+		set approvalDate=sysdate, state='거절',refusalreason=#{refusalreason}  
+		where vacationAppNum=#{vacationAppNum};
+	</update>
+	<!-- 휴가 갯수의 변화 -->
+	<update id="updateCnt">
+		update vacationScedule 
+		set holidayNum =(select count(userid) 
+		from vacationApplicationTable where userid=#{userid} and state not in('거절'))
+		where id = #{id};
+	</update>
+	
+	
+	
+	<!-- 사용자 -->
+		<!-- 신청서 등록 구문 -->
+	<insert id="">
+		insert into vacationApplicationTable(holidayAppNum,userid,type,startterm,endterm,state,applicationDate,reason) 
+		values(vacationAppNum_SEQ.nextval,#{userid},#{type},#{startterm},#{endterm},#{state},#{applicationDate},#{reason})
+	</insert>
+	
+	<!--사용자 페이지 보여주는 구문-->
+	<select id="showUser" resultType="VecationVO">
+		select vacationAppNum , userid, type,startterm,state,applicationDate,approvaldate
+		from vacationApplicationTable where userid=#{userid} 
+	</select >
+	<select id="showUserOne">
+		select vacationAppNum,userid,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
+		from vacationApplicationTable
+		where userid=#{userid} and vacationAppNum=#{vacationAppNum}
+	</select>
+	<update id="userUpdateApp">
+		update vacationApplicationTable 
+		set type=#{type},startterm=#{startterm}, endterm=#{endterm} ,applicationDate=sysdate
+		where userid=#{userid} and vacationAppNum=#{vacationAppNum}
+	</update>
+	<delete id="deleteUserApp">
+		delete from vacationApplicationTable
+		where userid=#{userid} and vacationAppNum=#{vacationAppNum}
+	</delete>
+</mapper>
