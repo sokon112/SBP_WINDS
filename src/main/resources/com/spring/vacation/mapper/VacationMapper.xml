@@ -22,7 +22,7 @@
 
 	</select>
 	<!--  -->
-	<select  id="countApp" resultType="Inteager">
+	<select  id="countApp" resultType="int">
 		select count(*)
 		from vacationApplicationTable at1, vacationScedule hs
 		where at1.userid=hs.id and at1.state like '신청';
