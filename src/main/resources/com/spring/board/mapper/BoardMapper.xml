@@ -31,12 +31,12 @@
 	</select> -->
 	
 	<!-- 페이지 나누기 적용 -->
-	<select id="list" resultType="com.spring.domain.BoardVO">
+	<select id="list" resultType="com.spring.board.domain.BoardVO">
 		<![CDATA[
 				select *
-				from(select /*+INDEX_DESC(spring_board pk_spring_board)*/
+				from(select /*+INDEX_DESC(board_table board_tb_seq)*/
 				          rownum rn,bno,title,writer,regdate,updatedate
-				     from SPRING_BOARD
+				     from board_table
 				     where 
 		]]>		
 		
@@ -51,7 +51,7 @@
 	
 	<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
-		select count(*) from spring_board 
+		select count(*) from board_table 
 		where
 		
 		<include refid="criteria"></include>
@@ -61,8 +61,8 @@
 	
 		
 	<!-- 특정번호 조회 : bno에 해당하는 게시물 가져오기(read) -->
-	<select id="read" resultType="com.spring.domain.BoardVO">
-		select * from spring_board where bno=#{bno}
+	<select id="read" resultType="com.spring.board.domain.BoardVO">
+		select * from board_table where bno=#{bno}
 	</select>
 	
 	
