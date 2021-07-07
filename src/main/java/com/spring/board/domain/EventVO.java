@@ -13,14 +13,15 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardVO {
-	private int bno;
-	private String nickname;
+public class EventVO {
+	private int no;
+	private String writer;
 	private String title;
-	private String content;
+	private String contents;
 	private String password;
 	private Date uploaddate;
-	private int views;
 	
+	//첨부파일 리스트
+		private List<BoardAttachFileDTO> attachList;
 	
 }
