@@ -24,11 +24,24 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">SBP Wind 로고자리</a>
+                <a class="navbar-brand" href="/">SBP Wind 로고자리</a>
             </div>
             <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-center">               
+            <ul class="nav navbar-top-links navbar-center">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>휴가 목록<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 승인</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 거절</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->               
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#">
                         <i class="fa fa-comment fa-fw"></i> 휴가 신청
@@ -38,7 +51,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>신청 확인<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 승인</a>

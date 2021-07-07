@@ -24,25 +24,25 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">SBP Wind 로고자리</a>
+                <a class="navbar-brand" href="/">SBP Wind 로고자리</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-center">               
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="/od/">
                         <i class="fa fa-envelope fa-fw"></i> ERD 시스템
                     </a>
                     <!-- /.dropdown-alerts -->
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="/board/">
                         <i class="fa fa-comment fa-fw"></i> 커뮤니티
                     </a>
                     <!-- /.dropdown-alerts -->
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="/vacation/">
                         <i class="fa fa-tasks fa-fw"></i> 휴가신청
                     </a>
                     <!-- /.dropdown-alerts -->
