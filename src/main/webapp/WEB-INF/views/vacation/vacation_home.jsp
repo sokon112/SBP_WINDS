@@ -14,6 +14,7 @@
 	<pre class="mt-5 mb-3 text-muted text-center"> 
 Soldesk Big-Data Professional Winds
 김석현 남광우 심태현 이채은 박다영 황다빈
+test
 	</pre>
 </div>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
