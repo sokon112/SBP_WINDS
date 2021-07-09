@@ -1,8 +1,11 @@
 package com.spring.od.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.od.domain.AttachFileDTO;
 import com.spring.od.domain.OfficeNoticeVO;
 import com.spring.od.mapper.DocAttachMapper;
 import com.spring.od.mapper.DocMapper;
@@ -15,6 +18,9 @@ public class DocServiceImpl implements DocService {
 	
 	@Autowired
 	private DocAttachMapper attachMapper;
+	
+	@Autowired
+	private int test;
 	
 	@Override
 	public boolean write(OfficeNoticeVO vo) {
@@ -34,20 +40,27 @@ public class DocServiceImpl implements DocService {
 
 	@Override
 	public boolean returned(OfficeNoticeVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		return mapper.returned(vo)>0?true:false;
 	}
 
 	@Override
 	public boolean approve(OfficeNoticeVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		return mapper.approve(vo)>0?true:false;
 	}
 
 	@Override
 	public OfficeNoticeVO read(int docNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.read(docNum);
+	}
+
+	@Override
+	public List<AttachFileDTO> getAttachList(int docNum) {
+		return attachMapper.findByDocNum(docNum);
+	}
+
+	@Override
+	public int test() {
+		return 0;
 	}
 
 }
