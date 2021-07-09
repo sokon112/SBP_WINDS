@@ -9,5 +9,5 @@ public interface MainService {
 	public List<OfficeNoticeVO> MainWaitList();
 	public List<OfficeNoticeVO> MainSuccessList();
 	public List<OfficeNoticeVO> MainTempList();
-	public List<OfficeNoticeVO> search(String criteria, String Keyword);
+	public List<OfficeNoticeVO> searchList(String criteria, String Keyword);
 }

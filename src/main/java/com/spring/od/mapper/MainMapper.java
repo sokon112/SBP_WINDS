@@ -11,7 +11,7 @@ public interface MainMapper {
 	public List<OfficeNoticeVO> MainWaitList();
 	public List<OfficeNoticeVO> MainSuccessList();
 	public List<OfficeNoticeVO> MainTempList();
-	public List<OfficeNoticeVO> search(@Param("criteria")String criteria,@Param("keyword")String keyword);
+	public List<OfficeNoticeVO> searchList(@Param("criteria")String criteria,@Param("keyword")String keyword);
 	
 	
 	
