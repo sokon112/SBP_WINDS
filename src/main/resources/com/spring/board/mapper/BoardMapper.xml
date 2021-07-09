@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.board.mapper.BoardMapper">
 
-	<!-- 삽입 : bno,nickname,title,contents,password,view 이며 bno의 경우 seq_board 값으로 삽입 (insert)-->
+<!-- 게시판 게시물 -->
+
+	<!-- 삽입 : bno,nickname,title,contents,password,view 이며 bno의 경우 board_tb_seq 값으로 삽입 (insert)-->
 	<insert id="insert">
 		<!-- 주로 pk 값을 미리 SQL 쿼리문을 통해서 처리해 두고 특정한 이름으로 결과를 보관 -->
 		<selectKey keyProperty="bno" order="BEFORE" resultType="int">
@@ -18,24 +20,20 @@
 	</delete>
 	
 	
-	<!-- 수정 : title,content,updatedate,  bno가 일치시(update) -->
+	<!-- 수정 : title,contents,uploaddate 가 일치시(update) -->
 	<update id="update">
 		update board_table
-		set title=#{title},content=#{content},updatedate=sysdate
+		set title=#{title},contents=#{contents},uploaddate=sysdate
 		where bno=#{bno} and password=#{password}
 	</update>
 	
-	<!-- 전체조회 : (list) 페이지 나누기 전 -->
-	<!-- <select id="list" resultType="com.spring.domain.BoardVO">
-		select * from spring_board where bno>0 order by bno desc,regdate desc
-	</select> -->
 	
 	<!-- 페이지 나누기 적용 -->
 	<select id="list" resultType="com.spring.board.domain.BoardVO">
 		<![CDATA[
 				select *
 				from(select /*+INDEX_DESC(board_table board_tb_seq)*/
-				          rownum rn,bno,title,writer,regdate,updatedate
+				          rownum rn,bno,nickname,title, contents, uploaddate, views
 				     from board_table
 				     where 
 		]]>		
@@ -66,12 +64,12 @@
 	</select>
 	
 	
-	<!-- 댓글 숫자 수정 : 댓글의 삽입 or 댓글 삭제 시 
-	<update id="replyCntUpdate">
-		update spring_board set replycnt = replycnt+ #{amount}
+	<!-- 댓글 숫자 수정 : 댓글의 삽입 or 댓글 삭제 시 -->
+	<update id="commentCntUpdate">
+		update board_table set commentcnt = commentcnt+ #{amount}
 		where bno=#{bno}
 	</update>
-	-->
+	
 	
 	
 	

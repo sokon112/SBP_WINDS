@@ -2,10 +2,11 @@ package com.spring.board.service;
 
 import java.util.List;
 
+import com.spring.board.domain.BoardAttachFileDTO;
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.Criteria;
 
-public interface BoardService {
+public interface CommentService {
 
 	public boolean insert(BoardVO vo);
 	public boolean delete(int bno);
