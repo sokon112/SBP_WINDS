@@ -37,11 +37,16 @@
 		order by vacationAppNum
 	</select>
 	<!-- 휴가신청 승인해주기 -->
-	<!-- 승인 -승인할때 휴가 갯수 깍이도록 or join을 사용해서 계산=> 하나더 만들기~~-->
+	<!-- 승인 -승인할때 휴가 갯수 깍이도록 or join을 사용해서 계산=> 하나더 만들기~~  => join은 실패 하나 더만들기 됬다!-->
 	<update id="ok">
 		update vacationApplicationTable 
 		set approvalDate=sysdate, state='승인'  
 		where vacationAppNum=#{vacationAppNum}
+	</update>
+	<update id="changeCnt">
+		update vacationScedule 
+		set (select count(userid) from vacationApplicationTable where userid=#{id})
+		where id=#{id}
 	</update>
 	<!-- 거절 -->
 	<update id="no">
@@ -50,13 +55,13 @@
 		where vacationAppNum=#{vacationAppNum}
 	</update>
 	<!-- 휴가 갯수의 변화 -->
-	<update id="updateCnt">
+	<!-- <update id="updateCnt">
 		update vacationScedule 
 		set VacationCnt =(select count(userid) 
 						  from vacationApplicationTable 
 						  where userid=#{userid} and state not in('거절'))
 		where id = #{id}
-	</update>
+	</update> -->
 	
 	
 	<!-- 사용자 -->
@@ -74,17 +79,17 @@
 	<select id="showUserOne">
 		select vacationAppNum,userid,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
 		from vacationApplicationTable
-		where userid=#{userid} and vacationAppNum=#{vacationAppNum}
+		where vacationAppNum=#{vacationAppNum}
 	</select>
 	<!-- 수정해야함 -->
 	<update id="userUpdateApp" >
 		update vacationApplicationTable 
 		set type=#{type},startterm=#{startterm}, endterm=#{endterm} ,applicationDate=sysdate,reason=#{reason}
-		where userid=#{userid} and vacationAppNum=#{vacationAppNum}
+		where vacationAppNum=#{vacationAppNum}
 	</update>
 	<delete id="deleteUserApp">
 		delete from vacationApplicationTable
-		where userid=#{userid} and vacationAppNum=#{vacationAppNum}
+		where vacationAppNum=#{vacationAppNum}
 	</delete>
 	<!-- 휴가 반납 : 승인된 휴가 중에서  cnt필요함-->
 	<update id="cancleVacation">

@@ -14,13 +14,14 @@ public class VacationCriteria {
 	private String keyword;
 	
 	Calendar cal = Calendar.getInstance();
-	Date term=null;
+
 	
 	
 	public VacationCriteria(Date nowMonth) {
 		super();
-		this.nowMonth=nowMonth;
 		cal.setTime(nowMonth);
+		cal.set(Calendar.DATE, 1);
+		this.nowMonth=cal.getTime();
 		cal.add(Calendar.MONTH, 1);
 		this.nextMonth=cal.getTime();
 	}
