@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.od.mapper.StorageMapper">
-<select id="waitList" resultType="OfficeNoticeVO">
+<select id="waitList" resultType="com.spring.od.domain.OfficeNoticeVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -16,7 +16,7 @@
 			where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 
-<select id="successList" resultType="OfficeNoticeVO">
+<select id="successList" resultType="com.spring.od.domain.OfficeNoticeVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -31,7 +31,7 @@
 			where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 
-<select id="tempList" resultType="OfficeNoticeVO">
+<select id="tempList" resultType="com.spring.od.domain.OfficeNoticeVO">
 <![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -46,5 +46,72 @@
 			where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 
+<select id="waitSearch" resultType="com.spring.od.domain.OfficeNoticeVO">
+	<![CDATA[
+	select * from (
+		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
+		rownum rn,docNum,title,state,D2.deptName,U.name,sysdate,retentDate
+		from doc_tab D1
+		inner join User_TAB U
+		on D1.send = U.id
+		inner join DM_TAB D2
+		on D2.Deptnum = U.Deptnum
+		where]]>
+		<!-- <include refid="criteria"></include> jsp작업 후 --> 
+		<![CDATA[
+			rownum <= (#{pageNum}*#{amount}))
+		where rn > ((#{pageNum}-1)*#{amount})]]>
+</select>
+<select id="successSearch" resultType="com.spring.od.domain.OfficeNoticeVO">
+	<![CDATA[
+	select * from (
+		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
+		rownum rn,docNum,title,D2.deptName,U.name,sysdate
+		from doc_tab D1
+		inner join User_TAB U
+		on D1.send = U.id
+		inner join DM_TAB D2
+		on D2.Deptnum = U.Deptnum
+		where]]>
+		<!-- <include refid="criteria"></include> jsp작업 후 -->
+		<![CDATA[
+			rownum <= (#{pageNum}*#{amount}))
+		where rn > ((#{pageNum}-1)*#{amount})]]>
+</select>
 
+<select id="tempSearch" resultType="com.spring.od.domain.OfficeNoticeVO">
+<![CDATA[
+	select * from (
+		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
+		rownum rn,docNum,title,D2.deptName,U.name,sysdate
+		from doc_tab D1
+		inner join User_TAB U
+		on D1.send = U.id
+		inner join DM_TAB D2
+		on D2.Deptnum = U.Deptnum
+		where]]>
+		<!-- <include refid="criteria"></include> jsp작업 후 -->
+		<![CDATA[
+			rownum <= (#{pageNum}*#{amount}))
+		where rn > ((#{pageNum}-1)*#{amount})]]>
+</select>
+<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='W'.toString()">
+							U.name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='N'.toString()">
+							docNum like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 </mapper>
