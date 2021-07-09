@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.board.mapper.BoardAttachMapper">
+<mapper namespace="com.spring.board.mapper.AttachMapper">
 
 	<!-- insert : 이벤트 -->
 	<insert id="eventinsert">
@@ -24,22 +24,22 @@
 	</delete>
 	
 	
-	<!-- eventselect(id:findByBno) : bno 일치시(BoardAttachFileDTO 이용)-->
-	<select id="eventfindByBno" resultType="com.spring.board.domain.BoardAttachFileDTO">
+	<!-- eventselect(id:findByBno) : bno 일치시(AttachFileDTO 이용)-->
+	<select id="eventfindByBno" resultType="com.spring.board.domain.EventAttachFileDTO">
 		select images from event_table where bno=#{bno} 
 	</select>
 	<!-- hobbyselect(id:findByBno) : bno 일치시(BoardAttachFileDTO 이용)-->
-	<select id="hobbyfindByBno" resultType="com.spring.board.domain.BoardAttachFileDTO">	
+	<select id="hobbyfindByBno" resultType="com.spring.board.domain.HoddyAttachFileDTO">	
 		select images from hobby_table where bno=#{bno} 
 	</select>
 	
 	<!-- 전일자 첨부파일 리스트 (이벤트)-->
-	<select id="eventgetOldFiles" resultType="com.spring.board.domain.BoardAttachFileDTO">
+	<select id="eventgetOldFiles" resultType="com.spring.board.domain.EventAttachFileDTO">
 		select images from event_table
 		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
 	</select>
 	<!-- 전일자 첨부파일 리스트 (동호회)-->
-	<select id="hobbygetOldFiles" resultType="com.spring.board.domain.BoardAttachFileDTO">	
+	<select id="hobbygetOldFiles" resultType="com.spring.board.domain.HoddyAttachFileDTO">	
 		select images from hobby_table
 		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
 	</select>
