@@ -22,6 +22,6 @@ public class EventVO { //이벤트
 	private Date uploaddate; //날짜
 	
 	//첨부파일 리스트
-	private List<BoardAttachFileDTO> attachList;
+	private List<EventAttachFileDTO> attachList;
 	
 }

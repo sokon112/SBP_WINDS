@@ -1,0 +1,17 @@
+package com.spring.board.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Setter
+@Getter
+public class EventAttachFileDTO { //파일첨부(동호회)
+	private String uuid;   //아이디
+	private String uploadPath; //
+	private String fileName;  //파일이름
+	private boolean fileType; //파일타입
+	private int bno; //번호
+	
+}

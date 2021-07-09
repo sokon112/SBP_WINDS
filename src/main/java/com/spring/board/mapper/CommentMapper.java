@@ -8,7 +8,7 @@ import com.spring.board.domain.CommentVO;
 import com.spring.board.domain.Criteria;
 
 
-public interface CommentMapper {
+public interface CommentMapper { //댓글
 	public int insert(CommentVO comment);
 	public CommentVO read(int rno);
 	public int update(CommentVO comment);

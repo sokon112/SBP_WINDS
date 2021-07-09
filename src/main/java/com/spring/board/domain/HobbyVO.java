@@ -3,7 +3,7 @@ package com.spring.board.domain;
 import java.util.Date;
 import java.util.List;
 
-import com.spring.board.domain.BoardAttachFileDTO;
+import com.spring.board.domain.EventAttachFileDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +25,6 @@ public class HobbyVO { //동호회
 	private Date uploaddate; //날짜
 	
 	//첨부파일 리스트
-	private List<BoardAttachFileDTO> attachList;
+	private List<HobbyAttachFileDTO> attachList;
 	
 }

@@ -2,7 +2,7 @@ package com.spring.board.service;
 
 import java.util.List;
 
-import com.spring.board.domain.BoardAttachFileDTO;
+import com.spring.board.domain.EventAttachFileDTO;
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.Criteria;
 
