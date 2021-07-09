@@ -19,8 +19,6 @@ public class DocServiceImpl implements DocService {
 	@Autowired
 	private DocAttachMapper attachMapper;
 	
-	@Autowired
-	private int test;
 	
 	@Override
 	public boolean write(OfficeNoticeVO vo) {
@@ -58,9 +56,5 @@ public class DocServiceImpl implements DocService {
 		return attachMapper.findByDocNum(docNum);
 	}
 
-	@Override
-	public int test() {
-		return 0;
-	}
 
 }

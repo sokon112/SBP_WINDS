@@ -12,6 +12,5 @@ public interface DocService {
 	public OfficeNoticeVO read(int docNum);
 	
 	public List<AttachFileDTO> getAttachList(int docNum);
-	
-	public int test();
+
 }
