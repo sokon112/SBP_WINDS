@@ -9,6 +9,7 @@ public interface DocService {
 	public boolean write(OfficeNoticeVO vo);
 	public boolean returned(OfficeNoticeVO vo);
 	public boolean approve(OfficeNoticeVO vo);
+	public boolean remove(int docNum);
 	public OfficeNoticeVO read(int docNum);
 	
 	public List<AttachFileDTO> getAttachList(int docNum);

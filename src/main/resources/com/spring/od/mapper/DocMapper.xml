@@ -15,6 +15,9 @@
 		UPDATE DOC_TAB SET state = #{state}, message = #{message}, storage = #{storage} , sign = #{sign}
 		WHERE docNum = #{docNum};
 	</update>
+	<delete id="remove">
+		DELETE FROM DOC_TAB WHERE docNum = #{docNum}
+	</delete>
 	<!-- 공문 보기 화면 -->
 	<select id="read" resultType="com.spring.od.domain.OfficeNoticeVO">
 		SELECT * FROM DOC_TAB WHERE docNum = #{docNum};

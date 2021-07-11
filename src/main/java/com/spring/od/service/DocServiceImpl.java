@@ -56,5 +56,10 @@ public class DocServiceImpl implements DocService {
 		return attachMapper.findByDocNum(docNum);
 	}
 
+	@Override
+	public boolean remove(int docNum) {
+		return mapper.remove(docNum)>0?true:false;
+	}
+
 
 }
