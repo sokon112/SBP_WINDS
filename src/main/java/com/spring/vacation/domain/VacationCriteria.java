@@ -5,6 +5,11 @@ package com.spring.vacation.domain;
 import java.util.Calendar;
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class VacationCriteria { 
 	
 	private Date nowMonth;

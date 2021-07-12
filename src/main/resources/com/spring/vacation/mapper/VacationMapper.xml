@@ -13,9 +13,9 @@
 	<!-- 관리자가 처음으로 보는 페이지 - 승인, 거부 인 사람 -->
 	<select  id="selectMonth" resultType="com.spring.vacation.domain.VacationVO">
 	<![CDATA[
-		select vacationAppNum,userid,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
+		select vacationAppNum,id,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
 		from vacationApplicationTable vat, vacationScedule hs
-		where vat.userid=hs.id and startterm >= #{nowMonth} and startterm < #{nextMonth} and state not in('신청') 
+		where vat.id=hs.id and startterm >= #{nowMonth} and startterm < #{nextMonth} and state not in('신청') 
 	]]>	
 	<include refid="criteria"></include>
 	<![CDATA[
@@ -27,13 +27,13 @@
 	<select  id="countApp" resultType="int">
 		select count(*)
 		from vacationApplicationTable vat, vacationScedule vs
-		where vat.userid=vs.id and vat.state like '신청'
+		where vat.id=vs.id and vat.state like '신청'
 	</select>
 	<!-- type이 '신청'인 리스트만 조회 -->
 	<select id="applicationList" resultType="com.spring.vacation.domain.VacationVO">
-		select vacationAppNum,userid,name,type,startterm,endterm,reason,state
+		select vacationAppNum,id,name,type,startterm,endterm,reason,state
 		from vacationApplicationTable vat, vacationScedule vs
-		where vat.userid=vs.id and vat.state like '신청'
+		where vat.id=vs.id and vat.state like '신청'
 		order by vacationAppNum
 	</select>
 	<!-- 휴가신청 승인해주기 -->
@@ -45,7 +45,7 @@
 	</update>
 	<update id="changeCnt">
 		update vacationScedule 
-		set (select count(userid) from vacationApplicationTable where userid=#{id})
+		set (select count(userid) from vacationApplicationTable where id=#{id})
 		where id=#{id}
 	</update>
 	<!-- 거절 -->
@@ -67,17 +67,17 @@
 	<!-- 사용자 -->
 		<!-- 신청서 등록 구문 -->
 	<insert id="insertUserApp">
-		insert into vacationApplicationTable(holidayAppNum,userid,type,startterm,endterm,state,applicationDate,reason) 
-		values(vacationAppNum_SEQ.nextval,#{userid},#{type},#{startterm},#{endterm},#{state},#{applicationDate},#{reason})
+		insert into vacationApplicationTable(holidayAppNum,id,type,startterm,endterm,state,applicationDate,reason) 
+		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},#{state},#{applicationDate},#{reason})
 	</insert>
 	
 	<!--사용자 페이지 보여주는 구문-->
 	<select id="showUser" resultType="com.spring.vacation.domain.VacationVO">
-		select vacationAppNum,userid,type,startterm,state,applicationDate,approvaldate
-		from vacationApplicationTable where userid=#{userid} 
+		select vacationAppNum,id,type,startterm,state,applicationDate,approvaldate
+		from vacationApplicationTable where id=#{id} 
 	</select >
 	<select id="showUserOne">
-		select vacationAppNum,userid,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
+		select vacationAppNum,id,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
 		from vacationApplicationTable
 		where vacationAppNum=#{vacationAppNum}
 	</select>
@@ -95,9 +95,19 @@
 	<update id="cancleVacation">
 		update vacationApplicationTable 
 		set approvalDate=sysdate, state='반납'  
-		where vacationAppNum=#{vacationAppNum}
+		where vacationAppNum=#{vacationAppNum} and startterm>#{startterm}
 	</update>
+	<!-- 휴가 갯수를 가져오는 mapper -->
+	<select id="idCnt">
+		select VacationCnt from vacationScedule where id={#id}
+	</select>	
 	
+	<!-- 현재 월 불러오는 mapper -->
+	<select id="vacationDay">
+		select startterm 
+		from vacationApplicationTable 
+		where vacationAppNum=#{vacationAppNum}
+	</select>
 	
 	<!-- 검색 조건에 따라 검색 하기 -->
 	<!-- 동적 SQL  -->

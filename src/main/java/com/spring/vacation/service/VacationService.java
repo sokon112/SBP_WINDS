@@ -1,6 +1,7 @@
 package com.spring.vacation.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import com.spring.vacation.domain.VacationCriteria;
@@ -15,14 +16,14 @@ public interface VacationService {
 	//상태가 신청인 것 조회
 	public List<VacationVO> applicationList();
 	//관리자 승인.거절
-	public boolean ok(int vacationAppNum,int userid);
-	public boolean no(int vacationAppNum);
+	public boolean ok(int vacationAppNum);
+	public boolean no(int vacationAppNum,String refusalreason);
 	
 	//사용자 
 	//휴가 신청서 제출
 	public boolean insertUserApp(VacationVO vacation);
 	//userid에 맞게 정보 검색
-	public List<VacationVO> showUser(int userid);
+	public List<VacationVO> showUser(int id);
 	//ㅇ선택한 문서 정보 가져오기 
 	public VacationVO showUserOne(int vacationAppNum);
 	//문서 수정
@@ -32,4 +33,8 @@ public interface VacationService {
 	//반려
 	public boolean cancleVacation(VacationVO vacation);
 	
+	public boolean idCnt(int id);
+	
+	
+	public Date vacationDay(int vacationAppNum);
 }
