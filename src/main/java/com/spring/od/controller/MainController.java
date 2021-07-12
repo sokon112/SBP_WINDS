@@ -31,7 +31,7 @@ public class MainController {
 	public String searchList(OfficeNoticeVO vo,Criteria cri) {
 		log.info("검색결과 요청....");
 		
-		
+		return "";
 		
 	}
 
