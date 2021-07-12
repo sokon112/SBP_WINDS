@@ -1,14 +1,8 @@
 package com.spring.board.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,12 +28,19 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	@GetMapping("/")	
+	public String odMain() {
+		log.info("board 메인 접속....");
+		return "/board/board_home";
+	}
+	
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri) {
 		log.info("전체 리스트 요청 ");
 		
 		//사용자가 선택한 페이지 게시물
 		List<BoardVO> list=service.list(cri);
+		
 		//전체 게시물 수 
 		int total = service.total(cri);
 				
