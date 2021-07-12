@@ -1,11 +1,22 @@
 package com.spring.od.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.od.domain.AttachFileDTO;
+import com.spring.od.domain.Criteria;
 import com.spring.od.domain.OfficeNoticeVO;
 import com.spring.od.service.DocService;
 
@@ -19,6 +30,11 @@ public class DocController {
 	@Autowired
 	private DocService service;
 	
+	@GetMapping("/register")
+	public void register() {
+		log.info("새로운 공문 작성 폼 요청");
+	}
+	
 	//공문 등록
 	@PostMapping("/register")
 	public String registerPost(OfficeNoticeVO vo,RedirectAttributes rttr) {
@@ -30,11 +46,89 @@ public class DocController {
 		
 		if(service.write(vo)) {
 			rttr.addFlashAttribute("result", vo.getDocNum());
-			return "";
+			return "redirect:wait";
 		}
 		else {
-			return "od/od_home";
+			return "redirect:register";
 		}
 	}
+	@GetMapping("/tempRead")
+	public void readtemp(int docNum,@ModelAttribute("cri") Criteria cri,Model model) {
+		log.info("임시 저장 페이지 가져오기"+docNum+" cri : "+cri);
+		
+		OfficeNoticeVO vo = service.read(docNum);
+		model.addAttribute("vo", vo);
+	}
+	
+	@PostMapping("/modify")
+	public String modify(OfficeNoticeVO vo,Criteria cri,RedirectAttributes rttr) {
+		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
+		
+		//첨부 파일 확인
+		if(vo.getAttach()!=null) {
+			vo.getAttach().forEach(attach -> log.info(""+attach));
+		}	
+		
+		service.write(vo);		
+		
+		
+		rttr.addFlashAttribute("result","성공");
+		
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
+		
+		return "redirect:wait";
+	}
+	@PostMapping("/remove")
+	public String remove(int docNum,Criteria cri,RedirectAttributes rttr) {
+		log.info("공문 삭제"+docNum);
+		
+		
+		//서버(폴더)에 저장된 첨부파일 삭제
+		//① bno에 해당하는 첨부파일 목록 알아내기
+		List<AttachFileDTO> attachList=service.getAttachList(docNum);
+		
+		//게시글 삭제 + 첨부파일 삭제
+		if(service.remove(docNum)) {
+			//② 폴더 파일 삭제
+			
+			rttr.addFlashAttribute("result","성공");
+		}	
+		
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
+		return "redirect:list";
+	}
+	private void deleteFiles(List<AttachFileDTO> attachList) {
+		log.info("첨부파일 삭제 "+attachList);
+		
+		if(attachList==null || attachList.size()<=0) {
+			return;
+		}
+		
+		for(AttachFileDTO dto:attachList) {
+			Path path = Paths.get("c:\\upload\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
+			
+			try {
+				Files.deleteIfExists(path);
+				
+				if(Files.probeContentType(path).startsWith("image")) {
+					Path thumbnail = Paths.get("c:\\upload\\", 
+							dto.getUploadPath()+"\\s_"+dto.getUuid()+"_"+dto.getFileName());
+					Files.delete(thumbnail);
+				}
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
 	
 }

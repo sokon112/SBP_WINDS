@@ -16,4 +16,5 @@ public interface CommentMapper { //댓글
 	public int deleteAll(int ano);
 	public int getCountByBno(int bno);
 	public List<CommentVO> list(@Param("cri") Criteria cri,@Param("bno") int bno);
+	public int total(Criteria cri);
 }
