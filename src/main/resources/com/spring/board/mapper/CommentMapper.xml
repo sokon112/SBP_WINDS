@@ -5,30 +5,30 @@
 <!-- 댓글 : 게시판에만 -->
 
 	<!-- insert : 게시판-->
-	<insert id="insert">
+	<insert id="commentinsert">
 		insert into comment_table(dno,bno,nickname, password, contents)
 		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents})
 	</insert>
 		
 	<!-- 댓글 하나 가져오기  : rno 가 일치-->
-	<select id="read" resultType="com.spring.board.domain.CommentVO">
+	<select id="commentread" resultType="com.spring.board.domain.CommentVO">
 		select * from comment_table where rno=#{rno}
 	</select>
 	
 	<!-- 댓글 수정 : 댓글 내용만 수정, updatedate, rno 일치하면 -->
-	<update id="update">
+	<update id="commentupdate">
 		update comment_table
 		set contents=#{contents}, uploaddate=sysdate
 		where rno=#{rno}
 	</update>
 	
 	<!-- 댓글 삭제 : rno, password 일치 -->
-	<delete id="delete">
+	<delete id="commentdelete">
 		delete from comment_table where rno=#{rno} and password=#{password}
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="list" resultType="com.spring.board.domain.CommentVO">
+	<select id="commentlist" resultType="com.spring.board.domain.CommentVO">
 		<![CDATA[	
 			select dno,bno,nickname,password,contents,uploaddate
 			from(
@@ -46,10 +46,13 @@
 		select count(*) from comment_table where bno=#{bno}	
 	</select>
 	
-	<delete id="deleteAll">
+	<delete id="commentdeleteAll">
 		delete from comment_table where bno=#{bno}	
 	</delete>
 
+	<select id="commenttotal" resultType="com.spring.board.domain.CommentVO">
+	
+	</select>
 
 
 

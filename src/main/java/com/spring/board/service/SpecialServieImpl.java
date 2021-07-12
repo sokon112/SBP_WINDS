@@ -7,28 +7,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.board.domain.Criteria;
-import com.spring.board.domain.EventAttachFileDTO;
-import com.spring.board.domain.EventVO;
-import com.spring.board.mapper.EvenetMapper;
-import com.spring.board.mapper.EventAttachMapper;
+import com.spring.board.domain.SpecialAttachFileDTO;
+import com.spring.board.domain.SpecialVO;
+import com.spring.board.mapper.SpecialAttachMapper;
+import com.spring.board.mapper.SpecialMapper;
 
 
 @Service
-public class EventServieImpl implements EventService {
+public class SpecialServieImpl implements SpecialService {
 
 	@Autowired
-	private EvenetMapper emapper;
+	private SpecialMapper smapper;
 	
 	@Autowired
-	private EventAttachMapper eventattachMapper;
+	private SpecialAttachMapper sattachMapper;
 	
 	
 	
 	@Transactional
 	@Override
-	public boolean insert(EventVO vo) {
+	public boolean insert(SpecialVO vo) {
 		//새글 등록		
-		boolean result=emapper.insert(vo)>0?true:false;
+		boolean result=smapper.insert(vo)>0?true:false;
 			
 		//첨부파일 등록
 		if(vo.getAttachList()==null || vo.getAttachList().size()<=0) {
@@ -37,7 +37,7 @@ public class EventServieImpl implements EventService {
 		
 		vo.getAttachList().forEach(attach ->{
 			attach.setBno(vo.getNo());
-			eventattachMapper.insert(attach);			
+			sattachMapper.insert(attach);			
 		});
 		
 		return result;
@@ -50,21 +50,21 @@ public class EventServieImpl implements EventService {
 		
 
 		//첨부파일 삭제
-		eventattachMapper.delete(bno);
+		sattachMapper.delete(bno);
 		
 		//게시글 삭제
-		return emapper.delete(bno)>0?true:false;
+		return smapper.delete(bno)>0?true:false;
 	}
 
 	@Transactional
 	@Override
-	public boolean update(EventVO vo) {
+	public boolean update(SpecialVO vo) {
 		//기존에 첨부파일 정보 모두 삭제 후 삽입
 		
-		eventattachMapper.delete(vo.getNo());
+		sattachMapper.delete(vo.getNo());
 		
 		//게시글 수정
-		boolean modifyResult = emapper.update(vo)>0?true:false;
+		boolean modifyResult = smapper.update(vo)>0?true:false;
 		
 		if(vo.getAttachList() == null) {
 			return modifyResult;
@@ -74,32 +74,32 @@ public class EventServieImpl implements EventService {
 		
 		//첨부파일 삽입
 		if(modifyResult && vo.getAttachList().size()>0) {
-			for(EventAttachFileDTO dto:vo.getAttachList()) {
+			for(SpecialAttachFileDTO dto:vo.getAttachList()) {
 				dto.setBno(vo.getNo());
-				eventattachMapper.insert(dto);
+				sattachMapper.insert(dto);
 			}
 		}
 		return modifyResult;
 	}
 
 	@Override
-	public List<EventVO> list(Criteria cri) {		
-		return emapper.list(cri);
+	public List<SpecialVO> list(Criteria cri) {		
+		return smapper.list(cri);
 	}
 
 	@Override
-	public EventVO read(int bno) {		
-		return emapper.read(bno);
+	public SpecialVO read(int bno) {		
+		return smapper.read(bno);
 	}
 
 	@Override
 	public int total(Criteria cri) {		
-		return emapper.totalCnt(cri);
+		return smapper.totalCnt(cri);
 	}
 
 	@Override
-	public List<EventAttachFileDTO> getAttachList(int bno) {		
-		return eventattachMapper.findByBno(bno);
+	public List<SpecialAttachFileDTO> getAttachList(int bno) {		
+		return sattachMapper.findByBno(bno);
 	}
 
 

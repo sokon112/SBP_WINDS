@@ -5,7 +5,7 @@
 <!-- 게시판 게시물 -->
 
 	<!-- 삽입 : bno,nickname,title,contents,password,view 이며 bno의 경우 board_tb_seq 값으로 삽입 (insert)-->
-	<insert id="insert">
+	<insert id="boardinsert">
 		<!-- 주로 pk 값을 미리 SQL 쿼리문을 통해서 처리해 두고 특정한 이름으로 결과를 보관 -->
 		<selectKey keyProperty="bno" order="BEFORE" resultType="int">
 			select board_tb_seq.nextval from dual		
@@ -15,13 +15,13 @@
 	</insert>
 	
 	<!-- 삭제 : bno,password가 일치하면 삭제(delete) -->
-	<delete id="delete">
+	<delete id="boarddelete">
 		delete from board_table where bno=#{bno} and password=#{password}	
 	</delete>
 	
 	
 	<!-- 수정 : title,contents,uploaddate 가 일치시(update) -->
-	<update id="update">
+	<update id="boardupdate">
 		update board_table
 		set title=#{title},contents=#{contents},uploaddate=sysdate
 		where bno=#{bno} and password=#{password}
@@ -29,7 +29,7 @@
 	
 	
 	<!-- 페이지 나누기 적용 -->
-	<select id="list" resultType="com.spring.board.domain.BoardVO">
+	<select id="boardlist" resultType="com.spring.board.domain.BoardVO">
 		<![CDATA[
 				select *
 				from(select /*+INDEX_DESC(board_table board_tb_seq)*/
@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- 전체 게시물 수 -->
-	<select id="totalCnt" resultType="int">
+	<select id="boardtotalCnt" resultType="int">
 		select count(*) from board_table 
 		where
 		
@@ -59,7 +59,7 @@
 	
 		
 	<!-- 특정번호 조회 : bno에 해당하는 게시물 가져오기(read) -->
-	<select id="read" resultType="com.spring.board.domain.BoardVO">
+	<select id="boardread" resultType="com.spring.board.domain.BoardVO">
 		select * from board_table where bno=#{bno}
 	</select>
 	
