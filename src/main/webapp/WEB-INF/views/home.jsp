@@ -7,15 +7,19 @@
 <html>
 <head>
 	<title>Home</title>
-	<style>
-	</style>
 </head>
 <body>
-<div align="center">
+<div class="text-center">
 	<h1>SBP Winds Home</h1>
-	<pre class="mt-5 mb-3 text-muted text-center"> 
+	<div class="text-center">
+		<img src="/resources/img/totoro.png" class="img-thumbnail test" alt="">
+		
+	</div>
+	<div class="fixed-bototom">
+		<pre class="mt-5 mb-3 text-muted text-center"> 
 Soldesk Big-Data Professional Winds
 김석현 남광우 심태현 이채은 박다영 황다빈
-	</pre>
+		</pre>
+	</div>
 </div>
 <%@include file="../includes/home/footer.jsp" %>
