@@ -20,7 +20,7 @@ public class DocController {
 	private DocService service;
 	
 	//공문 등록
-	@PostMapping("/registre")
+	@PostMapping("/register")
 	public String registerPost(OfficeNoticeVO vo,RedirectAttributes rttr) {
 		log.info("새 공문 등록 요청"+vo);
 		
