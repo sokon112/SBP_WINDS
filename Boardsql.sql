@@ -66,6 +66,7 @@ CREATE TABLE hobby_table
 --동호회 테이블 시퀸스 생성
 create SEQUENCE hobby_tb_seq;
 
+--동호회 삽입
 insert into hobby_table(no,writer,title,  password, contents)
 values(hobby_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자');
 insert into hobby_table(no,writer,title,  password, contents)

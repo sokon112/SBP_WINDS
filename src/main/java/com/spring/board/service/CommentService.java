@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.spring.board.domain.EventAttachFileDTO;
 import com.spring.board.domain.BoardVO;
+import com.spring.board.domain.CommentVO;
 import com.spring.board.domain.Criteria;
 
 public interface CommentService {
 
-	public boolean insert(BoardVO vo);
+	public boolean insert(CommentVO comment);
 	public boolean delete(int bno);
 	public boolean update(BoardVO vo);
 	public List<BoardVO> list(Criteria cri);
