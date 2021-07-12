@@ -52,7 +52,7 @@ public class DocController {
 			return "redirect:register";
 		}
 	}
-	@GetMapping("/tempRead")
+	@GetMapping({"/tempRead","/modify"})
 	public void readtemp(int docNum,@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("임시 저장 페이지 가져오기"+docNum+" cri : "+cri);
 		
@@ -91,10 +91,10 @@ public class DocController {
 		//① bno에 해당하는 첨부파일 목록 알아내기
 		List<AttachFileDTO> attachList=service.getAttachList(docNum);
 		
-		//게시글 삭제 + 첨부파일 삭제
+		//공문 삭제 + 첨부파일 삭제
 		if(service.remove(docNum)) {
 			//② 폴더 파일 삭제
-			
+			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
 		}	
 		

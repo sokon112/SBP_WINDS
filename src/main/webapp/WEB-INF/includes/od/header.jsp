@@ -30,7 +30,7 @@
 
             <ul class="nav navbar-top-links navbar-center">               
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="/od/register">
                         <i class="fa fa-comment fa-fw"></i> 공문 작성
                     </a>
                     <!-- /.dropdown-alerts -->
