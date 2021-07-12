@@ -1,6 +1,6 @@
 package com.spring.od.controller;
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.beans.factory.annotation.Autowired;  
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +22,15 @@ public class MainController {
 	@GetMapping("/")
 	public String odMain() {
 		log.info("od 메인 접속....");
-		service.MainSuccessList();
-		service.MainTempList();
-		service.MainWaitList();
+		service.mainsuccesslist();
+		service.maintemplist();
+		service.mainwaitlist();
 		return "/od/od_home";
 	}
 	
-	public String searchList(OfficeNoticeVO vo,Criteria cri) {
+	@GetMapping("/searchlist")
+	public String searchlist(OfficeNoticeVO vo,Criteria cri) {
+		
 		log.info("검색결과 요청....");
 		
 		return "";
