@@ -22,4 +22,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
 }

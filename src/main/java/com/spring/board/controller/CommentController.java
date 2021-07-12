@@ -47,12 +47,6 @@ public class CommentController {
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping("/{rno}")
-	public ResponseEntity<CommentVO> get(@PathVariable("bno") int bno){
-		log.info("댓글 하나 가져오기 "+bno);
-		
-		return new ResponseEntity<>(service.commentGet(bno),HttpStatus.OK);
-	}
 	
 	
 	@PreAuthorize("principal.username == #comment.replyer")

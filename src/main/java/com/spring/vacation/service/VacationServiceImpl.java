@@ -1,5 +1,6 @@
 package com.spring.vacation.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +34,15 @@ public class VacationServiceImpl implements VacationService {
 	}
 
 	@Override
-	public boolean ok(int vacationAppNum, int userid) {
+	public boolean ok(int vacationAppNum) {
 		boolean flag=mapper.ok(vacationAppNum)>0?true:false;
-		mapper.changeCnt(userid);
 		return flag;
 	}
 
 	@Override
-	public boolean no(int vacationAppNum) {
+	public boolean no(int vacationAppNum,String refusalreason) {
 		
-		return mapper.no(vacationAppNum)>0?true:false;
+		return mapper.no(vacationAppNum,refusalreason)>0?true:false;
 	}
 
 	@Override
@@ -52,9 +52,9 @@ public class VacationServiceImpl implements VacationService {
 	}
 
 	@Override
-	public List<VacationVO> showUser(int userid) {
+	public List<VacationVO> showUser(int id) {
 		
-		return mapper.showUser(userid);
+		return mapper.showUser(id);
 	}
 
 	@Override
@@ -79,9 +79,20 @@ public class VacationServiceImpl implements VacationService {
 	public boolean cancleVacation(VacationVO vacation) {
 		boolean flag=mapper.cancleVacation(vacation)>0?true:false;
 		
-		mapper.changeCnt(vacation.getVacationApplication().getUserid());
+		//mapper.changeCnt(vacation.getVacationApplication().getUserid());
 		return flag; 
 
+	}
+
+	@Override
+	public boolean idCnt(int id) {
+		return mapper.idCnt(id)>20?true:false;
+	}
+
+	@Override
+	public Date vacationDay(int vacationAppNum) {
+
+		return mapper.vacationDay(vacationAppNum);
 	}
 	
 

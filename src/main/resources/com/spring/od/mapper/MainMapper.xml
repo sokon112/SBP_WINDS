@@ -3,7 +3,7 @@
 <mapper namespace="com.spring.od.mapper.MainMapper">
 
 <!-- 미결 -->
-<select  id ="MainWaitList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select  id ="mainwaitlist" resultType="com.spring.od.domain.OfficeNoticeVO">
 select docNum,title,D2.deptName,U.name,retentDate,regDate
 FROM DOC_TAB D1
 INNER JOIN USER_TAB U
@@ -15,7 +15,7 @@ WHERE D1.storage = 'wait' and rowNum = 20
 
 
 <!-- 완료 -->
-<select  id ="MainSuccessList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select  id ="mainsuccesslist" resultType="com.spring.od.domain.OfficeNoticeVO">
 select docNum,title,D2.deptName,U.name,retentDate,regDate
 FROM DOC_TAB D1
 INNER JOIN USER_TAB U
@@ -27,7 +27,7 @@ WHERE D1.storage = 'success' and rowNum = 10
 
 
 <!-- 임시 -->
-<select  id ="MainTempList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select  id ="maintemplist" resultType="com.spring.od.domain.OfficeNoticeVO">
 select docNum,title,D2.deptName,U.name,retentDate,regDate
 FROM DOC_TAB D1
 INNER JOIN USER_TAB U
@@ -39,7 +39,7 @@ WHERE D1.storage = 'temp' and rowNum = 10
 
 
 <!-- 검색 -->
-<select id = "searchList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id = "searchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
 select docNum,title,state,storage from DOC_TAB
 where 
 <if test="criteria=='title'.toString()">
