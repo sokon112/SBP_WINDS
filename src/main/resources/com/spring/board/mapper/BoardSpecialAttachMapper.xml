@@ -1,59 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.board.mapper.BoardSpecialMapper">
+<mapper namespace="com.spring.board.mapper.BoardSpecialAttachMapper">
 
-<!-- 스페셜 :  -->
+<!-- 스페셜 : 파일첨부 -->
 
-	<!-- insert : 이벤트,동호회-->
+	<!-- 파일insert : 이벤트,동호회-->
 	<insert id="bspecialinsert">
-		insert into special_table(dno,bno,nickname, password, contents, boardname)
-		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents},#       )
+		insert into special_attach(uuid,uploadpath,filename,filetype,sno)
+		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{sno})
 	</insert>
-		
-	<!--  하나 가져오기  : rno 가 일치-->
-	<select id="specialread" resultType="com.spring.board.domain.SpecialVO">
-		select * from <!-- 스페셜 테이블 --> where rno=#{rno}
+	
+	<!-- 파일찾기 -->
+	<select id="bspecialfindsno">
+		select * from special_attach where sno= #{sno} 
 	</select>
+
 	
-	<!--  수정 : 댓글 내용만 수정, updatedate, rno 일치하면 -->
-	<update id="specialupdate">
-		update <!-- 스페셜 테이블 -->
-		set contents=#{contents}, uploaddate=sysdate
-		where rno=#{rno}
-	</update>
-	
-	<!-- 댓글 삭제 : rno, password 일치 -->
-	<delete id="specialdelete">
-		delete from <!-- 스페셜 테이블 --> where rno=#{rno} and password=#{password}
+	<!-- 파일삭제  -->
+	<delete id="bspecialdelete">
+		delete from special_attach where sno=#{sno} 
 	</delete>
 	
-	<!-- 댓글 페이지 처리 -->
-	<select id="speciallist" resultType="com.spring.board.domain.SpecialVO">
-		<![CDATA[	
-			select dno,bno,nickname,password,contents,uploaddate
-			from(
-					select /*+INDEX(comment_table idx_comment)*/
-					       rownum rn, dno,bno,nickname,password,contents,uploaddate
-					from <!-- 스페셜 테이블 -->
-					where bno=#{bno} and rno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
-			     )
-			where rn > (#{cri.pageNum}-1) * #{cri.amount}		
-		]]>
-	</select>
 	
-	<!-- 하나의 글번호에 대한 전체 댓글 게시물 수 -->
-	<select id="getCountByBno" resultType="int">
-		select count(*) from <!-- 스페셜 테이블 --> where bno=#{bno}	
-	</select>
-	
-	<delete id="specialdeleteAll">
-		delete from <!-- 스페셜 테이블 --> where bno=#{bno}	
-	</delete>
-
-	<select id="specialtotal" resultType="com.spring.board.domain.SpecialVO">
-		
-	</select>
-
-
 
 </mapper>

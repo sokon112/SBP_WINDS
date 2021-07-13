@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.domain.BoardCriteria;
-import com.spring.board.domain.EventAttachFileDTO;
-import com.spring.board.domain.EventVO;
 import com.spring.board.domain.BoardPageVO;
+import com.spring.board.domain.BoardSpecialAttachFileDTO;
+import com.spring.board.domain.BoardSpecialVO;
 import com.spring.board.service.BoardService;
-import com.spring.board.service.EventService;
+import com.spring.board.service.BoardSpecialService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -34,16 +34,16 @@ public class BoardSpecialController {
 
 
 	@Autowired
-	private EventService service;
+	private BoardSpecialService service;
 	
 	@GetMapping("/list")
 	public void list(Model model,BoardCriteria cri) {
 		log.info("전체 리스트 요청 ");
 		
 		//사용자가 선택한 페이지 게시물
-		List<EventVO> list=service.list(cri);
+		List<BoardSpecialVO> list=service.bspeciallist(cri);
 		//전체 게시물 수 
-		int total = service.total(cri);
+		int total = service.bspecialtotalCnt(cri);
 				
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", new BoardPageVO(cri, total));
@@ -59,7 +59,7 @@ public class BoardSpecialController {
 	//게시글 등록
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
-	public String registerPost(EventVO vo,RedirectAttributes rttr) {
+	public String registerPost(BoardSpecialVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
 		//첨부 파일 확인
@@ -68,7 +68,7 @@ public class BoardSpecialController {
 		}	
 		
 		
-		if(service.insert(vo)) {
+		if(service.bspecialinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getNo());
 			return "redirect:list";    //   redirect:/board/list
@@ -78,22 +78,19 @@ public class BoardSpecialController {
 	}
 	
 	
-	//   /board/read?bno=22  
-    //   /board/modify?bno=7
-	
 	
 	@GetMapping({"/read","/modify"})
 	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
 		
-		EventVO vo=service.read(no);
+		BoardSpecialVO vo=service.bspecialread(no);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 	}
 	
 	// modify+post 수정한 후 list
 	@PreAuthorize("principal.username == #vo.writer")
 	@PostMapping("/modify")
-	public String modify(EventVO vo,BoardCriteria cri,RedirectAttributes rttr) {
+	public String modify(BoardSpecialVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
 		//첨부 파일 확인
@@ -101,7 +98,7 @@ public class BoardSpecialController {
 			vo.getAttachList().forEach(attach -> log.info(""+attach));
 		}	
 		
-		service.update(vo);		
+		service.bspecialupdate(vo);		
 		
 		
 		rttr.addFlashAttribute("result","성공");
@@ -124,10 +121,10 @@ public class BoardSpecialController {
 		
 		//서버(폴더)에 저장된 첨부파일 삭제
 		//① bno에 해당하는 첨부파일 목록 알아내기
-		List<EventAttachFileDTO> attachList=service.getAttachList(no);
+		List<BoardSpecialAttachFileDTO> attachList=service.bspecialAttachList(no);
 		
 		//게시글 삭제 + 첨부파일 삭제
-		if(service.delete(no)) {
+		if(service.bspecialdelete(no)) {
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
@@ -144,21 +141,21 @@ public class BoardSpecialController {
 	
 	//첨부물 가져오기
 	@GetMapping("/getAttachList")
-	public ResponseEntity<List<EventAttachFileDTO>> getAttachList(int no){
+	public ResponseEntity<List<BoardSpecialAttachFileDTO>> getAttachList(int no){
 		log.info("첨부물 가져오기 "+no);
 		
-		return new ResponseEntity<List<EventAttachFileDTO>>(service.getAttachList(no),HttpStatus.OK);
+		return new ResponseEntity<List<BoardSpecialAttachFileDTO>>(service.bspecialAttachList(no),HttpStatus.OK);
 	}
 	
 	
-	private void deleteFiles(List<EventAttachFileDTO> attachList) {
+	private void deleteFiles(List<BoardSpecialAttachFileDTO> attachList) {
 		log.info("첨부파일 삭제 "+attachList);
 		
 		if(attachList==null || attachList.size()<=0) {
 			return;
 		}
 		
-		for(EventAttachFileDTO dto:attachList) {
+		for(BoardSpecialAttachFileDTO dto:attachList) {
 			Path path = Paths.get("e:\\upload\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
 			
 			try {

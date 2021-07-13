@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardSpecialVO { //동호회
-	private int no; //번호
+public class BoardSpecialVO { //이벤트,동호회
+	private int sno; //번호
 	private String writer;  //작성자
 	private String title; //제목
 	private String contents; //내용

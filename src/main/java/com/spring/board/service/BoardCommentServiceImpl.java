@@ -15,44 +15,44 @@ import com.spring.board.mapper.BoardCommentMapper;
 public class BoardCommentServiceImpl implements BoardCommentService {
 
 	@Autowired
-	private BoardCommentMapper cmapper;
+	private BoardCommentMapper bcmapper;
 
 	@Autowired
 	private BoardMapper bmapper;
 	
 	@Override	
-	public boolean insert(BoardCommentVO comment) {
+	public boolean bcommentinsert(BoardCommentVO comment) {
 		
-		boolean result = cmapper.insert(comment)>0?true:false;
+		boolean result = bcmapper.bcommentinsert(comment)>0?true:false;
 		return result;
 	}
 	
 	@Override
-	public boolean update(BoardCommentVO comment) {
-		return cmapper.update(comment)>0?true:false;
+	public boolean bcommentupdate(BoardCommentVO comment) {
+		return bcmapper.bcommentupdate(comment)>0?true:false;
 	}
 
 	@Override
-	public boolean delete(int rno) {
+	public boolean bcommentdelete(int rno) {
 
-		BoardCommentVO comment = cmapper.read(rno);
-		return cmapper.delete(rno)>0?true:false;
+		BoardCommentVO comment = bcmapper.bcommentread(rno);
+		return bcmapper.bcommentdelete(rno)>0?true:false;
 	}
 
 	
 	@Override
-	public List<BoardCommentVO> list(BoardCriteria cri, int bno) {
-		return cmapper.list(cri,bno);
+	public List<BoardCommentVO> bcommentlist(BoardCriteria cri, int bno) {
+		return bcmapper.bcommentlist(cri,bno);
 	}
 
 	@Override
-	public BoardCommentVO read(int rno) {
-		return cmapper.read(rno);
+	public BoardCommentVO bcommentread(int rno) {
+		return bcmapper.bcommentread(rno);
 	}
 
 	@Override
-	public int total(BoardCriteria cri) {
-		return cmapper.total(cri);
+	public int bcommenttotal(BoardCriteria cri) {
+		return bcmapper.bcommenttotal(cri);
 
 	}
 	

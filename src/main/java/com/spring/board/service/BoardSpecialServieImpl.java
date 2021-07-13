@@ -26,9 +26,9 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 	
 	@Transactional
 	@Override
-	public boolean insert(BoardSpecialVO vo) {
+	public boolean bspecialinsert(BoardSpecialVO vo) {
 		//새글 등록		
-		boolean result=smapper.insert(vo)>0?true:false;
+		boolean result=smapper.bspecialinsert(vo)>0?true:false;
 			
 		//첨부파일 등록
 		if(vo.getAttachList()==null || vo.getAttachList().size()<=0) {
@@ -37,7 +37,7 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 		
 		vo.getAttachList().forEach(attach ->{
 			attach.setBno(vo.getNo());
-			sattachMapper.insert(attach);			
+			sattachMapper.bspecialinsert(attach);			
 		});
 		
 		return result;
@@ -46,25 +46,25 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 
 	@Transactional
 	@Override
-	public boolean delete(int bno) {
+	public boolean bspecialdelete(int bno) {
 		
 
 		//첨부파일 삭제
-		sattachMapper.delete(bno);
+		sattachMapper.bspecialdelete(bno);
 		
 		//게시글 삭제
-		return smapper.delete(bno)>0?true:false;
+		return smapper.bspecialdelete(bno)>0?true:false;
 	}
 
 	@Transactional
 	@Override
-	public boolean update(BoardSpecialVO vo) {
+	public boolean bspecialupdate(BoardSpecialVO vo) {
 		//기존에 첨부파일 정보 모두 삭제 후 삽입
 		
-		sattachMapper.delete(vo.getNo());
+		sattachMapper.bspecialdelete(vo.getNo());
 		
 		//게시글 수정
-		boolean modifyResult = smapper.update(vo)>0?true:false;
+		boolean modifyResult = smapper.bspecialupdate(vo)>0?true:false;
 		
 		if(vo.getAttachList() == null) {
 			return modifyResult;
@@ -76,32 +76,35 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 		if(modifyResult && vo.getAttachList().size()>0) {
 			for(BoardSpecialAttachFileDTO dto:vo.getAttachList()) {
 				dto.setBno(vo.getNo());
-				sattachMapper.insert(dto);
+				sattachMapper.bspecialinsert(dto);
 			}
 		}
 		return modifyResult;
 	}
 
 	@Override
-	public List<BoardSpecialVO> list(BoardCriteria cri) {		
-		return smapper.list(cri);
+	public List<BoardSpecialVO> bspeciallist(BoardCriteria cri) {		
+		return smapper.bspeciallist(cri);
 	}
 
 	@Override
-	public BoardSpecialVO read(int bno) {		
-		return smapper.read(bno);
+	public BoardSpecialVO bspecialread(int bno) {		
+		return smapper.bspecialread(bno);
 	}
 
 	@Override
-	public int total(BoardCriteria cri) {		
-		return smapper.totalCnt(cri);
+	public int bspecialtotalCnt(BoardCriteria cri) {		
+		return smapper.bspecialtotalCnt(cri);
 	}
 
 	@Override
-	public List<BoardSpecialAttachFileDTO> getAttachList(int bno) {		
-		return sattachMapper.findByBno(bno);
+	public List<BoardSpecialAttachFileDTO> bspecialAttachList(int bno) {		
+		return sattachMapper.bspecialfindByBno(bno);
 	}
 
+	
+
+	
 
 	
 	

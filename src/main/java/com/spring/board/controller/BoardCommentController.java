@@ -43,7 +43,7 @@ public class BoardCommentController {
 	public ResponseEntity<String> create(@RequestBody BoardCommentVO comment){
 		log.info("댓글 삽입 요청 "+comment);
 		
-		return service.insert(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
+		return service.bcommentinsert(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	

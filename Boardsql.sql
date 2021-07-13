@@ -53,9 +53,9 @@ where bno=2 and views=1;
 
 
 -- 이벤트_동호회 테이블 Table Create SQL
-CREATE TABLE event_hobby_table
+CREATE TABLE special_table
 (
-    no          NUMBER     PRIMARY KEY       NOT NULL, 
+    sno          NUMBER     PRIMARY KEY       NOT NULL, 
     writer      VARCHAR2(20)      NOT NULL, 
     title       VARCHAR2(20)      NOT NULL, 
     uploaddate        DATE     default sysdate          NOT NULL, 
@@ -66,15 +66,15 @@ CREATE TABLE event_hobby_table
 );
 
 --이벤트,동호회 테이블 시퀀스 생성
-create SEQUENCE event_hobby_tb_seq;
+create SEQUENCE special_tb_seq;
 
 --이벤트,동호회 삽입
+insert into special_table(no,writer,title,  password, contents, boardname)
+values(special_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자','event');
 insert into event_hobby_table(no,writer,title,  password, contents, boardname)
-values(event_hobby_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자','event');
-insert into event_hobby_table(no,writer,title,  password, contents, boardname)
-values(event_hobby_tb_seq.nextval,'이채은','아스트로','2345','테스트','hobby');
-insert into event_hobby_table(no,writer,title,  password, contents,boardname)
-values(event_hobby_tb_seq.nextval,'김명준','아스트로','2345','맏형이다','event');
+values(special_tb_seq.nextval,'이채은','아스트로','2345','테스트','hobby');
+insert into special_table(no,writer,title,  password, contents,boardname)
+values(special_tb_seq.nextval,'김명준','아스트로','2345','맏형이다','event');
 insert into event_hobby_table(no,writer,title,  password, contents,boardname)
 values(event_hobby_tb_seq.nextval,'박민혁','댄스동호회','2345','댄스부 모집','hobby');
 
@@ -160,5 +160,38 @@ where bno=4;
 ALTER TABLE comment_table
     ADD CONSTRAINT FK_board_table_bno FOREIGN KEY (bno)
         REFERENCES board_table (bno);
+
+
+        
+-- 파일 첨부 테이블        
+create table special_attach(
+	uuid varchar2(100) not null,
+	uploadPath varchar2(200) not null,
+	fileName varchar2(100) not null,
+	fileType char(1) default 'I',
+	sno NUMBER 
+);
+
+DROP TABLE special_attach;
+
+alter table special_attach add constraint pk_sp_attach_uuid primary key(uuid);
+alter table special_attach add constraint fk_sp_attach foreign key(sno) references special_table(sno);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

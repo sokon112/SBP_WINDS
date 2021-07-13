@@ -39,12 +39,12 @@ public class BoardController {
 		log.info("전체 리스트 요청 ");
 		
 		//사용자가 선택한 페이지 게시물
-		List<BoardVO> list=service.list(cri);
+		List<BoardVO> boardlist=service.boardlist(cri);
 		
 		//전체 게시물 수 
-		int total = service.total(cri);
+		int total = service.boardtotal(cri);
 				
-		model.addAttribute("list", list);
+		model.addAttribute("list", boardlist);
 		model.addAttribute("pageVO", new BoardPageVO(cri, total));
 	}	
 	
@@ -61,7 +61,7 @@ public class BoardController {
 	public String registerPost(BoardVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
-		if(service.insert(vo)) {
+		if(service.boardinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getBno());
 			return "redirect:list";    //   redirect:/board/list
@@ -75,7 +75,7 @@ public class BoardController {
 	public void read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
 		
-		BoardVO vo=service.read(bno);
+		BoardVO vo=service.boardread(bno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 	}
 	
@@ -86,7 +86,7 @@ public class BoardController {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 			
 		
-		service.update(vo);		
+		service.boardupdate(vo);		
 		
 		
 		rttr.addFlashAttribute("result","성공");

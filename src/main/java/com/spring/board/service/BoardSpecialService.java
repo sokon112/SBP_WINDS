@@ -7,16 +7,16 @@ import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardSpecialAttachFileDTO;
 import com.spring.board.domain.BoardSpecialVO;
 
-public interface BoardSpecialService {
+public interface BoardSpecialService { //이벤트, 동호회 
 
-	public boolean insert(BoardSpecialVO vo);
-	public boolean delete(int bno);
-	public boolean update(BoardSpecialVO vo);
-	public List<BoardSpecialVO> list(BoardCriteria cri);
-	public BoardSpecialVO read(int bno);
-	public int total(BoardCriteria cri);
+	public boolean bspecialinsert(BoardSpecialVO vo);
+	public boolean bspecialdelete(int bno);
+	public boolean bspecialupdate(BoardSpecialVO vo);
+	public List<BoardSpecialVO> bspeciallist(BoardCriteria cri);
+	public BoardSpecialVO bspecialread(int bno);
+	public int bspecialtotalCnt(BoardCriteria cri); // 검색
 	
-	public List<BoardSpecialAttachFileDTO> getAttachList(int bno);
+	public List<BoardSpecialAttachFileDTO> bspecialAttachList(int bno); //
 
 	
 }

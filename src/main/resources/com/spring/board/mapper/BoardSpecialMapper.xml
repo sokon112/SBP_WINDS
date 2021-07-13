@@ -6,54 +6,51 @@
 
 	<!-- insert : 이벤트,동호회-->
 	<insert id="bspecialinsert">
-		insert into special_table(dno,bno,nickname, password, contents, boardname)
-		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents},#       )
+		insert into special_table(sno,writer,title, password, contents,images,boardname)
+		values(special_tb_seq.nextval,#{writer},#{title},#{password},#{images},#{contents},#{boardname})
 	</insert>
 		
-	<!--  하나 가져오기  : rno 가 일치-->
-	<select id="specialread" resultType="com.spring.board.domain.SpecialVO">
-		select * from <!-- 스페셜 테이블 --> where rno=#{rno}
+	<!--  하나 가져오기  : sno 가 일치-->
+	<select id="bspecialread" resultType="com.spring.board.domain.BaordSpecialVO">
+		select * from special_table where sno=#{sno}
 	</select>
 	
-	<!--  수정 : 댓글 내용만 수정, updatedate, rno 일치하면 -->
-	<update id="specialupdate">
-		update <!-- 스페셜 테이블 -->
+	<!--  수정 : 댓글 내용만 수정, updatedate, sno 일치하면 -->
+	<update id="bspecialupdate">
+		update special_table
 		set contents=#{contents}, uploaddate=sysdate
-		where rno=#{rno}
+		where sno=#{sno}
 	</update>
 	
 	<!-- 댓글 삭제 : rno, password 일치 -->
-	<delete id="specialdelete">
-		delete from <!-- 스페셜 테이블 --> where rno=#{rno} and password=#{password}
+	<delete id="bspecialdelete">
+		delete from special_table where sno=#{sno} and password=#{password}
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="speciallist" resultType="com.spring.board.domain.SpecialVO">
+	<select id="bspeciallist" resultType="com.spring.board.domain.SpecialVO">
 		<![CDATA[	
-			select dno,bno,nickname,password,contents,uploaddate
+			select sno,writer,title, password, contents,images,boardnameuploaddate
 			from(
 					select /*+INDEX(comment_table idx_comment)*/
-					       rownum rn, dno,bno,nickname,password,contents,uploaddate
-					from <!-- 스페셜 테이블 -->
-					where bno=#{bno} and rno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
+					       rownum rn, sno,writer,title, password, contents,images,boardname,uploaddate
+					from special_table
+					where sno=#{sno} and sno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
 			     )
 			where rn > (#{cri.pageNum}-1) * #{cri.amount}		
 		]]>
 	</select>
 	
 	<!-- 하나의 글번호에 대한 전체 댓글 게시물 수 -->
-	<select id="getCountByBno" resultType="int">
-		select count(*) from <!-- 스페셜 테이블 --> where bno=#{bno}	
+	<select id="bspecialCountByBno" resultType="int">
+		select count(*) from special_table where sno=#{sno}	
 	</select>
 	
-	<delete id="specialdeleteAll">
-		delete from <!-- 스페셜 테이블 --> where bno=#{bno}	
+	<delete id="bspecialdeleteAll">
+		delete from special_table where sno=#{sno}	
 	</delete>
 
-	<select id="specialtotal" resultType="com.spring.board.domain.SpecialVO">
-		
-	</select>
-
+	
 
 
 </mapper>

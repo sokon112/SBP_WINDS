@@ -10,45 +10,45 @@
 		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents})
 	</insert>
 		
-	<!-- 댓글 하나 가져오기  : rno 가 일치-->
-	<select id="bcommentread" resultType="com.spring.board.domain.CommentVO">
-		select * from comment_table where rno=#{rno}
+	<!-- 댓글 하나 가져오기  : dno 가 일치-->
+	<select id="bcommentread" resultType="com.spring.board.domain.BoardCommentVO">
+		select * from comment_table where dno=#{dno}
 	</select>
 	
-	<!-- 댓글 수정 : 댓글 내용만 수정, updatedate, rno 일치하면 -->
+	<!-- 댓글 수정 : 댓글 내용만 수정, updatedate, dno 일치하면 -->
 	<update id="bcommentupdate">
 		update comment_table
 		set contents=#{contents}, uploaddate=sysdate
-		where rno=#{rno} and password=#{password}
+		where dno=#{dno} and password=#{password}
 	</update>
 	
 	<!-- 댓글 삭제 : rno, password 일치 -->
 	<delete id="bcommentdelete">
-		delete from comment_table where rno=#{rno} and password=#{password}
+		delete from comment_table where dno=#{dno} and password=#{password}
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="bcommentlist" resultType="com.spring.board.domain.CommentVO">
+	<select id="bcommentlist" resultType="com.spring.board.domain.BoardCommentVO">
 		<![CDATA[	
 			select dno,bno,nickname,password,contents,uploaddate
 			from(
 					select /*+INDEX(comment_table idx_comment)*/
 					       rownum rn, dno,bno,nickname,password,contents,uploaddate
 					from comment_table
-					where bno=#{bno} and rno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
+					where dno=#{dno} and rno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
 			     )
 			where rn > (#{cri.pageNum}-1) * #{cri.amount}		
 		]]>
 	</select>
 	
 	<!-- 하나의 글번호에 대한 전체 댓글 게시물 수 -->
-	<select id="bgetCountByBno" resultType="int">
-		select count(*) from comment_table where bno=#{bno}	
+	<select id="bcommentCountByBno" resultType="int">
+		select count(*) from comment_table where dno=#{dno}	
 	</select>
 	
 	<!-- 글을 삭제 할떄 글에 딸려있는 댓글들도 삭제  -->
 	<delete id="bcommentdeleteAll">
-		delete from comment_table where bno=#{bno}	
+		delete from comment_table where dno=#{dno}	
 	</delete>
 
 	

@@ -67,7 +67,7 @@
 	
 	<!-- 댓글 숫자 수정 : 댓글의 삽입 or 댓글 삭제 시 -->
 	<update id="boardcommentCntUpdate">
-		update board_table set commentcnt = commentcnt+ #{amount}
+		update board_table set bcommentcnt = bcommentcnt+ #{amount}
 		where bno=#{bno}
 	</update>
 	
@@ -76,7 +76,8 @@
 	
 	
 	<!-- 동적 SQL -->
-	<sql id="criteria">
+	<!-- 제목, 내용 검색 -->
+	<sql id="boardcommentcriteria">
 		<trim prefix="(" suffix=") AND"  prefixOverrides="OR" >
 			<foreach collection="typeArr" item='type'>
 				<trim prefix="OR">
