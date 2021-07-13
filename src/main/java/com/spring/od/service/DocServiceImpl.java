@@ -21,44 +21,60 @@ public class DocServiceImpl implements DocService {
 	
 	
 	@Override
-	public boolean write(OfficeNoticeVO vo) {
+	public boolean owrite(OfficeNoticeVO vo) {
 		
-		boolean result = mapper.write(vo)>0?true:false;
+		boolean result = mapper.owrite(vo)>0?true:false;
 		
 		if(vo.getAttach()==null||vo.getAttach().size()<=0) {
 			return result;
 		}
 		vo.getAttach().forEach(attach ->{
 			attach.setDocNum(vo.getDocNum());
-			attachMapper.insert(attach);
+			attachMapper.oainsert(attach);
 		});
 		
 		return result;
 	}
 
 	@Override
-	public boolean returned(OfficeNoticeVO vo) {
-		return mapper.returned(vo)>0?true:false;
+	public boolean oreturned(OfficeNoticeVO vo) {
+		return mapper.oreturned(vo)>0?true:false;
 	}
 
 	@Override
-	public boolean approve(OfficeNoticeVO vo) {
-		return mapper.approve(vo)>0?true:false;
+	public boolean oapprove(OfficeNoticeVO vo) {
+		return mapper.oapprove(vo)>0?true:false;
 	}
 
 	@Override
-	public OfficeNoticeVO read(int docNum) {
-		return mapper.read(docNum);
+	public OfficeNoticeVO oread(int docNum) {
+		return mapper.oread(docNum);
 	}
 
 	@Override
 	public List<AttachFileDTO> getAttachList(int docNum) {
-		return attachMapper.findByDocNum(docNum);
+		return attachMapper.oafindByDocNum(docNum);
 	}
 
 	@Override
-	public boolean remove(int docNum) {
-		return mapper.remove(docNum)>0?true:false;
+	public boolean oremove(int docNum) {
+		return mapper.oremove(docNum)>0?true:false;
+	}
+
+	@Override
+	public boolean omodify(OfficeNoticeVO vo) {
+		boolean result = mapper.omodify(vo)>0?true:false;
+		
+		if(vo.getAttach()==null||vo.getAttach().size()<=0) {
+			return result;
+		}
+		
+		vo.getAttach().forEach(attach ->{
+			attach.setDocNum(vo.getDocNum());
+			attachMapper.oainsert(attach);
+		});
+				
+		return result;
 	}
 
 

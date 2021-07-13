@@ -44,7 +44,7 @@ public class DocController {
 			vo.getAttach().forEach(attach -> log.info(""+attach));
 		}
 		
-		if(service.write(vo)) {
+		if(service.owrite(vo)) {
 			rttr.addFlashAttribute("result", vo.getDocNum());
 			return "redirect:wait";
 		}
@@ -56,7 +56,7 @@ public class DocController {
 	public void readtemp(int docNum,@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("임시 저장 페이지 가져오기"+docNum+" cri : "+cri);
 		
-		OfficeNoticeVO vo = service.read(docNum);
+		OfficeNoticeVO vo = service.oread(docNum);
 		model.addAttribute("vo", vo);
 	}
 	
@@ -69,7 +69,7 @@ public class DocController {
 			vo.getAttach().forEach(attach -> log.info(""+attach));
 		}	
 		
-		service.write(vo);		
+		service.omodify(vo);		
 		
 		
 		rttr.addFlashAttribute("result","성공");
@@ -92,7 +92,7 @@ public class DocController {
 		List<AttachFileDTO> attachList=service.getAttachList(docNum);
 		
 		//공문 삭제 + 첨부파일 삭제
-		if(service.remove(docNum)) {
+		if(service.oremove(docNum)) {
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
@@ -105,6 +105,7 @@ public class DocController {
 		
 		return "redirect:list";
 	}
+	
 	private void deleteFiles(List<AttachFileDTO> attachList) {
 		log.info("첨부파일 삭제 "+attachList);
 		
@@ -113,13 +114,14 @@ public class DocController {
 		}
 		
 		for(AttachFileDTO dto:attachList) {
-			Path path = Paths.get("c:\\upload\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
+			String rootPath = "c:\\upload\\od\\"; //개인 첨부파일 저장 최상위 경로(서버측)
+			Path path = Paths.get(rootPath,dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
 			
 			try {
 				Files.deleteIfExists(path);
 				
 				if(Files.probeContentType(path).startsWith("image")) {
-					Path thumbnail = Paths.get("c:\\upload\\", 
+					Path thumbnail = Paths.get(rootPath, 
 							dto.getUploadPath()+"\\s_"+dto.getUuid()+"_"+dto.getFileName());
 					Files.delete(thumbnail);
 				}
