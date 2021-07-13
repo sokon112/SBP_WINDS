@@ -2,24 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.od.mapper.DocMapper">
 	<!-- 공문 작성 -->
-	<insert id="write">
+	<insert id="owrite">
 		INSERT INTO DOC_TAB (docNum,title,contents,authority,sign,attachFile,retentDate,send,dest,review,state,storage,message,regDate)
 		VALUES(docNum.NEXTVAL,#{title},#{contents},#{authority},#{sign},#{attachFile},#{retentDate},#{send},#{dest},#{review},#{state},#{storage},#{message},SYSDATE);
 	</insert>
+	<update id="omodify">
+		UPDATE DOC_TAB SET title = #{title}, contents = #{contents}, attachFile = #{attachFile}, retentDate = #{retentDate}, dest = #{dest}, review = #{review}, state = #{state}, storage = #{storage}, regDate = SYSDATE
+		WHERE docNum = #{docNum};
+	</update>
 	<!-- 공문 결재/반려 -->
-	<update id="returned">
+	<update id="oreturned">
 		UPDATE DOC_TAB SET state = #{state}, message = #{message}
 		WHERE docNum = #{docNum};
 	</update>
-	<update id="approve">
+	<update id="oapprove">
 		UPDATE DOC_TAB SET state = #{state}, message = #{message}, storage = #{storage} , sign = #{sign}
 		WHERE docNum = #{docNum};
 	</update>
-	<delete id="remove">
+	<delete id="oremove">
 		DELETE FROM DOC_TAB WHERE docNum = #{docNum}
 	</delete>
 	<!-- 공문 보기 화면 -->
-	<select id="read" resultType="com.spring.od.domain.OfficeNoticeVO">
+	<select id="oread" resultType="com.spring.od.domain.OfficeNoticeVO">
 		SELECT * FROM DOC_TAB WHERE docNum = #{docNum};
 	</select>
 </mapper>

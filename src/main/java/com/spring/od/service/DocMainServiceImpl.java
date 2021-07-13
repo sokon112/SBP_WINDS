@@ -7,32 +7,36 @@ import org.springframework.stereotype.Service;
 
 import com.spring.od.domain.Criteria;
 import com.spring.od.domain.OfficeNoticeVO;
-import com.spring.od.mapper.MainMapper;
+import com.spring.od.mapper.DocMainMapper;
 
 @Service
-public class MainServiceImpl implements MainService {
+public class DocMainServiceImpl implements DocMainService {
 
 	@Autowired
-	private MainMapper mapper;
+	private DocMainMapper mapper;
 	
+	//미결 불러오기
 	@Override
 	public List<OfficeNoticeVO> mainwaitlist() {
 		return mapper.mainwaitlist();
 	}
 
+	//결재완료보관함 불러오기
 	@Override
 	public List<OfficeNoticeVO> mainsuccesslist() {
 		return mapper.mainsuccesslist();
 	}
 
+	//임시보관함 불러오기!
 	@Override
 	public List<OfficeNoticeVO> maintemplist() {
 		return mapper.maintemplist();
 	}
 	
+	//검색
 	@Override
-	public List<OfficeNoticeVO> searchlist(Criteria criteria, String Keyword) {
-		return mapper.searchlist(criteria, Keyword);
+	public List<OfficeNoticeVO> mainsearchlist(Criteria criteria, String Keyword) {
+		return mapper.mainsearchlist(criteria, Keyword);
 	}
 
 }

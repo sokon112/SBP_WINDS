@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.od.mapper.DocAttachMapper">
-	<insert id="insert">
+	<insert id="oainsert">
 		insert into spring_attach(uuid,uploadpath,filename,filetype,docNum)
 		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{docNum})
 	</insert>
-	<delete id="delete">
+	<delete id="oadelete">
 		delete from doc_attach where docNum = #{docNum}
 	</delete>
-	<select id="findByDocNum" resultType="com.spring.od.domain.AttachFileDTO">
+	<select id="oafindByDocNum" resultType="com.spring.od.domain.AttachFileDTO">
 		select * from doc_attach where docNum = #{docNum}
 	</select>
 </mapper>
