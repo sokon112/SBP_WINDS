@@ -16,7 +16,7 @@
 			where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 
-<select id="successList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id="completeList" resultType="com.spring.od.domain.OfficeNoticeVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -62,7 +62,7 @@
 			rownum <= (#{pageNum}*#{amount}))
 		where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
-<select id="successSearch" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id="completeSearch" resultType="com.spring.od.domain.OfficeNoticeVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 

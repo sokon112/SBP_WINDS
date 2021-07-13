@@ -11,7 +11,7 @@
 	</insert>
 		
 	<!--  하나 가져오기  : rno 가 일치-->
-	<select id="specialread" resultType="com.spring.board.domain.specialVO">
+	<select id="specialread" resultType="com.spring.board.domain.SpecialVO">
 		select * from <!-- 스페셜 테이블 --> where rno=#{rno}
 	</select>
 	
