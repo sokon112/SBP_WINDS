@@ -9,6 +9,9 @@
 	<title>Vacation</title>
 </head>
 <body>
+<form action="/showUser" method="get">
+<h1>hahaha</h1>	
+</form>	
 <div align="center">
 	<h1>SBP Winds Vacation</h1>
 	<pre class="mt-5 mb-3 text-muted text-center"> 

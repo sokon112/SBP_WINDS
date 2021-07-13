@@ -11,26 +11,26 @@
 		where vat.userid=hs.id and state not in('신청') order by vacationAppNum
 	</select> -->
 	<!-- 관리자가 처음으로 보는 페이지 - 승인, 거부 인 사람 -->
-	<select  id="selectMonth" resultType="com.spring.vacation.domain.VacationVO">
+	<select  id="vSelectMonth" resultType="com.spring.vacation.domain.VacationVO">
 	<![CDATA[
 		select vacationAppNum,id,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
 		from vacationApplicationTable vat, vacationScedule hs
 		where vat.id=hs.id and startterm >= #{nowMonth} and startterm < #{nextMonth} and state not in('신청') 
 	]]>	
-	<include refid="criteria"></include>
+	<include refid="vacationCriteria"></include>
 	<![CDATA[
 			
 		order by vacationAppNum
 		]]>	
 	</select>
 	<!-- type이 '신청'인 신청서 갯수 추출  -->
-	<select  id="countApp" resultType="int">
+	<select  id="vCountApp" resultType="int">
 		select count(*)
 		from vacationApplicationTable vat, vacationScedule vs
 		where vat.id=vs.id and vat.state like '신청'
 	</select>
 	<!-- type이 '신청'인 리스트만 조회 -->
-	<select id="applicationList" resultType="com.spring.vacation.domain.VacationVO">
+	<select id="vApplicationList" resultType="com.spring.vacation.domain.VacationVO">
 		select vacationAppNum,id,name,type,startterm,endterm,reason,state
 		from vacationApplicationTable vat, vacationScedule vs
 		where vat.id=vs.id and vat.state like '신청'
@@ -38,18 +38,18 @@
 	</select>
 	<!-- 휴가신청 승인해주기 -->
 	<!-- 승인 -승인할때 휴가 갯수 깍이도록 or join을 사용해서 계산=> 하나더 만들기~~  => join은 실패 하나 더만들기 됬다!-->
-	<update id="ok">
+	<update id="vOk">
 		update vacationApplicationTable 
 		set approvalDate=sysdate, state='승인'  
 		where vacationAppNum=#{vacationAppNum}
 	</update>
-	<update id="changeCnt">
+	<update id="vChangeCnt">
 		update vacationScedule 
 		set (select count(userid) from vacationApplicationTable where id=#{id})
 		where id=#{id}
 	</update>
 	<!-- 거절 -->
-	<update id="no">
+	<update id="vNo">
 		update vacationApplicationTable 
 		set approvalDate=sysdate, state='거절',refusalreason=#{refusalreason}   
 		where vacationAppNum=#{vacationAppNum}
@@ -66,44 +66,44 @@
 	
 	<!-- 사용자 -->
 		<!-- 신청서 등록 구문 -->
-	<insert id="insertUserApp">
+	<insert id="vInsertUserApp">
 		insert into vacationApplicationTable(holidayAppNum,id,type,startterm,endterm,state,applicationDate,reason) 
 		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},#{state},#{applicationDate},#{reason})
 	</insert>
 	
 	<!--사용자 페이지 보여주는 구문-->
-	<select id="showUser" resultType="com.spring.vacation.domain.VacationVO">
+	<select id="vShowUser" resultType="com.spring.vacation.domain.VacationVO">
 		select vacationAppNum,id,type,startterm,state,applicationDate,approvaldate
 		from vacationApplicationTable where id=#{id} 
 	</select >
-	<select id="showUserOne">
+	<select id="vShowUserOne">
 		select vacationAppNum,id,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
 		from vacationApplicationTable
 		where vacationAppNum=#{vacationAppNum}
 	</select>
 	<!-- 수정해야함 -->
-	<update id="userUpdateApp" >
+	<update id="vUserUpdateApp" >
 		update vacationApplicationTable 
 		set type=#{type},startterm=#{startterm}, endterm=#{endterm} ,applicationDate=sysdate,reason=#{reason}
 		where vacationAppNum=#{vacationAppNum}
 	</update>
-	<delete id="deleteUserApp">
+	<delete id="vDeleteUserApp">
 		delete from vacationApplicationTable
 		where vacationAppNum=#{vacationAppNum}
 	</delete>
 	<!-- 휴가 반납 : 승인된 휴가 중에서  cnt필요함-->
-	<update id="cancleVacation">
+	<update id="vCancleVacation">
 		update vacationApplicationTable 
 		set approvalDate=sysdate, state='반납'  
 		where vacationAppNum=#{vacationAppNum} and startterm>#{startterm}
 	</update>
 	<!-- 휴가 갯수를 가져오는 mapper -->
-	<select id="idCnt">
+	<select id="vIdCnt">
 		select VacationCnt from vacationScedule where id={#id}
 	</select>	
 	
 	<!-- 현재 월 불러오는 mapper -->
-	<select id="vacationDay">
+	<select id="vVacationDay">
 		select startterm 
 		from vacationApplicationTable 
 		where vacationAppNum=#{vacationAppNum}

@@ -32,19 +32,20 @@ public class VacationController {
 	}
 	
 	//메인메뉴 3가지 
+	//id에 따른 휴가 목록 보여주는 페이지 
 	@GetMapping("/showUser")
 	public void showUserMain(Model model,int id) {
 		log.info("showUser페이지 ");
-		
+	
 		List<VacationVO> list=service.showUser(id);
 		int cnt=service.countApp();
 		model.addAttribute("list",list);
 		model.addAttribute("cnt",cnt);
-	}
-	@GetMapping("/vacationRegister")
-	public void vacationRegister() {
+	}//휴가신청서 작성하는 페이지
+	@GetMapping("/vacationApply")
+	public void vacationApply() {
 		log.info("휴가신청 페이지");	
-	}
+	}//관리자가 보는 페이지 
 	@GetMapping("/showAdmin")
 	public void showAdmin(Model model,VacationCriteria cri) {
 		log.info("휴가관리 페이지");
@@ -87,7 +88,7 @@ public class VacationController {
 		log.info("반납버튼 눌렀을때");
 		Date date=new Date();
 		boolean result=false;
-		Date startday=service.vacationDay(vacation.getVacationApplication().getUserid());
+		Date startday=service.vacationDay(vacation.getVacationApplication().getId());
 		if(!date.after(startday)){
 			result=service.cancleVacation(vacation);
 			if(result) {
@@ -105,12 +106,11 @@ public class VacationController {
 	}
 
 //	휴가신청 작성 페이지
-
-	@PostMapping("/vacationRegister")
-	public void registerPost(VacationVO vacation,RedirectAttributes rttr){
+	@PostMapping("/vacationApply")
+	public void applyPost(VacationVO vacation,RedirectAttributes rttr){
 		log.info("휴가 신청!!");
 		
-		if(service.idCnt(vacation.getVacationApplication().getUserid())) {
+		if(service.idCnt(vacation.getVacationApplication().getId())) {
 			//휴가가 20개 이상이면 알람창
 			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
 			
@@ -119,31 +119,31 @@ public class VacationController {
 			service.insertUserApp(vacation);
 		}
 	}
-	
+	//관리자가 신청리스트 보는 페이지 
 	@GetMapping("/applicationList")
 	public void applicationList(Model model) {
 		List<VacationVO> list = service.applicationList();
 		model.addAttribute("list", list);
 	}
 	
-////	휴가심사 페이지
-////	승인 -> PutMapping("/ok")
-//	//경로지정
-//	@PutMapping("/{vacationAppNum}")
-//	public String ok(int vacationAppNum){
-//		log.info("문서 승인");
-//		boolean result = service.ok(vacationAppNum);
-//		return "승인";
-//	}
-//	
-//	
-////	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
-//	@PutMapping("/{vacationAppNum}")
-//	public String no(int vacationAppNum,String refusalreason){
-//		log.info("문서 거절");
-//		boolean result = service.no(vacationAppNum,refusalreason);
-//		return "거절";
-//	}
-////	닫기 -> showAdmin 페이지로 넘어감
-//	
+//	휴가심사 페이지
+//	승인 -> PutMapping("/ok")
+	//경로지정
+	@PutMapping("/{vacationAppNum}/ok")
+	public String ok(int vacationAppNum){
+		log.info("문서 승인");
+		boolean result = service.ok(vacationAppNum);
+		return "승인";
+	}
+	
+	
+//	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
+	@PutMapping("/{vacationAppNum}/no")
+	public String no(int vacationAppNum,String refusalreason){
+		log.info("문서 거절");
+		boolean result = service.no(vacationAppNum,refusalreason);
+		return "거절";
+	}
+//	닫기 -> showAdmin 페이지로 넘어감
+	
 }

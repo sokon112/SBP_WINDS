@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 public class VacationApplicationVO {
 
-	private int userid;
+	private int id;
 	private String name;
 	private int VacationCnt;
 }

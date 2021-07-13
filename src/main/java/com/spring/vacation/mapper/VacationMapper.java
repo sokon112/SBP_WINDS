@@ -9,25 +9,25 @@ import com.spring.vacation.domain.VacationVO;
 
 public interface VacationMapper {
 	//관리자
-	public List<VacationVO> selectMonth(VacationCriteria cri);
-	public int countApp();
-	public List<VacationVO> applicationList();
+	public List<VacationVO> vSelectMonth(VacationCriteria cri);
+	public int vCountApp();
+	public List<VacationVO> vApplicationList();
 	
 	
 	//승인
-	public int ok(int holidayAppNum);
-	public int no(int holidayAppNum,String refusalreason);
+	public int vOk(int holidayAppNum);
+	public int vNo(int holidayAppNum,String refusalreason);
 
 	//cnt계산 다시 하기
-	//public int  changeCnt(int id);
+	public int  vChangeCnt(int id);
 
 	//사용자
-	public int insertUserApp(VacationVO vacation);
-	public List<VacationVO> showUser(int id);
-	public VacationVO showUserOne(int vacationAppNum);
-	public int userUpdateApp(VacationVO vacation);
-	public int deleteUserApp(int vacationAppNum);
-	public int cancleVacation(VacationVO vacation);
-	public int idCnt(int id);
-	public Date vacationDay(int vacationAppNum);
+	public int vInsertUserApp(VacationVO vacation);
+	public List<VacationVO> vShowUser(int id);
+	public VacationVO vShowUserOne(int vacationAppNum);
+	public int vUserUpdateApp(VacationVO vacation);
+	public int vDeleteUserApp(int vacationAppNum);
+	public int vCancleVacation(VacationVO vacation);
+	public int vIdCnt(int id);
+	public Date vVacationDay(int vacationAppNum);
 }

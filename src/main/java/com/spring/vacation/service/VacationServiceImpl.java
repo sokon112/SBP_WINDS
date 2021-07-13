@@ -18,66 +18,66 @@ public class VacationServiceImpl implements VacationService {
 	@Override
 	public List<VacationVO> selectMonth(VacationCriteria cri) {
 		// TODO Auto-generated method stub
-		return mapper.selectMonth(cri);
+		return mapper.vSelectMonth(cri);
 	}
 
 	@Override
 	public int countApp() {
 		// TODO Auto-generated method stub
-		return mapper.countApp();
+		return mapper.vCountApp();
 	}
 
 	@Override
 	public List<VacationVO> applicationList() {
 		// TODO Auto-generated method stub
-		return mapper.applicationList();
+		return mapper.vApplicationList();
 	}
 
 	@Override
 	public boolean ok(int vacationAppNum) {
-		boolean flag=mapper.ok(vacationAppNum)>0?true:false;
+		boolean flag=mapper.vOk(vacationAppNum)>0?true:false;
 		return flag;
 	}
 
 	@Override
 	public boolean no(int vacationAppNum,String refusalreason) {
 		
-		return mapper.no(vacationAppNum,refusalreason)>0?true:false;
+		return mapper.vNo(vacationAppNum,refusalreason)>0?true:false;
 	}
 
 	@Override
 	public boolean insertUserApp(VacationVO vacation) {
 		
-		return mapper.insertUserApp(vacation)>0?true:false;
+		return mapper.vInsertUserApp(vacation)>0?true:false;
 	}
 
 	@Override
 	public List<VacationVO> showUser(int id) {
 		
-		return mapper.showUser(id);
+		return mapper.vShowUser(id);
 	}
 
 	@Override
 	public VacationVO showUserOne(int vacationAppNum) {
 		// TODO Auto-generated method stub
-		return mapper.showUserOne(vacationAppNum);
+		return mapper.vShowUserOne(vacationAppNum);
 	}
 
 	@Override
 	public boolean userUpdateApp(VacationVO vacation) {
 
-		return mapper.userUpdateApp(vacation)>0?true:false;
+		return mapper.vUserUpdateApp(vacation)>0?true:false;
 	}
 
 	@Override
 	public boolean deleteUserApp(int vacationAppNum) {
 		// TODO Auto-generated method stub
-		return mapper.deleteUserApp(vacationAppNum)>0?true:false;
+		return mapper.vDeleteUserApp(vacationAppNum)>0?true:false;
 	}
 
 	@Override
 	public boolean cancleVacation(VacationVO vacation) {
-		boolean flag=mapper.cancleVacation(vacation)>0?true:false;
+		boolean flag=mapper.vCancleVacation(vacation)>0?true:false;
 		
 		//mapper.changeCnt(vacation.getVacationApplication().getUserid());
 		return flag; 
@@ -86,13 +86,13 @@ public class VacationServiceImpl implements VacationService {
 
 	@Override
 	public boolean idCnt(int id) {
-		return mapper.idCnt(id)>20?true:false;
+		return mapper.vIdCnt(id)>20?true:false;
 	}
 
 	@Override
 	public Date vacationDay(int vacationAppNum) {
 
-		return mapper.vacationDay(vacationAppNum);
+		return mapper.vVacationDay(vacationAppNum);
 	}
 	
 
