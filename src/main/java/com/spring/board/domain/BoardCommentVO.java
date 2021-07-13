@@ -20,7 +20,7 @@ public class BoardCommentVO { //댓글
 	private String content; //내용
 	private String password; //비번
 	private Date uploaddate; //날짜
-	
+	//
 	
 	
 }

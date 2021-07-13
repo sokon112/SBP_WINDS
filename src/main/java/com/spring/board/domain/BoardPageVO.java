@@ -13,7 +13,7 @@ public class BoardPageVO { //게시물 페이지 나누는것
 	private boolean next;
 	private int total; //전체 게시물 수
 	private BoardCriteria cri; //현재페이지, 화면에 몇개씩 보여줄것인가?
-	
+	//
 	public BoardPageVO(BoardCriteria cri,int total) {
 		this.total = total;
 		this.cri = cri;

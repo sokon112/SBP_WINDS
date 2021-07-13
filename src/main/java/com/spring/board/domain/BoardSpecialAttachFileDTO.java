@@ -13,4 +13,5 @@ public class BoardSpecialAttachFileDTO { //파일첨부(이벤트, 동호회)
 	private String fileName;  //파일이름
 	private boolean fileType; //파일타입
 	private int sno; //번호
+	//
 }
