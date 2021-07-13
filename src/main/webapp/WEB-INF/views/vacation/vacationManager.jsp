@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@include file="/WEB-INF/includes/vacation/header.jsp" %>>
 <html>
 <head>
 <meta charset="EUC-KR">

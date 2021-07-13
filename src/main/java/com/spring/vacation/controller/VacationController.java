@@ -1,20 +1,26 @@
 package com.spring.vacation.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 import com.spring.vacation.service.VacationService;
+import com.spring.vacation.service.VacationServiceImpl;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,7 +29,9 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/vacation/*")
 public class VacationController {
 
-	private VacationService service;
+	@Autowired
+	private VacationServiceImpl service;
+	
 	//vacationMine화면 
 	@GetMapping("/")	
 	public String vacationMain() {
@@ -33,14 +41,16 @@ public class VacationController {
 	
 	//메인메뉴 3가지 
 	//id에 따른 휴가 목록 보여주는 페이지 
-	@GetMapping("/showUser")
-	public void showUserMain(Model model,int id) {
-		log.info("showUser페이지 ");
-	
-		List<VacationVO> list=service.showUser(id);
-		int cnt=service.countApp();
-		model.addAttribute("list",list);
-		model.addAttribute("cnt",cnt);
+	@GetMapping("/vacationUserList")
+	public void showUserMain( Model model, int id) {
+		log.info("showUser페이지 " +id);
+		
+		List<VacationVO> vlist=service.showUser(id);
+		
+		log.info(vlist);
+		
+		model.addAttribute("list",vlist);
+		
 	}//휴가신청서 작성하는 페이지
 	@GetMapping("/vacationApply")
 	public void vacationApply() {
@@ -50,8 +60,10 @@ public class VacationController {
 	public void showAdmin(Model model,VacationCriteria cri) {
 		log.info("휴가관리 페이지");
 	List<VacationVO> list=service.selectMonth(cri);
-		
-		model.addAttribute("list",list);		
+	
+		int cnt=service.countApp();
+		model.addAttribute("list",list);
+		model.addAttribute("cnt",cnt);		
 	}
 	
 	//사용자 페이지에서 작동하는 컨트롤러

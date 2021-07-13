@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.vacation.domain.VacationApplicationVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 import com.spring.vacation.mapper.VacationMapper;
 
+@Service
 public class VacationServiceImpl implements VacationService {
 
 	@Autowired
