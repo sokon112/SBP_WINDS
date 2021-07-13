@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.od.mapper.MainMapper">
+<mapper namespace="com.spring.od.mapper.DocMainMapper">
 
 <!-- 미결 -->
 <select  id ="mainwaitlist" resultType="com.spring.od.domain.OfficeNoticeVO">
@@ -39,7 +39,7 @@ WHERE D1.storage = 'temp' and rowNum = 10
 
 
 <!-- 검색 -->
-<select id = "searchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id = "mainsearchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
 select docNum,title,state,storage from DOC_TAB
 where 
 <if test="criteria=='title'.toString()">
