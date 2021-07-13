@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.board.mapper.SpecialMapper">
+<mapper namespace="com.spring.board.mapper.BoardSpecialMapper">
 
 <!-- 스페셜 :  -->
 
 	<!-- insert : 이벤트,동호회-->
-	<insert id="specialinsert">
-		insert into comment_table(dno,bno,nickname, password, contents, boardname)
-		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents})
+	<insert id="bspecialinsert">
+		insert into special_table(dno,bno,nickname, password, contents, boardname)
+		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents},#       )
 	</insert>
 		
 	<!--  하나 가져오기  : rno 가 일치-->

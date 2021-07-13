@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.board.mapper.CommentMapper">
+<mapper namespace="com.spring.board.mapper.BoardCommentMapper">
 
 <!-- 댓글 : 게시판에만 -->
 
 	<!-- insert : 게시판-->
-	<insert id="commentinsert">
+	<insert id="bcommentinsert">
 		insert into comment_table(dno,bno,nickname, password, contents)
 		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents})
 	</insert>
 		
 	<!-- 댓글 하나 가져오기  : rno 가 일치-->
-	<select id="commentread" resultType="com.spring.board.domain.CommentVO">
+	<select id="bcommentread" resultType="com.spring.board.domain.CommentVO">
 		select * from comment_table where rno=#{rno}
 	</select>
 	
 	<!-- 댓글 수정 : 댓글 내용만 수정, updatedate, rno 일치하면 -->
-	<update id="commentupdate">
+	<update id="bcommentupdate">
 		update comment_table
 		set contents=#{contents}, uploaddate=sysdate
-		where rno=#{rno}
+		where rno=#{rno} and password=#{password}
 	</update>
 	
 	<!-- 댓글 삭제 : rno, password 일치 -->
-	<delete id="commentdelete">
+	<delete id="bcommentdelete">
 		delete from comment_table where rno=#{rno} and password=#{password}
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="commentlist" resultType="com.spring.board.domain.CommentVO">
+	<select id="bcommentlist" resultType="com.spring.board.domain.CommentVO">
 		<![CDATA[	
 			select dno,bno,nickname,password,contents,uploaddate
 			from(
@@ -42,18 +42,16 @@
 	</select>
 	
 	<!-- 하나의 글번호에 대한 전체 댓글 게시물 수 -->
-	<select id="getCountByBno" resultType="int">
+	<select id="bgetCountByBno" resultType="int">
 		select count(*) from comment_table where bno=#{bno}	
 	</select>
 	
-	<delete id="commentdeleteAll">
+	<!-- 글을 삭제 할떄 글에 딸려있는 댓글들도 삭제  -->
+	<delete id="bcommentdeleteAll">
 		delete from comment_table where bno=#{bno}	
 	</delete>
 
-	<select id="commenttotal" resultType="com.spring.board.domain.CommentVO">
 	
-	</select>
-
 
 
 </mapper>
