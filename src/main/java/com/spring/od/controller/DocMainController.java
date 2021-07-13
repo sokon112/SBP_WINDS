@@ -1,8 +1,10 @@
 package com.spring.od.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;   
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.od.domain.Criteria;
@@ -29,11 +31,12 @@ public class DocMainController {
 	}
 	
 	@GetMapping("/mainsearchlist")
-	public String mainsearchlist(OfficeNoticeVO vo,Criteria cri) {
+	public String mainsearchlist(OfficeNoticeVO vo, String title
+			) {
 		
 		log.info("검색결과 요청....");
-		service.mainsearchlist(cri, null);
-		return "";
+		service.mainsearchlist(title);
+		return "/od/mainsearchlist";
 		
 	}
 

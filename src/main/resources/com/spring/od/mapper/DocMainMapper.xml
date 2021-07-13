@@ -4,47 +4,51 @@
 
 <!-- 미결 -->
 <select  id ="mainwaitlist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select docNum,title,D2.deptName,U.name,retentDate,regDate
+select rownum rn, docNum,title,D2.deptName,U.name,retentDate,regDate
 FROM DOC_TAB D1
 INNER JOIN USER_TAB U
 ON D1.send = U.id
 INNER JOIN DM_TAB D2
 ON D2.deptNum = U.deptNum
-WHERE D1.storage = 'wait' and rowNum = 20
+WHERE D1.storage = 'wait' and rn= 20
 </select>
 
 
 <!-- 완료 -->
 <select  id ="mainsuccesslist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select docNum,title,D2.deptName,U.name,retentDate,regDate
+select rownum rn, docNum,title,D2.deptName,U.name,retentDate,regDate
 FROM DOC_TAB D1
 INNER JOIN USER_TAB U
 ON D1.send = U.id
 INNER JOIN DM_TAB D2
 ON D2.deptNum = U.deptNum
-WHERE D1.storage = 'success' and rowNum = 10
+WHERE D1.storage = 'success' and rn= 10
 </select>
 
 
 <!-- 임시 -->
 <select  id ="maintemplist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select docNum,title,D2.deptName,U.name,retentDate,regDate
+select rownum rn, docNum,title,D2.deptName,U.name,retentDate,regDate
 FROM DOC_TAB D1
 INNER JOIN USER_TAB U
 ON D1.send = U.id
 INNER JOIN DM_TAB D2
 ON D2.deptNum = U.deptNum
-WHERE D1.storage = 'temp' and rowNum = 10
+WHERE D1.storage = 'temp' and rn = 10
 </select>
 
 
 <!-- 검색 -->
 <select id = "mainsearchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select docNum,title,state,storage from DOC_TAB
+select rownum rn, docNum,title,state,storage from DOC_TAB
 where 
-<if test="criteria=='title'.toString()">
-title like '%'||#(keyword)||'%'
-</if>
+title like '%'||#(title)||'%'
+<![CDATA[ rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount})]]>
+    		
+
 </select>
+	
+
 
 </mapper>
