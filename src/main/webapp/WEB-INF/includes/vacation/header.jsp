@@ -45,15 +45,10 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="/vacation/showAdmin">
+                    <a class="dropdown-toggle" href="/vacation/showAdmin">
                         <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리<i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 승인</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 거절</a>
-                        </li>
-                    </ul>
+                    
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
