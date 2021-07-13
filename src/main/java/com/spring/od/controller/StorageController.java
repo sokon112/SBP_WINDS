@@ -27,10 +27,10 @@ public class StorageController {
 	
 	//header '보관함',메인 페이지 '미결 문서 보관함' 클릭시
 	@GetMapping("/waitlist")
-	public void waitList(Model model,Criteria cri) {
+	public void waitList(OfficeNoticeVO vo,Model model,Criteria cri) {
 		log.info("미결 문서 보관함 요청");
 		
-		List<OfficeNoticeVO> waitlist = service.WaitList(cri);
+		List<OfficeNoticeVO> waitlist = service.WaitList(vo,cri);
 		
 		int total = service.total(cri);
 		
@@ -40,10 +40,10 @@ public class StorageController {
 	
 	//메인페이지 및 각 보관함 사이드바 '결제 완료 문서함' 클릭시
 	@GetMapping("/completelist")
-	public void completeList(Model model,Criteria cri) {
+	public void completeList(OfficeNoticeVO vo,Model model,Criteria cri) {
 		log.info("결재 완료 문서 보관함 요청");
 		
-		List<OfficeNoticeVO> completelist = service.CompleteList(cri);
+		List<OfficeNoticeVO> completelist = service.CompleteList(vo,cri);
 		
 		int total = service.total(cri);
 		
@@ -53,22 +53,16 @@ public class StorageController {
 	
 	//메인페이지 및 각 보관함 사이드바 '임시 보관함' 클릭시
 	@GetMapping("/templist")
-	public void templist(Model model,Criteria cri) {
+	public void templist(OfficeNoticeVO vo,Model model,Criteria cri) {
 		log.info("임시 문서 보관함 요청 ");
 		
-		List<OfficeNoticeVO> templist = service.TempList(cri);
+		List<OfficeNoticeVO> templist = service.TempList(vo,cri);
 		
 		int total = service.total(cri);
 		
 		model.addAttribute("templist",templist);
 		model.addAttribute("PageVO", new PageVO(cri, total));
 	}
-	//read service가 DocService에 있어서 임포트 함
-	@GetMapping("/tempRead")
-	public void read(int docNum,@ModelAttribute("cri") Criteria cri,Model model) {
-		log.info("글 하나 가져오기"+docNum+" cri : "+cri);
-		OfficeNoticeVO vo=service.read(docNum);
-		model.addAttribute("vo", vo);
-	}
+	
 	
 }
