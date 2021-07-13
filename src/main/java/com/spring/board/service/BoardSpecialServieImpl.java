@@ -36,7 +36,7 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 		}		
 		
 		vo.getAttachList().forEach(attach ->{
-			attach.setBno(vo.getNo());
+			attach.setSno(vo.getSno());
 			sattachMapper.bspecialinsert(attach);			
 		});
 		
@@ -61,7 +61,7 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 	public boolean bspecialupdate(BoardSpecialVO vo) {
 		//기존에 첨부파일 정보 모두 삭제 후 삽입
 		
-		sattachMapper.bspecialdelete(vo.getNo());
+		sattachMapper.bspecialdelete(vo.getSno());
 		
 		//게시글 수정
 		boolean modifyResult = smapper.bspecialupdate(vo)>0?true:false;
@@ -75,7 +75,7 @@ public class BoardSpecialServieImpl implements BoardSpecialService {
 		//첨부파일 삽입
 		if(modifyResult && vo.getAttachList().size()>0) {
 			for(BoardSpecialAttachFileDTO dto:vo.getAttachList()) {
-				dto.setBno(vo.getNo());
+				dto.setSno(vo.getSno());
 				sattachMapper.bspecialinsert(dto);
 			}
 		}

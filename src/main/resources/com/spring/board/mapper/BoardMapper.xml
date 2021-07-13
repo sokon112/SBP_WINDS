@@ -53,7 +53,7 @@
 		select count(*) from board_table 
 		where
 		
-		<include refid="criteria"></include>
+		<include refid="boardcommentcriteria"></include>
 		
 		 bno>0
 	</select>

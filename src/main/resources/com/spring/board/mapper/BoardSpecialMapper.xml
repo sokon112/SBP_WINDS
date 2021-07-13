@@ -28,7 +28,7 @@
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="bspeciallist" resultType="com.spring.board.domain.SpecialVO">
+	<select id="bspeciallist" resultType="com.spring.board.domain.BoardSpecialVO">
 		<![CDATA[	
 			select sno,writer,title, password, contents,images,boardnameuploaddate
 			from(

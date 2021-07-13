@@ -70,7 +70,7 @@ public class BoardSpecialController {
 		
 		if(service.bspecialinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
-			rttr.addFlashAttribute("result", vo.getNo());
+			rttr.addFlashAttribute("result", vo.getSno());
 			return "redirect:list";    //   redirect:/board/list
 		}else {
 			return "redirect:register"; //  redirect:/board/register
