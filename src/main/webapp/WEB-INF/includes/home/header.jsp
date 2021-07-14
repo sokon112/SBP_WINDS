@@ -24,8 +24,8 @@
         <!-- Navigation -->
         <nav class="navbar navbar-dark navbar-dark navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">
-					<img src="" alt="" />
+                <a class="navbar-brand" href="/" >
+					<img src="/resources/img/SBP_Winds_logo.png" class="img-thumbnail test" style="margin-top: 0; width: 150px;" alt="" />
 				</a>
             </div>
             <!-- /.navbar-header -->
