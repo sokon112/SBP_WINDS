@@ -11,7 +11,7 @@
 	</insert>
 		
 	<!--  하나 가져오기  : sno 가 일치-->
-	<select id="bspecialread" resultType="com.spring.board.domain.BaordSpecialVO">
+	<select id="bspecialread" resultType="com.spring.board.domain.BoardSpecialVO">
 		select * from special_table where sno=#{sno}
 	</select>
 	
