@@ -41,11 +41,11 @@
                         <i class="fa fa-tasks fa-fw"></i>보관함 <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 미결 보관함</a>
+                        <li><a href="/od/waitlist"><i class="fa fa-envelope fa-fw"></i> 미결 보관함</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 결제완료 보관함</a>
+                        <li><a href="/od/completelist"><i class="fa fa-envelope fa-fw"></i> 결제완료 보관함</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-envelope fa-fw"></i> 임시 보관함</a>
+                        <li><a href="/od/templist"><i class="fa fa-envelope fa-fw"></i> 임시 보관함</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

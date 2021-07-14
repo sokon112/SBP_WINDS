@@ -6,9 +6,9 @@ import com.spring.od.domain.Criteria;
 import com.spring.od.domain.OfficeNoticeVO;
 
 public interface StorageMapper {
-	public List<OfficeNoticeVO> waitList(OfficeNoticeVO vo, Criteria cri);
-	public List<OfficeNoticeVO> completeList(OfficeNoticeVO vo, Criteria cri);
-	public List<OfficeNoticeVO> tempList(OfficeNoticeVO vo, Criteria cri);
+	public List<OfficeNoticeVO> waitList(Criteria cri);
+	public List<OfficeNoticeVO> completeList(Criteria cri);
+	public List<OfficeNoticeVO> tempList(Criteria cri);
 	
 	public int totalCnt(Criteria cri);
 	

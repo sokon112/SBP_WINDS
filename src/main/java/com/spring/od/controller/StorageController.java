@@ -27,10 +27,10 @@ public class StorageController {
 	
 	//header '보관함',메인 페이지 '미결 문서 보관함' 클릭시
 	@GetMapping("/waitlist")
-	public void waitList(OfficeNoticeVO vo,Model model,Criteria cri) {
+	public void waitList(Model model,Criteria cri) {
 		log.info("미결 문서 보관함 요청");
 		
-		List<OfficeNoticeVO> waitlist = service.WaitList(vo,cri);
+		List<OfficeNoticeVO> waitlist = service.WaitList(cri);
 		
 		int total = service.total(cri);
 		
@@ -40,10 +40,10 @@ public class StorageController {
 	
 	//메인페이지 및 각 보관함 사이드바 '결제 완료 문서함' 클릭시
 	@GetMapping("/completelist")
-	public void completeList(OfficeNoticeVO vo,Model model,Criteria cri) {
+	public void completeList(Model model,Criteria cri) {
 		log.info("결재 완료 문서 보관함 요청");
 		
-		List<OfficeNoticeVO> completelist = service.CompleteList(vo,cri);
+		List<OfficeNoticeVO> completelist = service.CompleteList(cri);
 		
 		int total = service.total(cri);
 		
@@ -53,10 +53,10 @@ public class StorageController {
 	
 	//메인페이지 및 각 보관함 사이드바 '임시 보관함' 클릭시
 	@GetMapping("/templist")
-	public void templist(OfficeNoticeVO vo,Model model,Criteria cri) {
+	public void templist(Model model,Criteria cri) {
 		log.info("임시 문서 보관함 요청 ");
 		
-		List<OfficeNoticeVO> templist = service.TempList(vo,cri);
+		List<OfficeNoticeVO> templist = service.TempList(cri);
 		
 		int total = service.total(cri);
 		

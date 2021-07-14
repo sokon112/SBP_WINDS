@@ -21,18 +21,18 @@ public class StorageServiceImpl implements StorageService {
 		return mapper.totalCnt(cri);
 	}
 	@Override
-	public List<OfficeNoticeVO> WaitList(OfficeNoticeVO vo, Criteria cri) {
-		return mapper.waitList(vo, cri);
+	public List<OfficeNoticeVO> WaitList(Criteria cri) {
+		return mapper.waitList(cri);
 	}
 
 	@Override
-	public List<OfficeNoticeVO> CompleteList(OfficeNoticeVO vo, Criteria cri) {
-		return mapper.completeList(vo, cri);
+	public List<OfficeNoticeVO> CompleteList(Criteria cri) {
+		return mapper.completeList(cri);
 	}
 
 	@Override
-	public List<OfficeNoticeVO> TempList(OfficeNoticeVO vo, Criteria cri) {
-		return mapper.tempList(vo, cri);
+	public List<OfficeNoticeVO> TempList(Criteria cri) {
+		return mapper.tempList(cri);
 	}
 
 }
