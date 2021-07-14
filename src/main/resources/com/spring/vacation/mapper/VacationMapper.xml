@@ -67,16 +67,21 @@
 	<!-- 사용자 -->
 		<!-- 신청서 등록 구문 -->
 	<insert id="vInsertUserApp">
+	
 		insert into vacationApplicationTable(holidayAppNum,id,type,startterm,endterm,state,applicationDate,reason) 
 		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},#{state},#{applicationDate},#{reason})
+		
 	</insert>
 	
 	<!--사용자 페이지 보여주는 구문-->
 	<select id="vShowUser" resultType="com.spring.vacation.domain.VacationVO">
-		select vacationAppNum,id,type,startterm,state,applicationDate,approvaldate
-		from vacationApplicationTable where id=#{id} 
+<![CDATA[
+		select vacationAppNum,id,type,startterm,endterm,state,applicationDate,approvaldate
+		from vacationApplicationTable 
+ 		where id=#{id} and startterm >= #{cri.nowMonth} and startterm < #{cri.nextMonth}
+	]]>
 	</select >
-	<select id="vShowUserOne">
+	<select id="vShowUserOne" resultType="com.spring.vacation.domain.VacationVO">
 		select vacationAppNum,id,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
 		from vacationApplicationTable
 		where vacationAppNum=#{vacationAppNum}
@@ -98,12 +103,12 @@
 		where vacationAppNum=#{vacationAppNum} and startterm>#{startterm}
 	</update>
 	<!-- 휴가 갯수를 가져오는 mapper -->
-	<select id="vIdCnt">
+	<select id="vIdCnt" resultType="int">
 		select VacationCnt from vacationScedule where id={#id}
 	</select>	
 	
-	<!-- 현재 월 불러오는 mapper -->
-	<select id="vVacationDay">
+	<!-- 현재 월 불러오는 mapper?? -->
+	<select id="vVacationDay" resultType="Date" >
 		select startterm 
 		from vacationApplicationTable 
 		where vacationAppNum=#{vacationAppNum}

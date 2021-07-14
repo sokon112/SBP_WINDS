@@ -20,11 +20,11 @@ public class VacationCriteria {
 	
 	Calendar cal = Calendar.getInstance();
 
+	Date date= new Date();
 	
-	
-	public VacationCriteria(Date nowMonth) {
+	public VacationCriteria() {
 		super();
-		cal.setTime(nowMonth);
+		cal.setTime(date);
 		cal.set(Calendar.DATE, 1);
 		this.nowMonth=cal.getTime();
 		cal.add(Calendar.MONTH, 1);

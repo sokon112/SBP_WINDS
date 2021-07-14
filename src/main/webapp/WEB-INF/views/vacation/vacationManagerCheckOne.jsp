@@ -1,20 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-    <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
-
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/vacation/vacationApply">
+<form action="/vacation/vacationManagerCheckOne">
         <table border="3">
             <thead>
-                <th colspan="3">휴가신청서</th> 
+                <th colspan="4">휴가신청서</th> 
             </thead>
             <tbody>
+                
+                <tr>
+                    <th>문서번호</th>
+                    <td colspan="3">0002563</td>
+                </tr>
+                <tr>
+                    <th>사원번호</th>
+                    <td>1234</td>
+                    <th>이름</th>
+                    <td>김길동</td>
+                </tr>
                 <tr>
                     <th>분류</th>
                     <td colspan="3">
@@ -43,9 +52,13 @@
                     <th>사유</th>
                     <td colspan="3">병원에 다녀와야함</td>
                 </tr>
+                <tr>
+                    <th>거절사유</th>
+                    <td colspan="3">병원에 다녀와야함</td>
+                </tr>
             </tbody>
         </table>
-        <button type="submit">신청</button>
+        <button type="submit">확인</button>
     </form>
 </body>
 </html>

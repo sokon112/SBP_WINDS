@@ -4,6 +4,8 @@ package com.spring.vacation.mapper;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 
@@ -16,14 +18,15 @@ public interface VacationMapper {
 	
 	//승인
 	public int vOk(int holidayAppNum);
-	public int vNo(int holidayAppNum,String refusalreason);
+	public int vNo(@Param("holidayAppNum")int holidayAppNum,@Param("refusalreason")String refusalreason);
 
 	//cnt계산 다시 하기
 	public int  vChangeCnt(int id);
 
 	//사용자
 	public int vInsertUserApp(VacationVO vacation);
-	public List<VacationVO> vShowUser(int id);
+	public List<VacationVO> vShowUser(@Param("id")int id,@Param("cri")VacationCriteria cri);
+	
 	public VacationVO vShowUserOne(int vacationAppNum);
 	public int vUserUpdateApp(VacationVO vacation);
 	public int vDeleteUserApp(int vacationAppNum);

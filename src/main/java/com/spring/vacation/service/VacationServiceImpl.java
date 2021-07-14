@@ -3,6 +3,7 @@ package com.spring.vacation.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,11 +54,14 @@ public class VacationServiceImpl implements VacationService {
 		return mapper.vInsertUserApp(vacation)>0?true:false;
 	}
 
-	@Override
-	public List<VacationVO> showUser(int id) {
-		
-		return mapper.vShowUser(id);
-	}
+	
+	  @Override 
+	  public List<VacationVO> showUser(int id,VacationCriteria cri) {
+		  return mapper.vShowUser(id,cri);
+	  }
+	 
+
+
 
 	@Override
 	public VacationVO showUserOne(int vacationAppNum) {

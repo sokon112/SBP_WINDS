@@ -1,6 +1,5 @@
 package com.spring.vacation.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,18 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
-import com.spring.vacation.service.VacationService;
 import com.spring.vacation.service.VacationServiceImpl;
 
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +27,8 @@ public class VacationController {
 	@Autowired
 	private VacationServiceImpl service;
 	
+
+	
 	//vacationMine화면 
 	@GetMapping("/")	
 	public String vacationMain() {
@@ -43,9 +40,12 @@ public class VacationController {
 	//id에 따른 휴가 목록 보여주는 페이지 
 	@GetMapping("/vacationUserList")
 	public void showUserMain( Model model, int id) {
-		log.info("showUser페이지 " +id);
 		
-		List<VacationVO> vlist=service.showUser(id);
+		VacationCriteria cri=new VacationCriteria();
+		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
+		
+		List<VacationVO> vlist=service.showUser(id,cri);
+		
 		
 		log.info(vlist);
 		
@@ -56,10 +56,11 @@ public class VacationController {
 	public void vacationApply() {
 		log.info("휴가신청 페이지");	
 	}//관리자가 보는 페이지 
-	@GetMapping("/showAdmin")
-	public void showAdmin(Model model,VacationCriteria cri) {
+	@GetMapping("/vacationManager")
+	public void showAdmin(Model model) {
 		log.info("휴가관리 페이지");
-	List<VacationVO> list=service.selectMonth(cri);
+		VacationCriteria cri=new VacationCriteria();
+		List<VacationVO> list=service.selectMonth(cri);
 	
 		int cnt=service.countApp();
 		model.addAttribute("list",list);
@@ -68,12 +69,23 @@ public class VacationController {
 	
 	//사용자 페이지에서 작동하는 컨트롤러
 	//리스트에 있는 목록 클릭시
-	@GetMapping("/showUserOne")
-	public void showUserOne(Model model, int vacationAppNum){
+	@GetMapping("/vacationUserListOne")
+	public String showUserOne(Model model, int vacationAppNum){
 		log.info("사용자의 페이지");
 		
-		VacationVO vo = service.showUserOne(vacationAppNum);
-		model.addAttribute("vo",vo);
+		VacationVO vacation = service.showUserOne(vacationAppNum);
+		log.info("vacation : "+vacation);
+		model.addAttribute("vacation",vacation);
+		if(vacation.getState().equals("승인")) {
+			return "redirect:/vacationUserSuccess";
+		}
+		else if(vacation.getState().equals("거절")) {
+			return "redirect:/vacationUserReject";
+		}else if(vacation.getState().equals("신청")) {
+			return "redirect:/vacationUserModify";
+		}else {
+			return "/";
+		}
 	}
 	//showUserOne으로 들어온 후 작성했던 휴가신청서 페이지
 	@PostMapping("/update")
@@ -89,9 +101,9 @@ public class VacationController {
 	public String delete(int vacationAppNum) {
 		log.info("삭제버튼 눌렀을때");
 		if(service.deleteUserApp(vacationAppNum)){
-			return "redirect:/";
+			return "redirect:/vacation/";
 		}else {
-			return "redirect:/showUserOne";
+			return "redirect:/vacation/showUserOne";
 		}
 		
 	}
@@ -132,10 +144,18 @@ public class VacationController {
 		}
 	}
 	//관리자가 신청리스트 보는 페이지 
-	@GetMapping("/applicationList")
+	@GetMapping("/vacationManagerConfirm")
 	public void applicationList(Model model) {
 		List<VacationVO> list = service.applicationList();
 		model.addAttribute("list", list);
+	}
+	//관리자가 목록중에 하나 눌렀을때 
+	@GetMapping("/vacationManagerCheckOne")
+	public void vacationManagerCheckOne(Model model, int vacationAppNum){
+		log.info("관리자 페이지");
+		
+		VacationVO vo = service.showUserOne(vacationAppNum);
+		model.addAttribute("vo",vo);
 	}
 	
 //	휴가심사 페이지

@@ -30,7 +30,7 @@
 
             <ul class="nav navbar-top-links navbar-center">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="/vacation/showUser">
+                    <a class="dropdown-toggle" href="/vacation/vacationUserList">
                         <i class="fa fa-tasks fa-fw"></i>휴가 목록<i class="fa fa-caret-down"></i>
                     </a>
                     
@@ -45,7 +45,7 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="/vacation/showAdmin">
+                    <a class="dropdown-toggle" href="/vacation/vacationManager">
                         <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리<i class="fa fa-caret-down"></i>
                     </a>
                     
