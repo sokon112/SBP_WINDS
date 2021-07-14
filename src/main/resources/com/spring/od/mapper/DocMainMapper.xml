@@ -4,37 +4,41 @@
 
 <!-- 미결 -->
 <select  id ="mainwaitlist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select rownum rn, docNum,title,D2.deptName,U.name,retentDate,regDate
-FROM DOC_TAB D1
-INNER JOIN USER_TAB U
-ON D1.send = U.id
-INNER JOIN DM_TAB D2
-ON D2.deptNum = U.deptNum
-WHERE D1.storage = 'wait' and rn= 20
+select rownum rn, docNum,title,uname,state,regDate
+FROM (select docNum,title,U.name uname,state,regDate 
+				From USER_TAB1 D1
+				INNER JOIN USER_TAB2 U
+				ON D1.send = U.id
+				WHERE D1.storage = 'wait'
+				order by regDate desc )
+				where ROWNUM between 0 and 20 order by desc;
 </select>
 
 
 <!-- 완료 -->
 <select  id ="mainsuccesslist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select rownum rn, docNum,title,D2.deptName,U.name,retentDate,regDate
-FROM DOC_TAB D1
-INNER JOIN USER_TAB U
-ON D1.send = U.id
-INNER JOIN DM_TAB D2
-ON D2.deptNum = U.deptNum
-WHERE D1.storage = 'success' and rn= 10
+select rownum rn, docNum,title,uname,regDate
+FROM  (select docNum,title,U.name uname,regDate 
+				From USER_TAB1 D1
+				INNER JOIN USER_TAB2 U
+				ON D1.send = U.id
+				WHERE D1.storage = 'success'
+				order by regDate desc )
+				where ROWNUM between 0 and 10 order by desc;
 </select>
 
 
 <!-- 임시 -->
 <select  id ="maintemplist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select rownum rn, docNum,title,D2.deptName,U.name,retentDate,regDate
-FROM DOC_TAB D1
-INNER JOIN USER_TAB U
-ON D1.send = U.id
-INNER JOIN DM_TAB D2
-ON D2.deptNum = U.deptNum
-WHERE D1.storage = 'temp' and rn = 10
+select rownum rn, docNum,title,uname,sysdate
+FROM  (select docNum,title,U.name uname,sysdate
+				From USER_TAB1 D1
+				INNER JOIN USER_TAB2 U
+				ON D1.send = U.id
+				WHERE D1.storage = 'temp'
+				order by regDate desc )
+				where ROWNUM between 0 and 10 order by desc;
+
 </select>
 
 
