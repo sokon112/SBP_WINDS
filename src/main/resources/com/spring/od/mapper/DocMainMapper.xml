@@ -11,33 +11,33 @@
 		on D1.send = U.id
 		where D1.storage = 'wait'
 		order by regDate desc)
-	where rownum between 0 and 20 order by desc
+	where rownum between 0 and 20 order by rn desc
 </select>
 
 
 <!-- 완료 -->
 <select id ="mainsuccesslist" resultType="com.spring.od.domain.OfficeNoticeVO">
-	select rownum rn, docNum,title,uname,regDate
+	select rownum rn,docNum,title,uname,regDate
 	from (select docNum,title,U.name uname,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
 		where D1.storage = 'success'
 		order by regDate desc)
-	where rownum between 0 and 10 order by desc
+	where rownum between 0 and 10 order by rn desc
 </select>
 
 
 <!-- 임시 -->
 <select id ="maintemplist" resultType="com.spring.od.domain.OfficeNoticeVO">
-	select rownum rn, docNum,title,uname,regDate
+	select rownum rn,docNum,title,uname,regDate
 	from (select docNum,title,U.name uname,regDate
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
 		where D1.storage = 'temp'
 		order by regDate desc)
-	where rownum between 0 and 10 order by desc
+	where rownum between 0 and 10 order by rn desc
 
 </select>
 
