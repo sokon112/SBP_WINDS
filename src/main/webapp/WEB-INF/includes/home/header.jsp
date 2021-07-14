@@ -24,7 +24,9 @@
         <!-- Navigation -->
         <nav class="navbar navbar-dark navbar-dark navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">SBP Wind 로고자리</a>
+                <a class="navbar-brand" href="/">
+					<img src="" alt="" />
+				</a>
             </div>
             <!-- /.navbar-header -->
 
