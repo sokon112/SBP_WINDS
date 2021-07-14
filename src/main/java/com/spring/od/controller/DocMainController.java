@@ -27,7 +27,7 @@ public class DocMainController {
 		service.mainsuccesslist();
 		service.maintemplist();
 		service.mainwaitlist();
-		return "/od/od_home";
+		return "/od/od_main";
 	}
 	
 	@GetMapping("/mainsearchlist")
