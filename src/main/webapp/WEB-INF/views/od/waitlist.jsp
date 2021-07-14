@@ -6,54 +6,16 @@
 <%@include file="../../includes/od/header.jsp" %>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Board List</h1>
+                    <h1 class="page-header">wait List</h1>
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Board List Page
-                            <button id='regBtn' type='button' class='btn btn-xs pull-right' onclick="location.href='register'">Register New Board</button>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>번 호</th>
-                                        <th>제 목</th>
-                                        <th>작성자</th>
-                                        <th>작성일</th>
-                                        <th>수정일</th>
-                                    </tr>									
-                                </thead>
-								<tbody>
-								<!-- 게시판 리스트 반복문 -->
-								<c:forEach var="vo" items="${list}">
-									<tr>
-										<td>${vo.bno}</td>
-										<td><a href="${vo.bno}" class="move">${vo.title}</a> <strong>[${vo.replycnt}]</strong></td>
-										<td>${vo.writer}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regdate}"/></td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.updatedate}"/></td>
-									</tr>
-								</c:forEach>								
-								</tbody>
-                            </table>
-							<div class="row"> <!-- start search -->
-                            	<div class="col-md-12">
-                            	  <div class="col-md-8"><!--search Form-->
+                <div class="row"> <!-- start search -->
+                            	<div class="col-sm-6">
+                            	  <div class="col-sm-2"><!--search Form-->
                             		<form action="" id="searchForm">
                             			<select name="type" id="" class="form-control">
                             				<option value="">-----------</option>
                             				<option value="T" <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
-                            				<option value="C" <c:out value="${pageVO.cri.type=='C'?'selected':''}"/>>내용</option>
-                            				<option value="W" <c:out value="${pageVO.cri.type=='W'?'selected':''}"/>>작성자</option>
-                            				<option value="TC" <c:out value="${pageVO.cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
-                            				<option value="TCW" <c:out value="${pageVO.cri.type=='TCW'?'selected':''}"/>>제목 or 내용 or 작성자</option>
+                            				<option value="U" <c:out value="${pageVO.cri.type=='U'?'selected':''}"/>>송신자</option>
                             			</select>
                             			<input type="text" name="keyword" value="${pageVO.cri.keyword}" />
                             			<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
@@ -62,6 +24,45 @@
                             			<button type="button" class="btn btn-default">검색</button>
                             		</form>
                             	   </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <button id='regBtn' type='button' class='btn btn-xs pull-right' onclick="location.href='register'">새 공문 작성</button>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>공문번호</th>
+                                        <th>공문제목</th>
+                                        <th>처리단계</th>
+                                        <th>송신부서</th>
+                                        <th>송신자명</th>
+                                        <th>작성일</th>
+                                        <th>만료기한</th>
+                                    </tr>									
+                                </thead>
+								<tbody>
+								
+								<c:forEach var="vo" items="${list}">
+									<tr>
+										<td>${vo.docNum}</td>
+										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
+										<td>${vo.state}</td>
+										<td>${DeptVO.deptName}</td>
+										<td>${UserVO.name}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regdate}"/></td>
+										<td>${vo.retentDate}</td>
+									</tr>
+								</c:forEach>								
+								</tbody>
+                            </table>
+							
                             	   <div class="col-md-2 col-md-offset-2">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
                             	   	<select name="" id="amount" class="form-control">
