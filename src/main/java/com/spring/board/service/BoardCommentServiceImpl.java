@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.board.domain.BoardCommentPageVO;
 import com.spring.board.domain.BoardCommentVO;
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.mapper.BoardMapper;
@@ -41,8 +42,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 	
 	@Override
-	public List<BoardCommentVO> bcommentlist(BoardCriteria cri, int bno) {
-		return bcmapper.bcommentlist(cri,bno);
+	public BoardCommentPageVO bcommentlist(BoardCriteria cri, int dno) {
+		return new BoardCommentPageVO(bcmapper.bcommentCountByBno(dno),bcmapper.bcommentlist(cri, dno));
 	}
 
 	@Override
@@ -55,6 +56,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		return bcmapper.bcommenttotal(cri);
 
 	}
+
 	
 	
 	

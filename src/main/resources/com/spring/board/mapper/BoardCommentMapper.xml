@@ -28,7 +28,7 @@
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="bcommentlist" resultType="com.spring.board.domain.BoardCommentVO">
+	<select id="bcommentlist" resultType="com.spring.board.domain.BoardCommentPageVO">
 		<![CDATA[	
 			select dno,bno,nickname,password,contents,uploaddate
 			from(

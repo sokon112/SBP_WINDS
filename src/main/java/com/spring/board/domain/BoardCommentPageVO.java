@@ -14,8 +14,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class BoardCommentPageVO { //댓글페이지 나누는 것 
-	private int commentCnt; //댓글 전체 개수
-	private List<BoardCommentVO> list; //댓글 리스트
-	//
+	private int bcommentCnt; //댓글 전체 개수
+	private List<BoardCommentVO> bcommentlist; //댓글 리스트
+	
 	
 }

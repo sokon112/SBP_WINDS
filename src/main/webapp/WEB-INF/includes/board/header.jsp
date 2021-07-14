@@ -30,7 +30,7 @@
 
             <ul class="nav navbar-top-links navbar-center">               
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="/board/main/boardlist">
                         <i class="fa fa-comment fa-fw"></i> 익명 게시판
                     </a>
                     <!-- /.dropdown-alerts -->

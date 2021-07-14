@@ -31,10 +31,10 @@ public class BoardController {
 	@GetMapping("/")	
 	public String odMain() {
 		log.info("board 메인 접속....");
-		return "/board/board_home";
+		return "redirect:main/boardlist";
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/main/boardlist")
 	public void list(Model model,BoardCriteria cri) {
 		log.info("전체 리스트 요청 ");
 		
@@ -44,7 +44,7 @@ public class BoardController {
 		//전체 게시물 수 
 		int total = service.boardtotal(cri);
 				
-		model.addAttribute("list", boardlist);
+		model.addAttribute("boardlist", boardlist);
 		model.addAttribute("pageVO", new BoardPageVO(cri, total));
 	}	
 	
