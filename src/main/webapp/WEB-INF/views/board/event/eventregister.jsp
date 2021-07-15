@@ -6,14 +6,63 @@
 <%@include file="/WEB-INF/includes/board/header.jsp" %>
 <html>
 <head>
-	<title>Board</title>
+	<title>글쓰기</title>
 </head>
 <body>
-<div align="center">
-	<h1>SBP Winds Board</h1>
-	<pre class="mt-5 mb-3 text-muted text-center"> 
-		Soldesk Big-Data Professional Winds
-		김석현 남광우 심태현 이채은 박다영 황다빈
-	</pre>
-</div>
+			<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">boardregister</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>            
+            <div class="row">
+                <div class="col-lg-12">
+                	<div class="panel panel-default">
+                        <div class="panel-heading">
+                           board Page
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                			<form action="" method="post" role="form">
+                				<div class="form-group">
+                					<label>Title</label>
+                					<input class="form-control" name="title">                				
+                				</div>  
+                				<div class="form-group">
+                					<label>Content</label>
+                					<textarea class="form-control" rows="3" name="content"></textarea>               				
+                				</div> 
+                				<div class="form-group">
+                					<label>Writer</label>
+                					<input class="form-control" name="writer">                				
+                				</div>  
+                				<button type="submit" class="btn btn-default">Submit</button>              			
+                				<button type="reset" class="btn btn-default">reset</button>              			
+                			</form>
+                		</div>
+                	</div>
+                </div>
+            </div>  
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				File 첨부
+			</div>
+			<div class="panel-body">
+				<div class="form-group uploadDiv">
+					<input type="file" name="uploadFile" multiple/>
+				</div>
+				<div class="uploadResult">
+					<ul></ul>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>  
+<script>
+	var csfHeaderName="${_csrf.HeaderName}";
+	var csfTokenValue="${_csrf.e\token}";
+</script>
+<script src="/resources/js/register.js"></script> 
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

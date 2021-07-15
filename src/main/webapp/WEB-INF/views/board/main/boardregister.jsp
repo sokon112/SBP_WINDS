@@ -4,14 +4,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/board/header.jsp" %>
-<html>
-<head>
-	<title>글쓰기</title>
-</head>
-<body>
+
 			<div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">boardregister</h1>
+                    <h1 class="page-header">익명 게시판 글쓰기</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>            
@@ -19,7 +15,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           boardregister Page
+                           board Page
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -43,23 +39,6 @@
                 	</div>
                 </div>
             </div>  
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				File 첨부
-			</div>
-			<div class="panel-body">
-				<div class="form-group uploadDiv">
-					<input type="file" name="uploadFile" multiple/>
-				</div>
-				<div class="uploadResult">
-					<ul></ul>
-				</div>
-			</div>			
-		</div>
-	</div>
-</div>  
 <script>
 	var csfHeaderName="${_csrf.HeaderName}";
 	var csfTokenValue="${_csrf.e\token}";

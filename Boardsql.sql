@@ -13,6 +13,10 @@ CREATE TABLE board_table
 -- 게시판 테이블 시퀸스 생성
 create SEQUENCE board_tb_seq;
 
+
+
+
+
 --테이블 삭제
 DROP TABLE board_table;
 DROP TABLE event_hobby_table;

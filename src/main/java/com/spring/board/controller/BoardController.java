@@ -28,14 +28,14 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	@GetMapping("/")	
-	public String odMain() {
-		log.info("board 메인 접속....");
+	@GetMapping("/")
+	public String boardMain() {
+		log.info("게시판 메인");
 		return "redirect:main/boardlist";
 	}
 	
 	@GetMapping("/main/boardlist")
-	public void list(Model model,BoardCriteria cri) {
+	public void boardlist(Model model,BoardCriteria cri) {
 		log.info("전체 리스트 요청 ");
 		
 		//사용자가 선택한 페이지 게시물
@@ -45,33 +45,33 @@ public class BoardController {
 		int total = service.boardtotal(cri);
 				
 		model.addAttribute("boardlist", boardlist);
-		model.addAttribute("pageVO", new BoardPageVO(cri, total));
+		model.addAttribute("boardpageVO", new BoardPageVO(cri, total));
 	}	
 	
 	
-	@PreAuthorize("isAuthenticated()") 
-	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()") //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+	@GetMapping("/boardregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/register")
+	@PostMapping("/boardregister")
 	public String registerPost(BoardVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
 		if(service.boardinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getBno());
-			return "redirect:list";    //   redirect:/board/list
+			return "redirect:boardlist";    //   redirect:/board/list
 		}else {
-			return "redirect:register"; //  redirect:/board/register
+			return "redirect:boardregister"; //  redirect:/board/register
 		}
 	}
 	
 	
-	@GetMapping({"/read","/modify"})
+	@GetMapping({"/boardread","/boardmodify"})
 	public void read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
 		
@@ -80,8 +80,8 @@ public class BoardController {
 	}
 	
 	// modify+post 수정한 후 list
-	@PreAuthorize("principal.username == #vo.writer")
-	@PostMapping("/modify")
+	@PreAuthorize("principal.username == #vo.nickname")
+	@PostMapping("/boardmodify")
 	public String modify(BoardVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 			
@@ -97,13 +97,13 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		
 		
-		return "redirect:list";
+		return "redirect:boardlist";
 	}
 	
 	//게시글 삭제 + post
-	@PreAuthorize("principal.username == #writer")
-	@PostMapping("/remove")
-	public String remove(int bno,String writer,BoardCriteria cri,RedirectAttributes rttr) {
+	@PreAuthorize("principal.username == #nickname")
+	@PostMapping("/boarddelete")
+	public String delete(int bno,String nickname,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+bno);
 		
 		
@@ -112,7 +112,7 @@ public class BoardController {
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:list";
+		return "redirect:boardlist";
 	}
 	
 	
