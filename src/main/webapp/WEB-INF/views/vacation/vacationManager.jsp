@@ -40,7 +40,7 @@
 							${vacation.vacationAppNum}
 					</td>
 					<td>
-							${vacation.vacationApplication.name()}
+							${vacation.vacationApplication.name}
 					</td>
 					<td>
 							${vacation.type}

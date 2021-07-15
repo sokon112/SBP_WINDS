@@ -14,14 +14,21 @@
 	<select  id="vSelectMonth" resultType="com.spring.vacation.domain.VacationVO">
 	<![CDATA[
 		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
-		from vacationApplicationTable vat, vacationScedule hs
-		where vat.id=hs.id and vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth} and vat.state not in('신청') 
+		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id 
+		where  vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth} and vat.state not in('신청') 
 	]]>	
 	<include refid="vacationCriteria"></include>
 	<![CDATA[	
 		order by vat.vacationAppNum
 	]]>	
 	</select>
+	
+	<select id="vSelectMonthUserData">
+		select vat.vacationAppNum,vat.id,hs.name
+		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id 
+		where vat.state not in('신청') ;
+	</select>
+	
 	<!-- type이 '신청'인 신청서 갯수 추출  -->
 	<select  id="vCountApp" resultType="int">
 		select count(*)

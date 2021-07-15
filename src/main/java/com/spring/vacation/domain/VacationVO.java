@@ -1,6 +1,9 @@
 package com.spring.vacation.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +28,6 @@ public class VacationVO {
 	private String reason;
 	private String refusalReason;	
 	
+	@Autowired
 	private VacationApplicationVO vacationApplication;
 }

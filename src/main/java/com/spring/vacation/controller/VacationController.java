@@ -64,7 +64,15 @@ VacationCriteria cri=new VacationCriteria();
 		VacationCriteria cri=new VacationCriteria();
 		
 		List<VacationVO> list=service.selectMonth(cri);
-	
+		log.info("list"+list);
+		/**/
+		
+		 for (VacationVO vacation:list) {
+		 log.info("vacation.getVacationApplication() :  "
+		  +vacation.getVacationApplication().getId()
+		  +vacation.getVacationApplication().getName()
+		  +vacation.getVacationApplication().getVacationCnt() ); }
+		 
 		int cnt=service.countApp();
 		model.addAttribute("cri",cri);
 		model.addAttribute("list",list);
