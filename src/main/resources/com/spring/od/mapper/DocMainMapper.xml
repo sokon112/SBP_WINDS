@@ -44,11 +44,12 @@
 
 <!-- 검색 -->
 <select id = "mainsearchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
-select rownum rn, docNum,title,state,storage from DOC_TAB
-where 
-title like '%'||#{keyword}||'%'
-<![CDATA[ rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount})]]>
+select * from( 
+select rownum rn, docNum,title,state,storage 
+from DOC_TAB
+where title like '%'||#{keyword}||'%'
+<![CDATA[ and rownum <= (#{pageNum}*#{amount}))
+where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 	
 

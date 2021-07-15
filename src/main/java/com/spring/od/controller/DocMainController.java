@@ -35,7 +35,7 @@ public class DocMainController {
 	
 	@GetMapping("/mainsearchlist")
 	public void mainsearchlist(Model model,Criteria cri) {
-		log.info("검색 리스트 요청 ");
+		log.info("검색 리스트 요청 "+cri);
 	
 		List<OfficeNoticeVO> searchlist= service.mainsearchlist(cri);
 		

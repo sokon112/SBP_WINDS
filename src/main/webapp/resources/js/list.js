@@ -3,7 +3,7 @@
  */
 $(function(){
 	// 모달 창 띄우기
-	checkModal(result);
+	//checkModal(result);
 	
 	history.replaceState({},null,null);
 	
@@ -57,7 +57,8 @@ $(function(){
 	//검색
 	//type or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
-	$(".btn-default").click(function(){
+	$(".btn-default").click(function(e){
+		//e.preventDefault();
 		//검색 폼 가져오기
 		var searchForm = $("#searchForm");
 		
