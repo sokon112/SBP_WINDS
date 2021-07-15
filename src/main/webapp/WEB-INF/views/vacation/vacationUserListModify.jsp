@@ -9,10 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="">
+<form action="/vacationUserListModify">
         <table border="3">
             <thead>
-                <th colspan="4">휴가신청서</th> 
+            <tr>
+                <th colspan="4">휴가신청서</th>
+            </tr> 
             </thead>
             <tbody>
                 <tr>
@@ -38,7 +40,7 @@
                 </tr>
                 <tr>
                     <th>거절사유</th>
-                    <td colspan="3">${vacation.refusalreason }</td>
+                   <%--  <td colspan="3">${vacation.refusalreason }</td> --%>
                 </tr>
             </tbody>
         </table>

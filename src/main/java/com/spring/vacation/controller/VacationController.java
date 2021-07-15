@@ -27,7 +27,7 @@ public class VacationController {
 	@Autowired
 	private VacationServiceImpl service;
 	
-
+VacationCriteria cri=new VacationCriteria();
 	
 	//vacationMine화면 
 	@GetMapping("/")	
@@ -41,7 +41,7 @@ public class VacationController {
 	@GetMapping("/vacationUserList")
 	public void showUserMain( Model model, int id) {
 		
-		VacationCriteria cri=new VacationCriteria();
+		
 		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
@@ -49,20 +49,24 @@ public class VacationController {
 		
 		log.info(vlist);
 		
+		model.addAttribute("cri",cri);
 		model.addAttribute("list",vlist);
 		
 	}//휴가신청서 작성하는 페이지
 	@GetMapping("/vacationApply")
 	public void vacationApply() {
 		log.info("휴가신청 페이지");	
+		
 	}//관리자가 보는 페이지 
 	@GetMapping("/vacationManager")
 	public void showAdmin(Model model) {
 		log.info("휴가관리 페이지");
 		VacationCriteria cri=new VacationCriteria();
+		
 		List<VacationVO> list=service.selectMonth(cri);
 	
 		int cnt=service.countApp();
+		model.addAttribute("cri",cri);
 		model.addAttribute("list",list);
 		model.addAttribute("cnt",cnt);		
 	}
@@ -75,14 +79,16 @@ public class VacationController {
 		
 		VacationVO vacation = service.showUserOne(vacationAppNum);
 		log.info("vacation : "+vacation);
+		
 		model.addAttribute("vacation",vacation);
+		
 		if(vacation.getState().equals("승인")) {
-			return "redirect:/vacationUserSuccess";
+			return "redirect:/vacationUserListSuccess";
 		}
 		else if(vacation.getState().equals("거절")) {
-			return "redirect:/vacationUserReject";
+			return "redirect:/vacationUserListReject";
 		}else if(vacation.getState().equals("신청")) {
-			return "redirect:/vacationUserModify";
+			return "redirect:/vacationUserListModify";
 		}else {
 			return "/";
 		}

@@ -13,15 +13,14 @@
 	<!-- 관리자가 처음으로 보는 페이지 - 승인, 거부 인 사람 -->
 	<select  id="vSelectMonth" resultType="com.spring.vacation.domain.VacationVO">
 	<![CDATA[
-		select vacationAppNum,id,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
+		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
 		from vacationApplicationTable vat, vacationScedule hs
-		where vat.id=hs.id and startterm >= #{nowMonth} and startterm < #{nextMonth} and state not in('신청') 
+		where vat.id=hs.id and vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth} and vat.state not in('신청') 
 	]]>	
 	<include refid="vacationCriteria"></include>
-	<![CDATA[
-			
-		order by vacationAppNum
-		]]>	
+	<![CDATA[	
+		order by vat.vacationAppNum
+	]]>	
 	</select>
 	<!-- type이 '신청'인 신청서 갯수 추출  -->
 	<select  id="vCountApp" resultType="int">
@@ -31,9 +30,9 @@
 	</select>
 	<!-- type이 '신청'인 리스트만 조회 -->
 	<select id="vApplicationList" resultType="com.spring.vacation.domain.VacationVO">
-		select vacationAppNum,id,name,type,startterm,endterm,reason,state
+		select vat.vacationAppNum,vat.id,vs.name,vat.type,vat.startterm,vat.endterm,vat.reason,vat.state
 		from vacationApplicationTable vat, vacationScedule vs
-		where vat.id=vs.id and vat.state like '신청'
+		where vat.id=vs.id and vat.state like ('신청')
 		order by vacationAppNum
 	</select>
 	<!-- 휴가신청 승인해주기 -->

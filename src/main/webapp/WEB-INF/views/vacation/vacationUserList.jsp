@@ -10,11 +10,9 @@
 </head>
 <body>
 <form action="/vacation/vacationUserList">
-    <button>왼쪽화살표</button>
-
-    <input type="text" id="yearMonth"  value="2021년 7월" disabled>
-    
-    <button>오른쪽화살표</button>
+    <button onclick="preMonth">왼쪽화살표</button>
+		<fmt:formatDate pattern="yyyy년 MM월"  value="${cri.nowMonth}"/>
+    <button onclick="nextMonth">오른쪽화살표</button>
 
  
 <table board="2">

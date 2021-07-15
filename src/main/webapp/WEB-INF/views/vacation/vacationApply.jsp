@@ -18,7 +18,7 @@
                 <tr>
                     <th>분류</th>
                     <td colspan="3">
-                        <select name="vacation" >
+                        <select name="type" >
                             <option value="none">=== 선택 ===</option>
                             <option value="annual">연차</option>
                             <option value="vacation1">공가</option>
@@ -29,19 +29,19 @@
                 </tr>
                 <tr>
                     <th>기간</th>
-                    <td><input type="date"></td>
+                    <td><input type="date" id="startDay"></td>
                     <td>~</td>
-                    <td><input type="date"></td>
+                    <td><input type="date" id="endDay"></td>
                 </tr>
                 <tr>
                     <th>시간</th>
-                    <td><input type=""></td>
+                    <td><input id="startTime" type="time" value="xxx" min="yyy" max="zzz"></td>
                     <td>~</td>
-                    <td><input type=""></td>
+                    <td><input id="endTime" type="time" value="xxx" min="yyy" max="zzz"></td>
                 </tr>
                 <tr>
                     <th>사유</th>
-                    <td colspan="3">병원에 다녀와야함</td>
+                    <td colspan="3"><input id="reason"></td>
                 </tr>
             </tbody>
         </table>

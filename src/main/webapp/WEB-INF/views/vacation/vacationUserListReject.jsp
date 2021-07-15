@@ -10,19 +10,12 @@
 </head>
 <body>
 <form action="/vacation/vacationUserList">
-    <button>왼쪽화살표</button>
 
-    <input type="text" id="yearMonth"  value="2021년 7월" disabled>
-    
-    <button>오른쪽화살표</button>
-
- 
 <table board="2">
 	<thead>
 		<tr>
 			<th>분류</th>
 			<th colspan="2">기간</th>
-			
 			<th>상태</th>
 			<th>신청날짜</th>
 			<th>승인날짜</th>
@@ -30,7 +23,7 @@
 	</thead>
 	<tbody>
 	<!-- 게시판 리스트 반복문 -->
-	<c:forEach var="vacation" items="${list}">
+
 		<tr>
 			<td>
 					${vacation.type}
@@ -50,8 +43,7 @@
 					확인
 				</a> 
 				</td>
-		</tr>
-	</c:forEach>								
+		</tr>						
 	</tbody>
     </table>
 
