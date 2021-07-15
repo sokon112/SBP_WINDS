@@ -15,6 +15,7 @@
   	<Logger name="com.spring.od.mapper" level="debug"/>
   	<Logger name="com.spring.board.mapper" level="debug"/>
   	<Logger name="com.spring.vacation.mapper" level="debug"/>
+  	<Logger name="com.spring.home.mapper" level="debug"/>
   	
   	
   	<Logger name="org.springframework.core" level="info"/>

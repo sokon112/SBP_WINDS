@@ -1,6 +1,8 @@
 package com.spring.home;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,9 +24,16 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
+	@GetMapping("/login")
+	public String loginGet() {
+		log.info("login 페이지 접속");
+		return "/member/loginForm";
+	}
+	
+	@PostMapping("/login")
+	public String loginPost() {
+		log.info("login 시도");
+		return "redirect: /";
 	}
 	
 }

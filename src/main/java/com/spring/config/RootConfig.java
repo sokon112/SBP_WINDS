@@ -20,9 +20,11 @@ import com.zaxxer.hikari.HikariDataSource;
 @MapperScan("com.spring.od.mapper")
 @MapperScan("com.spring.vacation.mapper")
 @MapperScan("com.spring.board.mapper")
+@MapperScan("com.spring.home.mapper")
 @ComponentScan("com.spring.od.service")
 @ComponentScan("com.spring.vacation.service")
 @ComponentScan("com.spring.board.service")
+@ComponentScan("com.spring.home.service")
 @Configuration
 public class RootConfig {
 
