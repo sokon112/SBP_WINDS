@@ -1,8 +1,11 @@
 package com.spring.od.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;   
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +34,12 @@ public class DocMainController {
 	}
 	
 	@GetMapping("/mainsearchlist")
-	public String mainsearchlist(OfficeNoticeVO vo, String title
-			) {
+	public void mainsearchlist(Model model,Criteria cri) {
+		log.info("검색 리스트 요청 ");
+	
+		List<OfficeNoticeVO> searchlist= service.mainsearchlist(cri);
 		
-		log.info("검색결과 요청....");
-		service.mainsearchlist(title);
-		return "/od/mainsearchlist";
-		
+		model.addAttribute("searchlist", searchlist);
 	}
 
 	

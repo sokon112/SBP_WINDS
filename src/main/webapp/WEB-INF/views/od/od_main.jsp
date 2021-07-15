@@ -18,10 +18,12 @@
      <div class="row"> <!-- start search -->
      	<div class="col-md-12">
         	<div class="col-md-8"><!--search Form-->
-            	<form action="/mainsearchlist" id="searchForm" >
-                	<input type="text" name="keyword" placeholder="문서 제목을 입력하세요." value="${pageVO.cri.keyword}" />
+            	<form action="" id="searchForm" >
+                	<input type="text" name="keyword" placeholder="문서 제목을 입력하세요." />
                     <!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
-                    <submit type="button" class="btn btn-default">검색</submit>
+                    <input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}">
+                    <input type="hidden" name="amount" value="${pageVO.cri.amount}">
+                    <button type="button" class="btn btn-default">검색</submit>
                 </form>
              </div>
         </div>                             	 
@@ -120,7 +122,7 @@
            </div>                   
         </div>               
         <!-- /.row -->
-
+<script src="/resources/js/list.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 
 

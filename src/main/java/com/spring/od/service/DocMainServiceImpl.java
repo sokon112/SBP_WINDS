@@ -35,8 +35,8 @@ public class DocMainServiceImpl implements DocMainService {
 	
 	//검색
 	@Override
-	public List<OfficeNoticeVO> mainsearchlist(String title) {
-		return mapper.mainsearchlist(title);
+	public List<OfficeNoticeVO> mainsearchlist(Criteria cri) {
+		return mapper.mainsearchlist(cri);
 	}
 
 }

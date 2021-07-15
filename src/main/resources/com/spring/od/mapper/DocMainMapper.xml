@@ -46,7 +46,7 @@
 <select id = "mainsearchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
 select rownum rn, docNum,title,state,storage from DOC_TAB
 where 
-title like '%'||#(title)||'%'
+title like '%'||#{keyword}||'%'
 <![CDATA[ rownum <= (#{pageNum}*#{amount}))
 				where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>

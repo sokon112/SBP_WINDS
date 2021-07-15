@@ -13,7 +13,7 @@ public interface DocMainMapper {
 	public List<OfficeNoticeVO> mainwaitlist();
 	public List<OfficeNoticeVO> mainsuccesslist();
 	public List<OfficeNoticeVO> maintemplist();
-	public List<OfficeNoticeVO> mainsearchlist(String title);
+	public List<OfficeNoticeVO> mainsearchlist(Criteria cri);
 	
 	
 	
