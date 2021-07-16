@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.spring.vacation.domain.VacationApplicationVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 import com.spring.vacation.service.VacationServiceImpl;
@@ -64,19 +64,25 @@ VacationCriteria cri=new VacationCriteria();
 		VacationCriteria cri=new VacationCriteria();
 		
 		List<VacationVO> list=service.selectMonth(cri);
-		log.info("list"+list);
-		/**/
+//		log.info("list"+list);
+
+
 		
-		 for (VacationVO vacation:list) {
-		 log.info("vacation.getVacationApplication() :  "
-		  +vacation.getVacationApplication().getId()
-		  +vacation.getVacationApplication().getName()
-		  +vacation.getVacationApplication().getVacationCnt() ); }
+//		for(VacationVO vo:list) {
+//			int appNum=vo.getVacationAppNum();
+//			
+//		}
+		
+//		 for (VacationVO vacation:list) {
+//		 log.info("vacation.getVacationApplication() :  "
+//		  +vacation.getVacationApplication().getId()
+//		  +vacation.getVacationApplication().getName()
+//		  +vacation.getVacationApplication().getVacationCnt() ); }
 		 
 		int cnt=service.countApp();
 		model.addAttribute("cri",cri);
 		model.addAttribute("list",list);
-		model.addAttribute("cnt",cnt);		
+		model.addAttribute("cnt",cnt);
 	}
 	
 	//사용자 페이지에서 작동하는 컨트롤러
@@ -91,12 +97,12 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("vacation",vacation);
 		
 		if(vacation.getState().equals("승인")) {
-			return "redirect:/vacationUserListSuccess";
+			return "/vacation/vacationUserListSuccess";
 		}
 		else if(vacation.getState().equals("거절")) {
-			return "redirect:/vacationUserListReject";
+			return "/vacation/vacationUserListReject";
 		}else if(vacation.getState().equals("신청")) {
-			return "redirect:/vacationUserListModify";
+			return "/vacation/vacationUserListModify";
 		}else {
 			return "/";
 		}

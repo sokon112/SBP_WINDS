@@ -12,6 +12,9 @@ import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 import com.spring.vacation.mapper.VacationMapper;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class VacationServiceImpl implements VacationService {
 
@@ -20,8 +23,20 @@ public class VacationServiceImpl implements VacationService {
 
 	@Override
 	public List<VacationVO> selectMonth(VacationCriteria cri) {
-		// TODO Auto-generated method stub
-		return mapper.vSelectMonth(cri);
+		List<VacationVO> selectMapper = mapper.vSelectMonth(cri);
+		log.info("selectMonth : "+selectMapper);
+//		for(VacationVO vo : selectMapper) {
+//
+//			 
+//			VacationApplicationVO vo1=mapper.vSelectMonthUserData(vo.getVacationAppNum());
+//
+//			vo.getVacationApplication().setId(vo1.getId());
+//			vo.getVacationApplication().setName(vo1.getName());
+//		}
+		log.info("selectMonth : "+selectMapper);
+		
+		return selectMapper;
+		
 	}
 
 	@Override

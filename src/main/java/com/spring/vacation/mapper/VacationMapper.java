@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.vacation.domain.VacationApplicationVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 
 public interface VacationMapper {
 	//관리자
 	public List<VacationVO> vSelectMonth(VacationCriteria cri);
+	public VacationApplicationVO vSelectMonthUserData(int holidayAppNum);
 	public int vCountApp();
 	public List<VacationVO> vApplicationList();
 	

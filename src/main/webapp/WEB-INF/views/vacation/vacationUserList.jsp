@@ -15,7 +15,7 @@
     <button onclick="nextMonth">오른쪽화살표</button>
 
  
-<table board="2">
+<table border="2">
 	<thead>
 		<tr>
 			<th>분류</th>
@@ -44,7 +44,7 @@
 			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/></td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/></td>
 					<td>
-				<a href="/vacation/vacationUserListOne" class="move">
+				<a href="${vacation.vacationAppNum}" class="move">
 					확인
 				</a> 
 				</td>

@@ -32,7 +32,7 @@
 								${vacation.vacationAppNum}
 						</td>
 						<td>
-								${vacation.vacationApplication.name()}
+								${vacation.vacationApplication.name}
 						</td>
 						<td>
 								${vacation.type}
@@ -50,13 +50,15 @@
 	                <td>
 	                    <button onclick="">승인</button>
 	                    <button onclick="">거절</button>
+	                    <input type="text" value="${vacation.state }" disabled>	
 	                 </td>
+	                 
 	            </tr>
   			</c:forEach>          
         </tbody>
     </table>
 
-    <button>닫기</button>
+    <button type='button' onclick="location.href='vacationManager'">닫기</button>
     </form>
 </body>
 </html>

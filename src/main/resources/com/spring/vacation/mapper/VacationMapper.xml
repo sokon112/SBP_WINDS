@@ -11,7 +11,27 @@
 		where vat.userid=hs.id and state not in('신청') order by vacationAppNum
 	</select> -->
 	<!-- 관리자가 처음으로 보는 페이지 - 승인, 거부 인 사람 -->
-	<select  id="vSelectMonth" resultType="com.spring.vacation.domain.VacationVO">
+	
+	
+
+	<resultMap type="com.spring.vacation.domain.VacationVO" id="selectMonthInfo">
+		<id property="vacationAppNum" column="vacationAppNum"/>
+		<result property="type" column="type"/>
+		<result property="startterm" column="startterm"/>
+		<result property="endterm" column="endterm"/>
+		<result property="state" column="state"/>
+		<result property="applicationDate" column="applicationDate"/>
+		<result property="approvalDate" column="approvalDate"/>
+		<result property="reason" column="reason"/>
+		<result property="refusalReason" column="refusalReason"/>
+		<collection property="vacationApplication" resultMap="userMap"/>
+	</resultMap>
+
+	<resultMap type="com.spring.vacation.domain.VacationApplicationVO" id="userMap">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+	</resultMap>
+	<select  id="vSelectMonth" resultMap="selectMonthInfo">
 	<![CDATA[
 		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
 		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id 
@@ -23,20 +43,15 @@
 	]]>	
 	</select>
 	
-	<select id="vSelectMonthUserData">
-		select vat.vacationAppNum,vat.id,hs.name
-		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id 
-		where vat.state not in('신청') ;
-	</select>
 	
 	<!-- type이 '신청'인 신청서 갯수 추출  -->
 	<select  id="vCountApp" resultType="int">
 		select count(*)
 		from vacationApplicationTable vat, vacationScedule vs
-		where vat.id=vs.id and vat.state like '신청'
+		where vat.id=vs.id and vat.state like ('신청')
 	</select>
 	<!-- type이 '신청'인 리스트만 조회 -->
-	<select id="vApplicationList" resultType="com.spring.vacation.domain.VacationVO">
+	<select id="vApplicationList" resultMap="selectMonthInfo">
 		select vat.vacationAppNum,vat.id,vs.name,vat.type,vat.startterm,vat.endterm,vat.reason,vat.state
 		from vacationApplicationTable vat, vacationScedule vs
 		where vat.id=vs.id and vat.state like ('신청')

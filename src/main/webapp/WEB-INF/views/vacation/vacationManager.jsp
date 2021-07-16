@@ -60,7 +60,7 @@
 						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/>
 					</td>
 					<td>
-						<a href="/vacation/vacationUserListOne" class="move">
+						<a href="${vacation.vacationAppNum}" class="move">
 							확인
 						</a> 
 					</td>
@@ -75,7 +75,7 @@
         <option value="state">분류</option>
     </select>
 
-    <input type="text" value="------">
+    <input type="text" placeholder="keywords">
     <button>검색</button>
     
     <button>휴가심사(${cnt})</button>
