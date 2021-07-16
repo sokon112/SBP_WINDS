@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.od.mapper.StorageMapper">
-<select id="waitList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id="waitList" resultType="com.spring.od.domain.StorageListVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -11,13 +11,13 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.Deptnum = U.Deptnum
-		where D1.storage = 'wait']]> 
+		where D1.storage = '미결']]> 
 		<include refid="criteria"></include>
 		<![CDATA[AND rownum <= (#{pageNum}*#{amount}))
 			where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 
-<select id="completeList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id="completeList" resultType="com.spring.od.domain.StorageListVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -27,13 +27,13 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.Deptnum = U.Deptnum
-		where D1.storage = 'complete']]> 
+		where D1.storage = '완결']]> 
 		<include refid="criteria"></include>
 		<![CDATA[AND rownum <= (#{pageNum}*#{amount}))
 			where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 
-<select id="tempList" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id="tempList" resultType="com.spring.od.domain.StorageListVO">
 <![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
@@ -43,7 +43,7 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.Deptnum = U.Deptnum
-		where D1.storage = 'temp']]> 
+		where D1.storage = '임시']]> 
 		<include refid="criteria"></include>
 		<![CDATA[AND rownum <= (#{pageNum}*#{amount}))
 			where rn > ((#{pageNum}-1)*#{amount})]]>
