@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/resources/dist/css/attach.css" />
 <div class="center">
 	<div class="col-lg-12">
-		<h1 class="page-header">공문 작성</h1>
+		<h1 class="page-header">공문 수정</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -98,9 +98,17 @@
 							</div>
 						</div>
 					</div>
-                	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">상신</button>
-					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal2">결재선</button>
-					<button type="submit" class="btn btn-info">임시저장</button>             			
+					<sec:authentication property="principal" var="info"/>
+                				<sec:authorize access="isAuthenticated()"><%--로그인 여부 확인--%>
+									<c:if test="${info.id==vo.send}"><%--로그인한 사용자와 작성자가 동일여부 확인 --%>
+                						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">상신</button>
+										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal2">결재선</button>
+										<button type="submit" class="btn btn-info">임시저장</button>
+										<button type="submit" class="btn btn-info">삭제</button>
+                					</c:if>
+                				</sec:authorize>
+					
+                	             			
 					<button type="reset" class="btn btn-info">취소</button>
 					<p></p>
 					<div class="col-sm-4">
@@ -159,7 +167,7 @@
 	</div>
 </div>
 
-<script src="/resources/js/register.js"></script>
+<script src="/resources/js/modify.js"></script>
 <%@include file="../../includes/od/footer.jsp"%>
 
 

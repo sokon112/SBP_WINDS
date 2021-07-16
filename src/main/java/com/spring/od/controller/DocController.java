@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,12 +31,14 @@ public class DocController {
 	@Autowired
 	private DocService service;
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 		log.info("새로운 공문 작성 폼 요청");
 	}
 	
 	//공문 등록
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String registerPost(OfficeNoticeVO vo,RedirectAttributes rttr) {
 		log.info("새 공문 등록 요청"+vo);
@@ -46,7 +49,7 @@ public class DocController {
 		
 		if(service.owrite(vo)) {
 			rttr.addFlashAttribute("result", vo.getDocNum());
-			return "redirect:wait";
+			return "redirect:waitlist";
 		}
 		else {
 			return "redirect:register";
@@ -80,7 +83,7 @@ public class DocController {
 		rttr.addAttribute("amount", cri.getAmount());
 		
 		
-		return "redirect:wait";
+		return "redirect:waitlist";
 	}
 	@PostMapping("/remove")
 	public String remove(int docNum,Criteria cri,RedirectAttributes rttr) {
@@ -103,7 +106,7 @@ public class DocController {
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:list";
+		return "redirect:waitlist";
 	}
 	
 	private void deleteFiles(List<AttachFileDTO> attachList) {

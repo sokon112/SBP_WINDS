@@ -56,9 +56,16 @@
                         <i class="fa fa-user fa-fw"></i>로그인 <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        <sec:authorize access="!isAuthenticated()">
                         <li>
-                        	<a href="#"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                        	<a href="/login" id="login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
                         </li>
+                        </sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
+                        <li>
+                        	<a href="/" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                        </sec:authorize>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

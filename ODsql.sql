@@ -15,18 +15,18 @@ CREATE TABLE DOC_TAB(
     regDate DATE DEFAULT SYSDATE
 );
 
-select * from DOC_TAB;
+select title,contents,authority,retentDate,send,dest,review,state,storage,message,regDate from DOC_TAB;
 
 INSERT INTO DOC_TAB (docNum,title,contents,authority,sign,attachfile,retentDate,send,dest,review,state,storage,message,regDate)
-VALUES(docNum.NEXTVAL,'테스트2','테스트 내용입니다.','사원','',
-'1564879',-- 첨부 파일 있을 시 'filename.확장자' 파일명으로 
+VALUES(docNum.NEXTVAL,'테스트2','테스트 내용입니다.','사원','123456',
+'123456',-- 첨부 파일 있을 시 'filename.확장자' 파일명으로 
 2, --만료기한(직접 설정)
 12081345, --공문 작성자 사번(로그인 한 회원 사번)
 13091455, --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
 00084567, --공문 검토자 (위와 동일 검토자 사번으로 설정)
 '요청', --공문 상태(가장 기본 DEFAULT값)
-'wait', --보관함(가장 기본 DEFAULT값) / 임시저장 버튼 클릭시 '임시'로 설정
-'', --상신 모달에서 검토자와 결재자가 메세지 작성시
+'미결', --보관함(가장 기본 DEFAULT값) / 임시저장 버튼 클릭시 '임시'로 설정
+'ㅇㅋ', --상신 모달에서 검토자와 결재자가 메세지 작성시
 SYSDATE);
 
 CREATE TABLE USER_TAB(
