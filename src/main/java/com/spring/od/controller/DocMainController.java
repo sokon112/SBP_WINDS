@@ -25,12 +25,23 @@ public class DocMainController {
 	private DocMainService service;
 	
 	@GetMapping("/")
-	public String odMain() {
+	public String odMain(Model model) {
 		log.info("od 메인 접속....");
-		service.mainsuccesslist();
-		service.maintemplist();
-		service.mainwaitlist();
+		
+		List<OfficeNoticeVO>successlist =service.mainsuccesslist();
+		List<OfficeNoticeVO>templist =service.maintemplist();
+		List<OfficeNoticeVO>waitlist =service.mainwaitlist();
+		
+		log.info("successlist : "+successlist + "templist : "+templist + "waitlist : "+waitlist);
+		
+		model.addAttribute("successlist",successlist);
+		model.addAttribute("templist",templist);
+		model.addAttribute("waitlist",waitlist);
+		
+		
 		return "/od/od_main";
+		
+		
 	}
 	
 	@GetMapping("/mainsearchlist")

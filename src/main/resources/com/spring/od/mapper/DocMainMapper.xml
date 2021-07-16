@@ -9,7 +9,7 @@
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
-		where D1.storage = 'wait'
+		where D1.storage = '미결'
 		order by regDate desc)
 	where rownum between 0 and 20 order by rn desc
 </select>
@@ -22,7 +22,7 @@
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
-		where D1.storage = 'success'
+		where D1.storage = '완결'
 		order by regDate desc)
 	where rownum between 0 and 10 order by rn desc
 </select>
@@ -35,7 +35,7 @@
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
-		where D1.storage = 'temp'
+		where D1.storage = '임시'
 		order by regDate desc)
 	where rownum between 0 and 10 order by rn desc
 
