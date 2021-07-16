@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.board.mapper.BoardEventMapper">
+
+<!-- 이벤트 :  -->
+
+	<!-- insert : 글 삽입-->
+	<insert id="beinsert">
+		insert into evnet_table(no,writer,title, password, contents,images)
+		values(event_tb_seq.nextval,#{writer},#{title},#{password},#{images},#{contents})
+	</insert>
+		
+	<!--  하나 가져오기  : no 가 일치-->
+	<select id="beread" resultType="com.spring.board.domain.BoardEventVO">
+		select * from event_table where no=#{no}
+	</select>
+	
+	<!--  수정 : 댓글 내용만 수정, updatedate, sno 일치하면 -->
+	<update id="beupdate">
+		update event_table
+		set contents=#{contents}, uploaddate=sysdate
+		where no=#{no}
+	</update>
+	
+	<!-- 삭제 : rno, password 일치 -->
+	<delete id="beldelete">
+		delete from event_table where no=#{no} and password=#{password}
+	</delete>
+	
+	
+	<delete id="bedeleteAll">
+		delete from event_table where sno=#{sno}	
+	</delete>
+
+	
+
+
+</mapper>

@@ -49,29 +49,29 @@ public class BoardController {
 	}	
 	
 	
-	@PreAuthorize("isAuthenticated()") //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
-	@GetMapping("/boardregister")
-	public void register() {
+//	@PreAuthorize("isAuthenticated()") //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+	@GetMapping("/main/boardregister")
+	public void boardregister() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
-	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/boardregister")
-	public String registerPost(BoardVO vo,RedirectAttributes rttr) {
+//	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/main/boardregister")
+	public String boardregisterPost(BoardVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
 		if(service.boardinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getBno());
-			return "redirect:boardlist";    //   redirect:/board/list
+			return "redirect:main/boardlist";    //   redirect:/board/list
 		}else {
-			return "redirect:boardregister"; //  redirect:/board/register
+			return "redirect:main/boardregister"; //  redirect:/board/register
 		}
 	}
 	
 	
-	@GetMapping({"/boardread","/boardmodify"})
+	@GetMapping({"/main/boardread","/main/boardmodify"})
 	public void read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
 		
@@ -80,8 +80,8 @@ public class BoardController {
 	}
 	
 	// modify+post 수정한 후 list
-	@PreAuthorize("principal.username == #vo.nickname")
-	@PostMapping("/boardmodify")
+//	@PreAuthorize("principal.username == #vo.nickname")
+	@PostMapping("/main/boardmodify")
 	public String modify(BoardVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 			
@@ -101,8 +101,8 @@ public class BoardController {
 	}
 	
 	//게시글 삭제 + post
-	@PreAuthorize("principal.username == #nickname")
-	@PostMapping("/boarddelete")
+//	@PreAuthorize("principal.username == #nickname")
+	@PostMapping("/main/boarddelete")
 	public String delete(int bno,String nickname,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+bno);
 		

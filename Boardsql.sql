@@ -56,54 +56,97 @@ where bno=2 and views=1;
 
 
 
--- 이벤트_동호회 테이블 Table Create SQL
-CREATE TABLE special_table
+-- 동호회 테이블 Table Create SQL
+CREATE TABLE hobby_table
 (
-    sno          NUMBER     PRIMARY KEY       NOT NULL, 
+    no          NUMBER     PRIMARY KEY       NOT NULL, 
     writer      VARCHAR2(20)      NOT NULL, 
     title       VARCHAR2(20)      NOT NULL, 
     uploaddate        DATE     default sysdate          NOT NULL, 
     password    VARCHAR2(20)      NOT NULL, 
     contents    VARCHAR2(2000)    NOT NULL, 
-    images      BLOB              NULL,
-    boardname   varchar2(20)      NOT NULL
+    images      BLOB              NULL 
 );
+--동호회 테이블 시퀸스 생성
+create SEQUENCE hobby_tb_seq;
 
---이벤트,동호회 테이블 시퀀스 생성
-create SEQUENCE special_tb_seq;
-
---이벤트,동호회 삽입
-insert into special_table(no,writer,title,  password, contents, boardname)
-values(special_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자','event');
-insert into event_hobby_table(no,writer,title,  password, contents, boardname)
-values(special_tb_seq.nextval,'이채은','아스트로','2345','테스트','hobby');
-insert into special_table(no,writer,title,  password, contents,boardname)
-values(special_tb_seq.nextval,'김명준','아스트로','2345','맏형이다','event');
-insert into event_hobby_table(no,writer,title,  password, contents,boardname)
-values(event_hobby_tb_seq.nextval,'박민혁','댄스동호회','2345','댄스부 모집','hobby');
+insert into hobby_table(no,writer,title,  password, contents)
+values(hobby_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자');
+insert into hobby_table(no,writer,title,  password, contents)
+values(hobby_tb_seq.nextval,'김명준','아스트로','2345','맏형이다');
+insert into hobby_table(no,writer,title,  password, contents)
+values(hobby_tb_seq.nextval,'박민혁','댄스동호회','2345','댄스부 모집');
 
 
---이벤트, 동호회 테이블 검색
-select * from event_hobby_table;
+--동호회 테이블 검색
+select * from hobby_table;
 
 
---이벤트_동호회 테이블 리스트 보기(사용자)
+--동호회 테이블 리스트 보기(사용자)
 select no, writer,title,contents,uploaddate
-from event_hobby_table
+from hobby_table
 where no=3;
 
---이벤트_동호회 테이블 리스트에서 목록을 누르는 경우(사용자)
+--동호회 테이블 리스트에서 목록을 누르는 경우(사용자)
 select no, writer,title,contents,uploaddate
-from event_hobby_table;
+from hobby_table
 
---이벤트_동호회 테이블 리스트에서 글쓰기 수정하는 경우
-update event_hobby_table 
+--동호회 테이블 리스트에서 글쓰기 수정하는 경우
+update hobby_table 
 set title='아로하', contents='5기 모집', uploaddate=sysdate
 where no=3;
 
---이벤트_동호회 테이블 리스트에서 삭제하는 경우
-delete from event_hobby_table
+--게시판 테이블 리스트에서 삭제하는 경우
+delete from hobby_table
 where no=3;
+
+
+
+
+-- 이벤트 테이블 Table Create SQL
+CREATE TABLE event_table
+(
+    no          NUMBER    PRIMARY KEY         NOT NULL, 
+    writer      VARCHAR2(20)      NOT NULL, 
+    title       VARCHAR2(20)      NOT NULL, 
+    uploaddate        DATE     default sysdate          NOT NULL, 
+    password    VARCHAR2(20)      NOT NULL, 
+    contents    VARCHAR2(2000)    NOT NULL, 
+    images      BLOB              NULL
+);
+
+--이벤트 테이블 삭제
+DROP TABLE special_table;
+
+--이벤트 테이블 시퀸스 생성
+create SEQUENCE event_tb_seq;
+
+--이벤트 테이블 정보 입력
+insert into event_table(no,writer,title,  password, contents)
+values(event_tb_seq.nextval,'이채은','롤 대회','3456','나두할래');
+insert into event_table(no,writer,title,  password, contents)
+values(event_tb_seq.nextval,'이채은','칼바람 대회','2345','이기면 1일 휴가');
+insert into event_table(no,writer,title,  password, contents)
+values(event_tb_seq.nextval,'이채은','체육대회','1234','부서 대항전');
+
+--이벤트 테이블 검색
+select * from event_table;
+
+
+--이벤트 테이블 리스트 보기(사용자)
+select no, writer,title,contents,uploaddate
+from event_table
+where no=3;
+
+--동호회 테이블 리스트에서 목록을 누르는 경우(사용자)
+select no, writer,title,contents,uploaddate
+from hobby_table
+
+--동호회 테이블 리스트에서 글쓰기 수정하는 경우
+update hobby_table 
+set title='아로하', contents='5기 모집', uploaddate=sysdate
+where no=3;
+
 
 
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.board.mapper.BoardHobbyMapper">
+
+<!-- 스페셜 :  -->
+
+	<!-- insert : 이벤트,동호회-->
+	<insert id="bhinsert">
+		insert into hobby_table(no,writer,title, password, contents,images)
+		values(hobby_tb_seq.nextval,#{hwriter},#{htitle},#{hpassword},#{hcontents},#{himages})
+	</insert>
+		
+	<!--  하나 가져오기  : no 가 일치-->
+	<select id="bhread" resultType="com.spring.board.domain.BoardHobbyVO">
+		select * from hobby_table where no=#{hno}
+	</select>
+	
+	<!--  수정 :  내용만 수정, updatedate, no 일치하면 -->
+	<update id="bhupdate">
+		update hobby_table
+		set contents=#{hcontents}, uploaddate=sysdate
+		where no=#{hno}
+	</update>
+	
+	<!-- 삭제 : no, password 일치 -->
+	<delete id="bhdelete">
+		delete from hobby_table where no=#{hno} and password=#{hpassword}
+	</delete>
+	
+	<!-- -->
+	<delete id="bhdeleteAll">
+		delete from hobby_table where no=#{hno}	
+	</delete>
+
+
+</mapper>

@@ -20,57 +20,57 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardPageVO;
-import com.spring.board.domain.BoardSpecialAttachFileDTO;
-import com.spring.board.domain.BoardSpecialVO;
+import com.spring.board.domain.BoardEventAttachFileDTO;
+import com.spring.board.domain.BoardEventVO;
 import com.spring.board.service.BoardService;
-import com.spring.board.service.BoardSpecialService;
+import com.spring.board.service.BoardEventService;
 
 import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
-@RequestMapping("/event/*")
-public class BoardSpecialController {
+@RequestMapping("/board/event/*")
+public class BoardEventController {
 
 
 	@Autowired
-	private BoardSpecialService service;
+	private BoardEventService beservice;
 	
-	@GetMapping("/list")
+	@GetMapping("/eventlist")
 	public void list(Model model,BoardCriteria cri) {
 		log.info("전체 리스트 요청 ");
 		
 		//사용자가 선택한 페이지 게시물
-		List<BoardSpecialVO> list=service.bspeciallist(cri);
+		List<BoardEventVO> eventlist=beservice.belist(cri);
 		//전체 게시물 수 
-		int total = service.bspecialtotalCnt(cri);
+		int total = beservice.betotalCnt(cri);
 				
-		model.addAttribute("list", list);
-		model.addAttribute("pageVO", new BoardPageVO(cri, total));
+		model.addAttribute("eventlist", eventlist);
+		model.addAttribute("BoardEventVO", new BoardPageVO(cri, total));
 	}	
 	
 	
-	@PreAuthorize("isAuthenticated()") 
-	@GetMapping("/register")
+//	@PreAuthorize("isAuthenticated()") 
+	@GetMapping("/eventregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
-	@PreAuthorize("isAuthenticated()")
+//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
-	public String registerPost(BoardSpecialVO vo,RedirectAttributes rttr) {
+	public String registerPost(BoardEventVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
 		//첨부 파일 확인
-		if(vo.getAttachList()!=null) {
-			vo.getAttachList().forEach(attach -> log.info(""+attach));
+		if(vo.getEattachList()!=null) {
+			vo.getEattachList().forEach(attach -> log.info(""+attach));
 		}	
 		
 		
-		if(service.bspecialinsert(vo)) {
+		if(beservice.beinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
-			rttr.addFlashAttribute("result", vo.getSno());
+			rttr.addFlashAttribute("result", vo.getEno());
 			return "redirect:list";    //   redirect:/board/list
 		}else {
 			return "redirect:register"; //  redirect:/board/register
@@ -83,22 +83,22 @@ public class BoardSpecialController {
 	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
 		
-		BoardSpecialVO vo=service.bspecialread(no);
+		BoardEventVO vo=beservice.beread(no);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 	}
 	
 	// modify+post 수정한 후 list
-	@PreAuthorize("principal.username == #vo.writer")
-	@PostMapping("/modify")
-	public String modify(BoardSpecialVO vo,BoardCriteria cri,RedirectAttributes rttr) {
+//	@PreAuthorize("principal.username == #vo.ewriter")
+	@PostMapping("/eventmodify")
+	public String modify(BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
 		//첨부 파일 확인
-		if(vo.getAttachList()!=null) {
-			vo.getAttachList().forEach(attach -> log.info(""+attach));
+		if(vo.getEattachList()!=null) {
+			vo.getEattachList().forEach(attach -> log.info(""+attach));
 		}	
 		
-		service.bspecialupdate(vo);		
+		beservice.beupdate(vo);		
 		
 		
 		rttr.addFlashAttribute("result","성공");
@@ -109,22 +109,22 @@ public class BoardSpecialController {
 		rttr.addAttribute("amount", cri.getAmount());
 		
 		
-		return "redirect:list";
+		return "redirect:eventlist";
 	}
 	
 	//게시글 삭제 + post
-	@PreAuthorize("principal.username == #writer")
-	@PostMapping("/remove")
+//	@PreAuthorize("principal.username == #writer")
+	@PostMapping("/eventdelete")
 	public String remove(int no,String writer,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+no);
 		
 		
 		//서버(폴더)에 저장된 첨부파일 삭제
 		//① bno에 해당하는 첨부파일 목록 알아내기
-		List<BoardSpecialAttachFileDTO> attachList=service.bspecialAttachList(no);
+		List<BoardEventAttachFileDTO> attachList=beservice.beAttachList(no);
 		
 		//게시글 삭제 + 첨부파일 삭제
-		if(service.bspecialdelete(no)) {
+		if(beservice.bedelete(no)) {
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
@@ -135,27 +135,27 @@ public class BoardSpecialController {
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:list";
+		return "redirect:eventlist";
 	}
 	
 	
 	//첨부물 가져오기
 	@GetMapping("/getAttachList")
-	public ResponseEntity<List<BoardSpecialAttachFileDTO>> getAttachList(int no){
-		log.info("첨부물 가져오기 "+no);
+	public ResponseEntity<List<BoardEventAttachFileDTO>> getAttachList(int eno){
+		log.info("첨부물 가져오기 "+eno);
 		
-		return new ResponseEntity<List<BoardSpecialAttachFileDTO>>(service.bspecialAttachList(no),HttpStatus.OK);
+		return new ResponseEntity<List<BoardEventAttachFileDTO>>(beservice.beAttachList(eno),HttpStatus.OK);
 	}
 	
 	
-	private void deleteFiles(List<BoardSpecialAttachFileDTO> attachList) {
+	private void deleteFiles(List<BoardEventAttachFileDTO> attachList) {
 		log.info("첨부파일 삭제 "+attachList);
 		
 		if(attachList==null || attachList.size()<=0) {
 			return;
 		}
 		
-		for(BoardSpecialAttachFileDTO dto:attachList) {
+		for(BoardEventAttachFileDTO dto:attachList) {
 			Path path = Paths.get("e:\\upload\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
 			
 			try {

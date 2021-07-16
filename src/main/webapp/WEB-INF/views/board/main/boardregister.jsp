@@ -15,33 +15,30 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           board Page
+                        	게시판 글쓰기
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                 			<form action="" method="post" role="form">
                 				<div class="form-group">
-                					<label>Title</label>
+                					<label>제목</label>
                 					<input class="form-control" name="title">                				
                 				</div>  
                 				<div class="form-group">
-                					<label>Content</label>
+                					<label>내용</label>
                 					<textarea class="form-control" rows="3" name="content"></textarea>               				
                 				</div> 
                 				<div class="form-group">
-                					<label>Writer</label>
-                					<input class="form-control" name="writer">                				
+                					<label>닉네임</label>
+                					<input class="form-control" name="nickname">                				
                 				</div>  
-                				<button type="submit" class="btn btn-default">Submit</button>              			
-                				<button type="reset" class="btn btn-default">reset</button>              			
+                				<button type="submit" class="btn btn-default">올리기</button>              			
+                				<button type="reset" class="btn btn-default">취소</button>              			
                 			</form>
                 		</div>
                 	</div>
                 </div>
             </div>  
-<script>
-	var csfHeaderName="${_csrf.HeaderName}";
-	var csfTokenValue="${_csrf.e\token}";
-</script>
+
 <script src="/resources/js/register.js"></script> 
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

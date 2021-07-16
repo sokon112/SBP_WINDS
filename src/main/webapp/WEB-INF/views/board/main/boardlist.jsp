@@ -16,7 +16,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            익명 게시판
+                            커뮤니티 > 익명 게시판
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -38,7 +38,7 @@
                               <td><a href="${vo.bno}" class="move">${vo.title}</a></td>
                               <td>${vo.nickname}</td>
                               <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.uploaddate}"/></td>
-                              <td>${vo.views}</td>
+                              <td><span class="badge badge-pill badge-primary">${vo.views}</span></td>
                            </tr>
                         </c:forEach>                        
                         </tbody>
@@ -70,7 +70,7 @@
                                         <option value="40"  <c:out value="${BoardpageVO.cri.amount==40?'selected':''}"/>>40</option>
                                      </select>
                                      <p></p>
-                                     <a href="boardregister.jsp" class="btn btn-primary pull-right">글쓰기</a>
+                                     <a href="boardregister" class="btn btn-primary pull-right">글쓰기</a>
                           </div>
                                  </div>                                 
                              </div><!-- end search -->
