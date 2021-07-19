@@ -21,4 +21,5 @@ public class StorageListVO {
 	private String name;
 	private Date regDate;
 	private int retentDate;
+	private String storage;
 }
