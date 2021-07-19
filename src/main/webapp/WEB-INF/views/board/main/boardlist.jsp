@@ -132,5 +132,5 @@
 <script>
    let result='${result}';
 </script>
-<script src="/resources/js/list.js"></script>
+<script src="/resources/js/board/list.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>
