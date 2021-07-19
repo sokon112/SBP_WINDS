@@ -82,7 +82,7 @@ public class BoardController {
 	// modify+post 수정한 후 list
 //	@PreAuthorize("principal.username == #vo.nickname")
 	@PostMapping("/main/boardmodify")
-	public String modify(BoardVO vo,BoardCriteria cri,RedirectAttributes rttr) {
+	public String modify(BoardVO vo,String nickname,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 			
 		

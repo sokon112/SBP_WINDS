@@ -31,7 +31,11 @@
                 				<div class="form-group">
                 					<label>닉네임</label>
                 					<input class="form-control" name="nickname">                				
-                				</div>  
+                				</div> 
+                				<div class="form-group">
+                					<label>비밀번호</label>
+                					<input class="form-control" name="password">                				
+                				</div> 
                 				<button type="submit" class="btn btn-default">올리기</button>              			
                 				<button type="reset" class="btn btn-default">취소</button>              			
                 			</form>

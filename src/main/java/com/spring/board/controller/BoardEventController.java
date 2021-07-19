@@ -29,14 +29,14 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
-@RequestMapping("/board/event/*")
-public class BoardEventController {
+@RequestMapping("/board/*")
+public class BoardEventController {    //이벤트
 
 
 	@Autowired
 	private BoardEventService beservice;
 	
-	@GetMapping("/eventlist")
+	@GetMapping("/event/eventlist")
 	public void list(Model model,BoardCriteria cri) {
 		log.info("전체 리스트 요청 ");
 		
@@ -51,14 +51,14 @@ public class BoardEventController {
 	
 	
 //	@PreAuthorize("isAuthenticated()") 
-	@GetMapping("/eventregister")
+	@GetMapping("/event/eventregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
 //	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/eventregister")
+	@PostMapping("/event/eventregister")
 	public String registerPost(BoardEventVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
@@ -71,15 +71,15 @@ public class BoardEventController {
 		if(beservice.beinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getEno());
-			return "redirect:list";    //   redirect:/board/list
+			return "redirect:eventlist";    //   redirect:/board/list
 		}else {
-			return "redirect:register"; //  redirect:/board/register
+			return "redirect:eventregister"; //  redirect:/board/register
 		}
 	}
 	
 	
 	
-	@GetMapping({"/read","/modify"})
+	@GetMapping({"/event/eventread","/event/eventmodify"})
 	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
 		
@@ -89,7 +89,7 @@ public class BoardEventController {
 	
 	// modify+post 수정한 후 list
 //	@PreAuthorize("principal.username == #vo.ewriter")
-	@PostMapping("/eventmodify")
+	@PostMapping("/event//eventmodify")
 	public String modify(BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
@@ -114,7 +114,7 @@ public class BoardEventController {
 	
 	//게시글 삭제 + post
 //	@PreAuthorize("principal.username == #writer")
-	@PostMapping("/eventdelete")
+	@PostMapping("/event/eventdelete")
 	public String remove(int no,String writer,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+no);
 		
@@ -140,7 +140,7 @@ public class BoardEventController {
 	
 	
 	//첨부물 가져오기
-	@GetMapping("/getAttachList")
+	@GetMapping("/event/getAttachList")
 	public ResponseEntity<List<BoardEventAttachFileDTO>> getAttachList(int eno){
 		log.info("첨부물 가져오기 "+eno);
 		

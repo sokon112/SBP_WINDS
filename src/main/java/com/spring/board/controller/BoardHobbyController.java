@@ -29,14 +29,14 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
-@RequestMapping("/board/hobby/*")
+@RequestMapping("/board/*")
 public class BoardHobbyController {
 
 
 	@Autowired
 	private BoardHobbyService bhservice;
 	
-	@GetMapping("/hobbylist")
+	@GetMapping("/hobby/hobbylist")
 	public void list(Model model,BoardCriteria cri) {
 		log.info("전체 리스트 요청 ");
 		
@@ -51,14 +51,14 @@ public class BoardHobbyController {
 	
 	
 //	@PreAuthorize("isAuthenticated()") 
-	@GetMapping("/hobbyregister")
+	@GetMapping("/hobby/hobbyregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
 //	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/hobbyregister")
+	@PostMapping("/hobby/hobbyregister")
 	public String registerPost(BoardHobbyVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		
@@ -79,7 +79,7 @@ public class BoardHobbyController {
 	
 	
 	
-	@GetMapping({"/hobbyread","/hobbymodify"})
+	@GetMapping({"/hobby/hobbyread","/hobby/hobbymodify"})
 	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
 		
@@ -89,7 +89,7 @@ public class BoardHobbyController {
 	
 	// modify+post 수정한 후 list
 //	@PreAuthorize("principal.username == #vo.writer")
-	@PostMapping("/hobbymodify")
+	@PostMapping("/hobby/hobbymodify")
 	public String modify(BoardHobbyVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
@@ -114,7 +114,7 @@ public class BoardHobbyController {
 	
 	//게시글 삭제 + post
 //	@PreAuthorize("principal.username == #writer")
-	@PostMapping("/hobbydelete")
+	@PostMapping("/hobby/hobbydelete")
 	public String remove(int no,String writer,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+no);
 		
@@ -140,7 +140,7 @@ public class BoardHobbyController {
 	
 	
 	//첨부물 가져오기
-	@GetMapping("/getAttachList")
+	@GetMapping("/hobby/getAttachList")
 	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int no){
 		log.info("첨부물 가져오기 "+no);		
 		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(bhservice.bhAttachList(no),HttpStatus.OK);
