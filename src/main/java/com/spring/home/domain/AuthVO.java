@@ -12,6 +12,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthVO {
-	private String userid;
-	private String auth;
+	private String id;
+	private String authority;
 }

@@ -3,24 +3,24 @@
 <mapper namespace="com.spring.home.mapper.MemberMapper">
 
 	<resultMap type="com.spring.home.domain.MemberVO" id="memberMap">
-		<id property="userid" column="userid"/>
-		<result property="userid" column="userid"/>
-		<result property="userpw" column="userpw"/>
-		<result property="username" column="username"/>
-		<result property="regdate" column="regdate"/>
-		<result property="updatedate" column="updatedate"/>
-		<collection property="authList" resultMap="authMap"/>
+		<id property="id" column="id"/>
+		<result property="id" column="id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="telNum" column="telNum"/>
+		<result property="email" column="email"/>
+		<collection property="authority" resultMap="authMap"/>
 	</resultMap>
 
 	<resultMap type="com.spring.home.domain.AuthVO" id="authMap">
-		<result property="userid" column="userid"/>
-		<result property="auth" column="auth"/>
+		<result property="id" column="id"/>
+		<result property="authority" column="authority"/>
 	</resultMap>
 
 	<select id="read" resultMap="memberMap">
-		select mem.userid,userpw,username,enabled,regdate,updatedate,auth
-		from spring_member mem left outer join spring_member_auth auth on mem.userid = auth.userid
-		where mem.userid=#{userid}	
+		select mem.id,password,name,telNum,email,authority
+		from USER_TAB mem left outer join AUTH_TAB auth on mem.id = auth.id
+		where mem.id=#{id}	
 	</select>
 
 </mapper>

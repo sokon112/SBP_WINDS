@@ -1,6 +1,5 @@
 package com.spring.home.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -9,21 +8,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @ToString
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberVO {
-	private String userid;
-	private String userpw;
-	private String username;
-	private Date regdate;
-	private Date updatedate;
-	private boolean enabled;
+	private String id;
+	private String password;
+	private String name;
+	private String telNum;
+	private String email;
+	private int deptNum;
 	
-	private List<AuthVO> authList; 
+	private List<AuthVO> authority; 
 }
 
 

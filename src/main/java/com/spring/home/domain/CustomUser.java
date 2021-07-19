@@ -19,11 +19,11 @@ public class CustomUser extends User {
 	} 
 	
 	public CustomUser(MemberVO memberVO) {		
-		super(memberVO.getUserid(),memberVO.getUserpw(),
-				memberVO.getAuthList()
-				      	.stream()
-				      	.map(auth -> 
-				      	new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
+		super(memberVO.getId(),memberVO.getPassword(),
+				memberVO.getAuthority()
+				.stream()
+				.map(auth -> 
+				new SimpleGrantedAuthority(auth.getAuthority())).collect(Collectors.toList()));
 		this.memberVO = memberVO;
 	}
 
