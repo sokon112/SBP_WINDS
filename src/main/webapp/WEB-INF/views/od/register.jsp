@@ -74,21 +74,44 @@
 									<h5 class="modal-title" id="staticBackdrop">결재선 지정</h5>
 								</div>
 								<div class="modal-body">
-									<label class="input-group-text" for="reviewer">검토자</label>
-									<select class="form-select" id="reviewer" name="review">
-										<option selected>검토자 선택</option>
+									<label class="input-group-text" for="dest">결재자</label>
+									<select class="form-select" id="dest" name="dest">
+										<option selected>결재자 선택</option>
 										<option value="18081354">한소희(인사팀)</option>
 										<option value="17071235">채수빈(재무팀)</option>
 										<option value="16114567">배수지(홍보팀)</option>
 									</select>
 									<p></p>
-									<label class="input-group-text" for="destination">결재자</label>
-									<select class="form-select" id="destination" name="dest">
-										<option selected>결재자 선택</option>
-										<option value="98074561">고길동(인사팀)</option>
-										<option value="99774852">신형만(재무팀)</option>
-										<option value="00894187">봉미선(홍보팀)</option>
-									</select>
+									<label class="input-group-text" for="review">검토자</label>
+									<c:choose>
+											<select class="form-select" id="review" name="review">
+											<c:when test="${dest eq '18081354'}">
+												<option selected>검토자 선택</option>
+												<option value="null">없음</option>
+												<option value="98074561">고길동(인사팀)</option>
+												<option value="99774852">신형만(인사팀)</option>
+												<option value="00894187">봉미선(인사팀)</option>
+											</c:when>
+											<c:when test="${dest eq '17071235'}">
+												<option selected>검토자 선택</option>
+												<option value="null">없음</option>
+												<option value="98074561">고길동(재무팀)</option>
+												<option value="99774852">신형만(재무팀)</option>
+												<option value="00894187">봉미선(재무팀)</option>
+											</c:when>
+											<c:when test="${dest eq '16114567'}">
+												<option selected>검토자 선택</option>
+												<option value="null">없음</option>
+												<option value="98074561">고길동(홍보팀)</option>
+												<option value="99774852">신형만(홍보팀)</option>
+												<option value="00894187">봉미선(홍보팀)</option>
+											</c:when>
+											<c:otherwise>
+												<option selected>결재자를 선택하세요</option>
+											</c:otherwise>
+											</select>
+									</c:choose>
+									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
@@ -159,7 +182,7 @@
 	</div>
 </div>
 
-<script src="/resources/js/register.js"></script>
+<script src="/resources/js/od/register.js"></script>
 <%@include file="../../includes/od/footer.jsp"%>
 
 
