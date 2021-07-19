@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class BoardHobbyAttachFileDTO { //파일첨부(이벤트, 동호회)
+public class BoardHobbyAttachFileDTO { //파일첨부(동호회)
 	private String uuid;   //아이디
 	private String uploadPath; //
 	private String fileName;  //파일이름

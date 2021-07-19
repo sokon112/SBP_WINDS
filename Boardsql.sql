@@ -216,13 +216,14 @@ create table special_attach(
 	uploadPath varchar2(200) not null,
 	fileName varchar2(100) not null,
 	fileType char(1) default 'I',
-	sno NUMBER 
+	no NUMBER 
 );
 
 DROP TABLE special_attach;
 
 alter table special_attach add constraint pk_sp_attach_uuid primary key(uuid);
-alter table special_attach add constraint fk_sp_attach foreign key(sno) references special_table(sno);
+alter table special_attach add constraint fk_sp_attach foreign key(no) references hobby_table(no);
+alter table special_attach add constraint fk_sp_attach foreign key(no) references event_table(no);
 
 
 

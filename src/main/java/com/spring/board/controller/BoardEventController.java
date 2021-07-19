@@ -58,7 +58,7 @@ public class BoardEventController {
 	
 	//게시글 등록
 //	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/register")
+	@PostMapping("/eventregister")
 	public String registerPost(BoardEventVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
 		

@@ -24,6 +24,6 @@ public class BoardHobbyVO { //이벤트,동호회
 	private Date huploaddate; //날짜
 	
 	//첨부파일 리스트
-	private List<BoardEventAttachFileDTO> hattachList;
+	private List<BoardHobbyAttachFileDTO> hattachList;
 	
 }

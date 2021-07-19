@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.board.mapper.BoardSpecialAttachMapper">
+<mapper namespace="com.spring.board.mapper.BoardHobbyAttachMapper">
 
-<!-- 스페셜 : 파일첨부 -->
+<!-- 동호회 : 파일첨부 -->
 
 	<!-- 파일insert : 이벤트,동호회-->
-	<insert id="bspecialinsert">
-		insert into special_attach(uuid,uploadpath,filename,filetype,sno)
-		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{sno})
+	<insert id="bhinsert">
+		insert into hobby_table(uuid,uploadpath,filename,filetype,no)
+		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{hno})
 	</insert>
 	
 	<!-- 파일찾기 -->
-	<select id="bspecialfindsno">
-		select * from special_attach where sno= #{sno} 
+	<select id="bhfindsno">
+		select * from hobby_table where no= #{hno} 
 	</select>
 
 	
 	<!-- 파일삭제  -->
-	<delete id="bspecialdelete">
-		delete from special_attach where sno=#{sno} 
+	<delete id="bhdelete">
+		delete from hobby_table where no=#{hno} 
 	</delete>
 	
 	

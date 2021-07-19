@@ -46,12 +46,12 @@ public class BoardHobbyController {
 		int total = bhservice.bhtotalCnt(cri);
 				
 		model.addAttribute("hobbylist", hobbylist);
-		model.addAttribute("BoardhobbyVO", new BoardHobbyVO());  //다시!
+		model.addAttribute("BoardhobbyVO", new BoardPageVO(cri, total));  
 	}	
 	
 	
 //	@PreAuthorize("isAuthenticated()") 
-	@GetMapping("/hoobyregister")
+	@GetMapping("/hobbyregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
@@ -79,7 +79,7 @@ public class BoardHobbyController {
 	
 	
 	
-	@GetMapping({"/read","/modify"})
+	@GetMapping({"/hobbyread","/hobbymodify"})
 	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
 		
@@ -89,7 +89,7 @@ public class BoardHobbyController {
 	
 	// modify+post 수정한 후 list
 //	@PreAuthorize("principal.username == #vo.writer")
-	@PostMapping("/modify")
+	@PostMapping("/hobbymodify")
 	public String modify(BoardHobbyVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
@@ -113,8 +113,8 @@ public class BoardHobbyController {
 	}
 	
 	//게시글 삭제 + post
-	@PreAuthorize("principal.username == #writer")
-	@PostMapping("/remove")
+//	@PreAuthorize("principal.username == #writer")
+	@PostMapping("/hobbydelete")
 	public String remove(int no,String writer,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+no);
 		
@@ -141,11 +141,10 @@ public class BoardHobbyController {
 	
 	//첨부물 가져오기
 	@GetMapping("/getAttachList")
-//	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int no){
-//		log.info("첨부물 가져오기 "+no);
-		
-//		return new ResponseEntity<List<BoardEventAttachFileDTO>>(bhservice.bhAttachList(no),HttpStatus.OK);
-//	}
+	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int no){
+		log.info("첨부물 가져오기 "+no);		
+		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(bhservice.bhAttachList(no),HttpStatus.OK);
+	}
 	
 	
 	private void deleteFiles(List<BoardHobbyAttachFileDTO> attachList) {
