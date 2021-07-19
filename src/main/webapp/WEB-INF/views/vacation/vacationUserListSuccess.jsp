@@ -9,10 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="" method="post">
-        <table border="3">
+<form action="/vacation/vacationUserList">
+        <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
             <thead>
-                <th colspan="4">휴가신청서</th> 
+            <tr>
+                <th colspan="4">휴가신청서</th>
+            </tr> 
             </thead>
             <tbody>
                 <tr>
@@ -21,7 +24,8 @@
                 </tr>
                 <tr>
                     <th>기간</th>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/></td>
+                    <td>
+                    <fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/></td>
                     <td>~</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
                 </tr>
@@ -33,18 +37,19 @@
                 </tr>
                 <tr>
                     <th>사유</th>
-                    <td colspan="3">	${vacation.reason }</td>
+                    <td colspan="3"><input value="${vacation.reason }" disabled>	</td>
                 </tr>
-                <tr>
-                    <th>거절사유</th>
-                    <td colspan="3">${vacation.refusalreason }</td>
-                </tr>
+                
             </tbody>
         </table>
-        <button type="button" class="modify">수정</button>
-        <button type="submit" class="remove">삭제</button>
-        <button type="submit" class="cancle">반납</button>
+        <button type="submit">수정</button>
         <button type="submit">확인</button>
+        </div>
+        				
+<h1>승인</h1>	
+				
     </form>
+
+    <script src="/resources/js/vacation/modify.js"></script>
 </body>
 </html>

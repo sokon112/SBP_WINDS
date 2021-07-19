@@ -11,50 +11,53 @@
 <body>
 <form action="/vacation/vacationUserList">
 
-<table board="2">
-	<thead>
-		<tr>
-			<th>분류</th>
-			<th colspan="2">기간</th>
-			<th>상태</th>
-			<th>신청날짜</th>
-			<th>승인날짜</th>
-		</tr>	
-	</thead>
-	<tbody>
-	<!-- 게시판 리스트 반복문 -->
+        <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th colspan="4">휴가신청서</th>
+            </tr> 
+            </thead>
+            <tbody>
+                <tr>
+                    <th>분류</th>
+                    <td colspan="3">${vacation.state}</td>
+                </tr>
+                <tr>
+                    <th>기간</th>
+                    <td>
+                    <fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/></td>
+                    <td>~</td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
+                </tr>
+                <tr>
+                    <th>시간</th>
+                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.startterm}"/></td>
+                    <td>~</td>
+                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.endterm}"/></td>
+                </tr>
+                <tr>
+                    <th>사유</th>
+                    <td colspan="3"><input>	${vacation.reason }</td>
+                </tr>
+                <tr>
+                    <th>거절사유</th>
+                   <%--  <td colspan="3">${vacation.refusalreason }</td> --%>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">수정</button>
+        <button type="submit">확인</button>
+        </div>
+        					
+<h1>거절</h1>	
+				
+    </form>
 
-		<tr>
-			<td>
-					${vacation.type}
-			</td>
-			<td>
-					<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
-				<strong>~</strong>
-			</td>
-			<td>
-					<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
-			</td>
-			<td>${vacation.state}</td>
-			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/></td>
-			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/></td>
-					<td>
-				<a href="/vacation/vacationUserListOne" class="move">
-					확인
-				</a> 
-				</td>
-		</tr>						
-	</tbody>
-    </table>
 
-</form>
-<div align="center">
-	<h1>SBP Winds Vacation</h1>
-	<pre class="mt-5 mb-3 text-muted text-center"> 
-Soldesk Big-Data Professional Winds
-김석현 남광우 심태현 이채은 박다영 황다빈
-test
-	</pre>
 
-</div>
+
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
+<script src="/resources/js/vacation/modify.js"></script>
+</body>
+</html>

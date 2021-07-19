@@ -12,19 +12,20 @@
 
 <form action="">
     <button onclick="preMonth">왼쪽화살표</button>
-	<fmt:formatDate pattern="yyyy년 MM월"  value="${cri.nowMonth}"/>
+    <input class="form-control" name="bno" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${cri.nowMonth}'/>">
+	
     <button onclick="nextMonth">오른쪽화살표</button>
     
 
-    <table border="2">
+   <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
         <thead>
 	        <tr>
 	            <th>신청서번호</th>
 	            <th>사원번호</th>
 	            <th>이름</th>
 	            <th>분류</th>
-	            <th>시작기간</th>
-	            <th>종료기간</th>
+	            <th>기간</th>
 	            <th>상태</th>
 	            <th>신청날짜</th>
 	            <th>승인날짜</th>
@@ -34,10 +35,10 @@
            <c:forEach var="vacation" items="${list}">
 				<tr>
 					<td>
-							${vacation.vacationApplication.id}
+							${vacation.vacationAppNum}
 					</td>
 					<td>
-							${vacation.vacationAppNum}
+							${vacation.vacationApplication.id}
 					</td>
 					<td>
 							${vacation.vacationApplication.name}
@@ -48,8 +49,6 @@
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
 						<strong>~</strong>
-					</td>
-					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
 					</td>
 					<td>${vacation.state}</td>
@@ -60,6 +59,7 @@
 						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/>
 					</td>
 					<td>
+					
 						<a href="${vacation.vacationAppNum}" class="move">
 							확인
 						</a> 
@@ -68,20 +68,43 @@
 			</c:forEach>
         </tbody>
     </table>
+    </div>
+    <!-- start search -->
+    <div class="row"> 
 
-    <select name="vacation" >
-        <option value="none">=== 선택 ===</option>
-        <option value="id">사원번호</option>
-        <option value="state">분류</option>
-    </select>
+                            	<div class="col-md-12">
+                            	  <div class="col-md-8"><!--search Form-->
+                            		<form action="" id="searchForm">
+                            			<select name="type" id="" class="form-control">
+                            				<option value="">-----------</option>
+                            				<option value="I" <c:out value="${cri.keyType=='I'?'selected':''}"/>>사원번호</option>
+                            				<option value="T" <c:out value="${cri.keyType=='T'?'selected':''}"/>>분류</option>
+                            			</select>
+                            			<input type="text" name="keyword" value="${cri.keyword}" />
+                            			<button type="button" class="btn btn-default">검색</button>
+                            		</form>
+                            	   </div>
+                            	   <div class="col-md-2 col-md-offset-2">
 
-    <input type="text" placeholder="keywords">
-    <button>검색</button>
+								  </div>
+                             	 </div>                             	 
+                      		 </div><!-- end search -->
     
-    <button>휴가심사(${cnt})</button>
-    <a href="/vacation/vacationManagerConfirm" class="move">
-		휴가심사(${cnt})
-	</a> 
+    <button type="button" class="btn btn-success" id="modalRegisterBtn" onclick="location.href='vacationManagerConfirm'">휴가심사(${cnt})</button>
+ 
    </form>
+<!-- 페이지 나누기 추가 -->            
+<form action="list" method="get" id="actionForm">	
+	<input type="hidden" name="keyType" value="${cri.keyType}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+
+</form>      
+   
+   <script>
+	let id = 4;
+	
+
+</script>
+<script src="/resources/js/vacation/list.js"></script>
 </body>
 </html>

@@ -10,9 +10,12 @@
 </head>
 <body>
 <form action="/vacation/vacationApply">
-        <table border="3">
+        <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
             <thead>
-                <th colspan="3">휴가신청서</th> 
+           	 <tr>
+                <th colspan="3">휴가신청서</th>
+                </tr> 
             </thead>
             <tbody>
                 <tr>
@@ -41,11 +44,20 @@
                 </tr>
                 <tr>
                     <th>사유</th>
-                    <td colspan="3"><input id="reason"></td>
+                    <td colspan="3">
+                    	<textarea class="form-control" rows="3" name="reason">
+                    	</textarea> 
+                    </td>
                 </tr>
             </tbody>
         </table>
-        <button type="submit">신청</button>
+        </div>
+        
+        <button type="button" class="btn btn-success" id="modalRegisterBtn">신청</button>
     </form>
+    <script type="text/javascript">
+    	let id=${vo.id}
+    </script>
+    <script src="/resources/js/vacation/list.js"></script>
 </body>
 </html>

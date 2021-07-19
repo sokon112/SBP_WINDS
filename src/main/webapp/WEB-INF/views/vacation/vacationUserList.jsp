@@ -15,11 +15,12 @@
     <button onclick="nextMonth">오른쪽화살표</button>
 
  
-<table border="2">
+<div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
 			<th>분류</th>
-			<th colspan="2">기간</th>
+			<th>기간</th>
 			
 			<th>상태</th>
 			<th>신청날짜</th>
@@ -35,9 +36,9 @@
 			</td>
 			<td>
 					<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
+					
 				<strong>~</strong>
-			</td>
-			<td>
+
 					<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
 			</td>
 			<td>${vacation.state}</td>
@@ -52,7 +53,7 @@
 	</c:forEach>								
 	</tbody>
     </table>
-
+</div>
 </form>
 <div align="center">
 	<h1>SBP Winds Vacation</h1>
@@ -63,4 +64,8 @@ test
 	</pre>
 
 </div>
+<script src="/resources/js/vacation/list.js"></script>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
+</body>
+</html>
+

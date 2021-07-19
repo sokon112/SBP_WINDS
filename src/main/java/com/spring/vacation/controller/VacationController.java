@@ -27,6 +27,7 @@ public class VacationController {
 	@Autowired
 	private VacationServiceImpl service;
 	
+	int id=4;
 VacationCriteria cri=new VacationCriteria();
 	
 	//vacationMine화면 
@@ -41,7 +42,7 @@ VacationCriteria cri=new VacationCriteria();
 	@GetMapping("/vacationUserList")
 	public void showUserMain( Model model, int id) {
 		
-		
+		id=4;	
 		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
@@ -83,6 +84,7 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("cri",cri);
 		model.addAttribute("list",list);
 		model.addAttribute("cnt",cnt);
+		model.addAttribute("cri",cri);
 	}
 	
 	//사용자 페이지에서 작동하는 컨트롤러

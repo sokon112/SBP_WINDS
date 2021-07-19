@@ -12,15 +12,18 @@
 <form action="/vacation/vacationManagerConfirm">
 <input type="text" id="yearMonth"  value="휴가심사" disabled>
 
-    <table border="2">
+<div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
         <thead>
+        <tr>
             <th>신청서번호</th>
             <th>사원번호</th>
             <th>이름</th>
             <th>분류</th>
-            <th colspan="3">기간</th>
+            <th>기간</th>
             <th>사유</th>
             <th>상태</th>
+            </tr>
         </thead>
         <tbody>
 	        <c:forEach var="vacation" items="${list}">
@@ -39,11 +42,9 @@
 						</td>
 		                <td>
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
-						</td>
-		                <td>
+
 	                		<strong>~</strong>
-						</td>
-						<td>
+
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
 						</td>
 	                <th>${vacation.reason}</th>
@@ -57,8 +58,14 @@
   			</c:forEach>          
         </tbody>
     </table>
-
+</div>
     <button type='button' onclick="location.href='vacationManager'">닫기</button>
     </form>
+    
+<form action="vacationManagerCheckOne" method="get" id="actionForm">	
+	<input type="hidden" name="keyType" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${keyword}" />
+</form> 
+    <script src="/resources/js/vacation/list.js"></script>
 </body>
 </html>

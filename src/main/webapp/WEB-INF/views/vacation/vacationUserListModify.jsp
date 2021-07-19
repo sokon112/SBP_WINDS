@@ -9,8 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/vacationUserListModify">
-        <table border="3">
+<form action="/vacation/vacationUserList">
+        <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
                 <th colspan="4">휴가신청서</th>
@@ -46,6 +47,11 @@
         </table>
         <button type="submit">수정</button>
         <button type="submit">확인</button>
+        </div>
+        				
+<h1>수정</h1>	
+				
     </form>
+    <script src="/resources/js/vacation/modify.js"></script>
 </body>
 </html>
