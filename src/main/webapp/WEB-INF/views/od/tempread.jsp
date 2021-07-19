@@ -33,13 +33,7 @@
 						<p></p>
 						<label class="input-group-text" for="inputGroupSelect01">보존기한</label>
 						<p></p>
-						<select class="form-select" id="inputGroupSelect01"
-							name="retentDate">
-							<option selected>보존기한을 선택하세요</option>
-							<option value="1">1년</option>
-							<option value="2">2년</option>
-							<option value="3">3년</option>
-						</select>
+						<input class="form-control" name="retentdate" readonly="readonly" value="${vo.retentDate}">
 						<p></p>
 					</div>
 
@@ -96,7 +90,7 @@
 	var csrfHeaderName="${_csrf.parameterName}";
 	var csrfTokenValue="${_csrf.token}";
 </script>
-<script src="/resources/js/read.js"></script>
+<script src="/resources/js/od/read.js"></script>
 <%@include file="../../includes/od/footer.jsp"%>
 
 

@@ -3,9 +3,9 @@
 <mapper namespace="com.spring.od.mapper.DocMainMapper">
 
 <!-- 미결 -->
-<select id ="mainwaitlist" resultType="com.spring.od.domain.OfficeNoticeVO">
-	select rownum rn,docNum,title,uname,state,regDate
-	from (select docNum,title,U.name uname,state,regDate 
+<select id ="mainwaitlist" resultType="com.spring.od.domain.StorageListVO">
+	select rownum rn,docNum,title,name,state,regDate
+	from (select docNum,title,U.name name,state,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
@@ -16,9 +16,9 @@
 
 
 <!-- 완료 -->
-<select id ="mainsuccesslist" resultType="com.spring.od.domain.OfficeNoticeVO">
-	select rownum rn,docNum,title,uname,regDate
-	from (select docNum,title,U.name uname,regDate 
+<select id ="mainsuccesslist" resultType="com.spring.od.domain.StorageListVO">
+	select rownum rn,docNum,title,name,regDate
+	from (select docNum,title,U.name name,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
@@ -29,9 +29,9 @@
 
 
 <!-- 임시 -->
-<select id ="maintemplist" resultType="com.spring.od.domain.OfficeNoticeVO">
-	select rownum rn,docNum,title,uname,regDate
-	from (select docNum,title,U.name uname,regDate
+<select id ="maintemplist" resultType="com.spring.od.domain.StorageListVO">
+	select rownum rn,docNum,title,name,regDate
+	from (select docNum,title,U.name name,regDate
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
@@ -43,15 +43,18 @@
 
 
 <!-- 검색 -->
-<select id = "mainsearchlist" resultType="com.spring.od.domain.OfficeNoticeVO">
+<select id = "mainsearchlist" resultType="com.spring.od.domain.StorageListVO">
 select * from( 
-select rownum rn, docNum,title,state,storage 
+select rownum rn, docNum,title,state,regDate,storage
 from DOC_TAB
 where title like '%'||#{keyword}||'%'
 <![CDATA[ and rownum <= (#{pageNum}*#{amount}))
 where rn > ((#{pageNum}-1)*#{amount})]]>
 </select>
 	
-
+<select id="odmaintotalcnt" resultType="int">
+		select count(*) from DOC_TAB 
+		where docNum>0
+	</select>
 
 </mapper>

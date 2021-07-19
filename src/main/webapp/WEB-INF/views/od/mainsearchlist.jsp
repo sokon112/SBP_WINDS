@@ -25,17 +25,19 @@
                                         <th>공문번호</th>
                                         <th>제   목</th>
                                         <th>단   계</th>
+                                        <th>수신일자</th>
                                         <th>보 관 함</th>
                                     </tr>									
                                 </thead>
 								<!-- 게시판 리스트 반복문 -->
 								<tbody>
-									<c:forEach var="vo" items="${list}">
+									<c:forEach var="vo" items="${searchlist}">
 										<tr>
-											<td>${vo.docNum}</td>
-											<td><a href="${vo.docNum}" class="move"> ${vo.title}</a></td>
-											<td>${vo.state}</td>
-											<td>${vo.storage}</td>
+										<td>${vo.docNum}</td>
+										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
+										<td>${vo.state}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
+										<td>${vo.storage}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -84,6 +86,6 @@
 	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}">
 	<input type="hidden" name="amount" value="${pageVO.cri.amount}">
 </form>
-<script src="/resources/js/list.js"></script>
+<script src="/resources/js/od/list.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 =

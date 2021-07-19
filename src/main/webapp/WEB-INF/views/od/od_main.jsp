@@ -21,8 +21,8 @@
             	<form action="mainsearchlist" id="searchForm" >
                 	<input type="text" name="keyword" placeholder="문서 제목을 입력하세요." />
                     <!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
-                    <input type="hidden" name="pageNum" value="1">
-                    <input type="hidden" name="amount" value="10">
+                    <input type="hidden" name="pageNum" value="${PageVO.cri.pageNum}">
+                    <input type="hidden" name="amount" value="${PageVO.cri.amount}">
                     <button type="button" class="btn btn-default">검색</button>
                 </form>
              </div>
@@ -52,9 +52,10 @@
 								<c:forEach var="vo" items="${waitlist}">
 									<tr>
 										<td>${vo.docNum}</td>
-										<td><a href="${vo.docNum}" class="move">${vo.title}</a>[${vo.uname}]</td>
+										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
+										<td>${vo.name}</td>
 										<td>${vo.state}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regdate}"/></td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
 								</c:forEach>								
 								</tbody>
@@ -80,9 +81,9 @@
 								<c:forEach var="vo" items="${successlist}">
 									<tr>
 										<td>${vo.docNum}</td>
-										<td><a href="${vo.docNum}" class="move">${vo.title}</a>[${vo.uname}]</td>
-										<td>${vo.state}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regdate}"/></td>
+										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
+										<td>${vo.name}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
 								</c:forEach>								
 								</tbody>
@@ -107,10 +108,10 @@
 							<!-- 게시판 리스트 반복문 -->
 								<c:forEach var="vo" items="${templist}">
 									<tr>
-										<td>${vo.bno}</td>
-										<td><a href="${vo.docNum}" class="move">${vo.title}</a>[${vo.uname}]</td>
-										<td>${vo.state}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regdate}"/></td>
+										<td>${vo.docNum}</td>
+										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
+										<td>${vo.name}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
 								</c:forEach>								
 							</tbody>
@@ -122,7 +123,7 @@
            </div>                   
         </div>               
         <!-- /.row -->
-<script src="/resources/js/list.js"></script>
+<script src="/resources/js/od/mainlist.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 
 
