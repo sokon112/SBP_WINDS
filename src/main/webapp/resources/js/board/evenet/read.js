@@ -81,16 +81,16 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//Modify버튼 클릭시  get방식 /board/modify
+	//Modify버튼 클릭시  get방식 /board/boardmodify
 	$(".btn-default").click(function(){
-		operForm.attr('action','/board/modify');
+		operForm.attr('action','/board/boardmodify');
 		operForm.submit();
 	})
 	
-	//List버튼 클릭시 get /board/list
+	//목록버튼 클릭시 get /board/boardlist
 	$(".btn-info").click(function(){
 		operForm.find("input[name='bno']").remove();
-		operForm.attr('action','/board/list');
+		operForm.attr('action','/board/boardlist');
 		operForm.submit();
 	})
 	

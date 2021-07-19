@@ -17,7 +17,7 @@ public class BoardVO { //게시판
 	private int bno; //게시물 번호
 	private String nickname; //닉네임
 	private String title; //제목
-	private String content; //내용
+	private String contents; //내용
 	private String password; //비번
 	private Date uploaddate; //날짜
 	private int views; //조회수

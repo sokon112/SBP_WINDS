@@ -38,7 +38,7 @@
                 				</div> 
                 				<div class="form-group">
                 					<label>Writer</label>
-                					<input class="form-control" name="writer" readonly="readonly" value="${vo.writer}">                				
+                					<input class="form-control" name="nickname" readonly="readonly" value="${vo.nickname}">                				
                 				</div>  
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
                 				<sec:authentication property="principal" var="info"/>
@@ -49,7 +49,7 @@
                 				</sec:authorize>
                 				
                 				
-                				<button type="button" class="btn btn-info">List</button>          			
+                				<button type="button" class="btn btn-info">목록</button>          			
                 			</form>
                 		</div>
                 	</div>
@@ -98,7 +98,7 @@
         </div>
         <div class="form-group">
         	<label for="">닉네임</label>
-        	<input type="text" name="nickname" class="form-control" value="닉네님"/>
+        	<input type="text" name="nickname" class="form-control" value="닉네임"/>
         </div>
         <div class="form-group">
         	<label for="">작성일</label>
@@ -132,6 +132,6 @@
 	
 	
 </script>
-<script src="/resources/js/read.js"></script>
-<script src="/resources/js/reply.js"></script>
+<script src="/resources/js/board/read.js"></script>
+<script src="/resources/js/board/reply.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

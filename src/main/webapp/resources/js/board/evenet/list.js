@@ -50,7 +50,7 @@ $(function(){
 		
 		//actionForm에 bno 값을 추가하여 actionForm 보내기		
 		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr('href')+"'>");
-		actionForm.attr('action','read');
+		actionForm.attr('action','boardread');
 		actionForm.submit();		
 	})
 	

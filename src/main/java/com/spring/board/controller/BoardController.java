@@ -43,9 +43,11 @@ public class BoardController {
 		
 		//전체 게시물 수 
 		int total = service.boardtotal(cri);
+		
+		log.info("total ",total);
 				
 		model.addAttribute("boardlist", boardlist);
-		model.addAttribute("boardpageVO", new BoardPageVO(cri, total));
+		model.addAttribute("boardPageVO", new BoardPageVO(cri, total));
 	}	
 	
 	
@@ -77,6 +79,7 @@ public class BoardController {
 		
 		BoardVO vo=service.boardread(bno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
+		model.addAttribute("cri", cri);
 	}
 	
 	// modify+post 수정한 후 list
