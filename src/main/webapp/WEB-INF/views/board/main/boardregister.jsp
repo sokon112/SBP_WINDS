@@ -36,8 +36,8 @@
                 					<label>비밀번호</label>
                 					<input class="form-control" name="password">                				
                 				</div> 
-                				<button type="submit" class="btn btn-default">올리기</button>              			
-                				<button type="reset" class="btn btn-default">취소</button>              			
+                				<button type="submit" name="boardregister" class="btn btn-default move">올리기</button>              			
+                				<button type="reset" name="boardlist" class="btn btn-default move">취소</button>              			
                 			</form>
                 		</div>
                 	</div>

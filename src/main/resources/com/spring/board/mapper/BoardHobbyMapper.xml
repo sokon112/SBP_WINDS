@@ -9,30 +9,30 @@
 		<selectKey keyProperty="hno" order="BEFORE" resultType="int">
 			select hobby_tb_seq.nextval from dual		
 		</selectKey>
-		insert into hobby_table(no,writer,title, password, contents,images)
+		insert into hobby_table(hno,hwriter,htitle, hpassword, hcontents,himages)
 		values(hobby_tb_seq.nextval,#{hwriter},#{htitle},#{hpassword},#{hcontents},#{himages})
 	</insert>
 	
 	<!--  하나 가져오기  : no 가 일치-->
 	<select id="bhread" resultType="com.spring.board.domain.BoardHobbyVO">
-		select * from hobby_table where no=#{hno}
+		select * from hobby_table where hno=#{hno}
 	</select>
 	
 	<!--  수정 :  내용만 수정, updatedate, no 일치하면 -->
 	<update id="bhupdate">
 		update hobby_table
-		set contents=#{hcontents}, uploaddate=sysdate
-		where no=#{hno}
+		set contents=#{hcontents}, huploaddate=sysdate
+		where hno=#{hno}
 	</update>
 	
 	<!-- 삭제 : no, password 일치 -->
 	<delete id="bhdelete">
-		delete from hobby_table where no=#{hno} and password=#{hpassword}
+		delete from hobby_table where hno=#{hno} and hpassword=#{hpassword}
 	</delete>
 	
 	<!-- -->
 	<delete id="bhdeleteAll">
-		delete from hobby_table where no=#{hno}	
+		delete from hobby_table where hno=#{hno}	
 	</delete>
 
 	<!-- 페이지 나누기 적용 -->
@@ -40,7 +40,7 @@
 		<![CDATA[
 				select *
 				from(select /*+INDEX_DESC(hobby_table hobby_tb_seq)*/
-				          rownum rn,no,writer,title,contents,uploaddate
+				          rownum rn,hno,hwriter,htitle,hcontents,huploaddate
 				     from hobby_table
 				     where 
 		]]>		
@@ -61,7 +61,7 @@
 		
 		<include refid="boardcommentcriteria"></include>
 		
-		 no>0
+		 hno>0
 	</select>
 	
 	

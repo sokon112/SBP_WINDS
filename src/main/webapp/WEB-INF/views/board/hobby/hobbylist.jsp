@@ -34,7 +34,7 @@
                            <tr>
                               <td>${vo.hno}</td>
                               <td><a href="${vo.hno}" class="move">${vo.htitle}</a></td>
-                              <td>${vo.writer}</td>
+                              <td>${vo.hwriter}</td>
                               <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.huploaddate}"/></td>
                            </tr>
                         </c:forEach>                        

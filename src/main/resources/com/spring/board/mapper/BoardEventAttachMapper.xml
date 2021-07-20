@@ -7,18 +7,18 @@
 	<!-- 파일insert : 이벤트,동호회-->
 	<insert id="beinsert">
 		insert into special_attach(uuid,uploadpath,filename,filetype,sno)
-		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{sno})
+		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{eno})
 	</insert>
 	
 	<!-- 파일찾기 -->
 	<select id="befindsno">
-		select * from special_attach where sno= #{sno} 
+		select * from special_attach where sno= #{eno} 
 	</select>
 
 	
 	<!-- 파일삭제  -->
 	<delete id="bedelete">
-		delete from special_attach where sno=#{sno} 
+		delete from special_attach where sno=#{eno} 
 	</delete>
 	
 	

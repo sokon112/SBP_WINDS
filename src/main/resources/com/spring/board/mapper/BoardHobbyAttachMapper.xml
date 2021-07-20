@@ -6,19 +6,19 @@
 
 	<!-- 파일insert : 이벤트,동호회-->
 	<insert id="bhinsert">
-		insert into hobby_table(uuid,uploadpath,filename,filetype,no)
+		insert into hobby_table(uuid,uploadpath,filename,filetype,sno)
 		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{hno})
 	</insert>
 	
 	<!-- 파일찾기 -->
 	<select id="bhfindsno">
-		select * from hobby_table where no= #{hno} 
+		select * from hobby_table where sno= #{hno} 
 	</select>
 
 	
 	<!-- 파일삭제  -->
 	<delete id="bhdelete">
-		delete from hobby_table where no=#{hno} 
+		delete from hobby_table where sno=#{hno} 
 	</delete>
 	
 	

@@ -9,30 +9,30 @@
 	<selectKey keyProperty="eno" order="BEFORE" resultType="int">
 			select event_tb_seq.nextval from dual		
 		</selectKey>
-		insert into evnet_table(no,writer,title, password, contents,images)
+		insert into evnet_table(eno,ewriter,etitle, epassword, econtents,eimages)
 		values(event_tb_seq.nextval,#{ewriter},#{etitle},#{epassword},#{eimages},#{econtents})
 	</insert>
 		
 	<!--  하나 가져오기  : no 가 일치-->
 	<select id="beread" resultType="com.spring.board.domain.BoardEventVO">
-		select * from event_table where no=#{eno}
+		select * from event_table where eno=#{eno}
 	</select>
 	
 	<!--  수정 : 댓글 내용만 수정, updatedate, sno 일치하면 -->
 	<update id="beupdate">
 		update event_table
-		set contents=#{econtents}, uploaddate=sysdate
-		where no=#{eno}
+		set econtents=#{econtents}, euploaddate=sysdate
+		where eno=#{eno}
 	</update>
 	
 	<!-- 삭제 : no, password 일치 -->
 	<delete id="beldelete">
-		delete from event_table where no=#{eno} and password=#{epassword}
+		delete from event_table where eno=#{eno} and epassword=#{epassword}
 	</delete>
 	
 	
 	<delete id="bedeleteAll">
-		delete from event_table where no=#{eno}	
+		delete from event_table where eno=#{eno}	
 	</delete>
 
 	<!-- 페이지 나누기 적용 -->
@@ -40,7 +40,7 @@
 		<![CDATA[
 				select *
 				from(select /*+INDEX_DESC(event_table event_tb_seq)*/
-				          rownum rn,no,writer,title,contents,uploaddate
+				          rownum rn,eno,ewriter,etitle,econtents,euploaddate
 				     from event_table
 				     where 
 		]]>		
@@ -61,7 +61,7 @@
 		
 		<include refid="boardcommentcriteria"></include>
 		
-		 no>0
+		 eno>0
 	</select>
 	
 	
