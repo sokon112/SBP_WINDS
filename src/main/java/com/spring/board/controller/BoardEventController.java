@@ -89,7 +89,7 @@ public class BoardEventController {    //이벤트
 	
 	// modify+post 수정한 후 list
 //	@PreAuthorize("principal.username == #vo.ewriter")
-	@PostMapping("/event//eventmodify")
+	@PostMapping("/event/eventmodify")
 	public String modify(BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		

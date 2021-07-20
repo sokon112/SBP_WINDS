@@ -32,7 +32,7 @@
                         <!-- 게시판 리스트 반복문 -->
                         <c:forEach var="vo" items="${eventlist}">
                            <tr>
-                              <td>${vo.no}</td>
+                              <td>${vo.eno}</td>
                               <td><a href="${vo.eno}" class="move">${vo.etitle}</a></td>
                               <td>${vo.ewriter}</td>
                               <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.euploaddate}"/></td>
@@ -46,25 +46,25 @@
                                   <form action="" id="searchForm">
                                      <select name="type" id="" class="form-control">
                                         <option value="">-----------</option>
-                                        <option value="T" <c:out value="${boardPageVO.cri.type=='T'?'selected':''}"/>>제목</option>
-                                        <option value="C" <c:out value="${boardPageVO.cri.type=='C'?'selected':''}"/>>내용</option>
-                                        <option value="TC" <c:out value="${boardPageVO.cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
+                                        <option value="T" <c:out value="${BoardEventVO.cri.type=='T'?'selected':''}"/>>제목</option>
+                                        <option value="C" <c:out value="${BoardEventVO.cri.type=='C'?'selected':''}"/>>내용</option>
+                                        <option value="TC" <c:out value="${BoardEventVO.cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
                                      </select>
-                                     <input type="text" name="keyword" value="${boardPageVO.cri.keyword}" />
+                                     <input type="text" name="keyword" value="${BoardEventVO.cri.keyword}" />
                                      
                                      <!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
-                                     <input type="hidden" name="pageNum" value="${boardPageVO.cri.pageNum}"/>
-                                     <input type="hidden" name="amount" value="${boardPageVO.cri.amount}" />
+                                     <input type="hidden" name="pageNum" value="${BoardEventVO.cri.pageNum}"/>
+                                     <input type="hidden" name="amount" value="${BoardEventVO.cri.amount}" />
                                      <button type="button" class="btn btn-default">검색</button>
                                   </form>
                                   </div>
                                   <div class="col-md-2 col-md-offset-2">
                                      <!--페이지 목록 갯수 지정하는 폼-->
                                      <select name="" id="amount" class="form-control">
-                                        <option value="10"  <c:out value="${boardPageVO.cri.amount==10?'selected':''}"/> >10</option>
-                                        <option value="20"  <c:out value="${boardPageVO.cri.amount==20?'selected':''}"/>>20</option>
-                                        <option value="30"  <c:out value="${boardPageVO.cri.amount==30?'selected':''}"/>>30</option>
-                                        <option value="40"  <c:out value="${boardPageVO.cri.amount==40?'selected':''}"/>>40</option>
+                                        <option value="10"  <c:out value="${BoardEventVO.cri.amount==10?'selected':''}"/> >10</option>
+                                        <option value="20"  <c:out value="${BoardEventVO.cri.amount==20?'selected':''}"/>>20</option>
+                                        <option value="30"  <c:out value="${BoardEventVO.cri.amount==30?'selected':''}"/>>30</option>
+                                        <option value="40"  <c:out value="${BoardEventVO.cri.amount==40?'selected':''}"/>>40</option>
                                      </select>
                                      <p></p>
                                      <a href="boardregister" class="btn btn-primary pull-right">글쓰기</a>
@@ -74,18 +74,18 @@
                             <!-- start Pagination -->
                             <div class="text-center">
                                <ul class="pagination">
-                                  <c:if test="${boardPageVO.prev}">
-                                     <li class="paginate_button previous"><a href="${boardPageVO.startPage-1}">Previous</a></li>
+                                  <c:if test="${BoardEventVO.prev}">
+                                     <li class="paginate_button previous"><a href="${BoardEventVO.startPage-1}">Previous</a></li>
                                 </c:if>                
                                   
-                                  <c:forEach var="idx" begin="${boardPageVO.startPage}" end="${boardPageVO.endPage}">
-                                     <li class="paginate_button ${boardPageVO.cri.pageNum==idx?'active':''}">
+                                  <c:forEach var="idx" begin="${BoardEventVO.startPage}" end="${BoardEventVO.endPage}">
+                                     <li class="paginate_button ${BoardEventVO.cri.pageNum==idx?'active':''}">
                                         <a href="${idx}">${idx}</a>
                                      </li>
                                   </c:forEach>
                                   
-                                  <c:if test="${boardPageVO.next}">
-                                     <li class="paginate_button next"><a href="${boardPageVO.endPage+1}">Next</a></li>
+                                  <c:if test="${BoardEventVO.next}">
+                                     <li class="paginate_button next"><a href="${BoardEventVO.endPage+1}">Next</a></li>
                                   </c:if> 
                                   
                                </ul>
@@ -100,10 +100,10 @@
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
 <form action="list" method="get" id="actionForm">   
-   <input type="hidden" name="type" value="${boardPageVO.cri.type}" />
-   <input type="hidden" name="keyword" value="${boardPageVO.cri.keyword}" />
-   <input type="hidden" name="pageNum" value="${boardPageVO.cri.pageNum}" />
-   <input type="hidden" name="amount" value="${boardPageVO.cri.amount}" />   
+   <input type="hidden" name="type" value="${BoardEventVO.cri.type}" />
+   <input type="hidden" name="keyword" value="${BoardEventVO.cri.keyword}" />
+   <input type="hidden" name="pageNum" value="${BoardEventVO.cri.pageNum}" />
+   <input type="hidden" name="amount" value="${BoardEventVO.cri.amount}" />   
 </form>            
           
 <!-- 모달 추가 -->

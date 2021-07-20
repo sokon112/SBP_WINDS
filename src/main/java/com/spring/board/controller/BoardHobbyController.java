@@ -71,9 +71,9 @@ public class BoardHobbyController { //동호회
 		if(bhservice.bhinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getHno());
-			return "redirect:list";    //   redirect:/board/list
+			return "redirect:hobbylist";    //   redirect:/board/list
 		}else {
-			return "redirect:register"; //  redirect:/board/register
+			return "redirect:hobbyregister"; //  redirect:/board/register
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class BoardHobbyController { //동호회
 		rttr.addAttribute("amount", cri.getAmount());
 		
 		
-		return "redirect:list";
+		return "redirect:hobbylist";
 	}
 	
 	//게시글 삭제 + post
