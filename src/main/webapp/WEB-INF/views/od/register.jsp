@@ -77,43 +77,18 @@
 									<label class="input-group-text" for="dest">결재자</label>
 									<select class="form-select" id="dest" name="dest">
 										<option selected>결재자 선택</option>
-										<option value="18081354">한소희(인사팀)</option>
-										<option value="17071235">채수빈(재무팀)</option>
-										<option value="16114567">배수지(홍보팀)</option>
+										<option value="이지은(대표이사)">이지은(대표이사)</option>
+										<option value="한소희(인사팀)">한소희(인사팀장)</option>
+										<option value="채수빈(기획팀)">채수빈(기획팀장)</option>
+										<option value="배수지(개발팀)">배수지(개발팀장)</option>
+										<option value="김소현(재무홍보팀)">김소현(재무홍보팀장)</option>
+										<option value="김유정(총무팀)">김유정(총무팀장)</option>
 									</select>
+									<button type="button" class="btn btn-primary" id="chooseDest">결재자 선택</button>
 									<p></p>
-									<label class="input-group-text" for="review">검토자</label>
-									<c:choose>
-											<select class="form-select" id="review" name="review">
-											<c:when test="${dest eq '18081354'}">
-												<option selected>검토자 선택</option>
-												<option value="null">없음</option>
-												<option value="98074561">고길동(인사팀)</option>
-												<option value="99774852">신형만(인사팀)</option>
-												<option value="00894187">봉미선(인사팀)</option>
-											</c:when>
-											<c:when test="${dest eq '17071235'}">
-												<option selected>검토자 선택</option>
-												<option value="null">없음</option>
-												<option value="98074561">고길동(재무팀)</option>
-												<option value="99774852">신형만(재무팀)</option>
-												<option value="00894187">봉미선(재무팀)</option>
-											</c:when>
-											<c:when test="${dest eq '16114567'}">
-												<option selected>검토자 선택</option>
-												<option value="null">없음</option>
-												<option value="98074561">고길동(홍보팀)</option>
-												<option value="99774852">신형만(홍보팀)</option>
-												<option value="00894187">봉미선(홍보팀)</option>
-											</c:when>
-											<c:otherwise>
-												<option selected>결재자를 선택하세요</option>
-											</c:otherwise>
-											</select>
-									</c:choose>
-									
 								</div>
 								<div class="modal-footer">
+									<button type="button" class="btn btn-info" id="chooseModify">결재선 수정</button>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
 									<button type="button" class="btn btn-primary">저장</button>

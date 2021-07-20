@@ -3,10 +3,65 @@
  */
 $(function(){
 	
+	var modalplus = $("#modal2 .modal-body");
+	
+	
+	
+	$("#chooseDest").click(function(){
+		var dest = $("#dest").val();
+		var str = "<label class='input-group-text' for='dest'>결재자</label>";
+		str+="<input type='text' class='form-control' id='recipient-name' readonly='readonly' value='"+dest+"'>";
+		str+="<p></p>";
+		str+="<label class='input-group-text' for='review'>검토자</label>";
+		str+="<select class='form-select' id='review' name='review'>";
+		
+		if(dest=='이지은(대표이사)'){
+			var dest = '10030001';
+			str+="<option selected>검토자 선택</option>";
+			str+="<option value='15080002'>한소희(인사팀)</option>";
+			str+="<option value='15080003'>채수빈(기획팀)</option>";
+			str+="<option value='15080004'>배수지(개발팀)</option>";
+			str+="<option value='15080005'>김소현(재무홍보팀)</option>";
+			str+="<option value='15080006'>김유정(총무팀)</option>";
+		}
+		else if(dest=='한소희(인사팀)'){
+			var dest = '15080002';
+			str+="<option selected>검토자 선택</option>";
+			str+="<option value='null'>없음</option>";
+		}
+		else if(dest=='채수빈(기획팀)'){
+			var dest = '15080003';
+			str+="<option selected>검토자 선택</option>";
+			str+="<option value='null'>없음</option>";
+		}
+		else if(dest=='배수지(개발팀)'){
+			var dest = '15080004';
+			str+="<option selected>검토자 선택</option>";
+			str+="<option value='null'>없음</option>";
+		}
+		else if(dest=='김소현(재무홍보팀)'){
+			var dest = '15080005';
+			str+="<option selected>검토자 선택</option>";
+			str+="<option value='null'>없음</option>";
+		}
+		else if(dest=='김유정(총무팀)'){
+			var dest = '15080006';
+			str+="<option selected>검토자 선택</option>";
+			str+="<option value='null'>없음</option>";
+		}
+		
+		str += "</select>";
+		modalplus.html(str);
+	})
+	
+	$("#chooseModify").click(modalplus,function(){
+		modalplus.reload;
+	})
+	
 	//업로드 되는 파일의 종류와 크기 제한
 	function checkExtension(fileName,fileSize){
 		
-		var regex = new RegExp("(.*?)\.(txt|jpg|gif|png|bmp)");
+		var regex = new RegExp("(.*?)\.(hwp|txt|jpg|gif|png|bmp)");
 		
 		var maxSize = 10242880; //5MB
 		
