@@ -1,5 +1,5 @@
 /**
- * list.jsp 스크립트
+ * eventlist.jsp 스크립트
  */
 $(function(){
 	// 모달 창 띄우기
