@@ -1,8 +1,8 @@
 /**
- * list.jsp 스크립트
+ * vacationManager.jsp 스크립트
  */
 $(function(){
-	// 모달 창 띄우기
+	/*// 모달 창 띄우기
 	checkModal(result);
 	
 	history.replaceState({},null,null);
@@ -42,7 +42,7 @@ $(function(){
 		
 		//actionForm 보내기
 		actionForm.submit();
-	})
+	})*/
 	
 	//게시글 제목 클릭시
 	$(".move").click(function(e){
@@ -54,7 +54,7 @@ $(function(){
 		actionForm.submit();		
 	})
 	
-	//검색
+	/*//검색
 	//type or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
 	$(".btn-default").click(function(){
@@ -81,7 +81,7 @@ $(function(){
 		//searchForm.find("input[name='pageNum']").val("1");
 		
 		searchForm.submit();
-	})
+	})*/
 })
 
 

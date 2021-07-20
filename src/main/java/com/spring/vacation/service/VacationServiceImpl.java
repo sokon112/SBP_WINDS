@@ -3,11 +3,10 @@ package com.spring.vacation.service;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.vacation.domain.VacationApplicationVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 import com.spring.vacation.mapper.VacationMapper;
@@ -114,6 +113,11 @@ public class VacationServiceImpl implements VacationService {
 	public Date vacationDay(int vacationAppNum) {
 
 		return mapper.vVacationDay(vacationAppNum);
+	}
+
+	@Override
+	public int total(VacationCriteria cri) {
+		return mapper.vTotalCnt(cri);
 	}
 	
 

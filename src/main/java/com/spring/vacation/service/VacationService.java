@@ -4,7 +4,6 @@ package com.spring.vacation.service;
 import java.util.Date;
 import java.util.List;
 
-import com.spring.vacation.domain.VacationApplicationVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 
@@ -12,7 +11,7 @@ public interface VacationService {
 	//관리자
 	//월별 조회
 	public List<VacationVO> selectMonth(VacationCriteria cri);
-
+	public int total(VacationCriteria cri);
 	
 	public int countApp();
 	//상태가 신청인 것 조회

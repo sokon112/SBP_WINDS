@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.vacation.domain.VacationApplicationVO;
+
 import com.spring.vacation.domain.VacationCriteria;
+import com.spring.vacation.domain.VacationPageVO;
 import com.spring.vacation.domain.VacationVO;
 import com.spring.vacation.service.VacationServiceImpl;
 
@@ -40,17 +42,17 @@ VacationCriteria cri=new VacationCriteria();
 	//메인메뉴 3가지 
 	//id에 따른 휴가 목록 보여주는 페이지 
 	@GetMapping("/vacationUserList")
-	public void showUserMain( Model model, int id) {
+	public void showUserMain( Model model, int id,VacationCriteria cri) {
 		
-		id=4;	
+
 		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
 		
 		
 		log.info(vlist);
-		
-		model.addAttribute("cri",cri);
+		int total = service.total(cri);
+		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",vlist);
 		
 	}//휴가신청서 작성하는 페이지
@@ -60,31 +62,18 @@ VacationCriteria cri=new VacationCriteria();
 		
 	}//관리자가 보는 페이지 
 	@GetMapping("/vacationManager")
-	public void showAdmin(Model model) {
+	public void showAdmin(Model model,VacationCriteria cri) {
 		log.info("휴가관리 페이지");
-		VacationCriteria cri=new VacationCriteria();
+		
 		
 		List<VacationVO> list=service.selectMonth(cri);
-//		log.info("list"+list);
-
-
-		
-//		for(VacationVO vo:list) {
-//			int appNum=vo.getVacationAppNum();
-//			
-//		}
-		
-//		 for (VacationVO vacation:list) {
-//		 log.info("vacation.getVacationApplication() :  "
-//		  +vacation.getVacationApplication().getId()
-//		  +vacation.getVacationApplication().getName()
-//		  +vacation.getVacationApplication().getVacationCnt() ); }
-		 
+		int total=service.total(cri);
 		int cnt=service.countApp();
-		model.addAttribute("cri",cri);
+		
+		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",list);
 		model.addAttribute("cnt",cnt);
-		model.addAttribute("cri",cri);
+	
 	}
 	
 	//사용자 페이지에서 작동하는 컨트롤러
@@ -173,11 +162,19 @@ VacationCriteria cri=new VacationCriteria();
 	}
 	//관리자가 목록중에 하나 눌렀을때 
 	@GetMapping("/vacationManagerCheckOne")
-	public void vacationManagerCheckOne(Model model, int vacationAppNum){
+	public String vacationManagerCheckOne( int vacationAppNum,@ModelAttribute("cri") VacationCriteria cri,Model model){
 		log.info("관리자 페이지");
 		
-		VacationVO vo = service.showUserOne(vacationAppNum);
-		model.addAttribute("vo",vo);
+		VacationVO vacation = service.showUserOne(vacationAppNum);
+		model.addAttribute("vacation",vacation);
+		if(vacation.getState().equals("승인")) {
+			return "/vacation/vacationManagerCheckOne";
+		}
+		else if(vacation.getState().equals("거절")) {
+			return "/vacation/vacationManagerCheckOneReject";
+		}else {
+			return "/";
+		}
 	}
 	
 //	휴가심사 페이지
@@ -186,7 +183,7 @@ VacationCriteria cri=new VacationCriteria();
 	@PutMapping("/{vacationAppNum}/ok")
 	public String ok(int vacationAppNum){
 		log.info("문서 승인");
-		boolean result = service.ok(vacationAppNum);
+		//boolean result = service.ok(vacationAppNum);
 		return "승인";
 	}
 	
@@ -195,7 +192,7 @@ VacationCriteria cri=new VacationCriteria();
 	@PutMapping("/{vacationAppNum}/no")
 	public String no(int vacationAppNum,String refusalreason){
 		log.info("문서 거절");
-		boolean result = service.no(vacationAppNum,refusalreason);
+		//boolean result = service.no(vacationAppNum,refusalreason);
 		return "거절";
 	}
 //	닫기 -> showAdmin 페이지로 넘어감

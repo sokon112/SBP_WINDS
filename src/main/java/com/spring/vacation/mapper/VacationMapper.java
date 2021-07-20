@@ -16,7 +16,7 @@ public interface VacationMapper {
 	public VacationApplicationVO vSelectMonthUserData(int holidayAppNum);
 	public int vCountApp();
 	public List<VacationVO> vApplicationList();
-	
+	public int vTotalCnt(VacationCriteria cri);
 	
 	//승인
 	public int vOk(int holidayAppNum);

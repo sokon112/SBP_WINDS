@@ -33,14 +33,32 @@
 	</resultMap>
 	<select  id="vSelectMonth" resultMap="selectMonthInfo">
 	<![CDATA[
-		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
-		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id 
-		where  vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth} and vat.state not in('신청') 
-	]]>	
+	
+	select *
+from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/ 
+            rownum rn,vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
+		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id  
+        where 
+       	]]>	
 	<include refid="vacationCriteria"></include>
-	<![CDATA[	
-		order by vat.vacationAppNum
+	<![CDATA[
+	
+		vat.state not in('신청') and rownum <=(#{pageNum})*#{amount} and vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth}
+		)
+		where rn>(#{pageNum}-1)*#{amount} 
 	]]>	
+	</select>
+	
+	
+	<select id="vTotalCnt" resultType="int">
+	<![CDATA[
+		select count(*) from vacationApplicationTable
+		where
+		]]>	
+	<include refid="vacationCriteria"></include>
+	<![CDATA[
+		vacationAppNum>0 and state not like ('신청')
+		]]>	
 	</select>
 	
 	
@@ -102,10 +120,11 @@
  		where id=#{id} and startterm >= #{cri.nowMonth} and startterm < #{cri.nextMonth}
 	]]>
 	</select >
-	<select id="vShowUserOne" resultType="com.spring.vacation.domain.VacationVO">
-		select vacationAppNum,id,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
-		from vacationApplicationTable
-		where vacationAppNum=#{vacationAppNum}
+	<select id="vShowUserOne" resultMap="selectMonthInfo">
+
+		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.state,vat.applicationDate,vat.approvalDate,vat.reason,vat.refusalReason
+		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id
+		where vat.vacationAppNum=#{vacationAppNum}
 	</select>
 	<!-- 수정해야함 -->
 	<update id="vUserUpdateApp" >
@@ -143,10 +162,10 @@
 				<trim prefix="OR">
 					<choose>
 						<when test="keyType=='I'.toString()"><!-- 사원 아이디로 검색 -->
-							id like '%'||#{keyword}||'%'
+							vat.id like '%'||#{keyword}||'%'
 						</when>
 						<when test="keyType=='T'.toString()"><!-- 휴가 종류로 검색로 검색 -->
-							type like '%'||#{keyword}||'%'
+							vat.type like '%'||#{keyword}||'%'
 						</when>
 					</choose>
 				</trim>

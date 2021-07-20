@@ -20,18 +20,31 @@ public class VacationCriteria {
 	private String keyType;
 	private String keyword;
 	
+	private int pageNum;
+	private int amount;
+	
 	Calendar cal = Calendar.getInstance();
 
 	Date date= new Date();
 	
 	public VacationCriteria() {
 		super();
+		this.pageNum=1;
+		this.amount=10;
 		cal.setTime(date);
 		cal.set(Calendar.DATE, 1);
 		this.nowMonth=cal.getTime();
 		cal.add(Calendar.MONTH, 1);
 		this.nextMonth=cal.getTime();
+		
 	}
+	
+	public VacationCriteria(int pageNum,int amount) {
+		super();
+		this.pageNum=pageNum;
+		this.amount=amount;
+	}
+	
 	public void upVacationMonth() {
 		this.nowMonth=this.nextMonth;
 		cal.setTime(nextMonth);
@@ -39,6 +52,7 @@ public class VacationCriteria {
 		this.nextMonth=cal.getTime();
 		System.out.println("nowMonth : "+nowMonth+"nextMonth : "+nextMonth);
 	}
+	
 	public void downVacationMonth() {
 		this.nextMonth=this.nowMonth;
 		cal.setTime(nowMonth);

@@ -49,8 +49,8 @@
 						</td>
 	                <th>${vacation.reason}</th>
 	                <td>
-	                    <button onclick="">승인</button>
-	                    <button onclick="">거절</button>
+	                    <button type="button" class="btn btn-primary" onclick="">승인</button>
+	                    <button type="button" class="btn btn-secondary">거절</button>
 	                    <input type="text" value="${vacation.state }" disabled>	
 	                 </td>
 	                 
@@ -63,9 +63,41 @@
     </form>
     
 <form action="vacationManagerCheckOne" method="get" id="actionForm">	
-	<input type="hidden" name="keyType" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${keyword}" />
+	
+<%-- 댓글 작성 폼 --%>  
+<div class="modal" tabindex="-1" id="replyModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title">Reply</h5>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+        	<label for="">댓글 내용</label>
+        	<input type="text" name="reply" class="form-control" value="댓글내용"/>
+        </div>
+        <div class="form-group">
+        	<label for="">작성자</label>
+        	<input type="text" name="replyer" class="form-control" value="작성자"/>
+        </div>
+        <div class="form-group">
+        	<label for="">작성일</label>
+        	<input type="text" name="replyDate" class="form-control" value="작성일"/>
+        </div>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
+        <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
+        <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modalCloseBtn">종료</button>
+      </div>
+    </div>
+  </div>
+</div>
 </form> 
-    <script src="/resources/js/vacation/list.js"></script>
+    <script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
 </body>
 </html>

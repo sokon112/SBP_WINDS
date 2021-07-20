@@ -71,6 +71,9 @@
         <form action="#" method="post" id="logoutForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
+        <script type="text/javascript">
+        	let id='${id}';
+        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
         

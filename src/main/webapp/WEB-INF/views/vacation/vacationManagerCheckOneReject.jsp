@@ -71,7 +71,10 @@
                     <th>사유</th>
                     <td colspan="3">${vacation.reason }</td>
                 </tr>
-
+				<tr>
+                    <th>거절사유</th>
+                    <td colspan="3">${vacation.refusalReason }</td>
+                </tr>
             </tbody>
         </table>
         <button type="button" class="btn btn-info">확인</button>
@@ -87,6 +90,6 @@
 	<input type="hidden" name="amount" value="${cri.amount}" />
 	<%-- <input type="hidden" name="id"  value="${vacation.id}"/> --%>
 </form>
-<script src="/resources/js/vacation/vacationManagerCheckOne.js"></script>
+<script src="/resources/js/vacation/vacationCheckOne.js"></script>
 </body>
 </html>
