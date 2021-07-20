@@ -19,7 +19,7 @@ create SEQUENCE board_tb_seq;
 
 --테이블 삭제
 DROP TABLE board_table;
-DROP TABLE event_hobby_table;
+DROP TABLE hobby_table;
 
 --게시판 테이블 정보 입력
 insert into board_table(bno,nickname,title, views, password, contents)

@@ -11,7 +11,7 @@
 <body>
 <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Board Modify</h1>
+                    <h1 class="page-header">게시물 수정</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>            
@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           Board Modify Page
+                           게시물 수정
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -68,5 +68,5 @@
 	var csrfHeaderName="${_csrf.headerName}";
 	var csrfTokenValue="${_csrf.token}";
 </script>
-<script src="/resources/js/modify.js"></script>
+<script src="/resources/js/board/main/modify.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

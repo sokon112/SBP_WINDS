@@ -2,14 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.board.mapper.BoardHobbyMapper">
 
-<!-- 스페셜 :  -->
+<!-- 동호회 :  -->
 
-	<!-- insert : 이벤트,동호회-->
+	<!-- insert : 동호회-->
 	<insert id="bhinsert">
+		<selectKey keyProperty="hno" order="BEFORE" resultType="int">
+			select hobby_tb_seq.nextval from dual		
+		</selectKey>
 		insert into hobby_table(no,writer,title, password, contents,images)
 		values(hobby_tb_seq.nextval,#{hwriter},#{htitle},#{hpassword},#{hcontents},#{himages})
 	</insert>
-		
+	
 	<!--  하나 가져오기  : no 가 일치-->
 	<select id="bhread" resultType="com.spring.board.domain.BoardHobbyVO">
 		select * from hobby_table where no=#{hno}
@@ -32,5 +35,55 @@
 		delete from hobby_table where no=#{hno}	
 	</delete>
 
+	<!-- 페이지 나누기 적용 -->
+	<select id="bhlist" resultType="com.spring.board.domain.BoardHobbyVO">
+		<![CDATA[
+				select *
+				from(select /*+INDEX_DESC(hobby_table hobby_tb_seq)*/
+				          rownum rn,no,writer,title,contents,uploaddate
+				     from hobby_table
+				     where 
+		]]>		
+		
+		<include refid="boardcommentcriteria"></include>
+		     
+		<![CDATA[		     
+				     
+				     rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount})		
+		]]>	
+	</select>
+	
+	<!-- 전체 게시물 수 (검색)-->
+	<select id="bhtotalCnt" resultType="int">
+		select count(*) from hobby_table 
+		where
+		
+		<include refid="boardcommentcriteria"></include>
+		
+		 no>0
+	</select>
+	
+	
+	
+	<!-- 동적 SQL -->
+	<!-- 제목, 내용 검색 -->
+	<sql id="boardcommentcriteria">
+		<trim prefix="(" suffix=") AND"  prefixOverrides="OR" >
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							contents like '%'||#{keyword}||'%'
+						</when>					
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
 
 </mapper>

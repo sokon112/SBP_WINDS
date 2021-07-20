@@ -4,16 +4,71 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/board/header.jsp" %>
-<html>
-<head>
-	<title>Board</title>
-</head>
-<body>
-<div align="center">
-	<h1>SBP Winds Board</h1>
-	<pre class="mt-5 mb-3 text-muted text-center"> 
-		Soldesk Big-Data Professional Winds
-		김석현 남광우 심태현 이채은 박다영 황다빈
-	</pre>
-</div>
+<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">게시물 읽기</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>            
+            <div class="row">
+                <div class="col-lg-12">
+                	<div class="panel panel-default">
+                        <div class="panel-heading">
+                           게시물 읽기
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                			<form action="" role="form">
+                				<div class="form-group">
+                					<label>번호</label>
+                					<input class="form-control" name="hno" readonly="readonly" value="${vo.hno}">                				
+                				</div> 
+                				<div class="form-group">
+                					<label>제목</label>
+                					<input class="form-control" name="title" readonly="readonly" value="${vo.htitle}">                				
+                				</div>  
+                				<div class="form-group">
+                					<label>내용</label>
+                					<textarea class="form-control" rows="3" name="contents" readonly="readonly">${vo.hcontents}</textarea>               				
+                				</div> 
+                				<div class="form-group">
+                					<label>작성자</label>
+                					<input class="form-control" name="writer" readonly="readonly" value="${vo.hwriter}">                				
+                				</div>  
+                				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
+                				<sec:authentication property="principal" var="info"/>
+                				<sec:authorize access="isAuthenticated()"><%-- 로그인 여부 확인 --%>
+                					<c:if test="${info.username==vo.hwriter}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
+                						<button type="button" class="btn btn-default">수정</button>
+                					</c:if>     			
+                				</sec:authorize>
+                				
+                				
+                				<button type="button" class="btn btn-info">목록</button>          			
+                			</form>
+                		</div>
+                	</div>
+                </div>
+            </div>
+
+<%-- 페이지 나누기를 위해 필요한 값 --%>
+<form action="" id="operForm">
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />	
+	<input type="hidden" name="hno"  value="${vo.hno}"/>
+</form>       
+<script>
+	let no = ${vo.no};
+	
+	
+	
+	var csrfHeaderName="${_csrf.headerName}";
+	var csrfTokenValue="${_csrf.token}";
+	
+	
+</script>
+<script src="/resources/js/board/hobby/read.js"></script>
+<script src="/resources/js/board/hobby/reply.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

@@ -15,7 +15,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                        	게시판 글쓰기
+                        	익명 게시판 글쓰기
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -44,5 +44,5 @@
                 </div>
             </div>  
 
-<script src="/resources/js/register.js"></script> 
+<script src="/resources/js/board/main/register.js"></script> 
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

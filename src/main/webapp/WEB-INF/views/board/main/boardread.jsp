@@ -132,6 +132,6 @@
 	
 	
 </script>
-<script src="/resources/js/board/read.js"></script>
-<script src="/resources/js/board/reply.js"></script>
+<script src="/resources/js/board/main/read.js"></script>
+<script src="/resources/js/board/main/reply.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

@@ -1,5 +1,5 @@
 /**
- * modify.jsp 스크립트
+ * hobbymodify.jsp 스크립트
  */
 $(function(){
 	

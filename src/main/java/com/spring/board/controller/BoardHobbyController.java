@@ -30,7 +30,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @Log4j2
 @RequestMapping("/board/*")
-public class BoardHobbyController {
+public class BoardHobbyController { //동호회
 
 
 	@Autowired
@@ -46,7 +46,7 @@ public class BoardHobbyController {
 		int total = bhservice.bhtotalCnt(cri);
 				
 		model.addAttribute("hobbylist", hobbylist);
-		model.addAttribute("BoardhobbyVO", new BoardPageVO(cri, total));  
+		model.addAttribute("BoardHobbyVO", new BoardPageVO(cri, total));  
 	}	
 	
 	

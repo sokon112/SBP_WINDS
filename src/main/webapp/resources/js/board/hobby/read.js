@@ -1,5 +1,5 @@
 /**
- * read.jsp 에서 사용할 스크립트
+ * hobbyread.jsp 에서 사용할 스크립트
  */
 
 function showImage(fileCallPath){

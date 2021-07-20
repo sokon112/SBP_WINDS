@@ -6,32 +6,84 @@
 
 	<!-- insert : 글 삽입-->
 	<insert id="beinsert">
+	<selectKey keyProperty="eno" order="BEFORE" resultType="int">
+			select event_tb_seq.nextval from dual		
+		</selectKey>
 		insert into evnet_table(no,writer,title, password, contents,images)
-		values(event_tb_seq.nextval,#{writer},#{title},#{password},#{images},#{contents})
+		values(event_tb_seq.nextval,#{ewriter},#{etitle},#{epassword},#{eimages},#{econtents})
 	</insert>
 		
 	<!--  하나 가져오기  : no 가 일치-->
 	<select id="beread" resultType="com.spring.board.domain.BoardEventVO">
-		select * from event_table where no=#{no}
+		select * from event_table where no=#{eno}
 	</select>
 	
 	<!--  수정 : 댓글 내용만 수정, updatedate, sno 일치하면 -->
 	<update id="beupdate">
 		update event_table
-		set contents=#{contents}, uploaddate=sysdate
-		where no=#{no}
+		set contents=#{econtents}, uploaddate=sysdate
+		where no=#{eno}
 	</update>
 	
-	<!-- 삭제 : rno, password 일치 -->
+	<!-- 삭제 : no, password 일치 -->
 	<delete id="beldelete">
-		delete from event_table where no=#{no} and password=#{password}
+		delete from event_table where no=#{eno} and password=#{epassword}
 	</delete>
 	
 	
 	<delete id="bedeleteAll">
-		delete from event_table where sno=#{sno}	
+		delete from event_table where no=#{eno}	
 	</delete>
 
+	<!-- 페이지 나누기 적용 -->
+	<select id="belist" resultType="com.spring.board.domain.BoardEventVO">
+		<![CDATA[
+				select *
+				from(select /*+INDEX_DESC(event_table event_tb_seq)*/
+				          rownum rn,no,writer,title,contents,uploaddate
+				     from event_table
+				     where 
+		]]>		
+		
+		<include refid="boardcommentcriteria"></include>
+		     
+		<![CDATA[		     
+				     
+				     rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount})		
+		]]>	
+	</select>
+	
+	<!-- 전체 게시물 수 (검색)-->
+	<select id="betotalCnt" resultType="int">
+		select count(*) from event_table 
+		where
+		
+		<include refid="boardcommentcriteria"></include>
+		
+		 no>0
+	</select>
+	
+	
+	
+	<!-- 동적 SQL -->
+	<!-- 제목, 내용 검색 -->
+	<sql id="boardcommentcriteria">
+		<trim prefix="(" suffix=") AND"  prefixOverrides="OR" >
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							contents like '%'||#{keyword}||'%'
+						</when>					
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 	
 
 
