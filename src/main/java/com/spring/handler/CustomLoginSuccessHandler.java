@@ -34,7 +34,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			return;
 		}
 		
-		if(roleNames.contains("ad") || roleNames.contains("mg") || roleNames.contains("imp")) {
+		if(roleNames.contains("ad") || roleNames.contains("mg") || roleNames.contains("emp")) {
 			response.sendRedirect("/");
 			return;
 		}
