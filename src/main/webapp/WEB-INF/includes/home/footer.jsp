@@ -1,3 +1,5 @@
+    	<!-- </div> --><!-- error -->
+    	<!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
     <!-- jQuery --> 

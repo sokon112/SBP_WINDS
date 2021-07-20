@@ -11,7 +11,7 @@
 <body>
 <div class="text-center">
 	<h1>SBP Winds Home</h1>
-	<div class="text-center">
+	<div>
 		<img src="/resources/img/iu2.png" class="img-thumbnail test" alt="">
 	</div>
 	<div>

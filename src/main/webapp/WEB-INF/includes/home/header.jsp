@@ -78,7 +78,7 @@
         <form action="/logout" method="post" id="logoutForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
-        <div id="page-wrapper">
+       <!--  <div id="page-wrapper"> --><!-- 오류 발생 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
         $(function(){
