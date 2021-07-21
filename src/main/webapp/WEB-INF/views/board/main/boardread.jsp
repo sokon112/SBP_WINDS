@@ -37,7 +37,7 @@
                 					<textarea class="form-control" rows="3" name="contents" readonly="readonly">${vo.contents}</textarea>               				
                 				</div> 
                 				<div class="form-group">
-                					<label>Writer</label>
+                					<label>닉네임</label>
                 					<input class="form-control" name="nickname" readonly="readonly" value="${vo.nickname}">                				
                 				</div>  
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>

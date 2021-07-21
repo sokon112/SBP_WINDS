@@ -49,7 +49,7 @@ $(function(){
 		e.preventDefault(); //타이틀 a 속성 막기
 		
 		//actionForm에 bno 값을 추가하여 actionForm 보내기		
-		actionForm.append("<input type='hidden' name='no' value='"+$(this).attr('href')+"'>");
+		actionForm.append("<input type='hidden' name='hno' value='"+$(this).attr('href')+"'>");
 		actionForm.attr('action','hobbyread');
 		actionForm.submit();		
 	})

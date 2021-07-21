@@ -58,6 +58,14 @@ public class BoardServieImpl implements BoardService {
 		return bmapper.boardread(rno);
 	}
 
+	// 조회수 올리기
+	@Override
+	public int Boardupdateviews(String views){
+		return bmapper.boardupdateviews(views);
+	}
+	
+	
+	
 	@Override
 	public int boardtotal(BoardCriteria cri) {		
 		int total = bmapper.boardtotalCnt(cri);

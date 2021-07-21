@@ -66,9 +66,9 @@ public class BoardController {
 		if(service.boardinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getBno());
-			return "redirect:main/boardlist";    //   redirect:/board/list
+			return "redirect:boardlist";    //   redirect:/board/list
 		}else {
-			return "redirect:main/boardregister"; //  redirect:/board/register
+			return "redirect:boardregister"; //  redirect:/board/register
 		}
 	}
 	
@@ -117,6 +117,8 @@ public class BoardController {
 		
 		return "redirect:boardlist";
 	}
+	
+	
 	
 	
 }

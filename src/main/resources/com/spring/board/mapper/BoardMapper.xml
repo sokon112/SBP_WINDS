@@ -71,7 +71,10 @@
 		where bno=#{bno}
 	</update>
 	
-	
+	<!-- 조회수 올리기 -->
+	<update id="boardupdateviews">
+		update board_table set views = views + 1 where views = #{views}
+	</update>
 	
 	
 	

@@ -135,7 +135,7 @@ public class BoardHobbyController { //동호회
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:list";
+		return "redirect:hobbylist";
 	}
 	
 	

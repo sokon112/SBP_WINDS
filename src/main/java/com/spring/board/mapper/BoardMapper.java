@@ -14,6 +14,7 @@ public interface BoardMapper { //게시판
 	public int boardupdate(BoardVO vo);  //게시글 수정
 	public List<BoardVO> boardlist(BoardCriteria cri);  //게시판 전체 리스트 검색
 	public BoardVO boardread(int bno); //게시글 읽기
+	public int boardupdateviews(String views);
 	public int boardtotalCnt(BoardCriteria cri); //게시글 검색
 	public int boardcommentCntUpdate(@Param("bno") int bno, @Param("amount") int amount);
 	// 게시글 댓글수 

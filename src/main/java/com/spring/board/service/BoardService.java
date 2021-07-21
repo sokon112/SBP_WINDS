@@ -13,6 +13,7 @@ public interface BoardService {
 	public List<BoardVO> boardlist(BoardCriteria cri);
 	public BoardVO boardread(int bno);
 	public int boardtotal(BoardCriteria cri);
+	public int Boardupdateviews(String views);
 	
 
 	

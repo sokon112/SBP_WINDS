@@ -74,10 +74,10 @@
 				<trim prefix="OR">
 					<choose>
 						<when test="type=='T'.toString()">
-							title like '%'||#{keyword}||'%'
+							htitle like '%'||#{keyword}||'%'
 						</when>
 						<when test="type=='C'.toString()">
-							contents like '%'||#{keyword}||'%'
+							hcontents like '%'||#{keyword}||'%'
 						</when>					
 					</choose>
 				</trim>
