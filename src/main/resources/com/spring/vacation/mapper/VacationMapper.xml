@@ -16,6 +16,7 @@
 
 	<resultMap type="com.spring.vacation.domain.VacationVO" id="selectMonthInfo">
 		<id property="vacationAppNum" column="vacationAppNum"/>
+		<result property="id" column="id"/>
 		<result property="type" column="type"/>
 		<result property="startterm" column="startterm"/>
 		<result property="endterm" column="endterm"/>
@@ -28,7 +29,7 @@
 	</resultMap>
 
 	<resultMap type="com.spring.vacation.domain.VacationApplicationVO" id="userMap">
-		<result property="id" column="id"/>
+		
 		<result property="name" column="name"/>
 	</resultMap>
 	<select  id="vSelectMonth" resultMap="selectMonthInfo">
@@ -52,7 +53,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 	
 	<select id="vTotalCnt" resultType="int">
 	<![CDATA[
-		select count(*) from vacationApplicationTable
+		select count(*) from vacationApplicationTable vat
 		where
 		]]>	
 	<include refid="vacationCriteria"></include>
@@ -84,7 +85,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 	</update>
 	<update id="vChangeCnt">
 		update vacationScedule 
-		set (select count(userid) from vacationApplicationTable where id=#{id})
+		set (select count(id) from vacationApplicationTable where id=#{id})
 		where id=#{id}
 	</update>
 	<!-- 거절 -->
@@ -107,8 +108,8 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		<!-- 신청서 등록 구문 -->
 	<insert id="vInsertUserApp">
 	
-		insert into vacationApplicationTable(holidayAppNum,id,type,startterm,endterm,state,applicationDate,reason) 
-		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},#{state},#{applicationDate},#{reason})
+		insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,state,applicationDate,reason) 
+		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},'신청',sysdate,#{reason})
 		
 	</insert>
 	

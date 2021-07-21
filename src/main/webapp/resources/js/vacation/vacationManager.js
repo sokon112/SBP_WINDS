@@ -51,7 +51,7 @@ $(function(){
 		//keyword 가져오기
 		var keyword = $("input[name='keyword']").val();
 		
-		if(type===''){
+		if(keyType===''){
 			alert("검색 기준을 확인하세요");
 			$("select[name='keyType']").focus();
 			return false;

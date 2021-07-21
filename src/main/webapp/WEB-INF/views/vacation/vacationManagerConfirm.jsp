@@ -29,7 +29,7 @@
 	        <c:forEach var="vacation" items="${list}">
 	            <tr>
 	                <td>
-								${vacation.vacationApplication.id}
+								${vacation.id}
 						</td>
 						<td>
 								${vacation.vacationAppNum}
@@ -41,11 +41,11 @@
 								${vacation.type}
 						</td>
 		                <td>
-							<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
 
 	                		<strong>~</strong>
 
-							<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
 						</td>
 	                <th>${vacation.reason}</th>
 
@@ -79,27 +79,18 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="modal-title">Reply</h5>
+        <h5 class="modal-title">거절 사유</h5>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-        	<label for="">댓글 내용</label>
-        	<input type="text" name="reply" class="form-control" value="댓글내용"/>
-        </div>
-        <div class="form-group">
-        	<label for="">작성자</label>
-        	<input type="text" name="replyer" class="form-control" value="작성자"/>
-        </div>
-        <div class="form-group">
-        	<label for="">작성일</label>
-        	<input type="text" name="replyDate" class="form-control" value="작성일"/>
-        </div>        
+
+        	<label for="">거절사유</label>
+        	<input type="text" name="rejectReason" class="form-control" value="거절사유"/>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
         <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
-        <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modalCloseBtn">종료</button>
+
       </div>
     </div>
   </div>

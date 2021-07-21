@@ -29,12 +29,7 @@
                     <td>~</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
                 </tr>
-                <tr>
-                    <th>시간</th>
-                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.startterm}"/></td>
-                    <td>~</td>
-                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.endterm}"/></td>
-                </tr>
+                
                 <tr>
                     <th>사유</th>
                     <td colspan="3"><input>	${vacation.reason }</td>

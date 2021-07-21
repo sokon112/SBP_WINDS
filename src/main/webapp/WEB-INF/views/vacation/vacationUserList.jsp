@@ -35,11 +35,11 @@
 					${vacation.type}
 			</td>
 			<td>
-					<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
 					
 				<strong>~</strong>
 
-					<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
 			</td>
 			<td>${vacation.state}</td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/></td>
@@ -64,7 +64,7 @@ test
 	</pre>
 
 </div>
-<script src="/resources/js/vacation/list.js"></script>
+<script src="/resources/js/vacation/vacationUserList.js"></script>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

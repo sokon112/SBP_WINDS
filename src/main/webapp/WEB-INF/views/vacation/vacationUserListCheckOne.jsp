@@ -21,32 +21,36 @@
             <tbody>
                 <tr>
                     <th>분류</th>
-                    <td colspan="3">${vacation.state}</td>
+                    <td colspan="3"><input readonly="readonly" value="${vacation.state}"></td>
                 </tr>
                 <tr>
                     <th>기간</th>
                     <td>
-                    <fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/></td>
+                    <input readonly="readonly" value="<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>"></td>
                     <td>~</td>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
+                    <td><input readonly="readonly" value="<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>"></td>
                 </tr>
-                <tr>
-                    <th>시간</th>
-                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.startterm}"/></td>
-                    <td>~</td>
-                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.endterm}"/></td>
-                </tr>
+                
                 <tr>
                     <th>사유</th>
-                    <td colspan="3"><input>	${vacation.reason }</td>
+                    <td colspan="3"><input readonly="readonly" value="${vacation.reason }"></td>
                 </tr>
                 <tr>
-                    <th>거절사유</th>
-                   <%--  <td colspan="3">${vacation.refusalreason }</td> --%>
+                <c:if test="${not empty vacation.refusalReason}">
+		                <tr>
+	                    <th>거절사유</th>
+                <td colspan="3"><input readonly="readonly" value="${vacation.refusalreason }"></td>
                 </tr>
+	                </c:if>
             </tbody>
         </table>
+        <c:if test="${vacation.state eq '신청' }">
         <button type="submit">수정</button>
+        <button type="submit">삭제</button>
+        </c:if>
+        <c:if test="${vacation.state eq '승인' }">
+        <button type="submit">반납</button>
+        </c:if>
         <button type="submit">확인</button>
         </div>
         					
@@ -58,6 +62,6 @@
 
 
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
-<script src="/resources/js/vacation/modify.js"></script>
+<script src="/resources/js/vacation/vacationManagerCheckOne.js"></script>
 </body>
 </html>

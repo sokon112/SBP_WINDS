@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/vacation/vacationApply">
+<form action="" method="post" role="form">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -19,6 +19,14 @@
             </thead>
             <tbody>
                 <tr>
+                	<tr>
+	                    <th>사원번호</th>
+	                    <td colspan="3">
+	                    	<input type="text" name="id" readonly="readonly" value="${id}">
+	                    </td>
+                    </tr>
+                <tr>
+               
                     <th>분류</th>
                     <td colspan="3">
                         <select name="type" >
@@ -32,32 +40,27 @@
                 </tr>
                 <tr>
                     <th>기간</th>
-                    <td><input type="date" id="startDay"></td>
+                    <td><input type="date" name="startterm" id="startDay"></td>
                     <td>~</td>
-                    <td><input type="date" id="endDay"></td>
+                    <td><input type="date" name="endterm" id="endDay"></td>
                 </tr>
-                <tr>
-                    <th>시간</th>
-                    <td><input id="startTime" type="time" value="xxx" min="yyy" max="zzz"></td>
-                    <td>~</td>
-                    <td><input id="endTime" type="time" value="xxx" min="yyy" max="zzz"></td>
-                </tr>
+
                 <tr>
                     <th>사유</th>
                     <td colspan="3">
-                    	<textarea class="form-control" rows="3" name="reason">
-                    	</textarea> 
+                    	<textarea class="form-control" rows="3" name="reason"></textarea> 
                     </td>
                 </tr>
             </tbody>
         </table>
         </div>
-        
-        <button type="button" class="btn btn-success" id="modalRegisterBtn">신청</button>
+        <%-- spring security 추가 --%>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <button type="submit" class="btn btn-success" id="modalRegisterBtn">신청</button>
     </form>
-    <script type="text/javascript">
+<!--     <script type="text/javascript">
     	let id=${vo.id}
-    </script>
-    <script src="/resources/js/vacation/list.js"></script>
+    </script> -->
+
 </body>
 </html>

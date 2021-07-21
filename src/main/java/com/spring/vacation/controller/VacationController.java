@@ -33,7 +33,7 @@ public class VacationController {
 VacationCriteria cri=new VacationCriteria();
 	
 	//vacationMine화면 
-	@GetMapping("/")	
+	@RequestMapping("/")	
 	public String vacationMain() {
 		log.info("vacation 메인 접속....");
 		return "/vacation/vacation_home";
@@ -43,7 +43,6 @@ VacationCriteria cri=new VacationCriteria();
 	//id에 따른 휴가 목록 보여주는 페이지 
 	@GetMapping("/vacationUserList")
 	public void showUserMain( Model model, int id,VacationCriteria cri) {
-		
 
 		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
@@ -57,8 +56,9 @@ VacationCriteria cri=new VacationCriteria();
 		
 	}//휴가신청서 작성하는 페이지
 	@GetMapping("/vacationApply")
-	public void vacationApply() {
+	public void vacationApply(int id,Model model) {
 		log.info("휴가신청 페이지");	
+		model.addAttribute("id",id);
 		
 	}//관리자가 보는 페이지 
 	@GetMapping("/vacationManager")
@@ -78,7 +78,7 @@ VacationCriteria cri=new VacationCriteria();
 	
 	//사용자 페이지에서 작동하는 컨트롤러
 	//리스트에 있는 목록 클릭시
-	@GetMapping("/vacationUserListOne")
+	@GetMapping("/vacationUserListCheckOne")
 	public String showUserOne(Model model,  int vacationAppNum){
 		log.info("사용자의 페이지");
 		
@@ -87,16 +87,10 @@ VacationCriteria cri=new VacationCriteria();
 		
 		model.addAttribute("vacation",vacation);
 		
-		if(vacation.getState().equals("승인")) {
-			return "/vacation/vacationUserListSuccess";
-		}
-		else if(vacation.getState().equals("거절")) {
-			return "/vacation/vacationUserListReject";
-		}else if(vacation.getState().equals("신청")) {
-			return "/vacation/vacationUserListModify";
-		}else {
-			return "/";
-		}
+		
+
+			return "/vacation/vacationUserListCheckOne";
+	
 	}
 	//showUserOne으로 들어온 후 작성했던 휴가신청서 페이지
 	@PostMapping("/update")
@@ -123,7 +117,7 @@ VacationCriteria cri=new VacationCriteria();
 		log.info("반납버튼 눌렀을때");
 		Date date=new Date();
 		boolean result=false;
-		Date startday=service.vacationDay(vacation.getVacationApplication().getId());
+		Date startday=service.vacationDay(vacation.getId());
 		if(!date.after(startday)){
 			result=service.cancleVacation(vacation);
 			if(result) {
@@ -142,18 +136,27 @@ VacationCriteria cri=new VacationCriteria();
 
 //	휴가신청 작성 페이지
 	@PostMapping("/vacationApply")
-	public String applyPost(VacationVO vacation,RedirectAttributes rttr){
-		log.info("휴가 신청!!");
+	public String applyPost(VacationVO vacation,Model model,RedirectAttributes rttr){
+		log.info("휴가 신청!!" + vacation);
 		
-		if(service.idCnt(vacation.getVacationApplication().getId())) {
-			//휴가가 20개 이상이면 알람창
-			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
-			
+//		if(service.idCnt(vacation.getVacationApplication().getId())) {
+//			//휴가가 20개 이상이면 알람창
+//			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
+//			
+//		}else {
+//			//휴가가 20개 이하이면
+//			service.insertUserApp(vacation);
+//		}
+
+		
+		if(service.insertUserApp(vacation)) {
+			log.info("성공");
+			rttr.addFlashAttribute("result", vacation.getVacationAppNum());
+			return "/vacation/vacation_home";
 		}else {
-			//휴가가 20개 이하이면
-			service.insertUserApp(vacation);
+			log.info("실패 포기하지마!");
+			return "/vacation/vacationApply";
 		}
-		return "/vacation/vacation_home";
 	}
 	//관리자가 신청리스트 보는 페이지 
 	@GetMapping("/vacationManagerConfirm")

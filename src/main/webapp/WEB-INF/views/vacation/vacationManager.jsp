@@ -49,7 +49,7 @@
 							${vacation.vacationAppNum}
 					</td>
 					<td>
-							${vacation.vacationApplication.id}
+							${vacation.id}
 					</td>
 					<td>
 							${vacation.vacationApplication.name}
@@ -58,16 +58,16 @@
 							${vacation.type}
 					</td>
 					<td>
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.startterm}"/>
+						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
 						<strong>~</strong>
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
+						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
 					</td>
 					<td>${vacation.state}</td>
 					<td>
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/>
+						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.applicationDate}"/>
 					</td>
 					<td>
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/>
+						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.approvalDate}"/>
 					</td>
 					<td>
 					

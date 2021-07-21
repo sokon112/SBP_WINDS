@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <th>사원번호</th>
-                    <td>${vacation.vacationApplication.id}</td>
+                    <td>${vacation.id}</td>
                     <th>이름</th>
                     <td>${vacation.vacationApplication.name}</td>
                 </tr>
@@ -61,12 +61,7 @@
                     <td>~</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
                 </tr>
-                <tr>
-                    <th>시간</th>
-                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.startterm}"/></td>
-                    <td>~</td>
-                    <td><fmt:formatDate pattern="HH:mm"  value="${vacation.endterm}"/></td>
-                </tr>
+
                 <tr>
                     <th>사유</th>
                     <td colspan="3">${vacation.reason }</td>
