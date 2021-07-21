@@ -28,7 +28,7 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String boardMain() {
 		log.info("게시판 메인");
 		return "redirect:main/boardlist";

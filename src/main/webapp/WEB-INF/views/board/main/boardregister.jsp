@@ -26,7 +26,7 @@
                 				</div>  
                 				<div class="form-group">
                 					<label>내용</label>
-                					<textarea class="form-control" rows="3" name="content"></textarea>               				
+                					<textarea class="form-control" rows="3" name="contents"></textarea>               				
                 				</div> 
                 				<div class="form-group">
                 					<label>닉네임</label>
@@ -36,8 +36,11 @@
                 					<label>비밀번호</label>
                 					<input class="form-control" name="password">                				
                 				</div> 
+                				<%-- spring security 추가 --%>
+                				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                				
                 				<button type="submit" name="boardregister" class="btn btn-default move">올리기</button>              			
-                				<button type="reset" name="boardlist" class="btn btn-default move">취소</button>              			
+                				<button type="reset" name="boardlist" class="btn btn-default" onclick="location.href='boardlist'">취소</button>              			
                 			</form>
                 		</div>
                 	</div>

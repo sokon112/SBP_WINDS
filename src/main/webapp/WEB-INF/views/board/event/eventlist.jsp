@@ -67,7 +67,7 @@
                                         <option value="40"  <c:out value="${BoardEventVO.cri.amount==40?'selected':''}"/>>40</option>
                                      </select>
                                      <p></p>
-                                     <a href="boardregister" class="btn btn-primary pull-right">글쓰기</a>
+                                     <a href="eventregister" class="btn btn-primary pull-right">글쓰기</a>
                           </div>
                                  </div>                                 
                              </div><!-- end search -->

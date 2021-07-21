@@ -30,12 +30,14 @@
                 				</div>  
                 				<div class="form-group">
                 					<label>Content</label>
-                					<textarea class="form-control" rows="3" name="content"></textarea>               				
+                					<textarea class="form-control" rows="3" name="contents"></textarea>               				
                 				</div> 
                 				<div class="form-group">
                 					<label>Writer</label>
                 					<input class="form-control" name="writer">                				
-                				</div>  
+                				</div>
+                				<%-- spring security 추가 --%>
+                				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />  
                 				<button type="submit" class="btn btn-default">Submit</button>              			
                 				<button type="reset" class="btn btn-default">reset</button>              			
                 			</form>
@@ -59,10 +61,6 @@
 			</div>			
 		</div>
 	</div>
-</div>  
-<script>
-	var csfHeaderName="${_csrf.HeaderName}";
-	var csfTokenValue="${_csrf.e\token}";
-</script>
-<script src="/resources/js/register.js"></script> 
+</div> 
+<script src="/resources/js/board/hobby/register.js"></script> 
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

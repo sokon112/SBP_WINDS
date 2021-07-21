@@ -7,7 +7,7 @@
 	<!-- 파일insert : 이벤트,동호회-->
 	<insert id="beinsert">
 		insert into special_attach(uuid,uploadpath,filename,filetype,sno)
-		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{eno})
+		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{eno})
 	</insert>
 	
 	<!-- 파일찾기 -->

@@ -31,11 +31,11 @@ public class BoardEventServieImpl implements BoardEventService {
 		boolean result=emapper.beinsert(vo)>0?true:false;
 			
 		//첨부파일 등록
-		if(vo.getEattachList()==null || vo.getEattachList().size()<=0) {
+		if(vo.getEimages()==null || vo.getEimages().size()<=0) {
 			return result;
 		}		
 		
-		vo.getEattachList().forEach(attach ->{
+		vo.getEimages().forEach(attach ->{
 			attach.setEno(vo.getEno());
 			eattachMapper.beinsert(attach);			
 		});
@@ -66,15 +66,15 @@ public class BoardEventServieImpl implements BoardEventService {
 		//게시글 수정
 		boolean modifyResult = emapper.beupdate(vo)>0?true:false;
 		
-		if(vo.getEattachList() == null) {
+		if(vo.getEimages() == null) {
 			return modifyResult;
 		}
 		
 		
 		
 		//첨부파일 삽입
-		if(modifyResult && vo.getEattachList().size()>0) {
-			for(BoardEventAttachFileDTO dto:vo.getEattachList()) {
+		if(modifyResult && vo.getEimages().size()>0) {
+			for(BoardEventAttachFileDTO dto:vo.getEimages()) {
 				dto.setEno(vo.getEno());
 				eattachMapper.beinsert(dto);
 			}

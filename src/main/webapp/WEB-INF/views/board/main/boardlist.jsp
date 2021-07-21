@@ -64,10 +64,10 @@
                                   <div class="col-md-2 col-md-offset-2">
                                      <!--페이지 목록 갯수 지정하는 폼-->
                                      <select name="" id="amount" class="form-control">
-                                        <option value="10"  <c:out value="${BoardHobbyVO.cri.amount==10?'selected':''}"/> >10</option>
-                                        <option value="20"  <c:out value="${BoardHobbyVO.cri.amount==20?'selected':''}"/>>20</option>
-                                        <option value="30"  <c:out value="${BoardHobbyVO.cri.amount==30?'selected':''}"/>>30</option>
-                                        <option value="40"  <c:out value="${BoardHobbyVO.cri.amount==40?'selected':''}"/>>40</option>
+                                        <option value="10"  <c:out value="${boardPageVO.cri.amount==10?'selected':''}"/> >10</option>
+                                        <option value="20"  <c:out value="${boardPageVO.cri.amount==20?'selected':''}"/>>20</option>
+                                        <option value="30"  <c:out value="${boardPageVO.cri.amount==30?'selected':''}"/>>30</option>
+                                        <option value="40"  <c:out value="${boardPageVO.cri.amount==40?'selected':''}"/>>40</option>
                                      </select>
                                      <p></p>
                                      <a href="boardregister" class="btn btn-primary pull-right">글쓰기</a>
@@ -102,7 +102,7 @@
                 </div>               
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
-<form action="list" method="get" id="actionForm">   
+<form action="boardlist" method="get" id="actionForm">   
    <input type="hidden" name="type" value="${boardPageVO.cri.type}" />
    <input type="hidden" name="keyword" value="${boardPageVO.cri.keyword}" />
    <input type="hidden" name="pageNum" value="${boardPageVO.cri.pageNum}" />

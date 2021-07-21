@@ -34,17 +34,18 @@
                 				<div class="form-group">
                 					<label>작성자</label>
                 					<input class="form-control" name="ewriter" readonly="readonly" value="${vo.ewriter}">                				
-                				</div>  
+                				</div> 
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
                 				<sec:authentication property="principal" var="info"/>
                 				<sec:authorize access="isAuthenticated()"><%-- 로그인 여부 확인 --%>
-                					<c:if test="${info.username==vo.ewriter}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-                						<button type="button" class="btn btn-default">수정</button>
+                					<c:if test="${info.authority=='ad'}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
+                						<button type="button" class="btn btn-warning">삭제</button>
                 					</c:if>     			
                 				</sec:authorize>
                 				
-                				
-                				<button type="button" class="btn btn-info">목록</button>          			
+                				<button type="button" class="btn btn-default">수정</button>
+                				<button type="button" class="btn btn-danger">삭제</button>
+                				<button type="button" class="btn btn-info">목록</button>
                 			</form>
                 		</div>
                 	</div>

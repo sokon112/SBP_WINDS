@@ -9,9 +9,8 @@
 	<selectKey keyProperty="eno" order="BEFORE" resultType="int">
 			select event_tb_seq.nextval from dual		
 		</selectKey>
-		insert into evnet_table(eno,ewriter,etitle, epassword, econtents,eimages)
-		values(event_tb_seq.nextval,#{ewriter},#{etitle},#{epassword},#{econtents},#{eimages})
-	</insert>
+		insert into event_table(eno,ewriter,etitle, epassword, econtents)
+		values(event_tb_seq.nextval,#{ewriter},#{etitle},#{epassword},#{econtents})</insert>
 		
 	<!--  하나 가져오기  : no 가 일치-->
 	<select id="beread" resultType="com.spring.board.domain.BoardEventVO">

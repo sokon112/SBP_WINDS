@@ -66,8 +66,7 @@ CREATE TABLE hobby_table
     htitle       VARCHAR2(20)      NOT NULL, 
     huploaddate        DATE     default sysdate          NOT NULL, 
     hpassword    VARCHAR2(20)      NOT NULL, 
-    hcontents    VARCHAR2(2000)    NOT NULL, 
-    himages      BLOB              NULL 
+    hcontents    VARCHAR2(2000)    NOT NULL 
 );
 --동호회 테이블 시퀸스 생성
 create SEQUENCE hobby_tb_seq;
@@ -113,8 +112,7 @@ CREATE TABLE event_table
     etitle       VARCHAR2(20)      NOT NULL, 
     euploaddate        DATE     default sysdate          NOT NULL, 
     epassword    VARCHAR2(20)      NOT NULL, 
-    econtents    VARCHAR2(2000)    NOT NULL, 
-    eimages      BLOB              NULL
+    econtents    VARCHAR2(2000)    NOT NULL
 );
 
 --이벤트 테이블 삭제
@@ -221,6 +219,8 @@ create table special_attach(
 	sno NUMBER 
 );
 
+
+
 DROP TABLE special_attach;
 
 alter table special_attach add constraint pk_sp_attach_uuid primary key(uuid);
@@ -228,7 +228,7 @@ alter table special_attach add constraint fk_sp_attach foreign key(no) reference
 alter table special_attach add constraint fk_sp_attach foreign key(no) references event_table(no);
 
 
-
+alter table board_table change column viewcnt view_cnt int default 0;
 
 
 

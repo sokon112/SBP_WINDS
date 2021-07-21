@@ -63,8 +63,8 @@ public class BoardEventController {    //이벤트
 		log.info("새글 등록 요청 "+vo);
 		
 		//첨부 파일 확인
-		if(vo.getEattachList()!=null) {
-			vo.getEattachList().forEach(attach -> log.info(""+attach));
+		if(vo.getEimages()!=null) {
+			vo.getEimages().forEach(attach -> log.info(""+attach));
 		}	
 		
 		
@@ -80,10 +80,10 @@ public class BoardEventController {    //이벤트
 	
 	
 	@GetMapping({"/event/eventread","/event/eventmodify"})
-	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
+	public void read(int eno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+eno+" cri : "+cri);  
 		
-		BoardEventVO vo=beservice.beread(no);
+		BoardEventVO vo=beservice.beread(eno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 	}
 	
@@ -94,8 +94,8 @@ public class BoardEventController {    //이벤트
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
 		//첨부 파일 확인
-		if(vo.getEattachList()!=null) {
-			vo.getEattachList().forEach(attach -> log.info(""+attach));
+		if(vo.getEimages()!=null) {
+			vo.getEimages().forEach(attach -> log.info(""+attach));
 		}	
 		
 		beservice.beupdate(vo);		
@@ -115,16 +115,16 @@ public class BoardEventController {    //이벤트
 	//게시글 삭제 + post
 //	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/event/eventdelete")
-	public String remove(int no,String writer,BoardCriteria cri,RedirectAttributes rttr) {
-		log.info("게시글 삭제 "+no);
+	public String remove(int eno,String writer,BoardCriteria cri,RedirectAttributes rttr) {
+		log.info("게시글 삭제 "+eno);
 		
 		
 		//서버(폴더)에 저장된 첨부파일 삭제
 		//① bno에 해당하는 첨부파일 목록 알아내기
-		List<BoardEventAttachFileDTO> attachList=beservice.beAttachList(no);
+		List<BoardEventAttachFileDTO> attachList=beservice.beAttachList(eno);
 		
 		//게시글 삭제 + 첨부파일 삭제
-		if(beservice.bedelete(no)) {
+		if(beservice.bedelete(eno)) {
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
