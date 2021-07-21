@@ -5,49 +5,62 @@
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,state,D2.deptName,U.name,sysdate,retentDate
+		rownum rn,docNum,title,state,D2.deptName,U.name,regDate,retentDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
-		on D2.Deptnum = U.Deptnum
-		where D1.storage = '미결']]> 
+		on D2.Deptnum = U.Deptnum 
+		where D1.storage = '미결' AND
+		
+		]]> 
 		<include refid="criteria"></include>
-		<![CDATA[AND rownum <= (#{pageNum}*#{amount}))
-			where rn > ((#{pageNum}-1)*#{amount})]]>
+		<![CDATA[ 
+				rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount})
+		]]>
 </select>
 
 <select id="completeList" resultType="com.spring.od.domain.StorageListVO">
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,D2.deptName,U.name,sysdate
+		rownum rn,docNum,title,D2.deptName,U.name,regDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.Deptnum = U.Deptnum
-		where D1.storage = '완결']]> 
+		where D1.storage = '완결' AND
+		
+		]]> 
 		<include refid="criteria"></include>
-		<![CDATA[AND rownum <= (#{pageNum}*#{amount}))
-			where rn > ((#{pageNum}-1)*#{amount})]]>
+		<![CDATA[ 
+			rownum <= (#{pageNum}*#{amount}))
+			where rn > ((#{pageNum}-1)*#{amount})
+		]]>
 </select>
 
 <select id="tempList" resultType="com.spring.od.domain.StorageListVO">
 <![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,D2.deptName,U.name,sysdate
+		rownum rn,docNum,title,D2.deptName,U.name,regDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.Deptnum = U.Deptnum
-		where D1.storage = '임시']]> 
+		where D1.storage = '임시' AND
+		]]> 
 		<include refid="criteria"></include>
-		<![CDATA[AND rownum <= (#{pageNum}*#{amount}))
-			where rn > ((#{pageNum}-1)*#{amount})]]>
+		<![CDATA[ 
+			rownum <= (#{pageNum}*#{amount}))
+			where rn > ((#{pageNum}-1)*#{amount})
+		]]>
 </select>
+
+
 
 <select id="totalCnt" resultType="int">
 	select count(*) from doc_tab 
@@ -59,11 +72,8 @@
 						<when test="type=='T'.toString()">
 							title like '%'||#{keyword}||'%'
 						</when>
-						<when test="type=='W'.toString()">
+						<when test="type=='U'.toString()">
 							U.name like '%'||#{keyword}||'%'
-						</when>
-						<when test="type=='N'.toString()">
-							docNum like '%'||#{keyword}||'%'
 						</when>
 					</choose>
 		</trim>

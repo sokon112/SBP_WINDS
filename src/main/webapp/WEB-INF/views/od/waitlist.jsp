@@ -58,7 +58,7 @@
 										<td>${vo.deptName}</td>
 										<td>${vo.name}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regDate}"/></td>
-										<td>${vo.retentDate}</td>
+										<td>${vo.retentDate} 년</td>
 									</tr>
 								</c:forEach>								
 								</tbody>
@@ -133,24 +133,5 @@
 <script>
 	let result='${result}';
 </script>
-<script src="/resources/js/od/list.js"></script>
+<script src="/resources/js/od/storagelist.js"></script>
 <%@include file="../../includes/od/footer.jsp" %>      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

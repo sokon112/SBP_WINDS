@@ -58,32 +58,20 @@ $(function(){
 	//type or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
 	$(".btn-default").click(function(){
-		searchEvent();
-	})
-	
-	
-	//text에서 엔터가 눌러지면
-	/*function enterkey(){
-		if(window.event.keyCode == 13){
-			searchEvent();
-		}
-	}*/
-	
-	$("input[name='keyword']").on("keydown",function(){
-		searchEvent();
-	})
-	
-	
-	
-	
-	function searchEvent(){
 		//검색 폼 가져오기
 		var searchForm = $("#searchForm");
+		
+		//type 가져오기
+		var type = $("select[name='type']").val();
 		
 		//keyword 가져오기
 		var keyword = $("input[name='keyword']").val();
 		
-		if(keyword===''){
+		if(type===''){
+			alert("검색 기준을 확인하세요");
+			$("select[name='type']").focus();
+			return false;
+		}else if(keyword===''){
 			alert("검색어를 확인하세요");
 			$("input[name='keyword']").focus();
 			return false;
@@ -91,9 +79,18 @@ $(function(){
 		
 		//검색 처음에는 1page 보여주기
 		searchForm.find("input[name='pageNum']").val("1");
-		searchForm.find("input[name='amount']").val("10");
 		
 		searchForm.submit();
+		
+		
+	})
+	//체크박스 일괄 선택
+	function checkAll(){
+		if($("#total").is(':checked') ){
+		 	$("#normal").prop("checked",true);
+		}else{
+			$("#normal").prop("checked",false);
+		}
 	}
 	
 })

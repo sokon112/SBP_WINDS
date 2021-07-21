@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.od.domain.Criteria;
-import com.spring.od.domain.OfficeNoticeVO;
+import com.spring.od.domain.StorageListVO;
 import com.spring.od.mapper.StorageMapper;
 
 @Service
@@ -21,17 +21,17 @@ public class StorageServiceImpl implements StorageService {
 		return mapper.totalCnt(cri);
 	}
 	@Override
-	public List<OfficeNoticeVO> WaitList(Criteria cri) {
+	public List<StorageListVO> WaitList(Criteria cri) {
 		return mapper.waitList(cri);
 	}
 
 	@Override
-	public List<OfficeNoticeVO> CompleteList(Criteria cri) {
+	public List<StorageListVO> CompleteList(Criteria cri) {
 		return mapper.completeList(cri);
 	}
 
 	@Override
-	public List<OfficeNoticeVO> TempList(Criteria cri) {
+	public List<StorageListVO> TempList(Criteria cri) {
 		return mapper.tempList(cri);
 	}
 
