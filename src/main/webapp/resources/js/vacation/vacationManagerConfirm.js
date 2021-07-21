@@ -60,7 +60,7 @@ var replyService=(function(){
 	
 	function update(reply,callback){
 		$.ajax({
-			url:'/replies/'+reply.rno,
+			url:reply.rno+'/replies/',
 			type:'put',
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);

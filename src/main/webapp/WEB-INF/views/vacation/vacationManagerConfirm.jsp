@@ -48,10 +48,17 @@
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.endterm}"/>
 						</td>
 	                <th>${vacation.reason}</th>
+
+	                <th>
+	                </th>
 	                <td>
+	                <c:if test="${vacation.state eq '신청' }">
 	                    <button type="button" class="btn btn-primary" onclick="">승인</button>
 	                    <button type="button" class="btn btn-secondary">거절</button>
-	                    <input type="text" value="${vacation.state }" disabled>	
+	                    </c:if>
+	                <c:if test="${vacation.state ne '신청' }">    
+	                    <input type="text" value="${vacation.state }" disabled>
+	                    </c:if>	
 	                 </td>
 	                 
 	            </tr>

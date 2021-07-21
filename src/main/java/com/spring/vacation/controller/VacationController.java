@@ -62,7 +62,7 @@ VacationCriteria cri=new VacationCriteria();
 		
 	}//관리자가 보는 페이지 
 	@GetMapping("/vacationManager")
-	public void showAdmin(Model model,VacationCriteria cri) {
+	public void showAdmin(Model model, VacationCriteria cri) {
 		log.info("휴가관리 페이지");
 		
 		
@@ -73,13 +73,13 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",list);
 		model.addAttribute("cnt",cnt);
-	
+
 	}
 	
 	//사용자 페이지에서 작동하는 컨트롤러
 	//리스트에 있는 목록 클릭시
 	@GetMapping("/vacationUserListOne")
-	public String showUserOne(Model model, int vacationAppNum){
+	public String showUserOne(Model model,  int vacationAppNum){
 		log.info("사용자의 페이지");
 		
 		VacationVO vacation = service.showUserOne(vacationAppNum);
@@ -119,7 +119,7 @@ VacationCriteria cri=new VacationCriteria();
 		
 	}
 	@PostMapping("/cancle")
-	public String cancle(VacationVO vacation,VacationCriteria cri,Model model,RedirectAttributes rttr) {
+	public String cancle(VacationVO vacation, VacationCriteria cri,Model model,RedirectAttributes rttr) {
 		log.info("반납버튼 눌렀을때");
 		Date date=new Date();
 		boolean result=false;
@@ -142,7 +142,7 @@ VacationCriteria cri=new VacationCriteria();
 
 //	휴가신청 작성 페이지
 	@PostMapping("/vacationApply")
-	public void applyPost(VacationVO vacation,RedirectAttributes rttr){
+	public String applyPost(VacationVO vacation,RedirectAttributes rttr){
 		log.info("휴가 신청!!");
 		
 		if(service.idCnt(vacation.getVacationApplication().getId())) {
@@ -153,6 +153,7 @@ VacationCriteria cri=new VacationCriteria();
 			//휴가가 20개 이하이면
 			service.insertUserApp(vacation);
 		}
+		return "/vacation/vacation_home";
 	}
 	//관리자가 신청리스트 보는 페이지 
 	@GetMapping("/vacationManagerConfirm")
@@ -162,19 +163,12 @@ VacationCriteria cri=new VacationCriteria();
 	}
 	//관리자가 목록중에 하나 눌렀을때 
 	@GetMapping("/vacationManagerCheckOne")
-	public String vacationManagerCheckOne( int vacationAppNum,@ModelAttribute("cri") VacationCriteria cri,Model model){
+	public void vacationManagerCheckOne( int vacationAppNum,@ModelAttribute("cri") VacationCriteria cri,Model model){
 		log.info("관리자 페이지");
 		
 		VacationVO vacation = service.showUserOne(vacationAppNum);
 		model.addAttribute("vacation",vacation);
-		if(vacation.getState().equals("승인")) {
-			return "/vacation/vacationManagerCheckOne";
-		}
-		else if(vacation.getState().equals("거절")) {
-			return "/vacation/vacationManagerCheckOneReject";
-		}else {
-			return "/";
-		}
+
 	}
 	
 //	휴가심사 페이지

@@ -66,6 +66,17 @@ $(function(){
 		
 		searchForm.submit();
 	})
+	$(".glyphicon-arrow-left").click(function(e){
+		e.preventDefault();  //a 속성 중지
+		
+		//actionForm의 안의 pageNum의 값을 사용자가 선택한 번호로 변경
+		//actionForm.find("input[name='nowMonth']").val($(this).attr(u));
+		actionForm.find("input[name='nowMonth']").val(this).attr("downVactionMonth()")
+		
+		//actionForm 보내기
+		actionForm.submit();
+	})
+	
 })
 
 

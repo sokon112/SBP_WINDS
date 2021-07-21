@@ -1,3 +1,5 @@
+
+<%@page import="com.spring.vacation.domain.VacationCriteria"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
@@ -22,7 +24,7 @@
                         
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-    <button class="glyphicon glyphicon-arrow-left" onclick="preMonth">왼쪽화살표</button>
+    <button type="button" class="glyphicon glyphicon-arrow-left" onclick="preMonth()">왼쪽화살표</button>
     <input class="form-control" name="bno" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
 	
     <button class="glyphicon glyphicon-arrow-right" onclick="nextMonth">오른쪽화살표</button>
@@ -141,13 +143,19 @@
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
+	<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
+	<%-- <input type="hidden" name="id" value="${vacation.id}" /> --%>
 	
 </form>      
    
 <script>
 
-	let id='${vacation.id}';
+	//let id='${vacation.id}';
 
+	<%-- function preMonth(){
+		${VactionPageVO.cri.nowMonth}='<%= VacationCriteria.downVacationMonth() %>';
+		
+	} --%>
 </script>
 <script src="/resources/js/vacation/vacationManager.js"></script>
 </body>

@@ -72,6 +72,12 @@
                     <td colspan="3">${vacation.reason }</td>
                 </tr>
 
+	                <c:if test="${not empty vacation.refusalReason}">
+		                <tr>
+	                    <th>거절사유</th>
+	                    <td colspan="3">${vacation.refusalReason }</td>
+	                	</tr>
+	                </c:if>
             </tbody>
         </table>
         <button type="button" class="btn btn-info">확인</button>
@@ -85,7 +91,7 @@
 	<input type="hidden" name="keyword" value="${cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />
-	<%-- <input type="hidden" name="id"  value="${vacation.id}"/> --%>
+<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 </form>
 <script src="/resources/js/vacation/vacationManagerCheckOne.js"></script>
 </body>
