@@ -11,7 +11,7 @@ import com.spring.od.domain.StorageListVO;
 public interface DocMainMapper {
 	
 	public List<StorageListVO> mainwaitlist();
-	public List<StorageListVO> mainsuccesslist();
+	public List<StorageListVO> maincompletelist();
 	public List<StorageListVO> maintemplist();
 	public List<StorageListVO> mainsearchlist(Criteria cri);
 	public int odmaintotalcnt(Criteria cri);

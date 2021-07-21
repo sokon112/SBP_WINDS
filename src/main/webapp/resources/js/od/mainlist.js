@@ -58,6 +58,14 @@ $(function(){
 	//type or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
 	$(".btn-default").click(function(){
+		searchEvent();
+	})
+	
+	
+	//text에서 엔터가 눌러지면
+	
+	
+	function searchEvent(){
 		//검색 폼 가져오기
 		var searchForm = $("#searchForm");
 		
@@ -75,7 +83,8 @@ $(function(){
 		searchForm.find("input[name='amount']").val("10");
 		
 		searchForm.submit();
-	})
+	}
+	
 })
 
 

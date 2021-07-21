@@ -4,31 +4,35 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/od/header.jsp" %>
-<div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Main Search List</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           Main Search List
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>공문번호</th>
-                                        <th>제   목</th>
-                                        <th>단   계</th>
-                                        <th>수신일자</th>
-                                        <th>보 관 함</th>
-                                    </tr>									
-                                </thead>
+		<div class="container-fluid">
+			<div class="row">
+        		<div class="col-sm-3 col-md-2 sidebar">
+		        	<ul class="nav nav-sidebar">
+		            	<li class="active"><a href="#">여긴뭘넣을까? <span class="sr-only">(current)</span></a></li>
+		            	<li><a href='waitlist'>미결문서 보관함</a></li>
+		            	<li><a href='completelist'>결재완료 보관함</a></li>
+		            	<li><a href='templist'>임시보관함</a></li>
+		          	</ul>
+		        </div>
+            	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+               		<h1 class="page-header">Main Search List</h1>
+                		<div class="col-lg-12">
+                    		<div class="panel panel-default">
+                        		<div class="panel-heading">
+                          		 '""검색 결과' 라고 나오게 하고싶다!!!
+                        		</div>
+                        		<!-- /.panel-heading -->
+                        		<div class="panel-body">
+                            		<table class="table table-striped table-bordered table-hover">
+		                                <thead>
+		                                    <tr>
+		                                        <th>공문번호</th>
+		                                        <th>제   목</th>
+		                                        <th>단   계</th>
+		                                        <th>수신일자</th>
+		                                        <th>보 관 함</th>
+		                                    </tr>									
+		                                </thead>
 								<!-- 게시판 리스트 반복문 -->
 								<tbody>
 									<c:forEach var="vo" items="${searchlist}">
@@ -76,8 +80,8 @@
                             <!-- end panel-body -->
                         </div>
                         <!-- end panel -->
-                    </div>                   
-                </div>               
+                       </div>  
+                   </div>            
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
 <form action="list" method="get" id="actionForm">

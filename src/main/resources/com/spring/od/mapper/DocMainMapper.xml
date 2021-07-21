@@ -16,7 +16,7 @@
 
 
 <!-- 완료 -->
-<select id ="mainsuccesslist" resultType="com.spring.od.domain.StorageListVO">
+<select id ="maincompletelist" resultType="com.spring.od.domain.StorageListVO">
 	select rownum rn,docNum,title,name,regDate
 	from (select docNum,title,U.name name,regDate 
 		from DOC_TAB D1

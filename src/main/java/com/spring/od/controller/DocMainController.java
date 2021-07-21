@@ -29,13 +29,13 @@ public class DocMainController {
 	public String odMain(Model model,Criteria cri) {
 		log.info("od 메인 접속....");
 		
-		List<StorageListVO> successlist =service.mainsuccesslist();
+		List<StorageListVO> completelist =service.maincompletelist();
 		List<StorageListVO> templist =service.maintemplist();
 		List<StorageListVO> waitlist =service.mainwaitlist();
 		
-		log.info("successlist : "+successlist + "templist : "+templist + "waitlist : "+waitlist+"criteria : "+cri);
+		log.info("completelist : "+completelist + "templist : "+templist + "waitlist : "+waitlist+"criteria : "+cri);
 		
-		model.addAttribute("successlist",successlist);
+		model.addAttribute("completelist",completelist);
 		model.addAttribute("templist",templist);
 		model.addAttribute("waitlist",waitlist);
 		model.addAttribute("Critera", cri);

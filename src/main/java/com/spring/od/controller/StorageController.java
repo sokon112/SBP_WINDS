@@ -35,7 +35,7 @@ public class StorageController {
 		int total = service.total(cri);
 		
 		model.addAttribute("waitlist",waitlist);
-		model.addAttribute("PageVO", new PageVO(cri, total));
+		model.addAttribute("pageVO", new PageVO(cri, total));
 	}
 	
 	//메인페이지 및 각 보관함 사이드바 '결제 완료 문서함' 클릭시

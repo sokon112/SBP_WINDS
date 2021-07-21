@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="../../includes/od/header.jsp" %>
-    			<div class="row">
+    		<div class="container-fluid">
                 <div class="col-lg-12">
                     <h1 class="page-header">미결 문서 보관함</h1>
                 </div>
@@ -27,11 +27,11 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
+            <div class="container-fluid" style="margin-top:20px">
                 <div class="col-lg-12" >
-                    <div class="panel panel-default">
+                   <div class="panel panel-default">
                         <div class="panel-heading">
-                            <button id='regBtn' type='button' class='btn btn-xs pull-right' onclick="location.href='register'">새 공문 작성</button>
+                            
                         </div>
                         
                         <!-- /.panel-heading -->
@@ -39,7 +39,6 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                    	<th>체크박스</th>
                                         <th>공문번호</th>
                                         <th>공문제목</th>
                                         <th>처리단계</th>
@@ -58,7 +57,7 @@
 										<td>${vo.state}</td>
 										<td>${vo.deptName}</td>
 										<td>${vo.name}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regdate}"/></td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regDate}"/></td>
 										<td>${vo.retentDate}</td>
 									</tr>
 								</c:forEach>								
@@ -100,11 +99,11 @@
                             <!-- end panel-body -->
                         </div>
                         <!-- end panel -->
-                    </div>                   
+                   </div>               
                 </div>               
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
-<form action="list" method="get" id="actionForm">	
+<form action="waitlist" method="get" id="actionForm">	
 	<input type="hidden" name="type" value="${pageVO.cri.type}" />
 	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
@@ -134,7 +133,7 @@
 <script>
 	let result='${result}';
 </script>
-<script src="/resources/js/list.js"></script>
+<script src="/resources/js/od/list.js"></script>
 <%@include file="../../includes/od/footer.jsp" %>      
 
 

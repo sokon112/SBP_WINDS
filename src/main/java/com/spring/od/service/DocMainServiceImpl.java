@@ -23,8 +23,8 @@ public class DocMainServiceImpl implements DocMainService {
 
 	//결재완료보관함 불러오기
 	@Override
-	public List<StorageListVO> mainsuccesslist() {
-		return mapper.mainsuccesslist();
+	public List<StorageListVO> maincompletelist() {
+		return mapper.maincompletelist();
 	}
 
 	//임시보관함 불러오기!
