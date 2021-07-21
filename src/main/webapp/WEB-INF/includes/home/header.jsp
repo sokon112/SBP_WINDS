@@ -68,7 +68,7 @@
 	                <li class="dropdown navbar-right">
 	       				<sec:authentication property="principal" var="info"/>
 	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                       ${info.username} ${info.memberVO.name} <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+	                       ${info.username} ${info.memberVO.deptNum} <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
 	                        <li>

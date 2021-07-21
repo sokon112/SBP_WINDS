@@ -9,6 +9,7 @@
 		<result property="name" column="name"/>
 		<result property="telNum" column="telNum"/>
 		<result property="email" column="email"/>
+		<result property="deptNum" column="deptNum"/>
 		<collection property="authority" resultMap="authMap"/>
 	</resultMap>
 
@@ -18,7 +19,7 @@
 	</resultMap>
 
 	<select id="read" resultMap="memberMap">
-		select mem.id,password,name,telNum,email,authority
+		select mem.id,password,name,telNum,email,authority,deptNum
 		from USER_TAB mem left outer join AUTH_TAB auth on mem.id = auth.id
 		where mem.id=#{id}	
 	</select>
