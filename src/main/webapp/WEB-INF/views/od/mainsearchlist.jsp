@@ -6,7 +6,7 @@
 <%@include file="/WEB-INF/includes/od/header.jsp" %>
 		<div class="container-fluid">
 			<div class="row">
-        		<div class="col-sm-3 col-md-2 sidebar">
+        		<div class="col-sm-3 col-md-2 sidebar" >
 		        	<ul class="nav nav-sidebar">
 		            	<li class="active"><a href="#">여긴뭘넣을까? <span class="sr-only">(current)</span></a></li>
 		            	<li><a href='waitlist'>미결문서 보관함</a></li>
@@ -84,12 +84,12 @@
                    </div>            
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
-<form action="list" method="get" id="actionForm">
+<form action="mainsearchlist" method="get" id="actionForm">
 	<input type="hidden" name="type" value="${pageVO.cri.type}">
 	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}">
 	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}">
 	<input type="hidden" name="amount" value="${pageVO.cri.amount}">
 </form>
-<script src="/resources/js/od/list.js"></script>
+<script src="/resources/js/od/mainlist.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 =

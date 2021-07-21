@@ -25,7 +25,7 @@ public class DocMainController {
 	@Autowired
 	private DocMainService service;
 	
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String odMain(Model model,Criteria cri) {
 		log.info("od 메인 접속....");
 		
@@ -57,7 +57,7 @@ public class DocMainController {
 		log.info("total : "+total);
 		
 		model.addAttribute("searchlist", searchlist);
-		model.addAttribute("PageVO",new PageVO(cri, total));
+		model.addAttribute("pageVO",new PageVO(cri, total));
 	}
 
 	
