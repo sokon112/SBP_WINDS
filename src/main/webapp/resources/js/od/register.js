@@ -5,7 +5,9 @@ $(function(){
 	
 	var modalplus = $("#modal2 .modal-body");
 	
-	
+	function destmodal(){
+		
+	}
 	
 	$("#chooseDest").click(function(){
 		var dest = $("#dest").val();
@@ -54,8 +56,10 @@ $(function(){
 		modalplus.html(str);
 	})
 	
-	$("#chooseModify").click(modalplus,function(){
-		modalplus.reload;
+	$("#chooseModify").click(function(){
+		modalplus.html("");
+		//modalplus.find("")
+		
 	})
 	
 	//업로드 되는 파일의 종류와 크기 제한
