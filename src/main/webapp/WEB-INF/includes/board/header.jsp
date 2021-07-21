@@ -37,15 +37,10 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="/board/event/eventlist">
-                        <i class="fa fa-tasks fa-fw"></i>이벤트<i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" href="/board/event/eventlist">
+                        <i class="fa fa-tasks fa-fw"></i> 이벤트
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/board/event/eventlist"><i class="fa fa-envelope fa-fw"></i> 현재 진행 중 인 이벤트 </a>
-                        </li>
-                        <li><a href="/board/event/eventlist"><i class="fa fa-envelope fa-fw"></i> 종료된 이벤트</a>
-                        </li>
-                    </ul>
+                   
                     <!-- /.dropdown-user -->
                 </li>
                 <li class="dropdown">
