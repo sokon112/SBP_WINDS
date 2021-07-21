@@ -10,6 +10,7 @@
 		<result property="telNum" column="telNum"/>
 		<result property="email" column="email"/>
 		<result property="deptNum" column="deptNum"/>
+		<result property="deptName" column="deptName"/>
 		<collection property="authority" resultMap="authMap"/>
 	</resultMap>
 
@@ -19,10 +20,13 @@
 	</resultMap>
 
 	<select id="read" resultMap="memberMap">
-		select mem.id,password,name,telNum,email,authority,deptNum
-		from USER_TAB mem left outer join AUTH_TAB auth on mem.id = auth.id
+		select mem.id,password,name,telNum,email,authority,mem.deptNum,dm.deptName
+		from USER_TAB mem 
+		left outer join AUTH_TAB auth on mem.id = auth.id
+		join DM_TAB dm on mem.deptNum = dm.deptNum
 		where mem.id=#{id}	
 	</select>
+	
 
 </mapper>
 

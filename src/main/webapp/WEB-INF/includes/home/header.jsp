@@ -31,25 +31,33 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links"> 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="/board/">
-                        <i class="fa fa-calendar fa-fw"></i> 커뮤니티
-                    </a>
-                    <!-- /.dropdown-alerts -->
-                </li>
                 <sec:authorize access="isAuthenticated()">              
 	                <li class="dropdown">
-	                    <a class="dropdown-toggle" href="/od/">
+	                    <a class="dropdown-toggle" href="#" id="od">
 	                        <i class="fa fa-folder fa-fw"></i> ERD 시스템
 	                    </a>
 	                    <!-- /.dropdown-alerts -->
 	                </li>
 	                <li class="dropdown">
-	                    <a class="dropdown-toggle" href="/vacation/">
+	                    <a class="dropdown-toggle" href="#" id="vacation">
 	                        <i class="fa fa-tasks fa-fw"></i> 휴가관리
 	                    </a>
 	                    <!-- /.dropdown-alerts -->
 	                </li>
+	                <li class="dropdown">
+	                   <a class="dropdown-toggle" href="#" id="board">
+	                        <i class="fa fa-calendar fa-fw"></i> 커뮤니티
+	                    </a>
+	                    <!-- /.dropdown-alerts -->
+	                </li>	     	                
+                </sec:authorize>
+                <sec:authorize access="!isAuthenticated()">
+	                <li class="dropdown">
+	                   <a class="dropdown-toggle" href="/board/">
+	                        <i class="fa fa-calendar fa-fw"></i> 커뮤니티
+	                    </a>
+	                    <!-- /.dropdown-alerts -->
+	                </li>	                
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
 	                <li class="dropdown navbar-right">
@@ -68,9 +76,16 @@
 	                <li class="dropdown navbar-right">
 	       				<sec:authentication property="principal" var="info"/>
 	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                       ${info.username} ${info.memberVO.deptNum} <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+	                         <i class="fa fa-user fa-fw"></i>로그인 정보<i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
+	                    	<li>
+	                        	<a>접속자 정보</a>
+	                        	<a>부서 : ${info.memberVO.deptName} ( ${info.memberVO.deptNum} )</a>
+	                        	<a>사번 : ${info.username}</a>
+	                        	<a>이름 : ${info.memberVO.name}</a>
+	                        	<a>연락처 : ${info.memberVO.telNum}</a>
+	                        </li>
 	                        <li>
 	                        	<a href="#" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 	                        </li>
@@ -86,6 +101,15 @@
         <form action="/logout" method="post" id="logoutForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
+        <form action="/od/" method="post" id="odForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+        </form>
+        <form action="/board/" method="post" id="boardForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+        </form>
+        <form action="/vacation/" method="post" id="vacationForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+        </form>
        <!--  <div id="page-wrapper"> --><!-- 오류 발생 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
@@ -96,6 +120,27 @@
         		
         		//form을 보낼때 csrf 값 포함해서 전송
         		$('#logoutForm').submit();
+        	})
+        	$("#board").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+       			$('#boardForm').submit();
+        	})
+        	$("#od").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+        		$('#odForm').submit();
+        	})
+        	$("#vacation").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+        		$('#vacationForm').submit();
         	})
         })
         </script>

@@ -20,6 +20,7 @@ public class MemberVO {
 	private String telNum;
 	private String email;
 	private String deptNum;
+	private String deptName;
 	
 	private List<AuthVO> authority; 
 }
