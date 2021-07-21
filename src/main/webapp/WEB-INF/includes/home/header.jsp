@@ -22,15 +22,15 @@
 <body >
     <div id="wrapper" >
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="min-height:65px; margin-bottom: 0; background-color:#ffffff">
             <div class="navbar-header" >
                 <a class="navbar-brand" href="/" >
-					<img src="/resources/img/SBP_Winds_logo.png" class="img-thumbnail test" style="width: 120px;" alt="" />
+					<img src="/resources/img/SBP_Winds_logo_1.png" style="width: 200px;" alt="" />
 				</a>
             </div>
             <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-center"> 
+            <ul class="nav navbar-top-links"> 
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="/board/">
                         <i class="fa fa-calendar fa-fw"></i> 커뮤니티
@@ -46,30 +46,38 @@
 	                </li>
 	                <li class="dropdown">
 	                    <a class="dropdown-toggle" href="/vacation/">
-	                        <i class="fa fa-tasks fa-fw"></i> 휴가신청
+	                        <i class="fa fa-tasks fa-fw"></i> 휴가관리
 	                    </a>
 	                    <!-- /.dropdown-alerts -->
 	                </li>
                 </sec:authorize>
-                <li class="dropdown navbar-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>로그인 <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                    
-                        <sec:authorize access="!isAuthenticated()">
-                        <li>
-                        	<a href="/login" id="login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
-                        </li>
-                        </sec:authorize>
-                        <sec:authorize access="isAuthenticated()">
-                        <li>
-                        	<a href="#" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                        </sec:authorize>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
+                <sec:authorize access="!isAuthenticated()">
+	                <li class="dropdown navbar-right">
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                       로그인 <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu dropdown-user">
+	                        <li>
+	                        	<a href="/login" id="login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+	                        </li>
+	                    </ul>
+	                    <!-- /.dropdown-user -->
+	                </li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+	                <li class="dropdown navbar-right">
+	       				<sec:authentication property="principal" var="info"/>
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                       ${info.username} ${info.memberVO.name} <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu dropdown-user">
+	                        <li>
+	                        	<a href="#" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+	                        </li>
+	                    </ul>
+	                    <!-- /.dropdown-user -->
+	                </li>
+                </sec:authorize>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->

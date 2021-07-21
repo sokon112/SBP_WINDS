@@ -12,7 +12,7 @@
 <div class="text-center">
 	<h1>SBP Winds Home</h1>
 	<div>
-		<img src="/resources/img/iu2.png" class="img-thumbnail test" alt="">
+		<img src="/resources/img/iu2.png" class="img-thumbnail test" alt="" style="width: 100%;max-width: 800px; height: auto;">
 	</div>
 	<div>
 		<pre class="mt-5 mb-3 text-muted text-center">
