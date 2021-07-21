@@ -1,15 +1,26 @@
 /**
- * 파일업로드
+ * 파일업로드 / 모달 / 정보저장
  */
 $(function(){
 	
 	var modalplus = $("#modal2 .modal-body");
 	
-	function destmodal(){
-		
+	function destmodal1(){
+		var str = "<label class='input-group-text' for='dest'>결재자</label>";
+		str += "<select class='form-select' id='dest' name='dest'>";
+		str += "<option selected>결재자 선택</option>";
+		str += "<option value='이지은(대표이사)'>이지은(대표이사)</option>";
+		str += "<option value='한소희(인사팀)'>한소희(인사팀장)</option>";
+		str += "<option value='채수빈(기획팀)'>채수빈(기획팀장)</option>";
+		str += "<option value='배수지(개발팀)'>배수지(개발팀장)</option>";
+		str += "<option value='김소현(재무홍보팀)'>김소현(재무홍보팀장)</option>";
+		str += "<option value='김유정(총무팀)'>김유정(총무팀장)</option>";
+		str += "</select>";
+		str += "<button type='button' class='btn btn-primary' id='chooseDest'>결재자 선택</button>";
+		modalplus.html(str);
 	}
 	
-	$("#chooseDest").click(function(){
+	function destmodal2(){
 		var dest = $("#dest").val();
 		var str = "<label class='input-group-text' for='dest'>결재자</label>";
 		str+="<input type='text' class='form-control' id='recipient-name' readonly='readonly' value='"+dest+"'>";
@@ -51,15 +62,39 @@ $(function(){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='null'>없음</option>";
 		}
+		else{
+			alert("결재자를 선택해주세요");
+			destmodel1();
+		}
 		
 		str += "</select>";
 		modalplus.html(str);
+	}
+	
+	$("#chooseDest").click(function(){
+		destmodal2();
 	})
 	
 	$("#chooseModify").click(function(){
-		modalplus.html("");
-		//modalplus.find("")
+		destmodal1();
+		$("#chooseDest").click(function(){
+			destmodal2();
+		})
+	})
+	
+	let modal = $("#modal2");
+	
+	$("#selectDest").click(function(){
+		var str = "";
+		var dest = $("#dest").val();
+		var review = $("#review").val();
 		
+		str += "<input type='hidden' name='dest' value='"+dest+"'>";
+		str += "<input type='hidden' name='review' value='"+review+"'>";
+		
+		var form = $("form");
+		form.append(str);
+		modal.modal("hide");
 	})
 	
 	//업로드 되는 파일의 종류와 크기 제한

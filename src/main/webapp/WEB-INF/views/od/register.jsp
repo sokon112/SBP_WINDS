@@ -41,14 +41,14 @@
 									<form>
 										<div class="form-group">
 										<p></p>
-											<label for="recipient-name" class="control-label">공문
+											<label for="odtitle" class="control-label">공문
 												제목:</label> <input type="text" class="form-control"
-												id="recipient-name" readonly="readonly" value="${vo.title}">
+												id="odtitle" readonly="readonly" value="${vo.title}">
 										</div>
 										<div class="form-group">
-											<label for="recipient-name" class="control-label">첨부파일
+											<label for="attachfilelist" class="control-label">첨부파일
 												리스트:</label> <input type="text" class="form-control"
-												id="recipient-name" readonly="readonly"
+												id="attachfilelist" readonly="readonly"
 												value="${vo.attachFile}">
 										</div>
 										<div class="form-group">
@@ -91,7 +91,7 @@
 									<button type="button" class="btn btn-info" id="chooseModify">결재선 수정</button>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
-									<button type="button" class="btn btn-primary">저장</button>
+									<button type="button" class="btn btn-primary" id="selectDest">저장</button>
 								</div>
 							</div>
 						</div>
@@ -103,9 +103,9 @@
 					<p></p>
 					<div class="col-sm-4">
 						<label class="form-label">공문번호</label> <input class="form-control"
-							name="docNum" readonly="readonly" value="${vo.docNum}"> <label
-							class="form-label">작성일자</label> <input class="form-control"
-							name="regDate" readonly="readonly" value="${vo.regDate}">
+							name="docNum" readonly="readonly" value=""> <label
+							class="form-label">작성일자</label> <input class="form-control" type="date"
+							name="regDate" id="regdate" readonly="readonly">
 						<p></p>
 						<label class="input-group-text" for="inputGroupSelect01">보존기한</label>
 						<p></p>
@@ -121,11 +121,11 @@
 
 					<div class="col-sm-4">
 						<label class="form-label">작성자</label> 
-						<input class="form-control" name="send" readonly="readonly" value="${vo.send}">
+						<input class="form-control" name="send" readonly="readonly" value='<sec:authentication property="principal.memberVO.name"/>'>
 					</div>
 					<div class="col-sm-4">
 						<label class="form-label">수신자</label> 
-						<input class="form-control" name="dest" readonly="readonly" value="${vo.dest}">
+						<input class="form-control" type="text" name="dest" readonly="readonly" id="destinput">
 					</div>
 					<p></p>
 					<div class="col-md-6">
@@ -156,8 +156,10 @@
 		</div>
 	</div>
 </div>
-
 <script src="/resources/js/od/register.js"></script>
+<script>
+document.getElementById('regdate').valueAsDate = new Date();
+</script>
 <%@include file="../../includes/od/footer.jsp"%>
 
 
