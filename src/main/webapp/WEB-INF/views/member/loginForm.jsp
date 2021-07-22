@@ -13,8 +13,7 @@
 	<h1 class="h3 mb-3 font-weight-normal">로그인</h1>
   
     <label for="userid" class="sr-only">로그인 아이디</label>
-    <input type="text" id="username" name="username" class="form-control" 
-    placeholder="아이디를 입력해 주세요" required autofocus> 
+    <input type="text" id="username" name="username" class="form-control"> 
      
     <label for="password" class="sr-only">비밀번호</label>
     <input type="password" id="password" name="password" class="form-control" 

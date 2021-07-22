@@ -59,48 +59,11 @@
 	                    <!-- /.dropdown-alerts -->
 	                </li>	                
                 </sec:authorize>
-                <sec:authorize access="!isAuthenticated()">
-	                <li class="dropdown navbar-right">
-	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                       로그인 <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
-	                    </a>
-	                    <ul class="dropdown-menu dropdown-user">
-	                        <li>
-	                        	<a href="/login" id="login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
-	                        </li>
-	                    </ul>
-	                    <!-- /.dropdown-user -->
-	                </li>
-                </sec:authorize>
-                <sec:authorize access="isAuthenticated()">
-	                <li class="dropdown navbar-right">
-	       				<sec:authentication property="principal" var="info"/>
-	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                         <i class="fa fa-user fa-fw"></i>로그인 정보<i class="fa fa-caret-down"></i>
-	                    </a>
-	                    <ul class="dropdown-menu dropdown-user">
-	                    	<li>
-	                        	<a>접속자 정보</a>
-	                        	<a>부서 : ${info.memberVO.deptName} ( ${info.memberVO.deptNum} )</a>
-	                        	<a>사번 : ${info.username}</a>
-	                        	<a>이름 : ${info.memberVO.name}</a>
-	                        	<a>연락처 : ${info.memberVO.telNum}</a>
-	                        </li>
-	                        <li>
-	                        	<a href="#" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-	                        </li>
-	                    </ul>
-	                    <!-- /.dropdown-user -->
-	                </li>
-                </sec:authorize>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
         </nav>
         <%-- 로그아웃을 클릭하면 전송할 폼 --%>
-        <form action="/logout" method="post" id="logoutForm">
-        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-        </form>
         <form action="/od/" method="post" id="odForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
@@ -114,13 +77,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
         $(function(){
-        	$("#logout").click(function(e){
-        		//a 태그 동작 막기
-        		e.preventDefault();
-        		
-        		//form을 보낼때 csrf 값 포함해서 전송
-        		$('#logoutForm').submit();
-        	})
         	$("#board").click(function(e){
         		//a 태그 동작 막기
         		e.preventDefault();
