@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -38,7 +38,7 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                    	<th><input type="checkbox" id="total"/></th>
+                                    	<th><input type="checkbox" id="total" /></th>
                                         <th>공문번호</th>
                                         <th>공문제목</th>
                                         <th>송신부서</th>
@@ -50,7 +50,7 @@
 								<!-- 게시판 리스트 반복문 -->
 								<c:forEach var="vo" items="${templist}">
 									<tr>
-										<td><input type="checkbox" id="normal" /></td>
+										<td><input type="checkbox" class="normal" /></td>
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
 										<td>${vo.deptName}</td>

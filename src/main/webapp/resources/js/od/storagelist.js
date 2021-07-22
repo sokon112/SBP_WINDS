@@ -85,13 +85,38 @@ $(function(){
 		
 	})
 	//체크박스 일괄 선택
-	function checkAll(){
-		if($("#total").is(':checked') ){
-		 	$("#normal").prop("checked",true);
+	$("#total").click(function(e){	
+		
+		let total=$("#total:checked").length;
+		
+		
+		if(total >0){
+			// normal 모두 가져오기
+			$(".normal").each(function(idx,item){		
+				$(this).prop("checked",true);
+			})				
 		}else{
-			$("#normal").prop("checked",false);
-		}
-	}
+				$(".normal").each(function(idx,item){		
+				$(this).prop("checked",false);
+			})		
+		}	
+	})
+	
+	
+	
+	$(".normal").click(function(){
+		let checkCount = 0;
+
+		checkCount = $(".normal:checked").length;
+		
+		console.log("check count"+checkCount);
+		
+		if(checkCount>0) {
+			$("#total").prop("checked",false);
+		} else if(checkCount === 0) {
+			$("#total").prop("checked",true);
+		}	
+	})
 	
 })
 
