@@ -22,10 +22,10 @@
 <body >
     <div id="wrapper" >
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="min-height:65px; margin-bottom: 0; background-color:#ffffff">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:#ffffff">
             <div class="navbar-header" >
                 <a class="navbar-brand" href="/" >
-					<img src="/resources/img/SBP_Winds_logo_1.png" style="width: 200px;" alt="" />
+					<img src="/resources/img/SBP_Winds_logo_1.png" style="width: 130px;" alt="" />
 				</a>
             </div>
             <!-- /.navbar-header -->
