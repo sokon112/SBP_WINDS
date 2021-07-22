@@ -1,91 +1,13 @@
 /**
- * read.jsp 에서 사용할 스크립트
+ * boardread.jsp 에서 사용할 스크립트
  */
 
-function showImage(fileCallPath){
-	$(".bigPictureWrapper").css("display","flex").show();
-	
-	$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>")
-	                .animate({width:'100%', height:'100%'},1000);
-}
 $(function(){
-	
-	//첨부 파일 가져오기
-	$.getJSON({
-		url:'getAttachList',
-		data:{
-			bno:bno
-		},
-		success:function(data){
-			console.log(data);
-			
-			var str="";
-			$(data).each(function(i,obj){
-				if(obj.fileType){ //image				
-					var fileCallPath = encodeURIComponent(obj.uploadPath+"\\s_"+obj.uuid+"_"+obj.fileName);
-											
-					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
-					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";							
-					str+="<img src='/display?fileName="+fileCallPath+"'>";
-					str+="</li>";
-				}else{					
-					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
-					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
-					str+="<span>"+obj.fileName+"</span><br>";				
-					str+="<img src='/resources/img/attach.png'>";
-					str+="</li>";				
-				}
-			})
-			$(".uploadResult ul").html(str);			
-		}
-	}) //getJSON 종료
-	
-	
-	$(".uploadResult").on("click","li",function(){
-		var liObj = $(this);
-		
-		
-		var path = encodeURIComponent(liObj.data("path")+"/"+liObj.data("uuid")+"_"+liObj.data("filename"));
-		
-		if(liObj.data("type")){
-			showImage(path.replace(new RegExp(/\\/g),"/"));			
-		}else{
-			self.location="/download?fileName="+path;
-		}
-	})
-	
-	
-	
-	
-	
-	
-	
-	//확대된 사진 영역 없애기
-	$(".bigPictureWrapper").click(function(){
-		//원본 사진 줄이기
-		$(".bigPicture").animate({width:'0%', height:'0%'},1000);
-		
-		//확대된 영역 없애기
-		setTimeout(function(){
-			$(".bigPictureWrapper").hide();
-		},1000);		
-	})
-	
-	
-	
-	
-	
-	
 	
 	
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//Modify버튼 클릭시  get방식 /board/boardmodify
-	$(".btn-default").click(function(){
-		operForm.attr('action','/board/boardmodify');
-		operForm.submit();
-	})
 	
 	//목록버튼 클릭시 get /board/boardlist
 	$(".btn-info").click(function(){
@@ -94,6 +16,25 @@ $(function(){
 		operForm.submit();
 	})
 	
+	
+	//수정버튼 클릭시 모달창 보이기
+	$("#modifyBtn").click(function(){
+		modal.modal("show");
+	})	
+	
+	//완료버튼 클릭시  get방식 /board/boardmodify
+	$("#modalSubmit").click(function(){
+		operForm.attr('action','/board/boardmodify');
+		operForm.submit();
+			
+	})
+	
+	//튀소버튼 클릭시  get방식 /board/boardmodify
+	$("#modalSubmit").click(function(){
+		operForm.attr('action','/board/boardlist');
+		operForm.submit();
+			
+	})
 	
 	//댓글 작업
 	
@@ -119,6 +60,8 @@ $(function(){
 	
 	
 	
+	
+	
 	$("#addReplyBtn").click(function(){
 		
 		//input안에 들어있는 value 제거
@@ -136,7 +79,7 @@ $(function(){
 		modalRegisterBtn.show();
 		
 		modal.modal("show");
-	})		
+	})	
 	
 	//댓글 삽입 - bno,reply(댓글내용),replyer(작성자)
 	$("#modalRegisterBtn").click(function(){

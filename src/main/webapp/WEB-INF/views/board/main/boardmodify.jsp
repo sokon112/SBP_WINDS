@@ -34,7 +34,7 @@
                 				</div> 
                 				<div class="form-group">
                 					<label>닉네임</label>
-                					<input class="form-control" name="writer" readonly="readonly" value="${vo.nickname}">                				
+                					<input class="form-control" name="nickname" readonly="readonly" value="${vo.nickname}">                				
                 				</div>  
                 				<%-- spring security 추가 --%>
                 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

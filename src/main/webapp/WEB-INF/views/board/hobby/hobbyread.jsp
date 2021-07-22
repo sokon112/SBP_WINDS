@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           게시물 읽기
+                           커뮤니티 > 동호회 > 게시물 읽기
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -38,13 +38,14 @@
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
                 				<sec:authentication property="principal" var="info"/>
                 				<sec:authorize access="isAuthenticated()"><%-- 로그인 여부 확인 --%>
-                					<c:if test="${info.username==vo.hwriter}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-                						<button type="button" class="btn btn-default">수정</button>
+                					<c:if test="${info.authority=='ad'}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
+                						<button type="button" class="btn btn-warning">삭제</button>
                 					</c:if>     			
                 				</sec:authorize>
                 				
-                				
-                				<button type="button" class="btn btn-info">목록</button>          			
+                				<button type="button" class="btn btn-default">수정</button>
+                				<button type="button" class="btn btn-danger">삭제</button>
+                				<button type="button" class="btn btn-info">목록</button>   			
                 			</form>
                 		</div>
                 	</div>
@@ -60,7 +61,7 @@
 	<input type="hidden" name="hno"  value="${vo.hno}"/>
 </form>       
 <script>
-	let no = ${vo.no};
+	let hno = ${vo.hno};
 	
 	
 	

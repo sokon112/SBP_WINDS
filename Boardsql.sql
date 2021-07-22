@@ -11,7 +11,11 @@ CREATE TABLE board_table
 );
 
 -- 게시판 테이블 시퀸스 생성
-create SEQUENCE board_tb_seq;
+create SEQUENCE board_tb_seq
+start with 1
+INCREMENT BY 1;
+
+drop SEQUENCE board_tb_seq;
 
 
 
@@ -30,6 +34,8 @@ insert into board_table(bno,nickname,title, views, password, contents)
 values(board_tb_seq.nextval,'차은우','아스트로',2,'1234','잘생겼다');
 insert into board_table(bno,nickname,title, views, password, contents)
 values(board_tb_seq.nextval,'윤산하','아스트로막내',3,'1234','뿌뿌');
+insert into board_table(bno,nickname,title, views, password, contents)
+values(board_tb_seq.nextval,'전전국','방탄막내',3,'1234','토끼');
 
 --게시판 테이블 검색
 select * from board_table;
@@ -46,11 +52,11 @@ from board_table
 --게시판 테이블 리스트에서 글쓰기 수정하는 경우
 update board_table 
 set title='아로하', contents='5기 모집', uploaddate=sysdate
-where bno=3;
+where bno=6;
 
 --게시판 테이블 리스트에서 삭제하는 경우
 delete from board_table
-where bno=1;
+where bno=5;
 
 select * from board_table
 where bno=2 and views=1;
@@ -69,7 +75,11 @@ CREATE TABLE hobby_table
     hcontents    VARCHAR2(2000)    NOT NULL 
 );
 --동호회 테이블 시퀸스 생성
-create SEQUENCE hobby_tb_seq;
+create SEQUENCE hobby_tb_seq
+start with 1;
+
+drop SEQUENCE hobby_tb_seq;
+
 
 insert into hobby_table(hno,hwriter,htitle,  hpassword, hcontents)
 values(hobby_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자');
@@ -115,11 +125,13 @@ CREATE TABLE event_table
     econtents    VARCHAR2(2000)    NOT NULL
 );
 
---이벤트 테이블 삭제
-DROP TABLE special_table;
+
 
 --이벤트 테이블 시퀸스 생성
-create SEQUENCE event_tb_seq;
+create SEQUENCE event_tb_seq
+start with 1;
+
+drop SEQUENCE event_tb_seq
 
 --이벤트 테이블 정보 입력
 insert into event_table(eno,ewriter,etitle,  epassword, econtents)
@@ -127,7 +139,7 @@ values(event_tb_seq.nextval,'이채은','롤 대회','3456','나두할래');
 insert into event_table(eno,ewriter,etitle,  epassword, econtents)
 values(event_tb_seq.nextval,'이채은','칼바람 대회','2345','이기면 1일 휴가');
 insert into event_table(eno,ewriter,etitle,  epassword, econtents)
-values(event_tb_seq.nextval,'이채은','체육대회','1234','부서 대항전');
+values(event_tb_seq.nextval,'bts','체육대회','1234','부서 대항전');
 
 --이벤트 테이블 검색
 select * from event_table;
@@ -166,7 +178,10 @@ CREATE TABLE comment_table
 );
 
 --댓글 테이블 시퀸스 생성
-create SEQUENCE comment_tb_seq;
+create SEQUENCE comment_tb_seq
+start with 1;
+
+drop SEQUENCE comment_tb_seq;
 
 --댓글 테이블 삭제
 DROP TABLE comment_table;
