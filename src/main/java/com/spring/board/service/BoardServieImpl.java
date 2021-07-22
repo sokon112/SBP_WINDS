@@ -54,8 +54,8 @@ public class BoardServieImpl implements BoardService {
 
 
 	@Override
-	public BoardVO boardread(int rno) {		
-		return bmapper.boardread(rno);
+	public BoardVO boardread(int bno) {		
+		return bmapper.boardread(bno);
 	}
 
 	// 조회수 올리기
