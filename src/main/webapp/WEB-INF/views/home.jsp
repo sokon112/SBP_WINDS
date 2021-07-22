@@ -28,13 +28,13 @@
 		    <label for="password" class="sr-only">비밀번호</label>
 		    <input type="password" id="password" name="password" class="form-control" 
 		    placeholder="비밀번호를 입력해 주세요" required>
+			<div class="error-message">
+			<span style="color:red;">${loginError}</span>
+			</div>
 			<div class="checkbox mb-3">
 			   <label>
 			      <input type="checkbox" name="remember-me"> 로그인 기억하기
 			   </label>
-			</div>  
-			<div class="error-message">
-			<span style="color:red;">${loginError}</span>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>	
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
