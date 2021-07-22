@@ -11,7 +11,7 @@
 		on D1.send = U.id
 		where D1.storage = '미결'
 		order by regDate desc)
-	where rownum between 0 and 20 order by rn desc
+	where rownum between 0 and 10 order by rn desc
 </select>
 
 
@@ -24,7 +24,7 @@
 		on D1.send = U.id
 		where D1.storage = '완결'
 		order by regDate desc)
-	where rownum between 0 and 10 order by rn desc
+	where rownum between 0 and 4 order by rn desc
 </select>
 
 
@@ -37,7 +37,7 @@
 		on D1.send = U.id
 		where D1.storage = '임시'
 		order by regDate desc)
-	where rownum between 0 and 10 order by rn desc
+	where rownum between 0 and 4 order by rn desc
 
 </select>
 

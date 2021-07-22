@@ -4,18 +4,75 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/od/header.jsp" %>
+
+<style>
+.small {font-size:12px;}
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color:  #f8f8f8;
+    border-right: 1px solid #eee;
+  }
+}
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  font-size:24px;
+  color: #fff;
+  background-color: #428bca;
+}
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+</style>
 		<div class="container-fluid">
 			<div class="row">
         		<div class="col-sm-3 col-md-2 sidebar" >
 		        	<ul class="nav nav-sidebar">
-		            	<li class="active"><a href="#">여긴뭘넣을까? <span class="sr-only">(current)</span></a></li>
+		            	<li class="active" style="line-height:120%"><a href='od_main'><small class="small">SBPwinds</small><br><strong>ERDsystem</strong><span class="sr-only">(current)</span></a></li>
 		            	<li><a href='waitlist'>미결문서 보관함</a></li>
 		            	<li><a href='completelist'>결재완료 보관함</a></li>
 		            	<li><a href='templist'>임시보관함</a></li>
 		          	</ul>
 		        </div>
             	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-               		<h1 class="page-header">Main Search List</h1>
+               		<h1 class="page-header">Search List</h1>
                 		<div class="col-lg-12">
                     		<div class="panel panel-default">
                         		<div class="panel-heading">

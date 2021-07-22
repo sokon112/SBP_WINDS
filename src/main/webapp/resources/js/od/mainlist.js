@@ -73,9 +73,6 @@ $(function(){
 		searchEvent();
 	})
 	
-	
-	
-	
 	function searchEvent(){
 		//검색 폼 가져오기
 		var searchForm = $("#searchForm");
