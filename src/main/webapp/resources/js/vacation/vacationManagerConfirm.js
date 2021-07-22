@@ -48,6 +48,15 @@ $(function(){
 		});  //add 종료
 	}) //#modalRegisterBtn 종료
 	
+	
+	var manageForm = $("#manageForm");
+	
+	//List버튼 클릭시 get /board/list
+	$(".btn-info").click(function(){
+		
+		manageForm.attr('action','/vacation/vacationManager');
+		manageForm.submit();
+	})
 /*	
 	function showList(page){
 		//댓글 목록 가져오기

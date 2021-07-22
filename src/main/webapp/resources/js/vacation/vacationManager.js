@@ -77,6 +77,16 @@ $(function(){
 		actionForm.submit();
 	})
 	
+	//operForm 가져온 후 전송하기
+	var checkPageForm = $("#checkPageForm");
+	
+
+	$(".btn-success").click(function(){
+		
+		checkPageForm.attr('action','/vacation/vacationManagerConfirm');
+		checkPageForm.submit();
+	})
+	
 })
 
 

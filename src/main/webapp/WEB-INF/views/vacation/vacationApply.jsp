@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/vacationApplyResult" method="post" role="form">
+<form action="/vacation/vacationApplyResult" method="post" role="form">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -22,9 +22,8 @@
                 	<tr>
 	                    <th>사원번호</th>
 	                    <td colspan="3">
-<sec:authentication property="principal" var="info"/>
-                				
-	                    	<input type="text" name="id" readonly="readonly" value="${info.id }">
+							<sec:authentication property="principal" var="info"/>
+	                    	<input type="text" name="id" value="${info.username}">
 	                    </td>
                     </tr>
                 <tr>
@@ -33,10 +32,8 @@
                     <td colspan="3">
                         <select name="type" >
                             <option value="none">=== 선택 ===</option>
-                            <option value="annual">연차</option>
-                            <option value="공가">공가</option>
-                            <option value="병가">병가</option>
-                            <option value="보상">보상</option>
+                            <option value="half">반차</option>
+                            <option value="monthly">월차</option>
                           </select>
                     </td>
                 </tr>

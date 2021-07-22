@@ -66,7 +66,7 @@
         </tbody>
     </table>
 </div>
-    <button type='button' onclick="location.href='vacationManager'">닫기</button>
+    <button type='button' class="btn-info" onclick="location.href='vacationManager'">닫기</button>
     </form>
     
 <form action="vacationManagerCheckOne" method="get" id="actionForm">	
@@ -96,6 +96,10 @@
   </div>
 </div>
 </form> 
+<form action="" id="manageForm" method="post">
+	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
     <script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
     <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
