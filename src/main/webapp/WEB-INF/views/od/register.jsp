@@ -43,13 +43,12 @@
 										<p></p>
 											<label for="odtitle" class="control-label">공문
 												제목:</label> <input type="text" class="form-control"
-												id="odtitle" readonly="readonly" value="${vo.title}">
+												id="modaltitle" readonly="readonly">
 										</div>
 										<div class="form-group">
 											<label for="attachfilelist" class="control-label">첨부파일
 												리스트:</label> <input type="text" class="form-control"
-												id="attachfilelist" readonly="readonly"
-												value="${vo.attachFile}">
+												id="modalattach" readonly="readonly">
 										</div>
 										<div class="form-group">
 											<label for="message-text" class="control-label">의견:</label>
@@ -77,18 +76,18 @@
 									<label class="input-group-text" for="dest">결재자</label>
 									<select class="form-select" id="dest" name="dest">
 										<option selected>결재자 선택</option>
-										<option value="이지은(대표이사)">이지은(대표이사)</option>
-										<option value="한소희(인사팀)">한소희(인사팀장)</option>
-										<option value="채수빈(기획팀)">채수빈(기획팀장)</option>
-										<option value="배수지(개발팀)">배수지(개발팀장)</option>
-										<option value="김소현(재무홍보팀)">김소현(재무홍보팀장)</option>
-										<option value="김유정(총무팀)">김유정(총무팀장)</option>
+										<option id="이지은(대표이사)" value="10030001">이지은(대표이사)</option>
+										<option id="한소희(인사팀)" value="15080002">한소희(인사팀장)</option>
+										<option id="채수빈(기획팀)" value="15080003">채수빈(기획팀장)</option>
+										<option id="배수지(개발팀)" value="15080004">배수지(개발팀장)</option>
+										<option id="김소현(재무홍보팀)" value="15080005">김소현(재무홍보팀장)</option>
+										<option id="김유정(총무팀)" value="15080006">김유정(총무팀장)</option>
 									</select>
 									<button type="button" class="btn btn-primary" id="chooseDest">결재자 선택</button>
 									<p></p>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-info" id="chooseModify">결재선 수정</button>
+									<button type="button" class="btn btn-info" id="chooseModify">수정</button>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
 									<button type="button" class="btn btn-primary" id="selectDest">저장</button>
@@ -96,16 +95,14 @@
 							</div>
 						</div>
 					</div>
-                	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">상신</button>
+                	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1" id="reg">상신</button>
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal2">결재선</button>
 					<button type="submit" class="btn btn-info">임시저장</button>             			
 					<button type="reset" class="btn btn-info">취소</button>
 					<p></p>
 					<div class="col-sm-4">
-						<label class="form-label">공문번호</label> <input class="form-control"
-							name="docNum" readonly="readonly" value=""> <label
-							class="form-label">작성일자</label> <input class="form-control" type="date"
-							name="regDate" id="regdate" readonly="readonly">
+						<label class="form-label">작성일자</label> 
+						<input class="form-control" type="date" name="regDate" id="regdate" readonly="readonly">
 						<p></p>
 						<label class="input-group-text" for="inputGroupSelect01">보존기한</label>
 						<p></p>
@@ -123,14 +120,15 @@
 						<label class="form-label">작성자</label> 
 						<input class="form-control" name="send" readonly="readonly" value='<sec:authentication property="principal.memberVO.name"/>'>
 					</div>
+					<p></p>
 					<div class="col-sm-4">
 						<label class="form-label">수신자</label> 
-						<input class="form-control" type="text" name="dest" readonly="readonly" id="destinput">
+						<input class="form-control" name="dest" readonly="readonly" id="destinput">
 					</div>
 					<p></p>
 					<div class="col-md-6">
 						<label class="form-label">공문제목</label> 
-						<input class="form-control" name="title">
+						<input class="form-control" id="title" name="title">
 					</div>
 					<div class="col-md-12">
 						<label>내용</label>
@@ -147,7 +145,7 @@
 			<div class="panel-heading">File 첨부</div>
 			<div class="panel-body">
 				<div class="form-group uploadDiv">
-					<input type="file" name="uploadFile" multiple />
+					<input type="file" name="uploadFile" id="attachlist" multiple />
 				</div>
 				<div class="uploadResult">
 					<ul></ul>

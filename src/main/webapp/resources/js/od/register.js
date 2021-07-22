@@ -3,33 +3,47 @@
  */
 $(function(){
 	
+	//상신 및 임시저장
+	
+	
+	
+	
+	//모달 관련
 	var modalplus = $("#modal2 .modal-body");
+	
+	
+	$("#reg").click(function(){
+		var title = $("#title").val()
+		var attach = $("#attachlist").val();
+		$("#modaltitle").val(title);
+		$("#modalattach").val(attach);
+	})
 	
 	function destmodal1(){
 		var str = "<label class='input-group-text' for='dest'>결재자</label>";
 		str += "<select class='form-select' id='dest' name='dest'>";
 		str += "<option selected>결재자 선택</option>";
-		str += "<option value='이지은(대표이사)'>이지은(대표이사)</option>";
-		str += "<option value='한소희(인사팀)'>한소희(인사팀장)</option>";
-		str += "<option value='채수빈(기획팀)'>채수빈(기획팀장)</option>";
-		str += "<option value='배수지(개발팀)'>배수지(개발팀장)</option>";
-		str += "<option value='김소현(재무홍보팀)'>김소현(재무홍보팀장)</option>";
-		str += "<option value='김유정(총무팀)'>김유정(총무팀장)</option>";
+		str += "<option name='이지은(대표이사)' value='10030001'>이지은(대표이사)</option>";
+		str += "<option name='한소희(인사팀)' value='15080002'>한소희(인사팀장)</option>";
+		str += "<option name='채수빈(기획팀)' value='15080003'>채수빈(기획팀장)</option>";
+		str += "<option name='배수지(개발팀)' value='15080004'>배수지(개발팀장)</option>";
+		str += "<option name='김소현(재무홍보팀)' value='15080005'>김소현(재무홍보팀장)</option>";
+		str += "<option name='김유정(총무팀)' value='15080006'>김유정(총무팀장)</option>";
 		str += "</select>";
 		str += "<button type='button' class='btn btn-primary' id='chooseDest'>결재자 선택</button>";
 		modalplus.html(str);
 	}
 	
 	function destmodal2(){
+		//var destid = $("#dest option:selected").attr("id");
 		var dest = $("#dest").val();
 		var str = "<label class='input-group-text' for='dest'>결재자</label>";
-		str+="<input type='text' class='form-control' id='recipient-name' readonly='readonly' value='"+dest+"'>";
+		str+="<input type='text' class='form-control' id='dest' readonly='readonly' value='"+dest+"'>";
 		str+="<p></p>";
 		str+="<label class='input-group-text' for='review'>검토자</label>";
 		str+="<select class='form-select' id='review' name='review'>";
 		
-		if(dest=='이지은(대표이사)'){
-			var dest = '10030001';
+		if(dest=='10030001'){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='15080002'>한소희(인사팀)</option>";
 			str+="<option value='15080003'>채수빈(기획팀)</option>";
@@ -37,28 +51,23 @@ $(function(){
 			str+="<option value='15080005'>김소현(재무홍보팀)</option>";
 			str+="<option value='15080006'>김유정(총무팀)</option>";
 		}
-		else if(dest=='한소희(인사팀)'){
-			var dest = '15080002';
+		else if(dest=='15080002'){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='null'>없음</option>";
 		}
-		else if(dest=='채수빈(기획팀)'){
-			var dest = '15080003';
+		else if(dest=='15080003'){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='null'>없음</option>";
 		}
-		else if(dest=='배수지(개발팀)'){
-			var dest = '15080004';
+		else if(dest=='15080004'){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='null'>없음</option>";
 		}
-		else if(dest=='김소현(재무홍보팀)'){
-			var dest = '15080005';
+		else if(dest=='15080005'){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='null'>없음</option>";
 		}
-		else if(dest=='김유정(총무팀)'){
-			var dest = '15080006';
+		else if(dest=='15080006'){
 			str+="<option selected>검토자 선택</option>";
 			str+="<option value='null'>없음</option>";
 		}
@@ -88,10 +97,13 @@ $(function(){
 		var str = "";
 		var dest = $("#dest").val();
 		var review = $("#review").val();
+		console.log(dest);
+		console.log(review);
 		
 		str += "<input type='hidden' name='dest' value='"+dest+"'>";
 		str += "<input type='hidden' name='review' value='"+review+"'>";
 		
+		$("#destinput").val(dest);
 		var form = $("form");
 		form.append(str);
 		modal.modal("hide");

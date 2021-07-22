@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.home.domain.MemberVO;
 import com.spring.od.domain.AttachFileDTO;
 import com.spring.od.domain.Criteria;
 import com.spring.od.domain.OfficeNoticeVO;
@@ -33,8 +34,10 @@ public class DocController {
 	
 	//@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
-	public void register() {
+	public void register(MemberVO vo,Model model) {
 		log.info("새로운 공문 작성 폼 요청");
+		
+		model.addAttribute("vo",vo);
 	}
 	
 	//공문 등록
