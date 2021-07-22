@@ -89,5 +89,6 @@
 <%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 </form>
 <script src="/resources/js/vacation/vacationManagerCheckOne.js"></script>
+<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

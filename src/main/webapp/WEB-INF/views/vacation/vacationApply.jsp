@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="" method="post" role="form">
+<form action="/vacationApplyResult" method="post" role="form">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -22,7 +22,9 @@
                 	<tr>
 	                    <th>사원번호</th>
 	                    <td colspan="3">
-	                    	<input type="text" name="id" readonly="readonly" value="${id}">
+<sec:authentication property="principal" var="info"/>
+                				
+	                    	<input type="text" name="id" readonly="readonly" value="${info.id }">
 	                    </td>
                     </tr>
                 <tr>
@@ -32,9 +34,9 @@
                         <select name="type" >
                             <option value="none">=== 선택 ===</option>
                             <option value="annual">연차</option>
-                            <option value="vacation1">공가</option>
-                            <option value="sickleave">병가</option>
-                            <option value="compensation">보상</option>
+                            <option value="공가">공가</option>
+                            <option value="병가">병가</option>
+                            <option value="보상">보상</option>
                           </select>
                     </td>
                 </tr>
@@ -55,12 +57,12 @@
         </table>
         </div>
         <%-- spring security 추가 --%>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button type="submit" class="btn btn-success" id="modalRegisterBtn">신청</button>
     </form>
 <!--     <script type="text/javascript">
     	let id=${vo.id}
     </script> -->
-
+<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -143,9 +144,8 @@
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-	<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
-	<%-- <input type="hidden" name="id" value="${vacation.id}" /> --%>
-	
+	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" />
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>      
    
 <script>
@@ -158,5 +158,6 @@
 	} --%>
 </script>
 <script src="/resources/js/vacation/vacationManager.js"></script>
+<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

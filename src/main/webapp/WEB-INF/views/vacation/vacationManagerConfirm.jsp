@@ -53,7 +53,7 @@
 	                </th>
 	                <td>
 	                <c:if test="${vacation.state eq '신청' }">
-	                    <button type="button" class="btn btn-primary" onclick="">승인</button>
+	                    <button type="button" class="btn btn-primary">승인</button>
 	                    <button type="button" class="btn btn-secondary">거절</button>
 	                    </c:if>
 	                <c:if test="${vacation.state ne '신청' }">    
@@ -97,5 +97,6 @@
 </div>
 </form> 
     <script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
+    <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

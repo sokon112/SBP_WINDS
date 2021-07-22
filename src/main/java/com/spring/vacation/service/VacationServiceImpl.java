@@ -70,7 +70,7 @@ public class VacationServiceImpl implements VacationService {
 
 	
 	  @Override 
-	  public List<VacationVO> showUser(int id,VacationCriteria cri) {
+	  public List<VacationVO> showUser(String id,VacationCriteria cri) {
 		  return mapper.vShowUser(id,cri);
 	  }
 	 
@@ -105,8 +105,8 @@ public class VacationServiceImpl implements VacationService {
 	}
 
 	@Override
-	public boolean idCnt(int id) {
-		return mapper.vIdCnt(id)>20?true:false;
+	public boolean idCnt(String id) {
+		return mapper.vIdCnt(id)>40?true:false;
 	}
 
 	@Override

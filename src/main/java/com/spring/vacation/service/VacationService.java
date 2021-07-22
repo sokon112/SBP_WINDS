@@ -24,7 +24,7 @@ public interface VacationService {
 	//휴가 신청서 제출
 	public boolean insertUserApp(VacationVO vacation);
 	//userid에 맞게 정보 검색
-	public List<VacationVO> showUser(int id,VacationCriteria cri);
+	public List<VacationVO> showUser(String id,VacationCriteria cri);
 	
 	//ㅇ선택한 문서 정보 가져오기 
 	public VacationVO showUserOne(int vacationAppNum);
@@ -35,7 +35,7 @@ public interface VacationService {
 	//반려
 	public boolean cancleVacation(VacationVO vacation);
 	
-	public boolean idCnt(int id);
+	public boolean idCnt(String id);
 	
 	
 	public Date vacationDay(int vacationAppNum);

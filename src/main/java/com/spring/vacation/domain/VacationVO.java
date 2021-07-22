@@ -20,7 +20,7 @@ import lombok.ToString;
 public class VacationVO {
 
 	private int vacationAppNum;
-	private int id;
+	private String id;
 	private String type;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startterm;

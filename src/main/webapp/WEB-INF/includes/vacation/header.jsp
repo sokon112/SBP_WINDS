@@ -30,7 +30,7 @@
 
             <ul class="nav navbar-top-links navbar-center">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="/vacation/vacationUserList">
+                    <a class="dropdown-toggle move-page" href="#" id="vacationList">
                         <i class="fa fa-tasks fa-fw"></i>휴가 목록<i class="fa fa-caret-down"></i>
                     </a>
                     
@@ -38,14 +38,14 @@
                 </li>
                 <!-- /.dropdown -->               
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="/vacation/vacationApply">
+                    <a class="dropdown-toggle move-page" href="#"id="vacationApplication">
                         <i class="fa fa-comment fa-fw"></i> 휴가 신청
                     </a>
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="/vacation/vacationManager">
+                    <a class="dropdown-toggle move-page" href="#" id="vacationManager">
                         <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리<i class="fa fa-caret-down"></i>
                     </a>
                     
@@ -68,11 +68,45 @@
             <!-- /.navbar-top-links -->
         </nav>
         <%-- 로그아웃을 클릭하면 전송할 폼 --%>
-        <form action="#" method="post" id="logoutForm">
+        <form action="/login" method="post" id="logoutForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        	 
+        </form>
+ <form action="/vacation/vacationUserList" method="post" id="vacactionListForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
-        <script type="text/javascript">
-        	let id='${id}';
+        <form action="/vacation/vacationApply" method="post" id="vacationAppliForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+        </form>
+        <form action="/vacation/vacationManager" method="post" id="vacationManagerForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+        </form>
+       <!--  <div id="page-wrapper"> --><!-- 오류 발생 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+        $(function(){
+        	$("#vacationList").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+       			$('#vacactionListForm').submit();
+        	})
+        	$("#vacationApplication").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+        		$('#vacationAppliForm').submit();
+        	})
+        	$("#vacationManager").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+        		$('#vacationManagerForm').submit();
+        	})
+        })
         </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
