@@ -1,6 +1,7 @@
 package com.spring.home;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,15 @@ public class HomeController {
 	public String loginPost() {
 		log.info("login 시도");
 		return "redirect: /";
+	}
+	
+
+	@GetMapping("/member/login-error")
+	public String loginError(Model model) {
+		
+		model.addAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		
+		return "home";
 	}
 	
 }

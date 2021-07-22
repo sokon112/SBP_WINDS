@@ -32,12 +32,12 @@
 			   <label>
 			      <input type="checkbox" name="remember-me"> 로그인 기억하기
 			   </label>
+			</div>  
+			<div class="error-message">
+			<span style="color:red;">${loginError}</span>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>	
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />  
-			<div class="error-message">
-			<span>${loginError}</span>
-			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 		</form>
 	</td>
 	</sec:authorize>
@@ -48,13 +48,13 @@
 			<h1 class="h3 mb-3 font-weight-normal">로그인 정보</h1>
 		  
 		    <label for="deptInfo" class="sr-only">부서</label>
-		    <p id="deptInfo">${info.memberVO.deptName} ( ${info.memberVO.deptNum} )</p>
+		    <p id="deptInfo">부&nbsp&nbsp&nbsp서 : &nbsp&nbsp${info.memberVO.deptName} ( ${info.memberVO.deptNum} )</p>
 		    <label for="empID" class="sr-only">사번</label>
-		    <p id="empID">${info.username}</p>
+		    <p id="empID">사&nbsp&nbsp&nbsp번 : &nbsp&nbsp${info.username}</p>
 		    <label for="empNAME" class="sr-only">이름</label>
-		    <p id="empID">${info.memberVO.name}</p>
+		    <p id="empID">이&nbsp&nbsp&nbsp름 : &nbsp&nbsp${info.memberVO.name}</p>
 		    <label for="empTEL" class="sr-only">연락처</label>
-		    <p id="empTEL">${info.memberVO.telNum}</p>
+		    <p id="empTEL">연락처 : &nbsp&nbsp${info.memberVO.telNum}</p>
 		</form>
 		<form class="form-signin" action="/logout" method="post" id="logoutForm">
 			<button class="btn btn-lg btn-success btn-block" type="submit">로그아웃</button>	
