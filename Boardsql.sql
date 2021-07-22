@@ -11,17 +11,9 @@ CREATE TABLE board_table
 );
 
 -- 게시판 테이블 시퀸스 생성
-create SEQUENCE board_tb_seq;
-
-
-
-
-
---테이블 삭제
-DROP TABLE board_table;
-DROP TABLE hobby_table;
-DROP TABLE event_table;
-
+create SEQUENCE board_tb_seq
+start with 1
+INCREMENT BY 1;
 
 --게시판 테이블 정보 입력
 insert into board_table(bno,nickname,title, views, password, contents)
@@ -30,30 +22,12 @@ insert into board_table(bno,nickname,title, views, password, contents)
 values(board_tb_seq.nextval,'차은우','아스트로',2,'1234','잘생겼다');
 insert into board_table(bno,nickname,title, views, password, contents)
 values(board_tb_seq.nextval,'윤산하','아스트로막내',3,'1234','뿌뿌');
+insert into board_table(bno,nickname,title, views, password, contents)
+values(board_tb_seq.nextval,'전전국','방탄막내',3,'1234','토끼');
 
 --게시판 테이블 검색
 select * from board_table;
 
---게시판 테이블 리스트 보기(사용자)
-select bno, nickname,title,views,contents,uploaddate
-from board_table
-where bno=3;
-
---게시판 테이블 리스트에서 목록을 누르는 경우(사용자)
-select bno,nickname,title, views, contents,uploaddate
-from board_table
-
---게시판 테이블 리스트에서 글쓰기 수정하는 경우
-update board_table 
-set title='아로하', contents='5기 모집', uploaddate=sysdate
-where bno=3;
-
---게시판 테이블 리스트에서 삭제하는 경우
-delete from board_table
-where bno=1;
-
-select * from board_table
-where bno=2 and views=1;
 
 
 
@@ -69,7 +43,9 @@ CREATE TABLE hobby_table
     hcontents    VARCHAR2(2000)    NOT NULL 
 );
 --동호회 테이블 시퀸스 생성
-create SEQUENCE hobby_tb_seq;
+create SEQUENCE hobby_tb_seq
+start with 1;
+
 
 insert into hobby_table(hno,hwriter,htitle,  hpassword, hcontents)
 values(hobby_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자');
@@ -81,25 +57,6 @@ values(hobby_tb_seq.nextval,'박민혁','댄스동호회','2345','댄스부 모�
 
 --동호회 테이블 검색
 select * from hobby_table;
-
-
---동호회 테이블 리스트 보기(사용자)
-select hno, hwriter,htitle,hcontents,huploaddate
-from hobby_table
-where hno=3;
-
---동호회 테이블 리스트에서 목록을 누르는 경우(사용자)
-select hno, hwriter,htitle,hcontents,huploaddate
-from hobby_table
-
---동호회 테이블 리스트에서 글쓰기 수정하는 경우
-update hobby_table 
-set htitle='아로하', hcontents='5기 모집', huploaddate=sysdate
-where hno=3;
-
---게시판 테이블 리스트에서 삭제하는 경우
-delete from hobby_table
-where hno=3;
 
 
 
@@ -115,11 +72,12 @@ CREATE TABLE event_table
     econtents    VARCHAR2(2000)    NOT NULL
 );
 
---이벤트 테이블 삭제
-DROP TABLE special_table;
+
 
 --이벤트 테이블 시퀸스 생성
-create SEQUENCE event_tb_seq;
+create SEQUENCE event_tb_seq
+start with 1;
+
 
 --이벤트 테이블 정보 입력
 insert into event_table(eno,ewriter,etitle,  epassword, econtents)
@@ -127,28 +85,10 @@ values(event_tb_seq.nextval,'이채은','롤 대회','3456','나두할래');
 insert into event_table(eno,ewriter,etitle,  epassword, econtents)
 values(event_tb_seq.nextval,'이채은','칼바람 대회','2345','이기면 1일 휴가');
 insert into event_table(eno,ewriter,etitle,  epassword, econtents)
-values(event_tb_seq.nextval,'이채은','체육대회','1234','부서 대항전');
+values(event_tb_seq.nextval,'bts','체육대회','1234','부서 대항전');
 
 --이벤트 테이블 검색
 select * from event_table;
-
-
---이벤트 테이블 리스트 보기(사용자)
-select eno, ewriter,etitle,econtents,euploaddate
-from event_table
-where eno=3;
-
---이벤트 테이블 리스트에서 목록을 누르는 경우(사용자)
-select eno, ewriter,etitle,econtents,euploaddate
-from event_table
-
---동호회 테이블 리스트에서 글쓰기 수정하는 경우
-update event_table 
-set etitle='아로하', econtents='5기 모집', euploaddate=sysdate
-where eno=3;
-
-
-
 
 
 
@@ -166,10 +106,8 @@ CREATE TABLE comment_table
 );
 
 --댓글 테이블 시퀸스 생성
-create SEQUENCE comment_tb_seq;
-
---댓글 테이블 삭제
-DROP TABLE comment_table;
+create SEQUENCE comment_tb_seq
+start with 1;
 
 --댓글 테이블 검색
 select  * from comment_table;
@@ -184,31 +122,13 @@ insert into comment_table(dno,bno,nickname, password, contents)
 values(comment_tb_seq.nextval,4,'이동민','1234','부서 대항전');
 
 
---댓글 테이블 리스트 보기(사용자)
-select dno,bno,nickname, password, contents,uploaddate
-from comment_table
-where dno=4;
-
---댓글 테이블 리스트에서 목록을 누르는 경우(사용자)
-select dno,bno,nickname, password, contents,uploaddate
-from comment_table
-
---댓글 테이블 리스트에서 글쓰기 수정하는 경우
-update comment_table 
-set contents='5기 모집', uploaddate=sysdate
-where bno=3;
-
---댓글 테이블 리스트에서 삭제하는 경우
-delete from comment_table
-where bno=4;
-
-
 -- 댓글테이블과 게시판 테이블 번호 연결
 ALTER TABLE comment_table
     ADD CONSTRAINT FK_board_table_bno FOREIGN KEY (bno)
         REFERENCES board_table (bno);
 
-
+        
+        
         
 -- 파일 첨부 테이블        
 create table special_attach(
@@ -221,13 +141,13 @@ create table special_attach(
 
 
 
-DROP TABLE special_attach;
+
 
 alter table special_attach add constraint pk_sp_attach_uuid primary key(uuid);
 alter table special_attach add constraint fk_sp_attach foreign key(no) references hobby_table(no);
 alter table special_attach add constraint fk_sp_attach foreign key(no) references event_table(no);
 
-
+--조회수
 alter table board_table change column viewcnt view_cnt int default 0;
 
 

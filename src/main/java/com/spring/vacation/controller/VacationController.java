@@ -4,16 +4,21 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.spring.home.domain.MemberVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationPageVO;
 import com.spring.vacation.domain.VacationVO;
@@ -29,9 +34,9 @@ public class VacationController {
 	@Autowired
 	private VacationServiceImpl service;
 	
-	int id=4;
+
 VacationCriteria cri=new VacationCriteria();
-	
+	String id="10030001";
 	//vacationMine화면 
 	@RequestMapping("/")	
 	public String vacationMain() {
@@ -41,12 +46,13 @@ VacationCriteria cri=new VacationCriteria();
 	
 	//메인메뉴 3가지 
 	//id에 따른 휴가 목록 보여주는 페이지 
-	@GetMapping("/vacationUserList")
-	public void showUserMain( Model model, int id,VacationCriteria cri) {
-
-		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
+	
+	@PostMapping("/vacationUserList")
+	public void showUserMain(Model model,MemberVO member, VacationCriteria cri) {
+		//VacationCriteria cri=new VacationCriteria();
+		log.info("showUser페이지 " +member.getId()+" cri : "+cri.getNowMonth());
 		
-		List<VacationVO> vlist=service.showUser(id,cri);
+		List<VacationVO> vlist=service.showUser(member.getId(),cri);
 		
 		
 		log.info(vlist);
@@ -55,13 +61,14 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("list",vlist);
 		
 	}//휴가신청서 작성하는 페이지
-	@GetMapping("/vacationApply")
-	public void vacationApply(int id,Model model) {
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/vacationApply")
+	public void vacationApply(Model model) {
 		log.info("휴가신청 페이지");	
-		model.addAttribute("id",id);
+
 		
 	}//관리자가 보는 페이지 
-	@GetMapping("/vacationManager")
+	@PostMapping("/vacationManager")
 	public void showAdmin(Model model, VacationCriteria cri) {
 		log.info("휴가관리 페이지");
 		
@@ -78,8 +85,8 @@ VacationCriteria cri=new VacationCriteria();
 	
 	//사용자 페이지에서 작동하는 컨트롤러
 	//리스트에 있는 목록 클릭시
-	@GetMapping("/vacationUserListCheckOne")
-	public String showUserOne(Model model,  int vacationAppNum){
+	@PostMapping("/vacationUserListCheckOne")
+	public String showUserOne(Model model, @PathVariable("vacationAppNum") int vacationAppNum){
 		log.info("사용자의 페이지");
 		
 		VacationVO vacation = service.showUserOne(vacationAppNum);
@@ -117,7 +124,7 @@ VacationCriteria cri=new VacationCriteria();
 		log.info("반납버튼 눌렀을때");
 		Date date=new Date();
 		boolean result=false;
-		Date startday=service.vacationDay(vacation.getId());
+		Date startday=service.vacationDay(vacation.getVacationAppNum());
 		if(!date.after(startday)){
 			result=service.cancleVacation(vacation);
 			if(result) {
@@ -135,7 +142,8 @@ VacationCriteria cri=new VacationCriteria();
 	}
 
 //	휴가신청 작성 페이지
-	@PostMapping("/vacationApply")
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/vacationApplyResult")
 	public String applyPost(VacationVO vacation,Model model,RedirectAttributes rttr){
 		log.info("휴가 신청!!" + vacation);
 		
@@ -148,7 +156,6 @@ VacationCriteria cri=new VacationCriteria();
 //			service.insertUserApp(vacation);
 //		}
 
-		
 		if(service.insertUserApp(vacation)) {
 			log.info("성공");
 			rttr.addFlashAttribute("result", vacation.getVacationAppNum());
@@ -159,14 +166,14 @@ VacationCriteria cri=new VacationCriteria();
 		}
 	}
 	//관리자가 신청리스트 보는 페이지 
-	@GetMapping("/vacationManagerConfirm")
+	@PostMapping("/vacationManagerConfirm")
 	public void applicationList(Model model) {
 		List<VacationVO> list = service.applicationList();
 		model.addAttribute("list", list);
 	}
 	//관리자가 목록중에 하나 눌렀을때 
-	@GetMapping("/vacationManagerCheckOne")
-	public void vacationManagerCheckOne( int vacationAppNum,@ModelAttribute("cri") VacationCriteria cri,Model model){
+	@PostMapping("/vacationManagerCheckOne")
+	public void vacationManagerCheckOne(@RequestParam("vacationAppNum") int vacationAppNum,@ModelAttribute("cri") VacationCriteria cri,Model model){
 		log.info("관리자 페이지");
 		
 		VacationVO vacation = service.showUserOne(vacationAppNum);

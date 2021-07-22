@@ -15,7 +15,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                        	익명 게시판 글쓰기
+                        	커뮤니티 > 익명게시판 > 익명게시판 글쓰기
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

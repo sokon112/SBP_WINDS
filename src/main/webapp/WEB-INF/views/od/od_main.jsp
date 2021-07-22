@@ -5,14 +5,14 @@
 
 <%@include file="/WEB-INF/includes/od/header.jsp" %>
 
-	 <div class="container-fluid">
+ <div class="container-fluid">
        <div class="col-lg-12">
-         <h1 class="page-header">ERDsystem</h1>
+         <h1 class="page-header" >ERDsystem</h1>
        </div>
        <!-- /.col-lg-12 -->
 	     <div class="row"> <!-- start search -->
 	     	<div class="col-md-12" style="margin-bottom:20px">
-	        	<div class="col-md-8"><!--search Form-->
+	        	<div class="col-md-8" ><!--search Form-->
 	            	<form action="mainsearchlist" id="searchForm" >
 	                	<input type="text" name="keyword" placeholder="문서 제목을 입력하세요." />
 	                    <!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
@@ -23,15 +23,14 @@
 	             </div>
 	        </div>                             	 
 			<!-- end search -->
-	      <div class="container-fluid" style="margin-top:20px"  >
-	      	<div class="col-lg-12">
+	     <div class="container-fluid" style="margin-top:20px"  >
+	      	<div class="col-xs-6">
 	      		<div class="panel panel-default">
 	      			<div class="panel-heading" onclick="location.href='waitlist'">
 	      				<button type="button" class="btn btn-link"><strong>미결 문서 보관함</strong></button>
 	        		</div>
 	         		<!-- /.panel-heading -->
 	          		<div class="panel-body">
-	          			<div class="text-align:center">
 	           			<table class="table table-striped table-bordered table-hover">
 	            			<thead >
 								<tr>
@@ -55,14 +54,12 @@
 								</c:forEach>								
 							</tbody>
 	                     </table>
-	                     </div>
 	                  </div>
 	              </div>
 	          </div>
-	       </div>
 	       <!-- end panel-body -->
-	       <div class="container-fluid" style="margin-top:20px">
-	       <div class="col-lg-12">
+	  	<div class="col-xs-6">
+	       <div class="col-md-12">
 	       		<div class="panel panel-default">
 	                 <div class="panel-heading" onclick="location.href='completelist'">
 	          			<button type="button" class="btn btn-link"><strong>결재 완료 보관함</strong></button>
@@ -93,10 +90,8 @@
 	                  </div>
 	              </div>
 	          </div>
-	       </div>
 	       <!-- end panel-body -->
-	       <div class="container-fluid" style="margin-top:20px">
-	       <div class="col-lg-12">
+	       <div class="col-md-12">
 	       		<div class="panel panel-default">
 	                  <div class="panel-heading" onclick="location.href='templist'">
 	                  	<button type="button" class="btn btn-link"><strong>임시 보관함</strong></button>
@@ -131,8 +126,9 @@
 	       <!-- end panel-body -->
 	     </div>
 	     <!-- /row -->
-	 </div>            
-     <!-- /container-fluid-->
+	 </div>
+	</div>           
+    <!-- /container-fluid-->
 <script src="/resources/js/od/mainlist.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 

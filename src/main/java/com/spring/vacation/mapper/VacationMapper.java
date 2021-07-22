@@ -23,16 +23,16 @@ public interface VacationMapper {
 	public int vNo(@Param("holidayAppNum")int holidayAppNum,@Param("refusalreason")String refusalreason);
 
 	//cnt계산 다시 하기
-	public int  vChangeCnt(int id);
+	public int  vChangeCnt(String id);
 
 	//사용자
 	public int vInsertUserApp(VacationVO vacation);
-	public List<VacationVO> vShowUser(@Param("id")int id,@Param("cri")VacationCriteria cri);
+	public List<VacationVO> vShowUser(@Param("id")String id,@Param("cri")VacationCriteria cri);
 	
 	public VacationVO vShowUserOne(int vacationAppNum);
 	public int vUserUpdateApp(VacationVO vacation);
 	public int vDeleteUserApp(int vacationAppNum);
 	public int vCancleVacation(VacationVO vacation);
-	public int vIdCnt(int id);
+	public int vIdCnt(String id);
 	public Date vVacationDay(int vacationAppNum);
 }

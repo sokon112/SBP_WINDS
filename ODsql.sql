@@ -21,6 +21,7 @@ drop table doc_tab;
 drop table doc_attach;
 
 
+
 INSERT INTO DOC_TAB (docNum,title,contents,authority,sign,attachfile,retentDate,send,dest,review,state,storage,message,regDate)
 VALUES(docNum.NEXTVAL,'테스트2','테스트 내용입니다.','사원','123456',
 '123456',-- 첨부 파일 있을 시 'filename.확장자' 파일명으로 

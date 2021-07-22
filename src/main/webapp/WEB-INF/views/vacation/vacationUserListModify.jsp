@@ -48,5 +48,6 @@
 				
     </form>
     <script src="/resources/js/vacation/modify.js"></script>
+    <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

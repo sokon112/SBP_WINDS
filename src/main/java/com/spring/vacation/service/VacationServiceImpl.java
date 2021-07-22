@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
@@ -70,7 +71,7 @@ public class VacationServiceImpl implements VacationService {
 
 	
 	  @Override 
-	  public List<VacationVO> showUser(int id,VacationCriteria cri) {
+	  public List<VacationVO> showUser(String id,VacationCriteria cri) {
 		  return mapper.vShowUser(id,cri);
 	  }
 	 
@@ -105,8 +106,8 @@ public class VacationServiceImpl implements VacationService {
 	}
 
 	@Override
-	public boolean idCnt(int id) {
-		return mapper.vIdCnt(id)>20?true:false;
+	public boolean idCnt(String id) {
+		return mapper.vIdCnt(id)>40?true:false;
 	}
 
 	@Override

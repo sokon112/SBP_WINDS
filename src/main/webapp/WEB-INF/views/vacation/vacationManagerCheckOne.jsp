@@ -81,13 +81,17 @@
     </div>
                 	</div>
                 </div>
-<form action="" id="operForm">
+<form action="" id="operForm" method="post">
 	<input type="hidden" name="keyType" value="${cri.keyType}" />
 	<input type="hidden" name="keyword" value="${cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />
+<%-- 	<input type="hidden" name="nowMonth" value="${cri.nowMonth}" /> --%>
 <%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
+
 <script src="/resources/js/vacation/vacationManagerCheckOne.js"></script>
+<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

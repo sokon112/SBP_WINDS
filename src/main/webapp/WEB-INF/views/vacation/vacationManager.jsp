@@ -5,6 +5,7 @@
 <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -84,7 +85,7 @@
     <div class="row"> <!-- start search -->
                             	<div class="col-md-12">
                             	  <div class="col-md-8"><!--search Form-->
-                            		<form action="" id="searchForm">
+                            		<form action="" id="searchForm" method="post">
                             			<select name="keyType" id="" class="form-control">
                             				<option value="">-----------</option>
                             				<option value="I" <c:out value="${VacationPageVO.cri.keyType=='I'?'selected':''}"/>>사원번호</option>
@@ -100,7 +101,7 @@
                             	   </div>
                             	   <div class="col-md-2 col-md-offset-2">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
-                            	   	<select name="" id="amount" class="form-control">
+                            	   	<select name="" id="amount" class="form-control" method="post">
                             	   		<option value="10"  <c:out value="${VacationPageVO.cri.amount==10?'selected':''}"/> >10</option>
                             	   		<option value="20"  <c:out value="${VacationPageVO.cri.amount==20?'selected':''}"/>>20</option>
                             	   		<option value="30"  <c:out value="${VacationPageVO.cri.amount==30?'selected':''}"/>>30</option>
@@ -138,25 +139,24 @@
                     </div>                   
                 </div>    
 <!-- 페이지 나누기 추가 -->            
-<form action="vacationManager" method="get" id="actionForm">	
+<form action="vacationManager" method="post" id="actionForm">	
 	<input type="hidden" name="keyType" value="${VacationPageVO.cri.keyType}" />
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-	<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
-	<%-- <input type="hidden" name="id" value="${vacation.id}" /> --%>
-	
+<%-- 	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>      
-   
+<form action="" id="checkPageForm" method="post">
+	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
 <script>
 
 	//let id='${vacation.id}';
 
-	<%-- function preMonth(){
-		${VactionPageVO.cri.nowMonth}='<%= VacationCriteria.downVacationMonth() %>';
-		
-	} --%>
 </script>
 <script src="/resources/js/vacation/vacationManager.js"></script>
+<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

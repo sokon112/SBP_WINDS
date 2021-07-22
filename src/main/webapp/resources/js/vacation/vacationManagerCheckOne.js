@@ -14,12 +14,6 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-/*	//Modify버튼 클릭시  get방식 /board/modify
-	$(".btn-default").click(function(){
-		operForm.attr('action','/board/modify');
-		operForm.submit();
-	})*/
-	
 	//List버튼 클릭시 get /board/list
 	$(".btn-info").click(function(){
 		

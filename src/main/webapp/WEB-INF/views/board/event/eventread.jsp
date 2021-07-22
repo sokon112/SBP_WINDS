@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           게시물 읽기
+                           커뮤니티 > 이벤트 > 게시물 읽기
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -38,7 +38,7 @@
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
                 				<sec:authentication property="principal" var="info"/>
                 				<sec:authorize access="isAuthenticated()"><%-- 로그인 여부 확인 --%>
-                					<c:if test="${info.authority=='ad'}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
+                					<c:if test="${info.authority=='admin'}"><%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
                 						<button type="button" class="btn btn-warning">삭제</button>
                 					</c:if>     			
                 				</sec:authorize>
