@@ -69,15 +69,14 @@ $(function(){
 		}
 	}*/
 	
-	$("input[name='keyword']").on("keydown",function(){
+	/*$("input[name='keyword']").on("keydown",function(){
 		searchEvent();
-	})
+	})*/
 	
 	function searchEvent(){
 		//검색 폼 가져오기
 		var searchForm = $("#searchForm");
 		
-		//keyword 가져오기
 		var keyword = $("input[name='keyword']").val();
 		
 		if(keyword===''){
@@ -85,12 +84,15 @@ $(function(){
 			$("input[name='keyword']").focus();
 			return false;
 		}
+			
 		
 		//검색 처음에는 1page 보여주기
 		searchForm.find("input[name='pageNum']").val("1");
 		searchForm.find("input[name='amount']").val("10");
 		
 		searchForm.submit();
+		//keyword 가져오기
+		
 	}
 	
 })

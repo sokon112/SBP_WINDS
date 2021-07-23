@@ -7,6 +7,7 @@
 
 <style>
 .small {font-size:12px;}
+
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
@@ -57,12 +58,16 @@
   }
 }
 
+
+th,td{
+text-align:center;}
 </style>
+
 		<div class="container-fluid">
 			<div class="row">
         		<div class="col-sm-3 col-md-2 sidebar" >
 		        	<ul class="nav nav-sidebar">
-		            	<li class="active" style="line-height:120%"><a href='od_main'><small class="small">SBPwinds</small><br><strong>ERDsystem</strong><span class="sr-only">(current)</span></a></li>
+		            	<li class="active" style="line-height:120%"><a href='/od/'><small class="small">SBPwinds</small><br><strong>ERDsystem</strong><span class="sr-only">(current)</span></a></li>
 		            	<li><a href='waitlist'>미결문서 보관함</a></li>
 		            	<li><a href='completelist'>결재완료 보관함</a></li>
 		            	<li><a href='templist'>임시보관함</a></li>
@@ -77,6 +82,15 @@
                         		</div>
                         		<!-- /.panel-heading -->
                         		<div class="panel-body">
+                        		<div class="col-md-2 col-md-offset-10" style="margin-bottom:10px">
+                            	   	<!--페이지 목록 갯수 지정하는 폼-->
+                            	   	<select name="" id="amount" class="form-control" >
+                            	   		<option value="10" <c:out value="${pageVO.cri.amount==10?'selected':''}"/>>10</option>
+                            	   		<option value="20" <c:out value="${pageVO.cri.amount==20?'selected':''}"/>>20</option>
+                            	   		<option value="30" <c:out value="${pageVO.cri.amount==30?'selected':''}"/>>30</option>
+                            	   		<option value="40" <c:out value="${pageVO.cri.amount==40?'selected':''}"/>>40</option>
+                            	   	</select>
+								  </div>
                             		<table class="table table-striped table-bordered table-hover">
 		                                <thead>
 		                                    <tr>
@@ -100,15 +114,7 @@
 									</c:forEach>
 								</tbody>
                             </table>
-                            	   <div class="col-md-2 col-md-offset-2">
-                            	   	<!--페이지 목록 갯수 지정하는 폼-->
-                            	   	<select name="" id="amount" class="form-control">
-                            	   		<option value="10" <c:out value="${pageVO.cri.amount==10?'selected':''}"/>>10</option>
-                            	   		<option value="20" <c:out value="${pageVO.cri.amount==20?'selected':''}"/>>20</option>
-                            	   		<option value="30" <c:out value="${pageVO.cri.amount==30?'selected':''}"/>>30</option>
-                            	   		<option value="40" <c:out value="${pageVO.cri.amount==40?'selected':''}"/>>40</option>
-                            	   	</select>
-								  </div>
+                            	   
                              	 </div>                             	 
                       		 </div><!-- end search -->
                             <!-- start Pagination -->
