@@ -22,9 +22,11 @@
 <body>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">SBP Wind 로고자리</a>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:#ffffff">
+            <div class="navbar-header" >
+                <a class="navbar-brand" href="/" >
+					<img src="/resources/img/SBP_Winds_logo_1.png" style="width: 130px;" alt="" />
+				</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -49,27 +51,40 @@
                     </a>
                     <!-- /.dropdown-alerts -->
                 </li>
-                <!-- /.dropdown -->
-                <li class="dropdown navbar-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="member/loginForm">
-                        <i class="fa fa-user fa-fw"></i>로그인 <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                        	<a href="#"><i class="fa fa-sign-in fa-fw"></i> Login</a>
-                        </li>
-                    </ul>
+                <!-- /.dropdown --> 
+                <sec:authorize access="isAuthenticated()"> 
+				<sec:authentication property="principal" var="info"/>
+                <li class="dropdown navbar-right" style="margin-right: 10px;">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="logout">
+						Logout<i class="fa fa-sign-out fa-fw"></i>
+					</a>				
                     <!-- /.dropdown-user -->
+                </li>   
+				<li class="navbar-right">
+                <a>${info.memberVO.deptName} ${info.memberVO.name}</a>
                 </li>
+                
+                </sec:authorize>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
         </nav>
         <%-- 로그아웃을 클릭하면 전송할 폼 --%>
-        <form action="#" method="post" id="logoutForm">
+        <form action="/logout" method="post" id="logoutForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+        $(function(){
+        	$("#logout").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+        		$('#logoutForm').submit();
+        	})
+        })
+        </script>
         
         
         

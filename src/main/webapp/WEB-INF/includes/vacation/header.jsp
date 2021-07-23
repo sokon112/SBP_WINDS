@@ -23,16 +23,18 @@
 <sec:authentication property="principal" var="info"/>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">SBP Wind 로고자리</a>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:#ffffff">
+            <div class="navbar-header" >
+                <a class="navbar-brand" href="/" >
+					<img src="/resources/img/SBP_Winds_logo_1.png" style="width: 130px;" alt="" />
+				</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-center">
                 <li class="dropdown">
                     <a class="dropdown-toggle move-page" href="#" id="vacationList">
-                        <i class="fa fa-tasks fa-fw"></i>휴가 목록<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-tasks fa-fw"></i>휴가 목록
                     </a>
                     
                     <!-- /.dropdown-user -->
@@ -45,35 +47,36 @@
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
+                
                 <li class="dropdown">
                     <a class="dropdown-toggle move-page" href="#" id="vacationManager">
-                        <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리
                     </a>
-                    
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown navbar-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>로그인 <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                        	<a href="#"><i class="fa fa-sign-in fa-fw"></i> Login</a>
-                        </li>
-                    </ul>
+                <sec:authorize access="isAuthenticated()">
+                <li class="dropdown navbar-right" style="margin-right: 10px;">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="logout">
+						Logout<i class="fa fa-sign-out fa-fw"></i>
+					</a>				
                     <!-- /.dropdown-user -->
+                </li>   
+				<li class="navbar-right">
+                <a>${info.memberVO.deptName} ${info.memberVO.name}</a>
                 </li>
+                
+                </sec:authorize>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
         </nav>
     </div>
         <%-- 로그아웃을 클릭하면 전송할 폼 --%>
-        <form action="/login" method="post" id="logoutForm">
-        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <form action="/logout" method="post" id="logoutForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         </form>
- <form action="/vacation/vacationUserList" method="post" id="vacactionListForm">
+ 		<form action="/vacation/vacationUserList" method="post" id="vacactionListForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
         	<input type="hidden" name="id" value="${info.username}"/>
         </form>
@@ -88,6 +91,13 @@
         <script>
         //let id='${info.username}';
         $(function(){
+        	$("#logout").click(function(e){
+        		//a 태그 동작 막기
+        		e.preventDefault();
+        		
+        		//form을 보낼때 csrf 값 포함해서 전송
+        		$('#logoutForm').submit();
+        	})
         	$("#vacationList").click(function(e){
         		//a 태그 동작 막기
         		e.preventDefault();
