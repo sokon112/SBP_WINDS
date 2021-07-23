@@ -48,16 +48,13 @@
  */
 
 .main {
-  padding: 20px;
+  padding: 5px;
 }
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;
     padding-left: 40px;
   }
-}
-.main .page-header {
-  margin-top: 0;
 }
 
 </style>
@@ -76,7 +73,7 @@
                 		<div class="col-lg-12">
                     		<div class="panel panel-default">
                         		<div class="panel-heading">
-                          		 '""검색 결과' 라고 나오게 하고싶다!!!
+                          	
                         		</div>
                         		<!-- /.panel-heading -->
                         		<div class="panel-body">

@@ -11,7 +11,7 @@
 		on D1.send = U.id
 		where D1.storage = '미결'
 		order by regDate desc)
-	where rownum between 0 and 10 order by rn desc
+	where rownum between 0 and 11 order by rn desc
 </select>
 
 
