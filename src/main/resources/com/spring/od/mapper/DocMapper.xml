@@ -4,26 +4,26 @@
 	<!-- 공문 작성 -->
 	<insert id="owrite">
 		INSERT INTO DOC_TAB (docNum,title,contents,authority,sign,attachFile,retentDate,send,dest,review,state,storage,message,regDate)
-		VALUES(docNum.NEXTVAL,#{title},#{contents},#{authority},#{sign},#{attachFile},#{retentDate},#{send},#{dest},#{review},#{state},#{storage},#{message},SYSDATE);
+		VALUES(docNum.NEXTVAL,#{title},#{contents},#{authority},#{sign},#{attachFile},#{retentDate},#{send},#{dest},#{review},#{state},#{storage},#{message},SYSDATE)
 	</insert>
 	<update id="omodify">
 		UPDATE DOC_TAB SET title = #{title}, contents = #{contents}, attachFile = #{attachFile}, retentDate = #{retentDate}, dest = #{dest}, review = #{review}, state = #{state}, storage = #{storage}, regDate = SYSDATE
-		WHERE docNum = #{docNum};
+		WHERE docNum = #{docNum}
 	</update>
 	<!-- 공문 결재/반려 -->
 	<update id="oreturned">
 		UPDATE DOC_TAB SET state = #{state}, message = #{message}
-		WHERE docNum = #{docNum};
+		WHERE docNum = #{docNum}
 	</update>
 	<update id="oapprove">
 		UPDATE DOC_TAB SET state = #{state}, message = #{message}, storage = #{storage} , sign = #{sign}
-		WHERE docNum = #{docNum};
+		WHERE docNum = #{docNum}
 	</update>
 	<delete id="oremove">
 		DELETE FROM DOC_TAB WHERE docNum = #{docNum}
 	</delete>
 	<!-- 공문 보기 화면 -->
 	<select id="oread" resultType="com.spring.od.domain.OfficeNoticeVO">
-		SELECT * FROM DOC_TAB WHERE docNum = #{docNum};
+		SELECT * FROM DOC_TAB WHERE docNum = #{docNum}
 	</select>
 </mapper>
