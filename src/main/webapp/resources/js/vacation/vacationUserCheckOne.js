@@ -11,12 +11,13 @@ $(function(){
 	
 	//수정 버튼 클릭시  get방식 /vacation/update
 	$(".btn-warning").click(function(){
-		operForm.append("<input type='hidden' name='vacationAppNum' value='"+$(this).attr('href')+"'>");
+		
 		operForm.attr('action','/vacation/vacationUserCheckModify');
 		operForm.submit();
 	})
 	//삭제 버튼 클릭시  get방식 /vacation/delete
 	$(".btn-danger").click(function(){
+		
 		operForm.attr('action','/vacation/delete');
 		operForm.submit();
 	})

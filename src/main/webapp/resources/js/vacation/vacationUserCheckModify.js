@@ -4,18 +4,22 @@
 $(function(){
 	
 	
-	//하단의 페이지 나누기 번호 클릭시 
-	var listCheckForm = $("#listCheckForm");	
-	//게시글 제목 클릭시
-	$(".move").click(function(e){
-		e.preventDefault(); //타이틀 a 속성 막기
-		
-		//actionForm에 bno 값을 추가하여 actionForm 보내기		
-		listCheckForm.append("<input type='hidden' name='vacationAppNum' value='"+$(this).attr('href')+"'>");
-		listCheckForm.attr('action','vacationUserListCheckOne');
-		listCheckForm.submit();		
-	})
+	//operForm 가져온 후 전송하기
+	var operForm = $("#operForm");
 	
+	//수정 버튼 클릭시  get방식 /vacation/update
+/*	$(".btn-warning").click(function(){
+		operForm.append("<input type='hidden' name='vacationAppNum' value='"+$(this).attr('href')+"'>");
+		operForm.attr('action','/vacation/update');
+		
+		operForm.submit();
+	})*/
+	
+	//확인버튼 클릭시 get /vacation/list
+	$(".btn-primary").click(function(){		
+		operForm.attr('action','/vacation/vacationUserList');
+		operForm.submit();
+	})
 	
 	
 })

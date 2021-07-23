@@ -70,18 +70,19 @@
         </c:if>
         <button type="button" class="btn btn-primary">확인</button>
         </div>
-		<input type="hidden" value="${vacation.vacationAppNum}" />		
+			
     </form>
  </div>
  </div>
  </div>  
+ <!--  modify 실행시 실행됨 -->
 <form action="" id="operForm" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<input type="hidden" name="id" value="${info.username}"/>
+	<input type="hidden" name="vacationAppNum" value="${vacation.vacationAppNum}" /> 	
 </form>
 
-
-<script src="/resources/js/vacation/vacationUserCheckOne.js"></script>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
+<script src="/resources/js/vacation/vacationUserCheckOne.js"></script>
 </body>
 </html>

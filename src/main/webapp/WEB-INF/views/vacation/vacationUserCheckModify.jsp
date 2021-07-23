@@ -9,7 +9,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/vacation/vacationUserList">
+<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">휴가신청서</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>            
+            <div class="row">
+                <div class="col-lg-12">
+                	<div class="panel panel-default">
+                        <div class="panel-heading">
+                           휴가신청서
+                        </div>
+                        <!-- /.panel-heading -->
+<form action="/vacation/update" role="form" method="post">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -18,40 +31,48 @@
             </tr> 
             </thead>
             <tbody>
+
                 <tr>
                     <th>분류</th>
-                    <td colspan="3">${vacation.state}</td>
-                </tr>
+                    <td colspan="3">
+                       <input type="text" name="type" value="${vacation.type }" readonly="readonly" disabled="disabled">
+                    </td>
                 <tr>
                     <th>기간</th>
                     <td>
-                    <fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/></td>
+                    <input type="text" name="startterm" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${vacation.startterm}"/>" readonly="readonly" disabled="disabled">
+                    	
+                    </td>
                     <td>~</td>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
+                    
+                    <td>
+                    <input type="text" name="endterm"  disabled="disabled" value="<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>" readonly="readonly"></td>
                 </tr>
                 
                 <tr>
                     <th>사유</th>
-                    <td colspan="3"><input>	${vacation.reason }</td>
+                    <td colspan="3"><input name="reason" value="${vacation.reason }"> </td>
                 </tr>
-                <tr>
-                    <th>거절사유</th>
-                   <%--  <td colspan="3">${vacation.refusalreason }</td> --%>
-                </tr>
+				
             </tbody>
         </table>
-        <button type="submit">수정</button>
-        <button type="submit">확인</button>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <input type="hidden" class="num" name="vacationAppNum" value="${vacation.vacationAppNum }"/>
+        	<input type="hidden" name="id" value="${info.username}"/>
+        <button type="submit" class="btn btn-warning">수정</button>
+        <button type="button" class="btn btn-primary">확인</button>
         </div>
-        <input type="hidden" value="${vacation.vacationAppNum}" />			
-<h1>수정</h1>	
-				
+			
     </form>
+ </div>
+ </div>
+ </div>  
     <form action="" id="operForm" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<input type="hidden" name="id" value="${info.username}"/>
 </form>
-    <script src="/resources/js/vacation/vacationUserCheckOnemodify.js"></script>
+   
     <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
+     <script src="/resources/js/vacation/vacationUserCheckModify.js"></script>
 </body>
 </html>

@@ -28,12 +28,12 @@
         <tbody>
 	        <c:forEach var="vacation" items="${list}">
 	            <tr>
-	                <td>
-								${vacation.id}
+	                <td><input type="hidden" id="vacationNum" value="${vacation.vacationAppNum}"> 
+							 	${vacation.vacationAppNum}
+								
 						</td>
 						<td>
-							 	<input type="hidden" id="vacationNum" value="${vacation.vacationAppNum}"> 
-							 	${vacation.vacationAppNum}
+							 	${vacation.id}
 						</td>
 						<td>
 								${vacation.vacationApplication.name}
@@ -50,13 +50,13 @@
 						</td>
 	                <th>${vacation.reason}</th>
 	                <td>
-	                <c:if test="${vacation.state eq '신청' }">
+<%-- 	                <c:if test="${vacation.state eq '신청' }"> --%>
 	                    <button type="button" id="successBtn" onclick="${vacation.vacationAppNum}" class="btn btn-primary">승인</button>
 	                    <button type="button" id="rejectBtn"  class="btn btn-secondary">거절</button>
-	                </c:if>
-	                <c:if test="${vacation.state ne '신청' }">    
+	                <%-- </c:if>
+	                <c:if test="${vacation.state ne '신청' }">     --%>
 	                    <input type="text" value="${vacation.state }" disabled>
-	                </c:if>	
+	           <%--      </c:if>	 --%>
 	                 </td>
 	                 
 	            </tr>
@@ -70,7 +70,7 @@
 <form action="vacationManagerCheckOne" method="get" id="actionForm">	
 	
 <%-- 댓글 작성 폼 --%>  
-<div class="modal" tabindex="-1" id="replyModal">
+<div class="modal modifymodal" tabindex="-1" id="replyModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,7 +82,7 @@
       <div class="modal-body">
         <div class="form-group">
         	<label for="">vacationAppNum</label>
-        	<input type="text" name="vacationAppNum" class="form-control" value="vacationAppNum" readonly="readonly"/>
+        	<input type="text" name="vacationAppNum" id="form-num" class="form-control form-num" value="신청서 번호" readonly="readonly"/>
         </div>
         <div class="form-group">
         	<label for="">거절사유</label>
@@ -92,7 +92,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
-        <button type="button"  class="btn btn-warning" id="cancelBtn"data-dismiss="modal" >취소</button>
+        <button type="button"  class="btn btn-warning" id="cancelBtn" data-dismiss="modal" >취소</button>
 
       </div>
     </div>
@@ -103,6 +103,7 @@
 	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
+ <script src="/resources/js/vacation/vacationFunction.js"></script>
     <script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
     <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>

@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,12 +107,12 @@ VacationCriteria cri=new VacationCriteria();
 	//상태가 신청인 경우 선택할 수 있는 버튼
 	//사유 수정하는 부분
 	@PostMapping("/update")
-	public String update(VacationVO vacation) {
+	public String update(VacationVO vacation,String id) {
 		log.info("수정버튼 눌렀을때");
 		if(service.userUpdateApp(vacation)) {
-			return "redirect:/";
+			return "redirect:/vacation/vacationUserList";
 		}else {
-			return "redirect:/showUserOne";
+			return "/vacation/vacation_home";
 		}
 	}
 	//신청서 부분 삭제
@@ -119,9 +120,9 @@ VacationCriteria cri=new VacationCriteria();
 	public String delete(int vacationAppNum) {
 		log.info("삭제버튼 눌렀을때");
 		if(service.deleteUserApp(vacationAppNum)){
-			return "redirect:/vacation/";
+			return "/vacation/vacationUserList";
 		}else {
-			return "redirect:/vacation/showUserOne";
+			return "/vacation/vacation_home";
 		}
 		
 	}
@@ -191,8 +192,8 @@ VacationCriteria cri=new VacationCriteria();
 //	휴가심사 페이지
 //	승인 -> PutMapping("/ok")
 	@PutMapping("/{vacationAppNum}/ok")
-	public ResponseEntity<String> ok(int vacationAppNum){
-		log.info("문서 승인");
+	public ResponseEntity<String> ok(@PathVariable("vacationAppNum")int vacationAppNum){
+		log.info("문서 승인"+vacationAppNum);
 		return service.ok(vacationAppNum)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 		
@@ -200,9 +201,9 @@ VacationCriteria cri=new VacationCriteria();
 	
 	
 //	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
-	@PutMapping("/{vacationAppNum}/no")
-	public ResponseEntity<String> no(int vacationAppNum,String refusalreason){
-		log.info("문서 거절");
+	@PutMapping("/no/{vacationAppNum}")
+	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@PathVariable("refusalreason")String refusalreason){
+		log.info("문서 거절"+vacationAppNum);
 		return service.no(vacationAppNum,refusalreason)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -129,7 +129,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 	<!-- 수정해야함 -->
 	<update id="vUserUpdateApp" >
 		update vacationApplicationTable 
-		set type=#{type},startterm=#{startterm}, endterm=#{endterm} ,applicationDate=sysdate,reason=#{reason}
+		set applicationDate=sysdate,reason=#{reason}
 		where vacationAppNum=#{vacationAppNum}
 	</update>
 	<delete id="vDeleteUserApp">
