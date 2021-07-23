@@ -12,14 +12,16 @@ $(function(){
 	//목록버튼 클릭시 get /board/boardlist
 	$(".btn-info").click(function(){
 		operForm.find("input[name='bno']").remove();
-		operForm.attr('action','/board/boardlist');
+		operForm.attr('action','/board/main/boardlist');
 		operForm.submit();
 	})
 	
+	//모달 영역 가져오기
+	let modifymodal = $(".modifymodal");	
 	
 	//수정버튼 클릭시 모달창 보이기
 	$("#modifyBtn").click(function(){
-		modal.modal("show");
+		modifymodal.modal("show");
 	})	
 	
 	//완료버튼 클릭시  get방식 /board/boardmodify
@@ -29,11 +31,18 @@ $(function(){
 			
 	})
 	
-	//튀소버튼 클릭시  get방식 /board/boardmodify
-	$("#modalSubmit").click(function(){
-		operForm.attr('action','/board/boardlist');
+	//취소버튼 클릭시  get방식 /board/boardmodify
+	$("#modalcansle").click(function(){
+		modifymodal.modal('hide');
+	})
+	
+	//삭제버튼 클릭시 get /board/main/boardread
+	$(".deletemodal").click(function(){
+		deletemodal.modal("show");
+		operForm.find("remove[name='bno'] and [password='passord']").remove();
+		operForm.attr('action','/board/main/boardread');
+		
 		operForm.submit();
-			
 	})
 	
 	//댓글 작업

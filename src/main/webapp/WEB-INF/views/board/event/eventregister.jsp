@@ -4,11 +4,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="/WEB-INF/includes/board/header.jsp"%>
-<html>
-<head>
-<title>글쓰기</title>
-</head>
-<body>
+
+<div class="container-fluid" style="margin: 20px">
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">이벤트 글쓰기</h1>
@@ -35,7 +32,7 @@
 						<div class="form-group">
 							<label>비밀번호</label> <input class="form-control" name="epassword">
 						</div>
-						
+
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="panel panel-default">
@@ -52,17 +49,20 @@
 							</div>
 						</div>
 						<%-- spring security 추가 --%>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />	
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 						<button type="submit" class="btn btn-default ">올리기</button>
-						<button type="reset" class="btn btn-default " onclick="location.href='eventlist'">취소</button>
+						<button type="reset" class="btn btn-default "
+							onclick="location.href='eventlist'">취소</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 <script>
-	var csrfHeaderName="${_csrf.headerName}";
-	var csrfTokenValue="${_csrf.token}";
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
 </script>
-	<script src="/resources/js/board/event/register.js"></script>
-	<%@include file="/WEB-INF/includes/board/footer.jsp"%>
+<script src="/resources/js/board/event/register.js"></script>
+<%@include file="/WEB-INF/includes/board/footer.jsp"%>

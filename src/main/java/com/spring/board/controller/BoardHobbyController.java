@@ -80,10 +80,10 @@ public class BoardHobbyController { //동호회
 	
 	
 	@GetMapping({"/hobby/hobbyread","/hobby/hobbymodify"})
-	public void read(int no,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+no+" cri : "+cri);  
+	public void read(int hno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+hno+" cri : "+cri);  
 		
-		BoardHobbyVO vo=bhservice.bhread(no);
+		BoardHobbyVO vo=bhservice.bhread(hno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 	}
 	
@@ -115,16 +115,16 @@ public class BoardHobbyController { //동호회
 	//게시글 삭제 + post
 //	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/hobby/hobbydelete")
-	public String remove(int no,String writer,BoardCriteria cri,RedirectAttributes rttr) {
-		log.info("게시글 삭제 "+no);
+	public String remove(int bno,String writer,BoardCriteria cri,RedirectAttributes rttr) {
+		log.info("게시글 삭제 "+bno);
 		
 		
 		//서버(폴더)에 저장된 첨부파일 삭제
 		//① bno에 해당하는 첨부파일 목록 알아내기
-		List<BoardHobbyAttachFileDTO> attachList=bhservice.bhAttachList(no);
+		List<BoardHobbyAttachFileDTO> attachList=bhservice.bhAttachList(bno);
 		
 		//게시글 삭제 + 첨부파일 삭제
-		if(bhservice.bhdelete(no)) {
+		if(bhservice.bhdelete(bno)) {
 			//② 폴더 파일 삭제
 //			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
@@ -141,9 +141,9 @@ public class BoardHobbyController { //동호회
 	
 	//첨부물 가져오기
 	@GetMapping("/hobby/getAttachList")
-	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int no){
-		log.info("첨부물 가져오기 "+no);		
-		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(bhservice.bhAttachList(no),HttpStatus.OK);
+	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int bno){
+		log.info("첨부물 가져오기 "+bno);		
+		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(bhservice.bhAttachList(bno),HttpStatus.OK);
 	}
 	
 	

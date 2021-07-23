@@ -88,8 +88,8 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 	}
 
 	@Override
-	public BoardHobbyVO bhread(int no) {		
-		return hmapper.bhread(no);
+	public BoardHobbyVO bhread(int bno) {		
+		return hmapper.bhread(bno);
 	}
 
 	@Override

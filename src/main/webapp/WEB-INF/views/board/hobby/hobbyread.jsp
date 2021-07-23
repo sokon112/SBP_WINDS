@@ -43,15 +43,40 @@
                 					</c:if>     			
                 				</sec:authorize>
                 				
-                				<button type="button" class="btn btn-default">수정</button>
-                				<button type="button" class="btn btn-danger">삭제</button>
-                				<button type="button" class="btn btn-info">목록</button>   			
+                				<button type="button" class="btn btn-info pull-right" onclick="location.href='hobbylist'">목록</button>
+                				<button type="button" style="margin-right:3px;" name="delete" class="btn btn-danger pull-right">삭제</button>
+                				<button type="button" style="margin-right:3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
+                			
                 			</form>
                 		</div>
                 	</div>
                 </div>
             </div>
-
+<!-- 수정 버튼 모달 추가 -->
+<div class="modifymodal" tabindex="-1" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">게시글 수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<table class="table">
+      		<tr>
+      			<td>비밀번호 입력</td>
+      			<td><input class = "form-control" id="password" type="number"></td>
+      		</tr>
+      	</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modalSubmit" class="btn btn-success"  >완료</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>        
+      </div>
+    </div>
+  </div>
+</div>  
 <%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="" id="operForm">
 	<input type="hidden" name="type" value="${cri.type}" />

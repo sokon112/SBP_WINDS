@@ -4,13 +4,21 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/board/header.jsp" %>
-  <div class="row">
+
+<style>
+th,td{
+	text-align: center;
+}
+</style>
+		<div class="container-fluid" style="margin:20px">
+  			<div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">이벤트</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -96,7 +104,8 @@
                         </div>
                         <!-- end panel -->
                     </div>                   
-                </div>               
+                </div>  
+			</div>             
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
 <form action="list" method="get" id="actionForm">   

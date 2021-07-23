@@ -13,19 +13,19 @@
 		values(hobby_tb_seq.nextval,#{hwriter},#{htitle},#{hpassword},#{hcontents},#{himages})
 	</insert>
 	
-	<!--  하나 가져오기  : no 가 일치-->
+	<!--  하나 가져오기  : hno 가 일치-->
 	<select id="bhread" resultType="com.spring.board.domain.BoardHobbyVO">
 		select * from hobby_table where hno=#{hno}
 	</select>
 	
-	<!--  수정 :  내용만 수정, updatedate, no 일치하면 -->
+	<!--  수정 :  내용만 수정, updatedate, hno 일치하면 -->
 	<update id="bhupdate">
 		update hobby_table
 		set contents=#{hcontents}, huploaddate=sysdate
 		where hno=#{hno}
 	</update>
 	
-	<!-- 삭제 : no, password 일치 -->
+	<!-- 삭제 : hno, password 일치 -->
 	<delete id="bhdelete">
 		delete from hobby_table where hno=#{hno} and hpassword=#{hpassword}
 	</delete>
