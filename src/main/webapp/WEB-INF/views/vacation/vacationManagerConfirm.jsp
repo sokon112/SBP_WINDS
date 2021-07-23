@@ -32,7 +32,8 @@
 								${vacation.id}
 						</td>
 						<td>
-								${vacation.vacationAppNum}
+							 	<input type="hidden" id="vacationNum" value="${vacation.vacationAppNum}"> 
+							 	${vacation.vacationAppNum}
 						</td>
 						<td>
 								${vacation.vacationApplication.name}
@@ -48,17 +49,14 @@
 							<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
 						</td>
 	                <th>${vacation.reason}</th>
-
-	                <th>
-	                </th>
 	                <td>
 	                <c:if test="${vacation.state eq '신청' }">
-	                    <button type="button" class="btn btn-primary">승인</button>
-	                    <button type="button" class="btn btn-secondary">거절</button>
-	                    </c:if>
+	                    <button type="button" id="successBtn" onclick="${vacation.vacationAppNum}" class="btn btn-primary">승인</button>
+	                    <button type="button" id="rejectBtn"  class="btn btn-secondary">거절</button>
+	                </c:if>
 	                <c:if test="${vacation.state ne '신청' }">    
 	                    <input type="text" value="${vacation.state }" disabled>
-	                    </c:if>	
+	                </c:if>	
 	                 </td>
 	                 
 	            </tr>
@@ -66,7 +64,7 @@
         </tbody>
     </table>
 </div>
-    <button type='button' class="btn-info" onclick="location.href='vacationManager'">닫기</button>
+    <button type='button' class="btn btn-info">닫기</button>
     </form>
     
 <form action="vacationManagerCheckOne" method="get" id="actionForm">	
@@ -82,14 +80,19 @@
         <h5 class="modal-title">거절 사유</h5>
       </div>
       <div class="modal-body">
-
+        <div class="form-group">
+        	<label for="">vacationAppNum</label>
+        	<input type="text" name="vacationAppNum" class="form-control" value="vacationAppNum" readonly="readonly"/>
+        </div>
+        <div class="form-group">
         	<label for="">거절사유</label>
-        	<input type="text" name="rejectReason" class="form-control" value="거절사유"/>
-      
+        	<textarea name="rejectReason" class="form-control"  rows="" cols="">거절사유</textarea>
+        	
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
-        <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
+        <button type="button"  class="btn btn-warning" id="cancelBtn"data-dismiss="modal" >취소</button>
 
       </div>
     </div>

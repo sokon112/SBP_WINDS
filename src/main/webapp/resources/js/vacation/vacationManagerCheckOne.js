@@ -1,13 +1,7 @@
 /**
- * read.jsp 에서 사용할 스크립트
+ * vacationManagerCheckOne.jsp 에서 사용할 스크립트
  */
 
-function showImage(fileCallPath){
-	$(".bigPictureWrapper").css("display","flex").show();
-	
-	$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>")
-	                .animate({width:'100%', height:'100%'},1000);
-}
 $(function(){
 	
 

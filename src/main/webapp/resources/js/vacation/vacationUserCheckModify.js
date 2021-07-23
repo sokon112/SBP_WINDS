@@ -1,5 +1,5 @@
 /**
- * vacationUser.jsp 스크립트
+ * vacationUserlist.jsp 스크립트
  */
 $(function(){
 	

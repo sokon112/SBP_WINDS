@@ -20,6 +20,7 @@
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">   
 </head>
 <body>
+<sec:authentication property="principal" var="info"/>
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -67,13 +68,14 @@
             </ul>
             <!-- /.navbar-top-links -->
         </nav>
+    </div>
         <%-- 로그아웃을 클릭하면 전송할 폼 --%>
         <form action="/login" method="post" id="logoutForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        	 
         </form>
  <form action="/vacation/vacationUserList" method="post" id="vacactionListForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+        	<input type="hidden" name="id" value="${info.username}"/>
         </form>
         <form action="/vacation/vacationApply" method="post" id="vacationAppliForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
@@ -84,6 +86,7 @@
        <!--  <div id="page-wrapper"> --><!-- 오류 발생 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
+        //let id='${info.username}';
         $(function(){
         	$("#vacationList").click(function(e){
         		//a 태그 동작 막기

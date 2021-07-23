@@ -64,7 +64,14 @@
 	</tbody>
     </table>
 </div>
+</div>
+</div>
+</div>
 
+
+<form action="/vacation/vacationManager" method="post" id="listCheckForm">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+</form>
 <div align="center">
 	<h1>SBP Winds Vacation</h1>
 	<pre class="mt-5 mb-3 text-muted text-center"> 
@@ -73,14 +80,10 @@ Soldesk Big-Data Professional Winds
 test
 	</pre>
 
-</div>
-<form action="/vacation/vacationManager" method="post" id="listCheckForm">
-        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-        </form>
-       
+</div>     
 <script src="/resources/js/vacation/vacationUser.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
+
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

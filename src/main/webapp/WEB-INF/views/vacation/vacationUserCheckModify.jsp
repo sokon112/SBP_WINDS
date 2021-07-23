@@ -43,11 +43,15 @@
         <button type="submit">수정</button>
         <button type="submit">확인</button>
         </div>
-        				
+        <input type="hidden" value="${vacation.vacationAppNum}" />			
 <h1>수정</h1>	
 				
     </form>
-    <script src="/resources/js/vacation/modify.js"></script>
+    <form action="" id="operForm" method="post">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="id" value="${info.username}"/>
+</form>
+    <script src="/resources/js/vacation/vacationUserCheckOnemodify.js"></script>
     <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

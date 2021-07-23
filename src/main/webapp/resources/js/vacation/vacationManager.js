@@ -41,15 +41,19 @@ $(function(){
 	//검색
 	//type or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
-	$(".btn-default").click(function(){
+	$(".selectBtn").click(function(){
 		//검색 폼 가져오기
-		var searchForm = $("#searchForm");
+		var actionForm = $("#actionForm");
 		
 		//type 가져오기
 		var keyType = $("select[name='keyType']").val();
 		
 		//keyword 가져오기
 		var keyword = $("input[name='keyword']").val();
+		
+/*		//월 가져오기 
+		var nowMonth = $("input[name='nowMonth']").val();
+		*/
 		
 		if(keyType===''){
 			alert("검색 기준을 확인하세요");
@@ -62,9 +66,9 @@ $(function(){
 		}
 		
 		//검색 처음에는 1page 보여주기
-		searchForm.find("input[name='pageNum']").val("1");
+		actionForm.find("input[name='pageNum']").val("1");
 		
-		searchForm.submit();
+		actionForm.submit();
 	})
 	$(".glyphicon-arrow-left").click(function(e){
 		e.preventDefault();  //a 속성 중지

@@ -9,6 +9,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">휴가 신청서</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>            
+            <div class="row">
+                <div class="col-lg-12">
+                	<div class="panel panel-default">
+                        <div class="panel-heading">
+                          휴가 신청서
+                        </div>
 <form action="/vacation/vacationApplyResult" method="post" role="form">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
@@ -22,15 +34,17 @@
                 	<tr>
 	                    <th>사원번호</th>
 	                    <td colspan="3">
+	                    <label for="">댓글 내용</label>
+        	
 							<sec:authentication property="principal" var="info"/>
-	                    	<input type="text" name="id" value="${info.username}">
+	                    	<input type="text" class="form-control" name="id" value="${info.username}">
 	                    </td>
                     </tr>
                 <tr>
                
                     <th>분류</th>
                     <td colspan="3">
-                        <select name="type" >
+                        <select name="type" class="form-control" >
                             <option value="none">=== 선택 ===</option>
                             <option value="half">반차</option>
                             <option value="monthly">월차</option>
@@ -39,9 +53,9 @@
                 </tr>
                 <tr>
                     <th>기간</th>
-                    <td><input type="date" name="startterm" id="startDay"></td>
+                    <td><input type="date" class="form-control" name="startterm" id="startDay"></td>
                     <td>~</td>
-                    <td><input type="date" name="endterm" id="endDay"></td>
+                    <td><input type="date" class="form-control" name="endterm" id="endDay"></td>
                 </tr>
 
                 <tr>
@@ -53,10 +67,14 @@
             </tbody>
         </table>
         </div>
+
         <%-- spring security 추가 --%>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button type="submit" class="btn btn-success" id="modalRegisterBtn">신청</button>
     </form>
+                    	</div>
+                </div>
+            </div> 
 <!--     <script type="text/javascript">
     	let id=${vo.id}
     </script> -->

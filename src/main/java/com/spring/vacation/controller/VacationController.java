@@ -4,21 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.home.domain.MemberVO;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationPageVO;
 import com.spring.vacation.domain.VacationVO;
@@ -36,8 +33,8 @@ public class VacationController {
 	
 
 VacationCriteria cri=new VacationCriteria();
-	String id="10030001";
-	//vacationMine화면 
+
+	//vacationMine화면
 	@RequestMapping("/")	
 	public String vacationMain() {
 		log.info("vacation 메인 접속....");
@@ -45,14 +42,13 @@ VacationCriteria cri=new VacationCriteria();
 	}
 	
 	//메인메뉴 3가지 
-	//id에 따른 휴가 목록 보여주는 페이지 
-	
+	//id에 따라 휴가 목록 보여주는 페이지
 	@PostMapping("/vacationUserList")
-	public void showUserMain(Model model,MemberVO member, VacationCriteria cri) {
+	public void showUserMain(Model model,String id, VacationCriteria cri) {
 		//VacationCriteria cri=new VacationCriteria();
-		log.info("showUser페이지 " +member.getId()+" cri : "+cri.getNowMonth());
+		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
-		List<VacationVO> vlist=service.showUser(member.getId(),cri);
+		List<VacationVO> vlist=service.showUser(id,cri);
 		
 		
 		log.info(vlist);
@@ -60,18 +56,18 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",vlist);
 		
-	}//휴가신청서 작성하는 페이지
-	@PreAuthorize("isAuthenticated()")
+	}
+	//휴가신청서 작성하는 페이지
 	@PostMapping("/vacationApply")
 	public void vacationApply(Model model) {
 		log.info("휴가신청 페이지");	
 
 		
-	}//관리자가 보는 페이지 
+	}//관리자 페이지 
 	@PostMapping("/vacationManager")
 	public void showAdmin(Model model, VacationCriteria cri) {
 		log.info("휴가관리 페이지");
-		
+		log.info(" cri : "+cri);
 		
 		List<VacationVO> list=service.selectMonth(cri);
 		int total=service.total(cri);
@@ -80,26 +76,35 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",list);
 		model.addAttribute("cnt",cnt);
-
 	}
 	
 	//사용자 페이지에서 작동하는 컨트롤러
-	//리스트에 있는 목록 클릭시
+	//리스트에 있는 목록 클릭시 작동
 	@PostMapping("/vacationUserListCheckOne")
-	public String showUserOne(Model model, @PathVariable("vacationAppNum") int vacationAppNum){
+	public void showUserOne(Model model, int vacationAppNum){
 		log.info("사용자의 페이지");
 		
 		VacationVO vacation = service.showUserOne(vacationAppNum);
 		log.info("vacation : "+vacation);
 		
 		model.addAttribute("vacation",vacation);
-		
-		
 
-			return "/vacation/vacationUserListCheckOne";
-	
 	}
-	//showUserOne으로 들어온 후 작성했던 휴가신청서 페이지
+	//목록에서 수정화면으로 이동
+	@PostMapping("/vacationUserCheckModify")
+	public void vacationUserCheckModify(Model model, int vacationAppNum){
+		log.info("사용자의 페이지");
+		
+		VacationVO vacation = service.showUserOne(vacationAppNum);
+		log.info("vacation : "+vacation);
+		
+		model.addAttribute("vacation",vacation);
+
+	}
+	
+	
+	//상태가 신청인 경우 선택할 수 있는 버튼
+	//사유 수정하는 부분
 	@PostMapping("/update")
 	public String update(VacationVO vacation) {
 		log.info("수정버튼 눌렀을때");
@@ -109,6 +114,7 @@ VacationCriteria cri=new VacationCriteria();
 			return "redirect:/showUserOne";
 		}
 	}
+	//신청서 부분 삭제
 	@PostMapping("/delete")
 	public String delete(int vacationAppNum) {
 		log.info("삭제버튼 눌렀을때");
@@ -119,6 +125,7 @@ VacationCriteria cri=new VacationCriteria();
 		}
 		
 	}
+	//승인 상태일때 날짜가 아직이면 반납 가능
 	@PostMapping("/cancle")
 	public String cancle(VacationVO vacation, VacationCriteria cri,Model model,RedirectAttributes rttr) {
 		log.info("반납버튼 눌렀을때");
@@ -183,21 +190,21 @@ VacationCriteria cri=new VacationCriteria();
 	
 //	휴가심사 페이지
 //	승인 -> PutMapping("/ok")
-	//경로지정
 	@PutMapping("/{vacationAppNum}/ok")
-	public String ok(int vacationAppNum){
+	public ResponseEntity<String> ok(int vacationAppNum){
 		log.info("문서 승인");
-		//boolean result = service.ok(vacationAppNum);
-		return "승인";
+		return service.ok(vacationAppNum)?new ResponseEntity<String>("success",HttpStatus.OK):
+			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+		
 	}
 	
 	
 //	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
 	@PutMapping("/{vacationAppNum}/no")
-	public String no(int vacationAppNum,String refusalreason){
+	public ResponseEntity<String> no(int vacationAppNum,String refusalreason){
 		log.info("문서 거절");
-		//boolean result = service.no(vacationAppNum,refusalreason);
-		return "거절";
+		return service.no(vacationAppNum,refusalreason)?new ResponseEntity<String>("success",HttpStatus.OK):
+			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 //	닫기 -> showAdmin 페이지로 넘어감
 	

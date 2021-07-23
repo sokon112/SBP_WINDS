@@ -1,43 +1,50 @@
 /**
- * 댓글 스크립트 - 자바스크립트 모듈(관련있는 함수들의 모임) 구성
+ * vacationManagerConfirm.jsp
  */
 $(function(){
+
+//닫기 버튼 누르면 manager페이지로 넘어감
+	var manageForm = $("#manageForm");
 	
-	
-	//댓글 작업
-	
-	//댓글이 보여질 영역 가져오기
-/*	let replyUl = $(".chat");
-	showList(1);*/	
-	
+	//Modify버튼 클릭시  get방식 /board/modify
+	$(".btn-info").click(function(){
+		manageForm.attr('action','/vacation/vacationManager');
+		manageForm.submit();
+	})
+
+
 	//모달 영역 가져오기
 	let modal = $(".modal");	
 	
-	
 	//모달 영역 안에 있는 input 가져오기
-	var modalReply = modal.find("input[name='rejectReason']");
-	
+	var rejectReason = modal.find("input[name='rejectReason']");
+
 		
 	//모달 영역 안에 있는 버튼 가져오기
-	var modalModifyBtn = $("#modalModifyBtn");
-
-
+	var modalRegisterBtn = $("#modalRegisterBtn");
+	var cancelBtn = $("#cancelBtn");
+	
+	
+	
+	
+	
+	$("#rejectBtn").click(function(){
+		
+		//modalReplyer.val(vacationAppNum);
+		$("#vacationNum").val($("#vacationNum").val());
+		modal.modal("show");
+	})		
 	
 	//댓글 삽입 - bno,reply(댓글내용),replyer(작성자)
 	$("#modalRegisterBtn").click(function(){
 		
 		//모달안에 있는 댓글 작성자, 댓글 내용 가져오기
 		var reply = {
-			bno:bno,
-			reply: modalReply.val(),
-			replyer: modalReplyer.val()
+			vacationAppNum:vacationAppNum,
+			rejectReason: modalReply.val()
 		};		
 		
 		replyService.add(reply,function(result){
-			
-			/*if(result){
-				alert(result);
-			}	*/		
 			
 			modal.find("input").val("");
 			modal.modal("hide");
@@ -49,16 +56,7 @@ $(function(){
 	}) //#modalRegisterBtn 종료
 	
 	
-	var manageForm = $("#manageForm");
-	
-	//List버튼 클릭시 get /board/list
-	$(".btn-info").click(function(){
-		
-		manageForm.attr('action','/vacation/vacationManager');
-		manageForm.submit();
-	})
-/*	
-	function showList(page){
+	/*function showList(page){
 		//댓글 목록 가져오기
 		replyService.getList({bno:bno,page:page||1},function(total,data){
 			console.log(total);
@@ -94,8 +92,8 @@ $(function(){
 		})		
 	}
 	*/
-/*	
-	//페이지 나누기
+	
+/*	//페이지 나누기
 	//댓글 페이지 영역 가져오기
 	var replyPageFooter = $(".panel-footer");
 	var pageNum=1;
@@ -135,19 +133,19 @@ $(function(){
 		
 		str += "</ul>";
 		replyPageFooter.html(str);
-	}
+	}*/
 	
-	//댓글 페이지 번호 클릭시
+	/*//댓글 페이지 번호 클릭시
 	replyPageFooter.on("click","li a",function(e){
 		e.preventDefault();  //a 태그의 동작 막기
 		
 		pageNum = $(this).attr("href");
 		showList(pageNum);
 		
-	})	
+	})	*/
 	
 		
-	//댓글 삭제
+	/*//댓글 삭제
 	$("#modalRemoveBtn").click(function(){
 		
 		//로그인 여부 확인
@@ -179,38 +177,39 @@ $(function(){
 			modal.modal("hide");
 			showList(pageNum);			
 		});		
-	}) //#modalRemoveBtn 종료		
-	*/
+	}) //#modalRemoveBtn 종료		*/
+	
 	//댓글 수정
 	$("#modalModifyBtn").click(function(){
 		
 		
-		/*//로그인 여부 확인
+		//로그인 여부 확인
 		if(!replyer){
 			alert("로그인 한 후 수정이 가능합니다.");
 			modal.modal("hide");
 			return;
-		}	*/	
+		}		
 		
 		//현재 모달창에 있는 작성자와 로그인 사용자가 같은지 확인
 		
 		//현재 모달창 작성자 가져오기
-		/*var oriReplyer = modalReplyer.val();
+		var oriReplyer = modalReplyer.val();
 		//비교
 		if(oriReplyer!=replyer){
 			alert('자신의 댓글만 수정이 가능합니다.');
 			modal.modal("hide");
 			return;
-		}*/
+		}
 		
 		
 		
 		var reply= {
-			rno:modal.data("vacationAppNum"),
-			rejectReason: modalReply.val(rejectReason)
+			rno:modal.data("rno"),
+			reply: modalReply.val(),
+			replyer : modalReplyer.val()
 		}	
 		
-		re.update(reply,function(result){
+		replyService.update(reply,function(result){
 			/*if(result){
 				alert(result);
 			}*/
@@ -238,26 +237,46 @@ $(function(){
 			//댓글 모달 창에 보여주기
 			modalReply.val(data.reply);
 			modalReplyer.val(data.replyer);
-			
+			modalDate.val(replyService.displayTime(data.replyDate)).prop("readonly","readonly");
 			// rno 값 필수로 담기(PK)
 			modal.data("rno",data.rno);
 			
 			
 			//작성날짜 영역 보여주기 => 등록 후 댓글 보는 작업을 진행할 수도 있기 때문
-
+			modalDate.closest("div").show();
 			modal.find('button').show();
 			modal.find("button[id='modalRegisterBtn']").hide();
 			
 			modal.modal("show");			
 		})		
 	})
-
-
-
-
-	function update(reply,callback){
+	
+	
+	
+})
+//함수
+var replyService=(function(){
+	
+	function no(reply,callback){
+			$.ajax({
+				url:'/replies/'+reply.rno,
+				type:'put',
+				beforeSend:function(xhr){
+					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+				},
+				data:JSON.stringify(reply),
+				contentType:'application/json',
+				success:function(result){
+					if(callback){
+						callback(result);
+					}
+				}
+			})
+		}//update 종료
+		
+		function ok(reply,callback){
 		$.ajax({
-			url:reply.rno+'/replies/',
+			url:'/replies/'+reply.rno,
 			type:'put',
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
@@ -272,60 +291,9 @@ $(function(){
 		})
 	}//update 종료
 	
-	function get(rno,callback){
-		
-		$.getJSON({
-			url:'/replies/'+rno,
-			success:function(data){
-				if(callback){
-					callback(data);
-				}
-			}
-		})
-	}
-	
-	function displayTime(timeValue){
-		var today = new Date();
-		
-		var gap = today.getTime() - timeValue;
-		var dateObj = new Date(timeValue);		
-		
-		if(gap < (1000*60*60*24)){ //댓글 단 날짜가 오늘이면 시분초
-			var hh = dateObj.getHours();
-			var mi = dateObj.getMinutes();
-			var ss = dateObj.getSeconds();
-			
-			return [(hh > 9 ? '':'0')+hh, ':', (mi > 9 ? '':'0')+mi, ':', (ss > 9 ? '':'0')+ss].join('');
-		}else{ //오늘이 아닌 경우 년/월/일
-			var yy = dateObj.getFullYear();
-			var mm = dateObj.getMonth() + 1;
-			var dd = dateObj.getDate();
-			return [yy,'/',(mm > 9 ? '':'0')+mm,'/',(dd > 9 ?'':'0')+dd].join('');
-		}
-	}
-	
-	//public
+//public
 	return {
 		add:add,
-		getList:getList,
-		remove:remove,
-		update:update,
-		get:get,
-		displayTime:displayTime
+		update:update
 	}
-	
-	
-	
-	
 })();
-
-
-
-
-
-
-
-
-
-
-

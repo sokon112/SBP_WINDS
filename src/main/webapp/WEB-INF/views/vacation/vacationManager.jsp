@@ -90,13 +90,13 @@
                             				<option value="">-----------</option>
                             				<option value="I" <c:out value="${VacationPageVO.cri.keyType=='I'?'selected':''}"/>>사원번호</option>
                             				<option value="T" <c:out value="${VacationPageVO.cri.keyType=='T'?'selected':''}"/>>분류</option>
-                            				<option value="IT" <c:out value="${VacationPageVO.cri.keyType=='IT'?'selected':''}"/>>사원번호 or 분류</option>
+                            				<%-- <option value="IT" <c:out value="${VacationPageVO.cri.keyType=='IT'?'selected':''}"/>>사원번호 or 분류</option> --%>
                             			</select>
                             			<input type="text" name="keyword" value="${VacationPageVO.cri.keyword}" />
                             			<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
                             			<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}"/>
                             			<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-                            			<button type="button" class="btn btn-default">검색</button>
+                            			<button type="button" class="btn btn-default selectBtn">검색</button>
                             		</form>
                             	   </div>
                             	   <div class="col-md-2 col-md-offset-2">
@@ -144,7 +144,7 @@
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-<%-- 	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
+<%-- 	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" />  --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>      
 <form action="" id="checkPageForm" method="post">
