@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.home.domain.MemberVO;
 import com.spring.od.domain.AttachFileDTO;
 import com.spring.od.domain.Criteria;
 import com.spring.od.domain.OfficeNoticeVO;
 import com.spring.od.service.DocService;
-import com.spring.od.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;
 
