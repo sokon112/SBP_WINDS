@@ -21,6 +21,7 @@ import com.spring.od.domain.AttachFileDTO;
 import com.spring.od.domain.Criteria;
 import com.spring.od.domain.OfficeNoticeVO;
 import com.spring.od.service.DocService;
+import com.spring.od.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -32,12 +33,11 @@ public class DocController {
 	@Autowired
 	private DocService service;
 	
+	
 	//@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
-	public void register(MemberVO vo,Model model) {
+	public void register() {
 		log.info("새로운 공문 작성 폼 요청");
-		
-		model.addAttribute("vo",vo);
 	}
 	
 	//공문 등록
@@ -58,7 +58,7 @@ public class DocController {
 			return "redirect:register";
 		}
 	}
-	@GetMapping({"/tempRead","/modify"})
+	@GetMapping({"/tempread","/modify"})
 	public void readtemp(int docNum,@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("임시 저장 페이지 가져오기"+docNum+" cri : "+cri);
 		
