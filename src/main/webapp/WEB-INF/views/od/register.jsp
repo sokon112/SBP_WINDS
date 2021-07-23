@@ -76,18 +76,15 @@
 									<label class="input-group-text" for="dest">결재자</label>
 									<select class="form-select" id="dest" name="dest">
 										<option selected>결재자 선택</option>
-										<option id="이지은(대표이사)" value="10030001">이지은(대표이사)</option>
-										<option id="한소희(인사팀)" value="15080002">한소희(인사팀장)</option>
-										<option id="채수빈(기획팀)" value="15080003">채수빈(기획팀장)</option>
-										<option id="배수지(개발팀)" value="15080004">배수지(개발팀장)</option>
-										<option id="김소현(재무홍보팀)" value="15080005">김소현(재무홍보팀장)</option>
-										<option id="김유정(총무팀)" value="15080006">김유정(총무팀장)</option>
+										<option value="15080002">인사팀</option>
+										<option value="15080003">기획팀</option>
+										<option value="15080004">개발팀</option>
+										<option value="15080005">재무홍보팀</option>
+										<option value="15080006">총무팀</option>
 									</select>
-									<button type="button" class="btn btn-primary" id="chooseDest">결재자 선택</button>
 									<p></p>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-info" id="chooseModify">수정</button>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
 									<button type="button" class="btn btn-primary" id="selectDest">저장</button>
