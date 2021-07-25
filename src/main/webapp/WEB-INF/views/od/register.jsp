@@ -29,16 +29,22 @@
 								<div class="modal-body">
 									<div class="btn-group" data-toggle="buttons">
 										<label class="btn btn-info"> 
-										<input type="checkbox" autocomplete="off" name="state" value="미결"> 상신
+										<input type="hidden" name="storage" value="미결">
+										<input type="hidden" name="state" value="요청">
+										<input type="checkbox" autocomplete="off" name="state" value="요청"> 상신
 										</label> 
-										<label class="btn btn-primary"> 
+										<label class="btn btn-primary">
+										<input type="hidden" name="storage" value="완결"> 
+										<input type="hidden" name="state" value="결재완료"> 
 										<input type="checkbox" autocomplete="off" name="state" value="결재완료"> 결재
 										</label> 
 										<label class="btn btn-danger"> 
+										<input type="hidden" name="storage" value="반려">
+										<input type="hidden" name="state" value="반려">
 										<input type="checkbox" autocomplete="off" name="state" value="반려"> 반려
 										</label>
 									</div>
-									<form>
+									<div>
 										<div class="form-group">
 										<p></p>
 											<label for="odtitle" class="control-label">공문
@@ -54,9 +60,11 @@
 											<label for="message-text" class="control-label">의견:</label>
 											<textarea class="form-control" id="message" name="message"></textarea>
 										</div>
-									</form>
+									</div>
 								</div>
 								<div class="modal-footer">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+									<input type="hidden" name="authority" value='<sec:authentication property="principal.memberVO.authority"/>'>
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 									<button type="submit" class="btn btn-primary">상신</button>
 								</div>
@@ -101,9 +109,9 @@
 						<label class="form-label">작성일자</label> 
 						<input class="form-control" type="date" name="regDate" id="regdate" readonly="readonly">
 						<p></p>
-						<label class="input-group-text" for="inputGroupSelect01">보존기한</label>
+						<label class="input-group-text" for="retentdate">보존기한</label>
 						<p></p>
-						<select class="form-select" id="inputGroupSelect01"
+						<select class="form-select"
 							name="retentDate">
 							<option selected>보존기한을 선택하세요</option>
 							<option value="1">1년</option>
@@ -125,7 +133,7 @@
 					<p></p>
 					<div class="col-md-6">
 						<label class="form-label">공문제목</label> 
-						<input class="form-control" id="title" name="title">
+						<input class="form-control" name="title" id="title">
 					</div>
 					<div class="col-md-12">
 						<label>내용</label>
@@ -153,6 +161,8 @@
 </div>
 <script src="/resources/js/od/register.js"></script>
 <script>
+var csrfHeaderName="${_csrf.parameterName}";
+var csrfTokenValue="${_csrf.token}";
 document.getElementById('regdate').valueAsDate = new Date();
 </script>
 <%@include file="../../includes/od/footer.jsp"%>

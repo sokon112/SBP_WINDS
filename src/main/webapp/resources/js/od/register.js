@@ -9,9 +9,6 @@ $(function(){
 	
 	
 	//결재선 모달 관련
-	var modalplus = $("#modal2 .modal-body");
-	
-	
 	$("#reg").click(function(){
 		var title = $("#title").val()
 		var attach = $("#attachlist").val();
@@ -26,13 +23,10 @@ $(function(){
 	$("#selectDest").click(function(){
 		var str = "";
 		var dest = $("#dest").val();
-		var review = $("#review").val();
 		
 		console.log(dest);
-		console.log(review);
 		
 		str += "<input type='hidden' name='dest' value='"+dest+"'>";
-		str += "<input type='hidden' name='review' value='"+review+"'>";
 		
 		var destname = "";
 		if(dest =='10030001'){
@@ -161,7 +155,6 @@ $(function(){
 	$("button[type='submit']").click(function(e){
 		e.preventDefault();
 		
-		
 		var str="";
 		$(".uploadResult ul li").each(function(idx,obj){
 			var job = $(obj);
@@ -172,7 +165,7 @@ $(function(){
 			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 		})
 		
-		console.log(str);
+		
 		
 		//게시글 등록 폼 가져오기
 		var form = $("form");

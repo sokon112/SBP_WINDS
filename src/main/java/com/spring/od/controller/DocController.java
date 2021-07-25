@@ -32,14 +32,14 @@ public class DocController {
 	private DocService service;
 	
 	
-	//@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 		log.info("새로운 공문 작성 폼 요청");
 	}
 	
 	//공문 등록
-	//@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String registerPost(OfficeNoticeVO vo,RedirectAttributes rttr) {
 		log.info("새 공문 등록 요청"+vo);
