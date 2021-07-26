@@ -41,4 +41,7 @@ public interface VacationService {
 	
 	
 	public Date vacationDay(int vacationAppNum);
+	
+	//여부에 따라 갯수 수정
+	public boolean vChangeCnt(int vcnt,String id);
 }

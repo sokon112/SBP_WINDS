@@ -41,18 +41,15 @@
 						<td>
 								${vacation.type}
 						</td>
-		                <td>
-							<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
+			<td>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>
 
-	                		<strong>~</strong>
-
-							<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
-						</td>
+			</td>
 	                <th>${vacation.reason}</th>
 	                <td>
 <%-- 	                <c:if test="${vacation.state eq '신청' }"> --%>
-	                    <button type="button" id="successBtn" onclick="${vacation.vacationAppNum}" class="btn btn-primary">승인</button>
-	                    <button type="button" id="rejectBtn"  class="btn btn-secondary">거절</button>
+	                    <button type="button" id="successBtn" onclick="successBtn()" class="btn btn-primary">승인</button>
+	                    <button type="button" id="rejectBtn" data-toggle='modal' data-target="#modifyModal" class="btn btn-secondary">거절</button>
 	                <%-- </c:if>
 	                <c:if test="${vacation.state ne '신청' }">     --%>
 	                    <input type="text" value="${vacation.state }" disabled>
@@ -91,7 +88,7 @@
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
+        <button type="button" class="btn btn-success modalRegisterBtn">등록</button>
         <button type="button"  class="btn btn-warning" id="cancelBtn" data-dismiss="modal" >취소</button>
 
       </div>
@@ -103,6 +100,11 @@
 	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
+<script type="text/javascript">
+function successBtn(){
+	
+}
+</script>
  <script src="/resources/js/vacation/vacationFunction.js"></script>
     <script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
     <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>

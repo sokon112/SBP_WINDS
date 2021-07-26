@@ -45,11 +45,8 @@
 					${vacation.type}
 			</td>
 			<td>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
-					
-				<strong>~</strong>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>
 
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
 			</td>
 			<td>${vacation.state}</td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/></td>

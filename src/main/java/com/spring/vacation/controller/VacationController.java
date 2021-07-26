@@ -107,10 +107,11 @@ VacationCriteria cri=new VacationCriteria();
 	//상태가 신청인 경우 선택할 수 있는 버튼
 	//사유 수정하는 부분
 	@PostMapping("/update")
-	public String update(VacationVO vacation,String id) {
+	public String update(VacationVO vacation,String id,RedirectAttributes rttr) {
 		log.info("수정버튼 눌렀을때");
 		if(service.userUpdateApp(vacation)) {
-			return "redirect:/vacation/vacationUserList";
+			rttr.addFlashAttribute("id",id);
+			return "/vacation/vacationUserList";
 		}else {
 			return "/vacation/vacation_home";
 		}
@@ -133,17 +134,17 @@ VacationCriteria cri=new VacationCriteria();
 		Date date=new Date();
 		boolean result=false;
 		Date startday=service.vacationDay(vacation.getVacationAppNum());
-		if(!date.after(startday)){
+		if(date.after(startday)){
 			result=service.cancleVacation(vacation);
 			if(result) {
-				return "redirect:/";
+				return "redirect:/vacation/";
 			}else {
-				return "redirect:/showUserOne";
+				return "redirect:/vacation/vacationUserList";
 			}
 		}
 		else {
 			rttr.addFlashAttribute("cancleError","기간이 지난 휴가입니다.");
-			return "redirect:/showUserOne";
+			return "/vacation/vacationUserList";
 		}
 			
 		
@@ -155,22 +156,30 @@ VacationCriteria cri=new VacationCriteria();
 	public String applyPost(VacationVO vacation,Model model,RedirectAttributes rttr){
 		log.info("휴가 신청!!" + vacation);
 		
-//		if(service.idCnt(vacation.getVacationApplication().getId())) {
-//			//휴가가 20개 이상이면 알람창
-//			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
-//			
-//		}else {
-//			//휴가가 20개 이하이면
-//			service.insertUserApp(vacation);
-//		}
-
-		if(service.insertUserApp(vacation)) {
-			log.info("성공");
-			rttr.addFlashAttribute("result", vacation.getVacationAppNum());
-			return "/vacation/vacation_home";
+		if(service.idCnt(vacation.getId())) {
+			//휴가가 20개 이상이면 알람창
+			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
+			log.info("신청 실패 !");
+			return "/vacation/";
 		}else {
-			log.info("실패 포기하지마!");
-			return "/vacation/vacationApply";
+			//휴가가 20개 이하이면
+			boolean insertVacation=service.insertUserApp(vacation);
+		
+
+			if(insertVacation) {
+				log.info("성공");
+				if(vacation.getType().equals("half")) {
+					vacation.setType("반차");
+				}
+				else {
+					vacation.setType("월차");
+				}
+				rttr.addFlashAttribute("result", vacation.getVacationAppNum());
+				return "/vacation/";
+			}else {
+				log.info("실패 포기하지마!");
+				return "/vacation/vacationApply";
+			}
 		}
 	}
 	//관리자가 신청리스트 보는 페이지 
@@ -193,6 +202,11 @@ VacationCriteria cri=new VacationCriteria();
 //	승인 -> PutMapping("/ok")
 	@PutMapping("/{vacationAppNum}/ok")
 	public ResponseEntity<String> ok(@PathVariable("vacationAppNum")int vacationAppNum){
+		int vCnt=0;
+		/*
+		 * if(getType().equals("half")) { setType("반차"); vCnt=1; }else {
+		 * vacation.setType("월차"); vCnt=2; }
+		 */
 		log.info("문서 승인"+vacationAppNum);
 		return service.ok(vacationAppNum)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
@@ -201,7 +215,7 @@ VacationCriteria cri=new VacationCriteria();
 	
 	
 //	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
-	@PutMapping("/no/{vacationAppNum}")
+	@PutMapping("/{vacationAppNum}/no")
 	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@PathVariable("refusalreason")String refusalreason){
 		log.info("문서 거절"+vacationAppNum);
 		return service.no(vacationAppNum,refusalreason)?new ResponseEntity<String>("success",HttpStatus.OK):

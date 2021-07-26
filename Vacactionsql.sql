@@ -69,8 +69,9 @@ select * from vacationApplicationTable;
 
 
 
----------------------------------------------------------------------
-
+--------------------------------------------------------------------- 실행 시켜주세요 
+alter table vacationApplicationTable drop column endterm;
+alter table vacationApplicationTable rename column startterm to term;
 
 
 

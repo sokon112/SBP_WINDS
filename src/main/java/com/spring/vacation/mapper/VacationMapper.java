@@ -23,7 +23,7 @@ public interface VacationMapper {
 	public int vNo(@Param("holidayAppNum")int holidayAppNum,@Param("refusalreason")String refusalreason);
 
 	//cnt계산 다시 하기
-	public int  vChangeCnt(String id);
+	public int  vChangeCnt(@Param("vcnt")int vcnt,@Param("id")String id);
 
 	//사용자
 	public int vInsertUserApp(VacationVO vacation);

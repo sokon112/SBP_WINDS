@@ -58,11 +58,10 @@
 					<td>
 							${vacation.type}
 					</td>
-					<td>
-						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
-						<strong>~</strong>
-						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
-					</td>
+			<td>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>
+
+			</td>
 					<td>${vacation.state}</td>
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.applicationDate}"/>
@@ -96,12 +95,14 @@
                             			<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
                             			<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}"/>
                             			<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-                            			<button type="button" class="btn btn-default selectBtn">검색</button>
+                            			<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
+                            			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            			<button type="submit" class="btn btn-default selectBtn">검색</button>
                             		</form>
                             	   </div>
                             	   <div class="col-md-2 col-md-offset-2">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
-                            	   	<select name="" id="amount" class="form-control" method="post">
+                            	   	<select name="" id="amount" class="form-control">
                             	   		<option value="10"  <c:out value="${VacationPageVO.cri.amount==10?'selected':''}"/> >10</option>
                             	   		<option value="20"  <c:out value="${VacationPageVO.cri.amount==20?'selected':''}"/>>20</option>
                             	   		<option value="30"  <c:out value="${VacationPageVO.cri.amount==30?'selected':''}"/>>30</option>
@@ -139,7 +140,9 @@
                     </div>                   
                 </div>    
 <!-- 페이지 나누기 추가 -->            
-<form action="vacationManager" method="post" id="actionForm">	
+<form action="vacationManager" method="post" id="actionForm">
+<%-- 	<input type="hidden" name="cri" value="${VacationCriteria }"> --%>
+	
 	<input type="hidden" name="keyType" value="${VacationPageVO.cri.keyType}" />
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />

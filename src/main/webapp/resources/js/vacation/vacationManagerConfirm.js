@@ -11,6 +11,23 @@ $(function(){
 		manageForm.attr('action','/vacation/vacationManager');
 		manageForm.submit();
 	})
+	
+	$(".btn-primary").click(function(){
+		$.ajax({
+			type:'post',
+			url:'/vacation/'+modalAppNum.val(),
+			beforeSend:function(xhr){
+				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+			},
+			contentType:'application/json',
+			data:JSON.stringify(),
+			success:function(result){
+				if(callback){
+					callback(result);
+				}
+			}			
+		})	
+	})
 
 
 	//모달 영역 가져오기

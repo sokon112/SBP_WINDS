@@ -107,7 +107,7 @@ public class VacationServiceImpl implements VacationService {
 
 	@Override
 	public boolean idCnt(String id) {
-		return mapper.vIdCnt(id)>40?true:false;
+		return mapper.vIdCnt(id)<40?true:false;
 	}
 
 	@Override
@@ -119,6 +119,12 @@ public class VacationServiceImpl implements VacationService {
 	@Override
 	public int total(VacationCriteria cri) {
 		return mapper.vTotalCnt(cri);
+	}
+
+	@Override
+	public boolean vChangeCnt(int vcnt, String id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

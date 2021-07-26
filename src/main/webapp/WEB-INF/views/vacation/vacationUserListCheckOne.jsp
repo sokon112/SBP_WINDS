@@ -42,11 +42,11 @@
                     </td>
                 <tr>
                     <th>기간</th>
-                    <td>
-                    	<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
-                    </td>
-                    <td>~</td>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/></td>
+			<td>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>
+
+			</td>
+
                 </tr>
                 
                 <tr>

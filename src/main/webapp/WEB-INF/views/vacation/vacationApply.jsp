@@ -53,9 +53,7 @@
                 </tr>
                 <tr>
                     <th>기간</th>
-                    <td><input type="date" class="form-control" name="startterm" id="startDay"></td>
-                    <td>~</td>
-                    <td><input type="date" class="form-control" name="endterm" id="endDay"></td>
+                    <td><input type="date" class="form-control" name="term" id="startDay"></td>
                 </tr>
 
                 <tr>
