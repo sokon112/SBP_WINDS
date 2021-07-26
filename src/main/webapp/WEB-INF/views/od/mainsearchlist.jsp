@@ -60,11 +60,12 @@ th,td{
 text-align:center;
 width:15%;}
 
+
 #amount {
 	margin-bottom:10px;
-	width:100px;
+	width:65px;
 	position:relative;
-	left:70px;
+	left:100px;
 }
 
 </style>
@@ -87,7 +88,7 @@ width:15%;}
                         		</div>
                         		<!-- /.panel-heading -->
                         		<div class="panel-body">
-                        		<div class="col-md-5 col-md-offset-10" >
+                        		<div class="col-md-2 col-md-offset-10">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
                             	   	<select name="" id="amount" class="form-control" >
                             	   		<option value="10" <c:out value="${pageVO.cri.amount==10?'selected':''}"/>>10</option>
