@@ -12,11 +12,30 @@ $(function(){
 		
 		//actionForm에 bno 값을 추가하여 actionForm 보내기		
 		listCheckForm.append("<input type='hidden' name='vacationAppNum' value='"+$(this).attr('href')+"'>");
+		
 		listCheckForm.attr('action','vacationUserListCheckOne');
 		listCheckForm.submit();		
 	})
 	
 	
+	var preMonthForm = $("#preMonthForm");
+	
+	$(".glyphicon-arrow-left").click(function(e){
+
+		preMonthForm.append("<input type='hidden' name='monthMove' value='pre'>");
+		preMonthForm.attr('action','/vacation/vacationUserListMove');
+		
+		//actionForm 보내기
+		preMonthForm.submit();
+	})
+	$(".glyphicon-arrow-right").click(function(e){
+
+		preMonthForm.append("<input type='hidden' name='monthMove' value='next'>");
+		preMonthForm.attr('action','/vacation/vacationUserListMove');
+		
+		//actionForm 보내기
+		preMonthForm.submit();
+	})
 	
 })
 

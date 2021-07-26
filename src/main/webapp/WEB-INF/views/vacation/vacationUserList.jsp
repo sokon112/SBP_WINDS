@@ -22,10 +22,11 @@
                         
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-    <button type="button" class="glyphicon glyphicon-arrow-left" onclick="preMonth()">왼쪽화살표</button>
-    <input class="form-control" name="bno" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
+
+    <button type="button" class="glyphicon glyphicon-arrow-left"></button>
+    <input class="form-control" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
 	
-    <button class="glyphicon glyphicon-arrow-right" onclick="nextMonth">오른쪽화살표</button>
+    <button type="button" class="glyphicon glyphicon-arrow-right" ></button>
 
         <table class="table table-striped table-bordered table-hover">
 	<thead>
@@ -68,6 +69,13 @@
 
 <form action="/vacation/vacationManager" method="post" id="listCheckForm">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+</form>
+
+<form action="" method="post" id="preMonthForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+	<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
+<!-- 	<input type="hidden" name="monthMove" value="pre"> -->
+	<input type="hidden" name="id" value="${info.username}"/>
 </form>
 <div align="center">
 	<h1>SBP Winds Vacation</h1>

@@ -155,7 +155,7 @@
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 <script>
-
+//아작스 사용 해야함 
 	//let id='${vacation.id}';
 
 </script>

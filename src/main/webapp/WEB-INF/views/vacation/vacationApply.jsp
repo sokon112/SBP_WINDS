@@ -68,6 +68,7 @@
 
         <%-- spring security 추가 --%>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
         <button type="submit" class="btn btn-success" id="modalRegisterBtn">신청</button>
     </form>
                     	</div>

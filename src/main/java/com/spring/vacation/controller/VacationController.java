@@ -33,7 +33,7 @@ public class VacationController {
 	private VacationServiceImpl service;
 	
 
-VacationCriteria cri=new VacationCriteria();
+
 
 	//vacationMine화면
 	@RequestMapping("/")	
@@ -45,8 +45,9 @@ VacationCriteria cri=new VacationCriteria();
 	//메인메뉴 3가지 
 	//id에 따라 휴가 목록 보여주는 페이지
 	@PostMapping("/vacationUserList")
-	public void showUserMain(Model model,String id, VacationCriteria cri) {
+	public void showUserMain(Model model,String id, VacationCriteria cri,String monthMove) {
 		//VacationCriteria cri=new VacationCriteria();
+		
 		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
@@ -57,6 +58,26 @@ VacationCriteria cri=new VacationCriteria();
 		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",vlist);
 		
+	}
+	//화살표
+	@PostMapping("/vacationUserListMove")
+	public String vacationUserListMove(Model model,String id, VacationCriteria cri,String monthMove) {
+		log.info("showUser페이지1 " +id+" cri : "+cri.getNowMonth());
+		if(monthMove.equals("pre")) {
+			cri.downVacationMonth();
+		}else if(monthMove.equals("next")){
+			cri.upVacationMonth();
+		}
+		log.info("showUser페이지2 " +id+" cri : "+cri.getNowMonth());
+		
+		List<VacationVO> vlist=service.showUser(id,cri);
+		
+		
+		log.info(vlist);
+		int total = service.total(cri);
+		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+		model.addAttribute("list",vlist);
+		return "/vacation/vacationUserList";
 	}
 	//휴가신청서 작성하는 페이지
 	@PostMapping("/vacationApply")
@@ -107,10 +128,14 @@ VacationCriteria cri=new VacationCriteria();
 	//상태가 신청인 경우 선택할 수 있는 버튼
 	//사유 수정하는 부분
 	@PostMapping("/update")
-	public String update(VacationVO vacation,String id,RedirectAttributes rttr) {
+	public String update(VacationVO vacation,String id,Model model) {
 		log.info("수정버튼 눌렀을때");
+		VacationCriteria cri=new VacationCriteria();
 		if(service.userUpdateApp(vacation)) {
-			rttr.addFlashAttribute("id",id);
+			List<VacationVO> vlist=service.showUser(id,cri);
+			int total = service.total(cri);
+			model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+			model.addAttribute("list",vlist);
 			return "/vacation/vacationUserList";
 		}else {
 			return "/vacation/vacation_home";
@@ -118,9 +143,14 @@ VacationCriteria cri=new VacationCriteria();
 	}
 	//신청서 부분 삭제
 	@PostMapping("/delete")
-	public String delete(int vacationAppNum) {
+	public String delete(int vacationAppNum,String id,Model model) {
 		log.info("삭제버튼 눌렀을때");
+		VacationCriteria cri=new VacationCriteria();
 		if(service.deleteUserApp(vacationAppNum)){
+			List<VacationVO> vlist=service.showUser(id,cri);
+			int total = service.total(cri);
+			model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+			model.addAttribute("list",vlist);
 			return "/vacation/vacationUserList";
 		}else {
 			return "/vacation/vacation_home";
@@ -129,7 +159,7 @@ VacationCriteria cri=new VacationCriteria();
 	}
 	//승인 상태일때 날짜가 아직이면 반납 가능
 	@PostMapping("/cancle")
-	public String cancle(VacationVO vacation, VacationCriteria cri,Model model,RedirectAttributes rttr) {
+	public String cancle(VacationVO vacation, VacationCriteria cri,String id,Model model,RedirectAttributes rttr) {
 		log.info("반납버튼 눌렀을때");
 		Date date=new Date();
 		boolean result=false;
@@ -137,8 +167,13 @@ VacationCriteria cri=new VacationCriteria();
 		if(date.after(startday)){
 			result=service.cancleVacation(vacation);
 			if(result) {
+				
 				return "redirect:/vacation/";
 			}else {
+				List<VacationVO> vlist=service.showUser(id,cri);
+				int total = service.total(cri);
+				model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+				model.addAttribute("list",vlist);
 				return "redirect:/vacation/vacationUserList";
 			}
 		}
@@ -155,18 +190,15 @@ VacationCriteria cri=new VacationCriteria();
 	@PostMapping("/vacationApplyResult")
 	public String applyPost(VacationVO vacation,Model model,RedirectAttributes rttr){
 		log.info("휴가 신청!!" + vacation);
-		
+		VacationCriteria cri=new VacationCriteria();
 		if(service.idCnt(vacation.getId())) {
 			//휴가가 20개 이상이면 알람창
 			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
 			log.info("신청 실패 !");
-			return "/vacation/";
+			return "/vacation/vacationApply";
 		}else {
 			//휴가가 20개 이하이면
-			boolean insertVacation=service.insertUserApp(vacation);
-		
-
-			if(insertVacation) {
+			
 				log.info("성공");
 				if(vacation.getType().equals("half")) {
 					vacation.setType("반차");
@@ -174,8 +206,17 @@ VacationCriteria cri=new VacationCriteria();
 				else {
 					vacation.setType("월차");
 				}
+				log.info("휴가 종류 : "+vacation.getType());
+				boolean insertVacation=service.insertUserApp(vacation);
+		
+
+			if(insertVacation) {
 				rttr.addFlashAttribute("result", vacation.getVacationAppNum());
-				return "/vacation/";
+				List<VacationVO> vlist=service.showUser(vacation.getId(),cri);
+				int total = service.total(cri);
+				model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+				model.addAttribute("list",vlist);
+				return "/vacation/vacationUserList";
 			}else {
 				log.info("실패 포기하지마!");
 				return "/vacation/vacationApply";
@@ -202,7 +243,7 @@ VacationCriteria cri=new VacationCriteria();
 //	승인 -> PutMapping("/ok")
 	@PutMapping("/{vacationAppNum}/ok")
 	public ResponseEntity<String> ok(@PathVariable("vacationAppNum")int vacationAppNum){
-		int vCnt=0;
+		//int vCnt=0;
 		/*
 		 * if(getType().equals("half")) { setType("반차"); vCnt=1; }else {
 		 * vacation.setType("월차"); vCnt=2; }

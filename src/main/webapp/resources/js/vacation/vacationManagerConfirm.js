@@ -28,7 +28,7 @@ $(function(){
 			}			
 		})	
 	})
-
+//승인 거절 값이 들어가기 때문에 form 에서 value값이 
 
 	//모달 영역 가져오기
 	let modal = $(".modal");	

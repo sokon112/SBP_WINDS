@@ -25,10 +25,11 @@ public class VacationCriteria {
 	
 	Calendar cal = Calendar.getInstance();
 
-	Date date= new Date();
+	
 	
 	public VacationCriteria() {
 		super();
+		Date date= new Date();
 		this.pageNum=1;
 		this.amount=10;
 		cal.setTime(date);
@@ -44,13 +45,21 @@ public class VacationCriteria {
 		this.pageNum=pageNum;
 		this.amount=amount;
 	}
-	
+//	public VacationCriteria(Date nowMonth) {
+//		super();
+//		cal.setTime(nowMonth);
+//		cal.set(Calendar.DATE, 1);
+//		this.nowMonth=cal.getTime();
+//		cal.add(Calendar.MONTH, 1);
+//		this.nextMonth=cal.getTime();
+//		
+//	}
 	public void upVacationMonth() {
 		this.nowMonth=this.nextMonth;
 		cal.setTime(nextMonth);
 		cal.add(Calendar.MONTH, +1);
 		this.nextMonth=cal.getTime();
-		System.out.println("nowMonth : "+nowMonth+"nextMonth : "+nextMonth);
+		//System.out.println("nowMonth : "+nowMonth+"nextMonth : "+nextMonth);
 	}
 	
 	public void downVacationMonth() {
@@ -58,7 +67,7 @@ public class VacationCriteria {
 		cal.setTime(nowMonth);
 		cal.add(Calendar.MONTH, -1);
 		this.nowMonth=cal.getTime();
-		System.out.println("nowMonth : "+nowMonth+"nextMonth : "+nextMonth);
+		//System.out.println("nowMonth : "+nowMonth+"nextMonth : "+nextMonth);
 	}
 	
 	private String[] getTypeArr() {
