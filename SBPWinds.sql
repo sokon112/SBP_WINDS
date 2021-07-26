@@ -64,3 +64,15 @@ select * from AUTH_TAB;
 -- 		~
 -- 21030020 pw020
 
+
+-- 로그인/로그아웃 중 테이블 없다고 에러시
+select * from PERSISTENT_LOGINS;
+
+create table persistent_logins(
+   username varchar(64) not null,
+   series varchar(64) not null,
+   token varchar(64) not null,
+   last_used timestamp not null
+);
+
+
