@@ -1,13 +1,11 @@
 CREATE TABLE DOC_TAB(
     docNum NUMBER(10) CONSTRAINT pk_dn primary key,
     title VARCHAR2(200) not null,
-    contents VARCHAR2(500) not null,
+    contents VARCHAR2(500),
     authority VARCHAR2(20) not null,
-    attachFile BLOB,
-    retentDate NUMBER(10) not null,
+    retentDate NUMBER(10),
     send VARCHAR2(20) not null,
     dest VARCHAR2(20) not null,
-    review VARCHAR2(20),
     state VARCHAR2(20) not null,
     storage VARCHAR2(20) not null,
     message VARCHAR2(200),
@@ -15,6 +13,7 @@ CREATE TABLE DOC_TAB(
 );
 
 drop table doc_tab;
+drop table doc_attach;
 
 CREATE SEQUENCE docNum_seq;
 
@@ -39,7 +38,6 @@ VALUES(docNum.NEXTVAL, --공문번호
 '테스트제목', --공문 제목
 '테스트 내용입니다. 테스트 테스트 무야호~', --공문 내용
 'emp', --권한
-'123456',-- 첨부 파일 있을 시 'filename.확장자' 파일명으로 
 3, --만료기한(직접 설정)
 '19080010', --공문 작성자 사번(로그인 한 회원 사번)
 '10030001', --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
@@ -54,7 +52,6 @@ VALUES(docNum.NEXTVAL, --공문번호
 '테스트제목', --공문 제목
 '테스트 내용입니다. 테스트 테스트 무야호~', --공문 내용
 'emp', --권한
-'123456',-- 첨부 파일 있을 시 'filename.확장자' 파일명으로 
 3, --만료기한(직접 설정)
 '19080010', --공문 작성자 사번(로그인 한 회원 사번)
 '10030001', --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
@@ -69,11 +66,10 @@ VALUES(docNum.NEXTVAL, --공문번호
 '테스트제목', --공문 제목
 '테스트 내용입니다. 테스트 테스트 무야호~', --공문 내용
 'emp', --권한
-'123456',-- 첨부 파일 있을 시 'filename.확장자' 파일명으로 
 3, --만료기한(직접 설정)
 '19080010', --공문 작성자 사번(로그인 한 회원 사번)
 '10030001', --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
-'요청', --공문 상태(가장 기본 DEFAULT값)
+'임시저장', --공문 상태(가장 기본 DEFAULT값)
 '임시', --보관함(가장 기본 DEFAULT값) / 임시저장 버튼 클릭시 '임시'로 설정
 '', --상신 모달에서 검토자와 결재자가 메세지 작성시
 SYSDATE);

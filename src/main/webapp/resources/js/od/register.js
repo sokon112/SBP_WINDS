@@ -3,11 +3,6 @@
  */
 $(function(){
 	
-	//상신 및 임시저장
-	
-	
-	
-	
 	//결재선 모달 관련
 	$("#reg").click(function(){
 		var title = $("#title").val()
@@ -15,8 +10,6 @@ $(function(){
 		$("#modaltitle").val(title);
 		$("#modalattach").val(attach);
 	})
-	
-	
 	
 	let modal = $("#modal2");
 	
@@ -150,10 +143,25 @@ $(function(){
 		uploadResult.append(str);
 	}// showUploadedFile 종료	
 	
+	function checksubmit(){
+		var destin = $("#destinput").val();
+		var title = $("#title").val();
+		
+		if(destin===''){
+			alert("결재선을 지정해주세요");
+			destin.focus();
+		}
+		if(title===''){
+			alert("제목을 입력하세요");
+			title.focus();
+		}
+	}
 	
 	//submit 버튼 중지
 	$("button[type='submit']").click(function(e){
 		e.preventDefault();
+		
+		checksubmit();
 		
 		var str="";
 		$(".uploadResult ul li").each(function(idx,obj){
@@ -165,7 +173,33 @@ $(function(){
 			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 		})
 		
+		str+="<input type='hidden' name='storage' value='미결'>";
+		str+="<input type='hidden' name='state' value='요청'>";
 		
+		//게시글 등록 폼 가져오기
+		var form = $("form");
+		//수집된 내용 폼에 추가하기
+		form.append(str);
+		//폼 전송하기
+		form.submit();
+	})
+	
+	$("#tempsave").click(function(){
+		
+		checksubmit();
+		
+		var str="";
+		$(".uploadResult ul li").each(function(idx,obj){
+			var job = $(obj);
+			//수집된 정보를 hidden 태그로 작성
+			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+		})
+		
+		str+="<input type='hidden' name='storage' value='임시' />";
+		str+="<input type='hidden' name='state' value='임시저장' />";
 		
 		//게시글 등록 폼 가져오기
 		var form = $("form");

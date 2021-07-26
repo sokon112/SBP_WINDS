@@ -50,7 +50,7 @@ public class DocController {
 		
 		if(service.owrite(vo)) {
 			rttr.addFlashAttribute("result", vo.getDocNum());
-			return "redirect:waitlist";
+			return "redirect:/od/";
 		}
 		else {
 			return "redirect:register";
@@ -58,7 +58,7 @@ public class DocController {
 	}
 	@GetMapping({"/tempread","/modify"})
 	public void readtemp(int docNum,@ModelAttribute("cri") Criteria cri,Model model) {
-		log.info("임시 저장 페이지 가져오기"+docNum+" cri : "+cri);
+		log.info("공문 페이지 가져오기"+docNum+" cri : "+cri);
 		
 		OfficeNoticeVO vo = service.oread(docNum);
 		model.addAttribute("vo", vo);

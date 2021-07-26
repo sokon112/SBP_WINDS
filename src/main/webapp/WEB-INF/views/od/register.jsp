@@ -12,8 +12,6 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading"></div>
-			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<form action="" method="post" role="form">
 					<!-- 상신 Modal -->
@@ -23,27 +21,10 @@
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="staticBackdropLabel">상신</h5>
+									<h5 class="modal-title" id="staticBackdropLabel"></h5>
 								</div>
 								<p></p>
 								<div class="modal-body">
-									<div class="btn-group" data-toggle="buttons">
-										<label class="btn btn-info"> 
-										<input type="hidden" name="storage" value="미결">
-										<input type="hidden" name="state" value="요청">
-										<input type="checkbox" autocomplete="off" name="state" value="요청"> 상신
-										</label> 
-										<label class="btn btn-primary">
-										<input type="hidden" name="storage" value="완결"> 
-										<input type="hidden" name="state" value="결재완료"> 
-										<input type="checkbox" autocomplete="off" name="state" value="결재완료"> 결재
-										</label> 
-										<label class="btn btn-danger"> 
-										<input type="hidden" name="storage" value="반려">
-										<input type="hidden" name="state" value="반려">
-										<input type="checkbox" autocomplete="off" name="state" value="반려"> 반려
-										</label>
-									</div>
 									<div>
 										<div class="form-group">
 										<p></p>
@@ -63,8 +44,7 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-									<input type="hidden" name="authority" value='<sec:authentication property="principal.memberVO.authority"/>'>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">										
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 									<button type="submit" class="btn btn-primary">상신</button>
 								</div>
@@ -82,7 +62,7 @@
 								</div>
 								<div class="modal-body">
 									<label class="input-group-text" for="dest">결재자</label>
-									<select class="form-select" id="dest" name="dest">
+									<select class="form-select" id="dest">
 										<option selected>결재자 선택</option>
 										<option value="15080002">인사팀</option>
 										<option value="15080003">기획팀</option>
@@ -102,8 +82,8 @@
 					</div>
                 	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1" id="reg">상신</button>
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal2">결재선</button>
-					<button type="submit" class="btn btn-info">임시저장</button>             			
-					<button type="reset" class="btn btn-info">취소</button>
+					<button type="button" class="btn btn-info" id="tempsave">임시저장</button>             			
+					<button type="reset" class="btn btn-info" onclick="location.href='/od/'">취소</button>
 					<p></p>
 					<div class="col-sm-4">
 						<label class="form-label">작성일자</label> 
@@ -113,7 +93,7 @@
 						<p></p>
 						<select class="form-select"
 							name="retentDate">
-							<option selected>보존기한을 선택하세요</option>
+							<option value="0" selected>보존기한을 선택하세요</option>
 							<option value="1">1년</option>
 							<option value="2">2년</option>
 							<option value="3">3년</option>
@@ -122,13 +102,14 @@
 					</div>
 
 					<div class="col-sm-4">
-						<label class="form-label">작성자</label> 
-						<input class="form-control" name="send" readonly="readonly" value='<sec:authentication property="principal.memberVO.name"/>'>
+						<label class="form-label">작성자</label>
+						<input type="hidden" name="send" value='<sec:authentication property="principal.memberVO.id"/>'> 
+						<input class="form-control" readonly="readonly" value='<sec:authentication property="principal.memberVO.name"/>'>
 					</div>
 					<p></p>
 					<div class="col-sm-4">
 						<label class="form-label">수신자</label> 
-						<input class="form-control" name="dest" readonly="readonly" id="destinput">
+						<input class="form-control" readonly="readonly" id="destinput">
 					</div>
 					<p></p>
 					<div class="col-md-6">
