@@ -5,12 +5,16 @@
 
 <%@include file="/WEB-INF/includes/od/header.jsp" %>
 <style>
-#searchForm {
+#searchForm  {
 float: right;
+margin-bottom:10px;
 }
 .page-header {
 margin-top: 3px;
 }
+th,td{
+text-align:center;
+width:15%;}
 
 
 </style>
@@ -20,13 +24,13 @@ margin-top: 3px;
          <h1 class="page-header">ERDsystem</h1>
        </div>       <!-- /.col-lg-12 -->
 	     <div class="row"> <!-- start search -->
-	     	<div class="col-md-12" style="margin-bottom:10px">	<!--search Form-->
+	     	<div class="col-md-12">	<!--search Form-->
 	            <form action="mainsearchlist" id="searchForm" >
 	                <input type="text" name="keyword" placeholder="문서 제목을 입력하세요." />
 	                <!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
 	                <input type="hidden" name="pageNum" value="${PageVO.cri.pageNum}"/>
 	                <input type="hidden" name="amount" value="${PageVO.cri.amount}"/>
-	                <button type="button" class="btn btn-default">검색</button>
+	                <button type="button" class="btn btn-default" id="search">검색</button>
 	           </form>
 	        </div>                             	 
 			<!-- end search -->

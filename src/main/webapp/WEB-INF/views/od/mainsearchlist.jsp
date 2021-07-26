@@ -6,7 +6,6 @@
 <%@include file="/WEB-INF/includes/od/header.jsp" %>
 
 <style>
-.small {font-size:12px;}
 
 /* Hide for mobile, show later */
 .sidebar {
@@ -15,12 +14,12 @@
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 51px;
+    top: 55px;
     bottom: 0;
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
+    margin-top:0;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color:  #f8f8f8;
@@ -36,20 +35,19 @@
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
-}
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  font-size:24px;
+  font-size:15px;
   color: #fff;
   background-color: #428bca;
+  height:45px;
 }
+
 /*
  * Main content
  */
 
 .main {
   padding: 5px;
+  
 }
 @media (min-width: 768px) {
   .main {
@@ -58,23 +56,30 @@
   }
 }
 
-
 th,td{
-text-align:center;}
+text-align:center;
+width:15%;}
+
+#amount {
+	margin-bottom:10px;
+	width:100px;
+	position:relative;
+	left:70px;
+}
+
 </style>
 
 		<div class="container-fluid">
 			<div class="row">
         		<div class="col-sm-3 col-md-2 sidebar" >
 		        	<ul class="nav nav-sidebar">
-		            	<li class="active" style="line-height:120%"><a href='/od/'><small class="small">SBPwinds</small><br><strong>ERDsystem</strong><span class="sr-only">(current)</span></a></li>
 		            	<li><a href='waitlist'>미결문서 보관함</a></li>
 		            	<li><a href='completelist'>결재완료 보관함</a></li>
 		            	<li><a href='templist'>임시보관함</a></li>
 		          	</ul>
 		        </div>
             	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-               		<h1 class="page-header">Search List</h1>
+               		<h1 class="page-header">검색 결과</h1>
                 		<div class="col-lg-12">
                     		<div class="panel panel-default">
                         		<div class="panel-heading">
@@ -82,7 +87,7 @@ text-align:center;}
                         		</div>
                         		<!-- /.panel-heading -->
                         		<div class="panel-body">
-                        		<div class="col-md-2 col-md-offset-10" style="margin-bottom:10px">
+                        		<div class="col-md-5 col-md-offset-10" >
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
                             	   	<select name="" id="amount" class="form-control" >
                             	   		<option value="10" <c:out value="${pageVO.cri.amount==10?'selected':''}"/>>10</option>
