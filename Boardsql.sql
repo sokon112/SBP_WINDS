@@ -5,7 +5,7 @@ CREATE TABLE board_table
     nickname VARCHAR2(20) NOT NULL, 
     title VARCHAR2(20) NOT NULL, 
     uploaddate  DATE default sysdate NOT NULL, 
-    views NUMBER NOT NULL, 
+    views number(8) default 0,
     password VARCHAR2(20) NOT NULL, 
     contents VARCHAR2(2000) NOT NULL
 );
@@ -15,21 +15,23 @@ create SEQUENCE board_tb_seq
 start with 1
 INCREMENT BY 1;
 
+drop SEQUENCE board_tb_seq;
+
 --게시판 테이블 정보 입력
-insert into board_table(bno,nickname,title, views, password, contents)
-values(board_tb_seq.nextval,'김명준','엠제이',1,'1234','참가번호 777 ');
-insert into board_table(bno,nickname,title, views, password, contents)
-values(board_tb_seq.nextval,'차은우','아스트로',2,'1234','잘생겼다');
-insert into board_table(bno,nickname,title, views, password, contents)
-values(board_tb_seq.nextval,'윤산하','아스트로막내',3,'1234','뿌뿌');
-insert into board_table(bno,nickname,title, views, password, contents)
-values(board_tb_seq.nextval,'전전국','방탄막내',3,'1234','토끼');
+insert into board_table(bno,nickname,title, password, contents)
+values(board_tb_seq.nextval,'김명준','엠제이','1234','참가번호 777 ');
+insert into board_table(bno,nickname,title,  password, contents)
+values(board_tb_seq.nextval,'차은우','아스트로','1234','잘생겼다');
+insert into board_table(bno,nickname,title,  password, contents)
+values(board_tb_seq.nextval,'윤산하','아스트로막내','1234','뿌뿌');
+insert into board_table(bno,nickname,title, password, contents)
+values(board_tb_seq.nextval,'전전국','방탄막내','1234','토끼');
 
 --게시판 테이블 검색
 select * from board_table;
 
 
-
+drop table board_table;
 
 
 -- 동호회 테이블 Table Create SQL
@@ -148,7 +150,7 @@ alter table special_attach add constraint fk_sp_attach foreign key(no) reference
 alter table special_attach add constraint fk_sp_attach foreign key(no) references event_table(no);
 
 --조회수
-alter table board_table change column viewcnt view_cnt int default 0;
+alter table board_table change column views views int default 0;
 
 
 

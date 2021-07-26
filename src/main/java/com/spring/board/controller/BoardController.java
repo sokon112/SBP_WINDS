@@ -103,6 +103,26 @@ public class BoardController {
 		return "redirect:boardlist";
 	}
 	
+	
+	//수정처리 비밀번호 확인
+	@PostMapping("/main/modifypassword")
+	public String boardUpdate(@ModelAttribute BoardVO vo, Model model) {
+		//비밀번호 체크
+		log.info("정보 : ",vo.getBno());
+//		boolean result = service.boardcheckpw(bno, password);
+//		if(result) {
+//			model.addAttribute("vo",vo);
+//			return "redirect:boardmodify";
+//		}else {
+//			model.addAttribute("message","비밀번호 불일치");
+//			return "/main/boardlist";
+//		}
+		return "";
+	}
+	
+	
+	
+	
 	//게시글 삭제 + post
 //	@PreAuthorize("principal.username == #nickname")
 	@PostMapping("/main/boarddelete")
@@ -118,7 +138,17 @@ public class BoardController {
 		return "redirect:boardlist";
 	}
 	
-	
+	//조회수 올리기
+//	@GetMapping("/main/boardlist")
+//	public String view(int bno,BoardCriteria cri,RedirectAttributes rttr) {
+//		
+//		rttr.addAttribute("type", cri.getType());
+//		rttr.addAttribute("keyword", cri.getKeyword());
+//		rttr.addAttribute("pageNum", cri.getPageNum());
+//		rttr.addAttribute("amount", cri.getAmount());
+//		
+//		return "redirect:boardlist";
+//	}
 	
 	
 }

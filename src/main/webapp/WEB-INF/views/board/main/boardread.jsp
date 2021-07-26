@@ -41,9 +41,9 @@
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
 							<%-- 로그인 여부 확인 --%>
-							<c:if test="${info.authority=='ad'}">
+							<c:if test="${info.memberVO.authority}=='ad'">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-								<button type="button" class="btn btn-warning">삭제</button>
+								<button type="button" class="btn btn-warning">삭제!</button>
 							</c:if>
 						</sec:authorize>
 						<button type="button" class="btn btn-info pull-right">목록</button>
@@ -62,7 +62,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">게시글 수정</h5>
+				<h5 class="modal-title">게시글 수정 및 삭제</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -72,13 +72,13 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="password" type="number"></td>
+						<td><input class="form-control" id="inpassword" type="text" name="password"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="modalSubmit" class="btn btn-success">완료</button>
-				<button type="button" id="modalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" id="mmodalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="mmodalCansle" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -96,14 +96,21 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<p>삭제가 완료되었습니다.</p>
+				<table class="table">
+					<tr>
+						<td>비밀번호 입력</td>
+						<td><input class="form-control" id="delpassword" type="text" name="password"></td>
+					</tr>
+				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id="dmodalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="dmodalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
 </div>
+
 <%-- 댓글 리스트 보여주는 부분 --%>
 <div class="container-fluid" style="margin: 20px">
 	<div class="row">
@@ -136,7 +143,7 @@
 </div>
 <!-- row close -->
 <%-- 댓글 작성 폼 --%>
-<div class="modal" tabindex="-1" id="replyModal">
+<div class="modal commentmodal" tabindex="-1" id="replyModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -163,7 +170,6 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
 				<button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
-
 				<button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
 				<button type="button" class="btn btn-primary" data-dismiss="modal"
 					id="modalCloseBtn">종료</button>
@@ -175,11 +181,12 @@
 
 <%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="" id="operForm">
-	<input type="hidden" name="type" value="${cri.type}" /> <input
-		type="hidden" name="keyword" value="${cri.keyword}" /> <input
-		type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
-		type="hidden" name="amount" value="${cri.amount}" /> <input
-		type="hidden" name="bno" value="${vo.bno}" />
+	<input type="hidden" name="type" value="${cri.type}" /> 
+	<input type="hidden" name="keyword" value="${cri.keyword}" /> 
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${cri.amount}" /> 
+	<input type="hidden" name="bno" value="${vo.bno}" />
+	<input type="hidden" name="password" value="" />
 </form>
 <script>
 	let bno = ${vo.bno};

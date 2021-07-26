@@ -1,5 +1,5 @@
 /**
- * read.jsp 에서 사용할 스크립트
+ * eventread.jsp 에서 사용할 스크립트
  */
 
 function showImage(fileCallPath){
@@ -81,18 +81,51 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//Modify버튼 클릭시  get방식 /board/boardmodify
-	$(".btn-default").click(function(){
-		operForm.attr('action','/board/boardmodify');
+	//목록버튼 클릭시 get /event/eventlist
+	$(".btn-info").click(function(){
+		operForm.find("input[name='eno']").remove();
+		operForm.attr('action','/board/event/eventlist');
 		operForm.submit();
 	})
 	
-	//목록버튼 클릭시 get /board/boardlist
-	$(".btn-info").click(function(){
-		operForm.find("input[name='bno']").remove();
-		operForm.attr('action','/board/boardlist');
+	//모달 영역 가져오기
+	let modifymodal = $(".modifymodal");	
+	
+	//수정버튼 클릭시 모달창 보이기
+	$("#modifyBtn").click(function(){
+		modifymodal.modal("show");
+	})	
+	
+	//수정-완료버튼 클릭시  get방식 /event/eventmodify
+	$("#modalSubmit").click(function(){
+		operForm.attr('action','/board/event/eventmodify');
 		operForm.submit();
+			
 	})
+	
+	//수정-취소버튼 클릭시  get방식 /board/boardmodify
+	$("#modalcansle").click(function(){
+		modifymodal.modal('hide');
+	})
+	
+	
+	//삭제버튼 클릭시 모달창 보이기
+	$(".deletemodal").click(function(){
+		modifymodal.modal("show");
+	})	
+	
+	//삭제-완료버튼 클릭시  get방식 /board/boardmodify
+	$("#modalSubmit").click(function(){
+		operForm.attr('action','/board/event/eventlist');
+		operForm.submit();
+			
+	})
+	
+	//삭제-취소버튼 클릭시  get방식 /event/eventmodify
+	$("#modalcansle").click(function(){
+		modifymodal.modal('hide');
+	})
+	
 	
 	
 	//댓글 작업

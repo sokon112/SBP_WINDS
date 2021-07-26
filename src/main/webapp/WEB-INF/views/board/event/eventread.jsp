@@ -46,13 +46,65 @@
 								<button type="button" class="btn btn-warning">삭제</button>
 							</c:if>
 						</sec:authorize>
+						<button type="button" class="btn btn-info pull-right">목록</button>
+						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
 
-						<button type="button" class="btn btn-default">수정</button>
-						<button type="button" class="btn btn-danger">삭제</button>
-						<button type="button" class="btn btn-info"
-							onclick="location.href='eventlist'">목록</button>
 					</form>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 수정 버튼 모달 추가 -->
+<div class="modal modifymodal" tabindex="-1" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">게시글 수정</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<tr>
+						<td>비밀번호 입력</td>
+						<td><input class="form-control" id="password" type="number"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="modalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="modalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 삭제 버튼 모달 추가 -->
+<div class="modal deletemodal" tabindex="-1" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">게시글 삭제</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<tr>
+						<td>비밀번호 입력</td>
+						<td><input class="form-control" id="password" type="number"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="modalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="modalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>

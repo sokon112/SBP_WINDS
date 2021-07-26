@@ -73,7 +73,7 @@
 	
 	<!-- 조회수 올리기 -->
 	<update id="boardupdateviews">
-		update board_table set views = views + 1 where bnp = #{bno}
+		update board_table set views = views + 1 where bno = #{bno}
 	</update>
 	
 	
@@ -97,7 +97,10 @@
 		</trim>
 	</sql>
 	
-
+	<select id="boardcheckpw" resultType="int">
+		select bno from board_table
+		where bno=#{bno} and password=#{password}
+	</select>
 
 
 

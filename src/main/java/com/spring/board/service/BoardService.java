@@ -13,8 +13,8 @@ public interface BoardService {
 	public List<BoardVO> boardlist(BoardCriteria cri);
 	public BoardVO boardread(int bno);
 	public int boardtotal(BoardCriteria cri);
-	public int Boardupdateviews(String views);
+//	public boolean Boardupdateviews(int bno); //조회수
+	public boolean boardcheckpw(int bno, String password);
 	
-
 	
 }

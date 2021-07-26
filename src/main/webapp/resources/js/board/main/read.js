@@ -9,7 +9,7 @@ $(function(){
 	var operForm = $("#operForm");
 	
 	
-	//목록버튼 클릭시 get /board/boardlist
+	//목록버튼 클릭시 get /board/main/boardlist
 	$(".btn-info").click(function(){
 		operForm.find("input[name='bno']").remove();
 		operForm.attr('action','/board/main/boardlist');
@@ -17,32 +17,47 @@ $(function(){
 	})
 	
 	//모달 영역 가져오기
-	let modifymodal = $(".modifymodal");	
+	let modifymodal = $(".modifymodal");
+	let deletemodal = $(".deletemodal");	
 	
 	//수정버튼 클릭시 모달창 보이기
 	$("#modifyBtn").click(function(){
 		modifymodal.modal("show");
 	})	
 	
-	//완료버튼 클릭시  get방식 /board/boardmodify
-	$("#modalSubmit").click(function(){
-		operForm.attr('action','/board/boardmodify');
+	//수정-완료버튼 클릭시  get방식 /board/main/boardmodify
+	$("#mmodalSubmit").click(function(){
+		operForm.find("input[name='password']").val($('#inpassword').val());		
+		operForm.attr('action','modifypassword');
+		operForm.attr('method','post');
 		operForm.submit();
 			
 	})
 	
-	//취소버튼 클릭시  get방식 /board/boardmodify
-	$("#modalcansle").click(function(){
+	//수정-취소버튼 클릭시  get방식 /board/main/boardmodify
+	$("#mmodalCansle").click(function(){
 		modifymodal.modal('hide');
 	})
 	
-	//삭제버튼 클릭시 get /board/main/boardread
+	
+	//삭제버튼 클릭시 모달창 보이기
 	$(".deletemodal").click(function(){
 		deletemodal.modal("show");
-		operForm.find("remove[name='bno'] and [password='passord']").remove();
-		operForm.attr('action','/board/main/boardread');
-		
+	})	
+	
+	//삭제-완료버튼 클릭시  get방식 /board/boardlist
+	$("#dmodalSubmit").click(function(){
+		var delpassword = $("#delpassword").val();
+		operForm.find("input[name='password']").val($('#inpassword').val());
+		operForm.attr('action','');
+		operForm.attr('method','post');
 		operForm.submit();
+			
+	})
+	
+	//삭제-취소버튼 클릭시  get방식 /board/boardlist
+	$("#dmodalCansle").click(function(){
+		modifymodal.modal('hide');
 	})
 	
 	//댓글 작업

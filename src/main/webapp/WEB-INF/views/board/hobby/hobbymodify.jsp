@@ -31,13 +31,10 @@
 								readonly="readonly" value="${vo.hwriter}">
 						</div>
 						<%-- spring security 추가 --%>
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 
-
-
-						<button type="submit" data-oper='list' class="btn btn-info">List</button>
+						<button type="submit" data-oper='list' class="btn btn-info">완료</button>
 					</form>
 				</div>
 			</div>
