@@ -105,7 +105,10 @@
                                 </thead>
 								<tbody>
 								<!-- 게시판 리스트 반복문 -->
+								<sec:authentication property="principal.memberVO" var="info"/>
+							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="vo" items="${completelist}">
+								<c:if test="${info.deptNum==vo.deptNum}">
 									<tr>
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
@@ -113,7 +116,9 @@
 										<td>${vo.name}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regDate}"/></td>
 									</tr>
-								</c:forEach>								
+								</c:if>
+								</c:forEach>
+								</sec:authorize>								
 								</tbody>
                             </table>
 							

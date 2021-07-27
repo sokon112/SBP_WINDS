@@ -45,7 +45,7 @@
 <![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,U.deptNum,D2.deptName,U.name,regDate
+		rownum rn,docNum,title,U.id,D2.deptName,U.name,regDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id

@@ -111,8 +111,10 @@
                                     </tr>									
                                 </thead>
 								<tbody>
-								
+								<sec:authentication property="principal.memberVO" var="info"/>
+							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="vo" items="${waitlist}">
+								<c:if test="${info.deptNum==vo.deptNum}">
 									<tr>
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
@@ -122,7 +124,9 @@
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regDate}"/></td>
 										<td>${vo.retentDate} 년</td>
 									</tr>
-								</c:forEach>								
+								</c:if>
+								</c:forEach>
+								</sec:authorize>								
 								</tbody>
                             </table>
                             <div class="col-md-2">

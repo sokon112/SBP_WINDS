@@ -110,7 +110,10 @@
                                 </thead>
 								<tbody>
 								<!-- 게시판 리스트 반복문 -->
+								<sec:authentication property="principal.memberVO" var="info"/>
+							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="vo" items="${templist}">
+								<c:if test="${info.id==vo.id}">
 									<tr>
 										<td><input type="checkbox" class="normal" /></td>
 										<td>${vo.docNum}</td>
@@ -119,7 +122,9 @@
 										<td>${vo.name}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regDate}"/></td>
 									</tr>
-								</c:forEach>								
+								</c:if>
+								</c:forEach>
+								</sec:authorize>								
 								</tbody>
                             </table>
                             	   <div class="col-md-2">
