@@ -142,6 +142,7 @@
 	</div>
 </div>
 <!-- row close -->
+
 <%-- 댓글 작성 폼 --%>
 <div class="modal commentmodal" tabindex="-1" id="replyModal">
 	<div class="modal-dialog">

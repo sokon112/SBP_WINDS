@@ -25,16 +25,16 @@ $(function(){
 		modifymodal.modal("show");
 	})	
 	
-	//수정-완료버튼 클릭시  get방식 /board/main/boardmodify
+	//수정-비번완료버튼 클릭시  get방식 /board/main/boardmodify
 	$("#mmodalSubmit").click(function(){
 		operForm.find("input[name='password']").val($('#inpassword').val());		
-		operForm.attr('action','modifypassword');
+		operForm.attr('action','/main/modifypassword');
 		operForm.attr('method','post');
 		operForm.submit();
 			
 	})
 	
-	//수정-취소버튼 클릭시  get방식 /board/main/boardmodify
+	//수정-비번취소버튼 클릭시  get방식 /board/main/boardmodify
 	$("#mmodalCansle").click(function(){
 		modifymodal.modal('hide');
 	})
@@ -48,7 +48,7 @@ $(function(){
 	//삭제-완료버튼 클릭시  get방식 /board/boardlist
 	$("#dmodalSubmit").click(function(){
 		var delpassword = $("#delpassword").val();
-		operForm.find("input[name='password']").val($('#inpassword').val());
+		operForm.find("input[name='password']").val($('#delpassword').val());
 		operForm.attr('action','');
 		operForm.attr('method','post');
 		operForm.submit();
