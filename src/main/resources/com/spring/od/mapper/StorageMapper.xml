@@ -5,12 +5,12 @@
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,state,D2.deptName,U.name,regDate,retentDate
+		rownum rn,docNum,title,state,U.deptNum,D2.deptName,U.name,regDate,retentDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
-		on D2.Deptnum = U.Deptnum 
+		on D2.deptNum = U.deptNum 
 		where D1.storage = '미결' AND
 		
 		]]> 
@@ -25,12 +25,12 @@
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,D2.deptName,U.name,regDate
+		rownum rn,docNum,title,U.deptNum,D2.deptName,U.name,regDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
-		on D2.Deptnum = U.Deptnum
+		on D2.deptNum = U.deptNum
 		where D1.storage = '완결' AND
 		
 		]]> 
@@ -45,12 +45,12 @@
 <![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,D2.deptName,U.name,regDate
+		rownum rn,docNum,title,U.deptNum,D2.deptName,U.name,regDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
-		on D2.Deptnum = U.Deptnum
+		on D2.deptNum = U.deptNum
 		where D1.storage = '임시' AND
 		]]> 
 		<include refid="criteria"></include>

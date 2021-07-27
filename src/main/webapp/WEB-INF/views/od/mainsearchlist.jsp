@@ -109,7 +109,10 @@ width:15%;}
 		                                </thead>
 								<!-- 게시판 리스트 반복문 -->
 								<tbody>
+								<sec:authentication property="principal.memberVO" var="info"/>
+							 		<sec:authorize access="isAuthenticated()">
 									<c:forEach var="vo" items="${searchlist}">
+									<c:if test="${info.deptNum==vo.deptNum}">	
 										<tr>
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
@@ -117,7 +120,9 @@ width:15%;}
 										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 										<td>${vo.storage}</td>
 										</tr>
+									</c:if>	
 									</c:forEach>
+									</sec:authorize>
 								</tbody>
                             </table>
                             	   

@@ -20,6 +20,8 @@ public class StorageListVO {
 	private String title;
 	private String state;
 	private String deptName;
+	private String id;
+	private int deptNum;
 	private String name;
 	private Date regDate;
 	private int retentDate;

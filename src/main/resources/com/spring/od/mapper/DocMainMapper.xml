@@ -4,11 +4,13 @@
 
 <!-- 미결 -->
 <select id ="mainwaitlist" resultType="com.spring.od.domain.StorageListVO">
-	select rownum rn,docNum,title,name,state,regDate
-	from (select docNum,title,U.name name,state,regDate 
+	select rownum rn,docNum,title,name,deptNum,state,regDate
+	from (select docNum,title,U.name name,U.deptNum deptNum,state,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
+		inner join DM_TAB D2
+		on D2.deptNum = U.deptNum
 		where D1.storage = '미결'
 		order by regDate desc)
 	where rownum between 0 and 11 order by rn desc
@@ -17,11 +19,13 @@
 
 <!-- 완료 -->
 <select id ="maincompletelist" resultType="com.spring.od.domain.StorageListVO">
-	select rownum rn,docNum,title,name,regDate
-	from (select docNum,title,U.name name,regDate 
+	select rownum rn,docNum,title,name,deptNum,regDate
+	from (select docNum,title,U.name name,U.deptNum deptNum,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
+		inner join DM_TAB D2
+		on D2.deptNum = U.deptNum
 		where D1.storage = '완결'
 		order by regDate desc)
 	where rownum between 0 and 4 order by rn desc
@@ -30,11 +34,13 @@
 
 <!-- 임시 -->
 <select id ="maintemplist" resultType="com.spring.od.domain.StorageListVO">
-	select rownum rn,docNum,title,name,regDate
-	from (select docNum,title,U.name name,regDate
+	select rownum rn,docNum,title,id,name,regDate
+	from (select docNum,title,U.id id,U.name name,regDate
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
+		inner join DM_TAB D2
+		on D2.deptNum = U.deptNum
 		where D1.storage = '임시'
 		order by regDate desc)
 	where rownum between 0 and 4 order by rn desc
@@ -45,8 +51,12 @@
 <!-- 검색 -->
 <select id = "mainsearchlist" resultType="com.spring.od.domain.StorageListVO">
 select * from( 
-select rownum rn, docNum,title,state,regDate,storage
-from DOC_TAB
+select rownum rn, docNum,title,state,U.deptNum,regDate,storage
+from DOC_TAB D1
+inner join USER_TAB U
+on D1.send = U.id
+inner join DM_TAB D2
+on D2.deptNum = U.deptNum
 where title like '%'||#{keyword}||'%'
 <![CDATA[ and rownum <= (#{pageNum}*#{amount}))
 where rn > ((#{pageNum}-1)*#{amount})]]>

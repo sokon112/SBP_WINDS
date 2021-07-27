@@ -25,6 +25,7 @@ public class OfficeNoticeVO {
 	private String dest; // 수신처/결재자사번
 	private String state; // 공문 상태
 	private String storage; // 공문보관함
+	private String deptNum; // 부서번호
 	private String message; // 결재/반려시 메세지 추가
 	private Date regDate; //수신일자
 	
