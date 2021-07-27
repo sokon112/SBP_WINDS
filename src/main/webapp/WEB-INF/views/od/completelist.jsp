@@ -68,31 +68,30 @@
                 </div>
                 <div class="row"> <!-- start search -->
                             	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                            	  <div class="col-xs-2"><!--search Form-->
+                            	  <div class="col-xs-13"><!--search Form-->
                             		<form action="" id="searchForm">
+                            		<div class="col-md-7"></div>
+                            		<div class="col-md-2">
                             			<select name="type" id="" class="form-control">
                             				<option value="">-----------</option>
                             				<option value="T" <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
                             				<option value="U" <c:out value="${pageVO.cri.type=='U'?'selected':''}"/>>송신자</option>
                             			</select>
+                            		</div>
                             			<input type="text" name="keyword" value="${pageVO.cri.keyword}" />
                             			<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
                             			<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}"/>
                             			<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
                             			<button type="button" class="btn btn-default">검색</button>
-                            		</form>
-                            	   </div>
+                            		</div>
+                            	</form>
+                            </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="container-fluid" style="margin-top:20px">
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            
-                        </div>
-                        
-                        <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -118,7 +117,7 @@
 								</tbody>
                             </table>
 							
-                            	   <div class="col-md-2 col-md-offset-2">
+                            	   <div class="col-md-2">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
                             	   	<select name="" id="amount" class="form-control">
                             	   		<option value="10"  <c:out value="${pageVO.cri.amount==10?'selected':''}"/>>10</option>
