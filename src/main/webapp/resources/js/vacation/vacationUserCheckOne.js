@@ -23,6 +23,7 @@ $(function(){
 	})
 	//반납 버튼 클릭시  get방식 /vacation/cancle
 	$(".btn-info").click(function(){
+		
 		operForm.attr('action','/vacation/cancle');
 		operForm.submit();
 	})

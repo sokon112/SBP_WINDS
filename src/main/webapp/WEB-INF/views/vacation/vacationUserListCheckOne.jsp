@@ -22,7 +22,7 @@
                            휴가신청서
                         </div>
                         <!-- /.panel-heading -->
-<form action=""role="form">
+<form action="/vacation/cancle" role="form" method="post">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -31,10 +31,6 @@
             </tr> 
             </thead>
             <tbody>
-
-           	 	
-				
-
                 <tr>
                     <th>분류</th>
                     <td colspan="3">
@@ -79,9 +75,17 @@
 <form action="" id="operForm" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<input type="hidden" name="id" value="${info.username}"/>
-	<input type="hidden" name="vacationAppNum" value="${vacation.vacationAppNum}" /> 	
+	<input type="hidden" name="vacationAppNum" value="${vacation.vacationAppNum}" />
+	 	
 </form>
-
+<form action="" id="operForm" method="post">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="id" value="${info.username}"/>
+	<input type="hidden" name="vacationAppNum" value="${vacation.vacationAppNum}" />
+	<%-- <input type="hidden" name="vacation" value="${vacation}"> --%>
+		<input type="hidden" name="cri" value="${VacationPageVO.cri} " />
+	 	
+</form>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 <script src="/resources/js/vacation/vacationUserCheckOne.js"></script>
 </body>

@@ -48,6 +48,7 @@ public class VacationController {
 	public void showUserMain(Model model,String id, VacationCriteria cri,String monthMove) {
 		//VacationCriteria cri=new VacationCriteria();
 		
+		
 		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
@@ -159,30 +160,35 @@ public class VacationController {
 	}
 	//승인 상태일때 날짜가 아직이면 반납 가능
 	@PostMapping("/cancle")
-	public String cancle(VacationVO vacation, VacationCriteria cri,String id,Model model,RedirectAttributes rttr) {
-		log.info("반납버튼 눌렀을때");
+	public String cancle(VacationVO vacation,String id, VacationCriteria cri,Model model,RedirectAttributes rttr) {
+		log.info("반납버튼 눌렀을때"+vacation);
 		Date date=new Date();
+		//VacationCriteria cri=new VacationCriteria();
 		boolean result=false;
 		Date startday=service.vacationDay(vacation.getVacationAppNum());
-		if(date.after(startday)){
+		if(!date.after(startday)){
+			log.info("날짜 통과"+vacation);
 			result=service.cancleVacation(vacation);
 			if(result) {
 				
-				return "redirect:/vacation/";
+				service.vChangeCnt(-1,id);
+				rttr.addFlashAttribute("message","반납 성공");
+				
 			}else {
-				List<VacationVO> vlist=service.showUser(id,cri);
-				int total = service.total(cri);
-				model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
-				model.addAttribute("list",vlist);
-				return "redirect:/vacation/vacationUserList";
+				rttr.addFlashAttribute("message","반납 실패");
 			}
+			
 		}
 		else {
+			log.info("날짜 실패"+vacation);
 			rttr.addFlashAttribute("cancleError","기간이 지난 휴가입니다.");
-			return "/vacation/vacationUserList";
 		}
 			
-		
+		List<VacationVO> vlist=service.showUser( id,cri);
+		int total = service.total(cri);
+		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+		model.addAttribute("list",vlist);
+		return "/vacation/vacationUserList";
 	}
 
 //	휴가신청 작성 페이지
@@ -242,14 +248,18 @@ public class VacationController {
 //	휴가심사 페이지
 //	승인 -> PutMapping("/ok")
 	@PutMapping("/{vacationAppNum}/ok")
-	public ResponseEntity<String> ok(@PathVariable("vacationAppNum")int vacationAppNum){
-		//int vCnt=0;
-		/*
-		 * if(getType().equals("half")) { setType("반차"); vCnt=1; }else {
-		 * vacation.setType("월차"); vCnt=2; }
-		 */
-		log.info("문서 승인"+vacationAppNum);
-		return service.ok(vacationAppNum)?new ResponseEntity<String>("success",HttpStatus.OK):
+	public ResponseEntity<String> ok(@PathVariable("vacation")VacationVO vacation){
+		int vCnt=0;
+
+		if(vacation.getType().equals("반차")) {
+			vCnt=1;
+		}
+		else {
+			vCnt=2;
+		}
+		service.vChangeCnt(vCnt, vacation.getId());
+		log.info("문서 승인"+vacation.getVacationAppNum());
+		return service.ok(vacation.getVacationAppNum())?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 		
 	}

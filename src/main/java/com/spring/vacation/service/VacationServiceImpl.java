@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
@@ -124,7 +123,7 @@ public class VacationServiceImpl implements VacationService {
 	@Override
 	public boolean vChangeCnt(int vcnt, String id) {
 		// TODO Auto-generated method stub
-		return false;
+		return mapper.vChangeCnt(vcnt, id)>0?true:false;
 	}
 	
 

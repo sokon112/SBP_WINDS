@@ -66,7 +66,7 @@
  </div>
  </div>
  </div>  
-    <form action="" id="operForm" method="post">
+<form action="" id="operForm" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<input type="hidden" name="id" value="${info.username}"/>
 </form>

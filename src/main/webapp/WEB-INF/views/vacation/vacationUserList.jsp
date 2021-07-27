@@ -22,11 +22,16 @@
                         
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-
-    <button type="button" class="glyphicon glyphicon-arrow-left"></button>
-    <input class="form-control" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
+    <form action="" method="post" id="leftForm">
+	<!-- <a href="" name="glyphiconl" class="glyphicon glyphicon-arrow-left"></a> -->
+	<button type="submit" class="glyphicon glyphicon-arrow-left" ></button>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="hidden" name="id" value="${info.username}"/> 
+	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth} " />
+    </form>
+    <input class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
 	
-    <button type="button" class="glyphicon glyphicon-arrow-right" ></button>
+    <!-- <button type="button" class="glyphicon glyphicon-arrow-right" ></button> -->
 
         <table class="table table-striped table-bordered table-hover">
 	<thead>
@@ -73,9 +78,11 @@
 
 <form action="" method="post" id="preMonthForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-	<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
-<!-- 	<input type="hidden" name="monthMove" value="pre"> -->
+	<input type="hidden" name="cri" value="${VacationPageVO.cri} " />
+	
 	<input type="hidden" name="id" value="${info.username}"/>
+	
+	<input type="hidden" name="monthMove" value="basic"/>
 </form>
 <div align="center">
 	<h1>SBP Winds Vacation</h1>

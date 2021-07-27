@@ -84,7 +84,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 	</update>
 	<!-- 승인에 변동사항 생기는 경우! -->
 	<update id="vChangeCnt">
-		update vacationScedule set vacationcnt=vacationcnt+#{vcnt} where id=#{id};
+		update vacationScedule set vacationcnt=vacationcnt+#{vcnt} where id=#{id}
 	</update>
 	<!-- 거절 -->
 	<update id="vNo">

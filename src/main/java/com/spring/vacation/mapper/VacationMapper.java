@@ -24,7 +24,7 @@ public interface VacationMapper {
 
 	//cnt계산 다시 하기
 	public int  vChangeCnt(@Param("vcnt")int vcnt,@Param("id")String id);
-
+	
 	//사용자
 	public int vInsertUserApp(VacationVO vacation);
 	public List<VacationVO> vShowUser(@Param("id")String id,@Param("cri")VacationCriteria cri);
