@@ -30,6 +30,8 @@
 						<div class="form-group">
 							<label>닉네임</label> <input class="form-control" name="nickname"
 								readonly="readonly" value="${vo.nickname}">
+								
+							<input type="hidden" name="password" value="${vo.password}">
 						</div>
 						<%-- spring security 추가 --%>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -52,6 +54,7 @@
 		type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
 		type="hidden" name="amount" value="${cri.amount}" /> <input
 		type="hidden" name="bno" value="${vo.bno}" />
+	<input type="hidden" name="password" value="${vo.password}">
 
 	<%-- spring security 추가 --%>
 	<input type="hidden" name="${_csrf.parameterName}"

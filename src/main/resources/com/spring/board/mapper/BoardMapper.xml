@@ -97,7 +97,7 @@
 		</trim>
 	</sql>
 	
-	<select id="boardcheckpw" resultType="int">
+	<select id="boardcheckpw" resultType="com.spring.board.domain.BoardVO">
 		select bno from board_table
 		where bno=#{bno} and password=#{password}
 	</select>

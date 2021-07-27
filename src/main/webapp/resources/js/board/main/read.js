@@ -28,7 +28,7 @@ $(function(){
 	//수정-비번완료버튼 클릭시  get방식 /board/main/boardmodify
 	$("#mmodalSubmit").click(function(){
 		operForm.find("input[name='password']").val($('#inpassword').val());		
-		operForm.attr('action','/main/modifypassword');
+		operForm.attr('action','/board/main/modifypassword');
 		operForm.attr('method','post');
 		operForm.submit();
 			

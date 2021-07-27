@@ -38,8 +38,8 @@
 								readonly="readonly" value="${vo.nickname}">
 						</div>
 						<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
-						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal" var="info" />
 							<%-- 로그인 여부 확인 --%>
 							<c:if test="${info.memberVO.authority}=='ad'">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
@@ -187,7 +187,11 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
 	<input type="hidden" name="amount" value="${cri.amount}" /> 
 	<input type="hidden" name="bno" value="${vo.bno}" />
+	<input type="hidden" name="title" value="${vo.title}" />
+	<input type="hidden" name="contents" value="${vo.contents}" />
+	<input type="hidden" name="nickname" value="${vo.nickname}" />
 	<input type="hidden" name="password" value="" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 </form>
 <script>
 	let bno = ${vo.bno};

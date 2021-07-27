@@ -17,6 +17,6 @@ public interface BoardMapper { //게시판
 	public int boardupdateviews(int bno); //조회수
 	public int boardtotalCnt(BoardCriteria cri); //게시글 검색
 	public int boardcommentCntUpdate(@Param("bno") int bno, @Param("amount") int amount);// 게시글 댓글수 
-	public int boardcheckpw(@Param("bno")int bno, @Param("password")String password); //비밀번호 체크
+	public BoardVO boardcheckpw(@Param("bno")int bno, @Param("password")String password); //비밀번호 체크
 	
 }

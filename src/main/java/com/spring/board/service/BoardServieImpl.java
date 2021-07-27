@@ -83,7 +83,7 @@ public class BoardServieImpl implements BoardService {
 	@Override
 	public boolean boardcheckpw(int bno, String password) {
 		
-		return bmapper.boardcheckpw(bno, password)>0?true:false;
+		return bmapper.boardcheckpw(bno, password)!=null?true:false;
 	}
 
 

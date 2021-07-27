@@ -2,6 +2,8 @@ package com.spring.board.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.BoardCriteria;
 
@@ -14,7 +16,7 @@ public interface BoardService {
 	public BoardVO boardread(int bno);
 	public int boardtotal(BoardCriteria cri);
 //	public boolean Boardupdateviews(int bno); //조회수
-	public boolean boardcheckpw(int bno, String password);
+	public boolean boardcheckpw(@Param("bno") int bno,@Param("password") String password);
 	
 	
 }

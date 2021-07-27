@@ -106,18 +106,19 @@ public class BoardController {
 	
 	//수정처리 비밀번호 확인
 	@PostMapping("/main/modifypassword")
-	public String boardUpdate(@ModelAttribute BoardVO vo, Model model) {
+	public String boardUpdate(int bno, String password, @ModelAttribute BoardVO vo, Model model) {
 		//비밀번호 체크
-		log.info("정보 : ",vo.getBno());
-//		boolean result = service.boardcheckpw(bno, password);
-//		if(result) {
-//			model.addAttribute("vo",vo);
-//			return "redirect:boardmodify";
-//		}else {
-//			model.addAttribute("message","비밀번호 불일치");
-//			return "/main/boardlist";
-//		}
-		return "";
+		log.info("정보 : ",vo);
+		boolean result = service.boardcheckpw(bno, password);
+		if(result) {
+			model.addAttribute("vo",vo);
+			model.addAttribute("bno",bno);
+			return "redirect:boardmodify";
+		}else {
+			model.addAttribute("message","잘못된 비밀번호 입니다.");
+			return "redirect:boardlist";
+		}
+//		return "redirect:/";
 	}
 	
 	
