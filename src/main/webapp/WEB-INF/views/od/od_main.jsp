@@ -10,7 +10,7 @@ float: right;
 margin-bottom:10px;
 }
 .page-header {
-margin-top: 3px;
+margin-top: 10px;
 }
 th,td{
 text-align:center;
@@ -21,7 +21,7 @@ width:15%;}
 
  	<div class="container-fluid">
        <div class="col-lg-12">
-         <h1 class="page-header">전자 결재 시스템</h1>
+         <h2 class="page-header">전자 결재 시스템</h2>
        </div>       <!-- /.col-lg-12 -->
 	     <div class="row"> <!-- start search -->
 	     	<div class="col-md-12">	<!--search Form-->
