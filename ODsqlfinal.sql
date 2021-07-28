@@ -35,7 +35,7 @@ alter table doc_attach add constraint pk_attach_uuid primary key(uuid);
 alter table doc_attach add constraint fk_doc_attach foreign key(docNum) references DOC_TAB(docNum);
 
 --공문 더미 데이터 -미결
-INSERT INTO DOC_TAB (docNum,title,contents,authority,attachfile,retentDate,send,dest,state,storage,message,regDate)
+INSERT INTO DOC_TAB (docNum,title,contents,authority,retentDate,send,dest,state,storage,deptNum,message,regDate)
 VALUES(docNum.NEXTVAL, --공문번호
 '테스트제목', --공문 제목
 '테스트 내용입니다. 테스트 테스트 무야호~', --공문 내용
@@ -45,11 +45,12 @@ VALUES(docNum.NEXTVAL, --공문번호
 '10030001', --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
 '요청', --공문 상태(가장 기본 DEFAULT값)
 '미결', --보관함(가장 기본 DEFAULT값) / 임시저장 버튼 클릭시 '임시'로 설정
+1005,
 '', --상신 모달에서 검토자와 결재자가 메세지 작성시
 SYSDATE);
 
 --공문 더미 데이터 -결재완료
-INSERT INTO DOC_TAB (docNum,title,contents,authority,attachfile,retentDate,send,dest,state,storage,message,regDate)
+INSERT INTO DOC_TAB (docNum,title,contents,authority,retentDate,send,dest,state,storage,deptNum,message,regDate)
 VALUES(docNum.NEXTVAL, --공문번호
 '테스트제목', --공문 제목
 '테스트 내용입니다. 테스트 테스트 무야호~', --공문 내용
@@ -59,11 +60,12 @@ VALUES(docNum.NEXTVAL, --공문번호
 '10030001', --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
 '완료', --공문 상태(가장 기본 DEFAULT값)
 '완결', --보관함(가장 기본 DEFAULT값) / 임시저장 버튼 클릭시 '임시'로 설정
+1005,
 'ㅇㅋㅇㅋ', --상신 모달에서 검토자와 결재자가 메세지 작성시
 SYSDATE);
 
 --공문 더미 데이터 -임시
-INSERT INTO DOC_TAB (docNum,title,contents,authority,attachfile,retentDate,send,dest,state,storage,message,regDate)
+INSERT INTO DOC_TAB (docNum,title,contents,authority,retentDate,send,dest,state,storage,deptNum,message,regDate)
 VALUES(docNum.NEXTVAL, --공문번호
 '테스트제목', --공문 제목
 '테스트 내용입니다. 테스트 테스트 무야호~', --공문 내용
@@ -73,6 +75,7 @@ VALUES(docNum.NEXTVAL, --공문번호
 '10030001', --공문 수신자 사번(결재선 모달 확인 버튼 클릭시 선택한 결재자 사번으로 설정)
 '임시저장', --공문 상태(가장 기본 DEFAULT값)
 '임시', --보관함(가장 기본 DEFAULT값) / 임시저장 버튼 클릭시 '임시'로 설정
+1005,
 '', --상신 모달에서 검토자와 결재자가 메세지 작성시
 SYSDATE);
 

@@ -8,6 +8,7 @@
   <Loggers>
   
   	<Logger name="com.spring.home" level="trace"/>
+  	<Logger name="com.spring.home.service" level="trace"/>
   	<Logger name="com.spring.od.controller" level="trace"/>
   	<Logger name="com.spring.vacation.controller" level="trace"/>
   	<Logger name="com.spring.board.controller" level="trace"/>
