@@ -47,7 +47,7 @@
 							</c:if>
 						</sec:authorize>
 						<button type="button" class="btn btn-info pull-right">목록</button>
-						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right" id="deleteBtn">삭제</button>
 						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
 
 					</form>
@@ -62,7 +62,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">게시글 수정 및 삭제</h5>
+				<h5 class="modal-title">게시글 수정</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>

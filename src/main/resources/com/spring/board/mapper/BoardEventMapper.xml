@@ -63,6 +63,15 @@
 		 eno>0
 	</select>
 	
+	<!-- 조회수 올리기 -->
+	<update id="boardupdateviews">
+		update board_table set views = views + 1 where bno = #{bno}
+	</update>
+	
+	<!-- 특정번호 조회 : bno에 해당하는 게시물 가져오기(read) -->
+	<select id="boardread" resultType="com.spring.board.domain.BoardVO">
+		select * from board_table where bno=#{bno}
+	</select>
 	
 	
 	<!-- 동적 SQL -->

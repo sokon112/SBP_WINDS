@@ -47,7 +47,7 @@
 							</c:if>
 						</sec:authorize>
 						<button type="button" class="btn btn-info pull-right">목록</button>
-						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right"  id="deleteBtn">삭제</button>
 						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
 
 					</form>
@@ -111,11 +111,16 @@
 </div>
 <%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="" id="operForm">
-	<input type="hidden" name="type" value="${cri.type}" /> <input
-		type="hidden" name="keyword" value="${cri.keyword}" /> <input
-		type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
-		type="hidden" name="amount" value="${cri.amount}" /> <input
-		type="hidden" name="eno" value="${vo.eno}" />
+	<input type="hidden" name="type" value="${cri.type}" /> 
+	<input type="hidden" name="keyword" value="${cri.keyword}" /> 
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${cri.amount}" /> 
+	<input type="hidden" name="eno" value="${vo.eno}" />
+	<input type="hidden" name="title" value="${vo.title}" />
+	<input type="hidden" name="contents" value="${vo.contents}" />
+	<input type="hidden" name="writer" value="${vo.writer}" />
+	<input type="hidden" name="password" value="" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 </form>
 <script>
 	let eno = $

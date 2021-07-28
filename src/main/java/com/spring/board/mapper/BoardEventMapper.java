@@ -2,21 +2,25 @@ package com.spring.board.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardEventAttachFileDTO;
 import com.spring.board.domain.BoardEventVO;
+import com.spring.board.domain.BoardVO;
 
 
 
-public interface BoardEventMapper { //이벤트,동호회(스페셜) 게시글
+public interface BoardEventMapper { //이벤트게시글
 
 	public int beinsert(BoardEventVO vo); //삽입
 	public int bedelete(int bno); //삭제
 	public int beupdate(BoardEventVO vo); //수정
 	public List<BoardEventVO> belist(BoardCriteria cri); //전체리스트 
 	public BoardEventVO beread(int bno); //읽기
+	public int boardupdateviews(int bno); //조회수
 	public int betotalCnt(BoardCriteria cri); // 검색
-	
+	public BoardVO boardcheckpw(@Param("bno")int bno, @Param("password")String password); //비밀번호 체크
 	public List<BoardEventAttachFileDTO> beAttachList(int bno);
-	//게시물 수
+	//첨부파일 리스트
 }

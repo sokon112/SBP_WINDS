@@ -102,6 +102,18 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 		return hattachMapper.bhfindByBno(bno);
 	}
 
+	// 조회수 올리기
+	@Override
+	public boolean boardupdateviews(int bno){
+		return hmapper.boardupdateviews(bno)>0? true:false;
+	}
+		
+	//비밀번호 체크
+	@Override
+	public boolean boardcheckpw(int bno, String password) {
+		return hmapper.boardcheckpw(bno, password)!=null?true:false;
+	}
+
 	
 
 	

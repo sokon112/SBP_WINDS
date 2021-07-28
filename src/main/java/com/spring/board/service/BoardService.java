@@ -10,12 +10,12 @@ import com.spring.board.domain.BoardCriteria;
 public interface BoardService {
 
 	public boolean boardinsert(BoardVO vo);
-	public boolean boarddelete(int bno);
+	public boolean boarddelete(@Param("bno")int bno, @Param("password")String password);
 	public boolean boardupdate(BoardVO vo);
 	public List<BoardVO> boardlist(BoardCriteria cri);
 	public BoardVO boardread(int bno);
 	public int boardtotal(BoardCriteria cri);
-//	public boolean Boardupdateviews(int bno); //조회수
+	public boolean boardupdateviews(int bno); //조회수
 	public boolean boardcheckpw(@Param("bno") int bno,@Param("password") String password);
 	
 	

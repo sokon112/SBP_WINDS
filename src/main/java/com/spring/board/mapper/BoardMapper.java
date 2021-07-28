@@ -10,7 +10,7 @@ import com.spring.board.domain.BoardCriteria;
 public interface BoardMapper { //게시판
 
 	public int boardinsert(BoardVO vo); //게시글 삽입
-	public int boarddelete(int bno);  //게시글 삭제
+	public int boarddelete(@Param("bno")int bno, @Param("password")String password);  //게시글 삭제
 	public int boardupdate(BoardVO vo);  //게시글 수정
 	public List<BoardVO> boardlist(BoardCriteria cri);  //게시판 전체 리스트 검색
 	public BoardVO boardread(int bno); //게시글 읽기

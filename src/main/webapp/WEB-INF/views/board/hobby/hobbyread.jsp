@@ -41,11 +41,11 @@
 							<%-- 로그인 여부 확인 --%>
 							<c:if test="${info.authority=='ad'}">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-								<button type="button" class="btn btn-warning">삭제</button>
+								<button type="button" class="btn btn-warning">삭제!</button>
 							</c:if>
 						</sec:authorize>
 						<button type="button" class="btn btn-info pull-right">목록</button>
-						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right" id="deleteBtn">삭제</button>
 						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
 
 					</form>
@@ -115,7 +115,12 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />	
 	<input type="hidden" name="hno"  value="${vo.hno}"/>
-</form>       
+	<input type="hidden" name="title" value="${vo.title}" />
+	<input type="hidden" name="contents" value="${vo.contents}" />
+	<input type="hidden" name="writer" value="${vo.writer}" />
+	<input type="hidden" name="password" value="" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+</form>
 <script>
 	let hno = ${vo.hno};
 	

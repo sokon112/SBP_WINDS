@@ -102,6 +102,18 @@ public class BoardEventServieImpl implements BoardEventService {
 		return eattachMapper.befindByBno(bno);
 	}
 
+	@Override
+	public boolean boardupdateviews(int bno) {
+		return emapper.boardupdateviews(bno)>0? true:false;
+
+	}
+
+	@Override
+	public boolean boardcheckpw(int bno, String password) {
+		return emapper.boardcheckpw(bno, password)!=null?true:false;
+
+	}
+
 	
 
 	

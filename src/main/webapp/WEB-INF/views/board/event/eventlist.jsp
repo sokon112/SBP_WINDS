@@ -34,6 +34,8 @@ th,td{
                                         <th style="width:50%">제 목</th>
                                         <th style="width:12%">작성자</th>
                                         <th style="width:16%">작성일</th>
+                                        <th style="width:12%">조회수</th>
+                                        
                                     </tr>                           
                                 </thead>
                         <tbody>
@@ -44,6 +46,9 @@ th,td{
                               <td><a href="${vo.eno}" class="move">${vo.etitle}</a></td>
                               <td>${vo.ewriter}</td>
                               <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.euploaddate}"/></td>
+                              <td><span class="badge badge-pill badge-primary">${vo.views}</span></td>
+                              
+                           	
                            </tr>
                         </c:forEach>                        
                         </tbody>

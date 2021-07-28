@@ -41,7 +41,7 @@ $(function(){
 	
 	
 	//삭제버튼 클릭시 모달창 보이기
-	$(".deletemodal").click(function(){
+	$("#deleteBtn").click(function(){
 		deletemodal.modal("show");
 	})	
 	
@@ -49,7 +49,7 @@ $(function(){
 	$("#dmodalSubmit").click(function(){
 		var delpassword = $("#delpassword").val();
 		operForm.find("input[name='password']").val($('#delpassword').val());
-		operForm.attr('action','');
+		operForm.attr('action','/board/main/boarddelete');
 		operForm.attr('method','post');
 		operForm.submit();
 			

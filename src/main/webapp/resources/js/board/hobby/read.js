@@ -77,21 +77,59 @@ $(function(){
 	
 	
 	
-	
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//Modify버튼 클릭시  get방식 /board/boardmodify
-	$(".btn-default").click(function(){
-		operForm.attr('action','/board/boardmodify');
+	
+	//목록버튼 클릭시 get /board/hobby/hobbylist
+	$(".btn-info").click(function(){
+		operForm.find("input[name='hno']").remove();
+		operForm.attr('action','/board/hobby/hobbylist');
 		operForm.submit();
 	})
 	
-	//목록버튼 클릭시 get /board/boardlist
-	$(".btn-info").click(function(){
-		operForm.find("input[name='bno']").remove();
-		operForm.attr('action','/board/boardlist');
+	//모달 영역 가져오기
+	let modifymodal = $(".modifymodal");
+	let deletemodal = $(".deletemodal");	
+	
+	//수정버튼 클릭시 모달창 보이기
+	$("#modifyBtn").click(function(){
+		modifymodal.modal("show");
+	})	
+	
+	//수정-비번완료버튼 클릭시  get방식 /board/hobby/hobbymodify
+	$("#mmodalSubmit").click(function(){
+		operForm.find("input[name='password']").val($('#inpassword').val());		
+		operForm.attr('action','/board/hobby/modifypassword');
+		operForm.attr('method','post');
 		operForm.submit();
+			
+	})
+	
+	//수정-비번취소버튼 클릭시  get방식 /board/hobby/hobbymodify
+	$("#mmodalCansle").click(function(){
+		modifymodal.modal('hide');
+	})
+	
+	
+	//삭제버튼 클릭시 모달창 보이기
+	$("#deleteBtn").click(function(){
+		deletemodal.modal("show");
+	})	
+	
+	//삭제-완료버튼 클릭시  get방식 /hobby/hobbylist
+	$("#dmodalSubmit").click(function(){
+		var delpassword = $("#delpassword").val();
+		operForm.find("input[name='password']").val($('#delpassword').val());
+		operForm.attr('action','/board/hobby/hobbydelete');
+		operForm.attr('method','post');
+		operForm.submit();
+			
+	})
+	
+	//삭제-취소버튼 클릭시  get방식 /hobby/hobbylist
+	$("#dmodalCansle").click(function(){
+		modifymodal.modal('hide');
 	})
 	
 	

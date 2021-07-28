@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardPageVO;
+import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.BoardEventAttachFileDTO;
 import com.spring.board.domain.BoardEventVO;
 import com.spring.board.service.BoardService;
@@ -79,12 +80,22 @@ public class BoardEventController {    //이벤트
 	
 	
 	
-	@GetMapping({"/event/eventread","/event/eventmodify"})
-	public void read(int eno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+eno+" cri : "+cri);  
+	@GetMapping("/event/hitread")
+	public String read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
+		beservice.boardupdateviews(bno);
+		model.addAttribute("cri", cri);
+		model.addAttribute("bno",bno);
+		return "redirect:eventread";
+	}
+	
+	@GetMapping({"/event/eventmodify","/event/eventread"})
+	public void modifyget(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
 		
-		BoardEventVO vo=beservice.beread(eno);
+		BoardEventVO vo=beservice.beread(bno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
+		model.addAttribute("cri", cri);
 	}
 	
 	// modify+post 수정한 후 list

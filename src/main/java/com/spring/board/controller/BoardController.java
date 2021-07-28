@@ -51,14 +51,12 @@ public class BoardController {
 	}	
 	
 	
-//	@PreAuthorize("isAuthenticated()") //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
 	@GetMapping("/main/boardregister")
 	public void boardregister() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
-//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/main/boardregister")
 	public String boardregisterPost(BoardVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
@@ -73,8 +71,17 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping({"/main/boardread","/main/boardmodify"})
-	public void read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+	@GetMapping("/main/hitread")
+	public String read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
+		service.boardupdateviews(bno);
+		model.addAttribute("cri", cri);
+		model.addAttribute("bno",bno);
+		return "redirect:boardread";
+	}
+	
+	@GetMapping({"/main/boardmodify","/main/boardread"})
+	public void modifyget(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
 		
 		BoardVO vo=service.boardread(bno);
@@ -83,7 +90,6 @@ public class BoardController {
 	}
 	
 	// modify+post 수정한 후 list
-//	@PreAuthorize("principal.username == #vo.nickname")
 	@PostMapping("/main/boardmodify")
 	public String modify(BoardVO vo,String nickname,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
@@ -106,16 +112,21 @@ public class BoardController {
 	
 	//수정처리 비밀번호 확인
 	@PostMapping("/main/modifypassword")
-	public String boardUpdate(int bno, String password, @ModelAttribute BoardVO vo, Model model) {
+	public String boardUpdate(int bno, String password, @ModelAttribute BoardVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
 		//비밀번호 체크
 		log.info("정보 : ",vo);
 		boolean result = service.boardcheckpw(bno, password);
 		if(result) {
 			model.addAttribute("vo",vo);
 			model.addAttribute("bno",bno);
+
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
 			return "redirect:boardmodify";
 		}else {
-			model.addAttribute("message","잘못된 비밀번호 입니다.");
 			return "redirect:boardlist";
 		}
 //		return "redirect:/";
@@ -125,31 +136,33 @@ public class BoardController {
 	
 	
 	//게시글 삭제 + post
-//	@PreAuthorize("principal.username == #nickname")
 	@PostMapping("/main/boarddelete")
-	public String delete(int bno,String nickname,BoardCriteria cri,RedirectAttributes rttr) {
+	public String delete(int bno,String password,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+bno);
 		
+		boolean result = service.boardcheckpw(bno, password);
+		if(result) {
+			service.boarddelete(bno, password);
+
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
+			return "redirect:boardlist";
+		}else {
+			rttr.addAttribute("bno",bno);
+
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
+			return "redirect:boardread";
+		}
 		
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:boardlist";
 	}
 	
-	//조회수 올리기
-//	@GetMapping("/main/boardlist")
-//	public String view(int bno,BoardCriteria cri,RedirectAttributes rttr) {
-//		
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-//		
-//		return "redirect:boardlist";
-//	}
-	
+
 	
 }

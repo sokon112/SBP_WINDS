@@ -19,6 +19,11 @@ $(function(){
 		$("#myModal").modal("show");
 	}
 	
+	//조회수 증가
+	
+	
+	
+	
 	
 	//하단의 페이지 나누기 번호 클릭시 
 	var actionForm = $("#actionForm");
@@ -50,7 +55,7 @@ $(function(){
 		
 		//actionForm에 bno 값을 추가하여 actionForm 보내기		
 		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr('href')+"'>");
-		actionForm.attr('action','boardread');
+		actionForm.attr('action','hitread');
 		actionForm.submit();		
 	})
 	

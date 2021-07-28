@@ -56,10 +56,6 @@ $(function(){
 	
 	
 	
-	
-	
-	
-	
 	//확대된 사진 영역 없애기
 	$(".bigPictureWrapper").click(function(){
 		//원본 사진 줄이기
@@ -76,12 +72,11 @@ $(function(){
 	
 	
 	
-	
-	
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//목록버튼 클릭시 get /event/eventlist
+	
+	//목록버튼 클릭시 get /board/event/eventlist
 	$(".btn-info").click(function(){
 		operForm.find("input[name='eno']").remove();
 		operForm.attr('action','/board/event/eventlist');
@@ -89,42 +84,53 @@ $(function(){
 	})
 	
 	//모달 영역 가져오기
-	let modifymodal = $(".modifymodal");	
+	let modifymodal = $(".modifymodal");
+	let deletemodal = $(".deletemodal");	
 	
 	//수정버튼 클릭시 모달창 보이기
 	$("#modifyBtn").click(function(){
 		modifymodal.modal("show");
 	})	
 	
-	//수정-완료버튼 클릭시  get방식 /event/eventmodify
-	$("#modalSubmit").click(function(){
-		operForm.attr('action','/board/event/eventmodify');
+	//수정-비번완료버튼 클릭시  get방식 /board/event/eventmodify
+	$("#mmodalSubmit").click(function(){
+		operForm.find("input[name='password']").val($('#inpassword').val());		
+		operForm.attr('action','/board/event/modifypassword');
+		operForm.attr('method','post');
 		operForm.submit();
 			
 	})
 	
-	//수정-취소버튼 클릭시  get방식 /board/boardmodify
-	$("#modalcansle").click(function(){
+	//수정-비번취소버튼 클릭시  get방식 /board/event/eventmodify
+	$("#mmodalCansle").click(function(){
 		modifymodal.modal('hide');
 	})
 	
 	
 	//삭제버튼 클릭시 모달창 보이기
-	$(".deletemodal").click(function(){
-		modifymodal.modal("show");
+	$("#deleteBtn").click(function(){
+		deletemodal.modal("show");
 	})	
 	
-	//삭제-완료버튼 클릭시  get방식 /board/boardmodify
-	$("#modalSubmit").click(function(){
-		operForm.attr('action','/board/event/eventlist');
+	//삭제-완료버튼 클릭시  get방식 /event/eventlist
+	$("#dmodalSubmit").click(function(){
+		var delpassword = $("#delpassword").val();
+		operForm.find("input[name='password']").val($('#delpassword').val());
+		operForm.attr('action','/board/event/eventdelete');
+		operForm.attr('method','post');
 		operForm.submit();
 			
 	})
 	
-	//삭제-취소버튼 클릭시  get방식 /event/eventmodify
-	$("#modalcansle").click(function(){
+	//삭제-취소버튼 클릭시  get방식 /event/eventlist
+	$("#dmodalCansle").click(function(){
 		modifymodal.modal('hide');
 	})
+	
+	
+	
+	
+	
 	
 	
 	

@@ -33,13 +33,13 @@ public class BoardServieImpl implements BoardService {
 
 	@Transactional
 	@Override
-	public boolean boarddelete(int bno) { //게시글 삭제
+	public boolean boarddelete(int bno, String password) { //게시글 삭제
 		
 		//댓글 삭제
 		bcommentMapper.bcommentdeleteAll(bno);		
 		
 		//게시글 삭제
-		return bmapper.boarddelete(bno)>0?true:false;
+		return bmapper.boarddelete(bno, password)>0?true:false;
 	}
 
 	@Transactional
@@ -59,10 +59,10 @@ public class BoardServieImpl implements BoardService {
 	}
 
 	// 조회수 올리기
-//	@Override
-//	public boolean Boardupdateviews(int bno){
-//		return bmapper.boardupdateviews(bno);
-//	}
+	@Override
+	public boolean boardupdateviews(int bno){
+		return bmapper.boardupdateviews(bno)>0? true:false;
+	}
 	
 	
 	
@@ -86,6 +86,8 @@ public class BoardServieImpl implements BoardService {
 		return bmapper.boardcheckpw(bno, password)!=null?true:false;
 	}
 
+
+	
 
 
 

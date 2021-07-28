@@ -22,6 +22,7 @@ import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardHobbyAttachFileDTO;
 import com.spring.board.domain.BoardHobbyVO;
 import com.spring.board.domain.BoardPageVO;
+import com.spring.board.domain.BoardVO;
 import com.spring.board.service.BoardService;
 import com.spring.board.service.BoardHobbyService;
 
@@ -79,12 +80,22 @@ public class BoardHobbyController { //동호회
 	
 	
 	
-	@GetMapping({"/hobby/hobbyread","/hobby/hobbymodify"})
-	public void read(int hno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+hno+" cri : "+cri);  
+	@GetMapping("/hobby/hitread")
+	public String read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
+		bhservice.boardupdateviews(bno);
+		model.addAttribute("cri", cri);
+		model.addAttribute("bno",bno);
+		return "redirect:boardread";
+	}
+	
+	@GetMapping({"/hobby/hobbymodify","/hobby/hobbyread"})
+	public void modifyget(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
 		
-		BoardHobbyVO vo=bhservice.bhread(hno);
+		BoardHobbyVO vo=bhservice.bhread(bno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
+		model.addAttribute("cri", cri);
 	}
 	
 	// modify+post 수정한 후 list

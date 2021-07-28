@@ -41,8 +41,7 @@ th, td {
 									<td>${vo.bno}</td>
 									<td><a href="${vo.bno}" class="move">${vo.title}</a></td>
 									<td>${vo.nickname}</td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-											value="${vo.uploaddate}" /></td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.uploaddate}" /></td>
 									<td><span class="badge badge-pill badge-primary">${vo.views}</span></td>
 								</tr>
 							</c:forEach>
@@ -54,6 +53,7 @@ th, td {
 							<div class="col-md-8">
 								<!--search Form-->
 								<form action="" id="searchForm">
+								<div class="col-md-2">
 									<select name="type" id="" class="form-control">
 										<option value="">-----------</option>
 										<option value="T"
@@ -63,9 +63,9 @@ th, td {
 										<option value="TC"
 											<c:out value="${boardPageVO.cri.type=='TC'?'selected':''}"/>>제목
 											or 내용</option>
-									</select> <input type="text" name="keyword"
-										value="${boardPageVO.cri.keyword}" />
-
+									</select> 
+									</div>
+									<input type="text" name="keyword" value="${boardPageVO.cri.keyword}" />
 									<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
 									<input type="hidden" name="pageNum"
 										value="${boardPageVO.cri.pageNum}" /> <input type="hidden"
@@ -73,7 +73,8 @@ th, td {
 									<button type="button" class="btn btn-default">검색</button>
 								</form>
 							</div>
-							<div class="col-md-2 col-md-offset-2">
+							<div class="col-md-4"></div>
+							<div class="col-md-1 col-md-offset-2">
 								<!--페이지 목록 갯수 지정하는 폼-->
 								<select name="" id="amount" class="form-control">
 									<option value="10"
@@ -86,8 +87,8 @@ th, td {
 										<c:out value="${boardPageVO.cri.amount==40?'selected':''}"/>>40</option>
 								</select>
 								<p></p>
-								<a href="boardregister" class="btn btn-primary pull-right">글쓰기</a>
 							</div>
+								<a href="boardregister" class="btn btn-primary pull-right">글쓰기</a>
 						</div>
 					</div>
 					<!-- end search -->

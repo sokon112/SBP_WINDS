@@ -25,7 +25,7 @@ values(board_tb_seq.nextval,'차은우','아스트로','1234','잘생겼다');
 insert into board_table(bno,nickname,title,  password, contents)
 values(board_tb_seq.nextval,'윤산하','아스트로막내','1234','뿌뿌');
 insert into board_table(bno,nickname,title, password, contents)
-values(board_tb_seq.nextval,'전전국','방탄막내','1234','토끼');
+values(5,'전전국','방탄막내','1234','토끼');
 
 --게시판 테이블 검색
 select * from board_table;
@@ -152,6 +152,7 @@ alter table special_attach add constraint fk_sp_attach foreign key(no) reference
 --조회수
 alter table board_table change column views views int default 0;
 
+update board_table set views = views + 1 where bno = 1;
 
 
 
