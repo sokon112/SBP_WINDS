@@ -38,7 +38,7 @@ width:15%;}
 	      	<div class="col-xs-6">
 	      		<div class="panel panel-default">
 	      			<div class="panel-heading" onclick="location.href='waitlist'" style="padding :8px">
-	      				<button type="button" class="btn btn-link"><strong>미결 문서 보관함</strong></button>
+	      				<button type="button" class="btn btn-link"><strong>미결 문서 보관함</strong> <span class="badge" style="background-color:#FF5A5A">N</span></button>
 	        		</div>
 	         		<!-- /.panel-heading -->
 	          		<div class="panel-body" style="padding-bottom:10px">
