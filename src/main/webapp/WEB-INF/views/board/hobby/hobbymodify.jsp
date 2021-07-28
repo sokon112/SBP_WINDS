@@ -57,9 +57,9 @@
 
 <%-- 스크립트 --%>
 <script>
-	let bno = $
+	let hno = $
 	{
-		vo.bno
+		vo.hno
 	};
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";

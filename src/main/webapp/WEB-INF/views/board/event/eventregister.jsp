@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">이벤트 글쓰기</div>
+				<div class="panel-heading">커뮤니티 > 이벤트 > 이벤트 글쓰기</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<form action="" method="post" role="form">
@@ -51,8 +51,8 @@
 						<%-- spring security 추가 --%>
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
-						<button type="submit" class="btn btn-default ">올리기</button>
-						<button type="reset" class="btn btn-default "
+						<button type="submit" name="eventregister" class="btn btn-default ">올리기</button>
+						<button type="reset" name="eventlist" class="btn btn-default "
 							onclick="location.href='eventlist'">취소</button>
 					</form>
 				</div>

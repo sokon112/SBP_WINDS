@@ -46,14 +46,14 @@ public class BoardEventServieImpl implements BoardEventService {
 
 	@Transactional
 	@Override
-	public boolean bedelete(int bno) {
+	public boolean bedelete(int bno,String epassword) {
 		
 
 		//첨부파일 삭제
 		eattachMapper.bedelete(bno);
 		
 		//게시글 삭제
-		return emapper.bedelete(bno)>0?true:false;
+		return emapper.bedelete(bno,epassword)>0?true:false;
 	}
 
 	@Transactional
@@ -101,17 +101,23 @@ public class BoardEventServieImpl implements BoardEventService {
 	public List<BoardEventAttachFileDTO> beAttachList(int bno) {		
 		return eattachMapper.befindByBno(bno);
 	}
+	
 
 	@Override
-	public boolean boardupdateviews(int bno) {
-		return emapper.boardupdateviews(bno)>0? true:false;
+	public boolean beupdateviews(int eno) {
+		return emapper.beupdateviews(eno)>0? true:false;
 
 	}
 
 	@Override
-	public boolean boardcheckpw(int bno, String password) {
-		return emapper.boardcheckpw(bno, password)!=null?true:false;
+	public boolean becheckpw(int eno, String epassword) {
+		return emapper.becheckpw(eno, epassword)!=null?true:false;
 
+	}
+
+	@Override
+	public boolean beaddelete(int bno) {
+		return emapper.beaddelete(bno)>0?true:false;
 	}
 
 	

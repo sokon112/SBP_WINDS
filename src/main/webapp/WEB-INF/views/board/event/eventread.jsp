@@ -41,14 +41,14 @@
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
 							<%-- 로그인 여부 확인 --%>
-							<c:if test="${info.authority=='ad'}">
+							<c:if test="${info.memberVO.id=='10030001'}">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-								<button type="button" class="btn btn-warning">삭제</button>
+								<button type="button" class="btn btn-info" id="addelete">삭제</button>
 							</c:if>
 						</sec:authorize>
-						<button type="button" class="btn btn-info pull-right">목록</button>
-						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right"  id="deleteBtn">삭제</button>
-						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
+						<button type="button" class="btn btn-primary pull-right">목록</button>
+						<button type="button" style="margin-right: 3px;" name="eventdelete" class="btn btn-danger pull-right"  id="edeleteBtn">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="emodify" class="btn btn-warning pull-right" id="emodifyBtn">수정</button>
 
 					</form>
 				</div>
@@ -57,7 +57,7 @@
 	</div>
 </div>
 <!-- 수정 버튼 모달 추가 -->
-<div class="modal modifymodal" tabindex="-1" id="myModal">
+<div class="modal emodifymodal" tabindex="-1" id="myModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -71,20 +71,20 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="password" type="number"></td>
+						<td><input class="form-control" id="inpassword" type="text" name="epassword"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="modalSubmit" class="btn btn-success">완료</button>
-				<button type="button" id="modalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" id="emmodalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="emmodalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
 </div>
 
 <!-- 삭제 버튼 모달 추가 -->
-<div class="modal deletemodal" tabindex="-1" id="myModal">
+<div class="modal edeletemodal" tabindex="-1" id="myModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -98,13 +98,13 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="password" type="number"></td>
+						<td><input class="form-control" id="delpassword" type="text" name="epassword"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="modalSubmit" class="btn btn-success">완료</button>
-				<button type="button" id="modalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" id="edmodalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="edmodalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -116,17 +116,14 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
 	<input type="hidden" name="amount" value="${cri.amount}" /> 
 	<input type="hidden" name="eno" value="${vo.eno}" />
-	<input type="hidden" name="title" value="${vo.title}" />
-	<input type="hidden" name="contents" value="${vo.contents}" />
-	<input type="hidden" name="writer" value="${vo.writer}" />
-	<input type="hidden" name="password" value="" />
+	<input type="hidden" name="etitle" value="${vo.etitle}" />
+	<input type="hidden" name="econtents" value="${vo.econtents}" />
+	<input type="hidden" name="ewriter" value="${vo.ewriter}" />
+	<input type="hidden" name="epassword" value="" />
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 </form>
 <script>
-	let eno = $
-	{
-		vo.eno
-	};
+	let eno = ${vo.eno};
 
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";

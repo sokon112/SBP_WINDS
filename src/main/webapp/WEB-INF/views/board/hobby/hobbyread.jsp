@@ -25,21 +25,21 @@
                 				</div> 
                 				<div class="form-group">
                 					<label>제목</label>
-                					<input class="form-control" name="title" readonly="readonly" value="${vo.htitle}">                				
+                					<input class="form-control" name="htitle" readonly="readonly" value="${vo.htitle}">                				
                 				</div>  
                 				<div class="form-group">
                 					<label>내용</label>
-                					<textarea class="form-control" rows="3" name="contents" readonly="readonly">${vo.hcontents}</textarea>               				
+                					<textarea class="form-control" rows="3" name="hcontents" readonly="readonly">${vo.hcontents}</textarea>               				
                 				</div> 
                 				<div class="form-group">
                 					<label>작성자</label>
-                					<input class="form-control" name="writer" readonly="readonly" value="${vo.hwriter}">                				
+                					<input class="form-control" name="hwriter" readonly="readonly" value="${vo.hwriter}">                				
                 				</div>  
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
 							<%-- 로그인 여부 확인 --%>
-							<c:if test="${info.authority=='ad'}">
+							<c:if test="${info.memberVO.id=='10030001'}">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
 								<button type="button" class="btn btn-warning">삭제!</button>
 							</c:if>

@@ -25,13 +25,13 @@ values(board_tb_seq.nextval,'차은우','아스트로','1234','잘생겼다');
 insert into board_table(bno,nickname,title,  password, contents)
 values(board_tb_seq.nextval,'윤산하','아스트로막내','1234','뿌뿌');
 insert into board_table(bno,nickname,title, password, contents)
-values(5,'전전국','방탄막내','1234','토끼');
+values(board_tb_seq.nextval,'전전국','방탄막내','1234','토끼');
 
 --게시판 테이블 검색
 select * from board_table;
 
 
-drop table board_table;
+drop table hobby_table;
 
 
 -- 동호회 테이블 Table Create SQL
@@ -42,12 +42,18 @@ CREATE TABLE hobby_table
     htitle       VARCHAR2(20)      NOT NULL, 
     huploaddate        DATE     default sysdate          NOT NULL, 
     hpassword    VARCHAR2(20)      NOT NULL, 
-    hcontents    VARCHAR2(2000)    NOT NULL 
+    hcontents    VARCHAR2(2000)    NOT NULL,
+    hviews number(8) default 0
+
+    
 );
 --동호회 테이블 시퀸스 생성
 create SEQUENCE hobby_tb_seq
-start with 1;
+start with 1
+INCREMENT BY 1;
 
+
+drop SEQUENCE hobby_tb_seq;
 
 insert into hobby_table(hno,hwriter,htitle,  hpassword, hcontents)
 values(hobby_tb_seq.nextval,'이채은','마술부','2345','테스트를 해보자');
@@ -71,14 +77,21 @@ CREATE TABLE event_table
     etitle       VARCHAR2(20)      NOT NULL, 
     euploaddate        DATE     default sysdate          NOT NULL, 
     epassword    VARCHAR2(20)      NOT NULL, 
-    econtents    VARCHAR2(2000)    NOT NULL
+    econtents    VARCHAR2(2000)    NOT NULL,
+    eviews number(8) default 0
+
 );
 
+drop table event_table;
 
 
 --이벤트 테이블 시퀸스 생성
 create SEQUENCE event_tb_seq
-start with 1;
+start with 1
+INCREMENT BY 1;
+
+
+drop SEQUENCE event_tb_seq;
 
 
 --이벤트 테이블 정보 입력
@@ -150,9 +163,9 @@ alter table special_attach add constraint fk_sp_attach foreign key(no) reference
 alter table special_attach add constraint fk_sp_attach foreign key(no) references event_table(no);
 
 --조회수
-alter table board_table change column views views int default 0;
-
 update board_table set views = views + 1 where bno = 1;
+update event_table set eviews = eviews + 1 where eno = 1;
+update hobby_table set hviews = hviews + 1 where hno = 1;
 
 
 
