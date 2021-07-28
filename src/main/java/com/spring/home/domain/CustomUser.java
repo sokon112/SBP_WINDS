@@ -13,6 +13,7 @@ import lombok.Getter;
 public class CustomUser extends User {
 	
 	private MemberVO memberVO;
+	private AuthVO authVO;
 
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);		

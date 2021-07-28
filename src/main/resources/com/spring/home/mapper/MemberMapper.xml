@@ -26,8 +26,6 @@
 		join DM_TAB dm on mem.deptNum = dm.deptNum
 		where mem.id=#{id}	
 	</select>
-	
-
 </mapper>
 
 

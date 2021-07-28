@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.spring.home.domain.AuthVO;
 import com.spring.home.domain.CustomUser;
 import com.spring.home.domain.MemberVO;
 import com.spring.home.mapper.MemberMapper;
