@@ -8,6 +8,7 @@ CREATE TABLE DOC_TAB(
     dest VARCHAR2(20) not null,
     state VARCHAR2(20) not null,
     storage VARCHAR2(20) not null,
+    deptNum NUMBER not null,
     message VARCHAR2(200),
     regDate DATE DEFAULT SYSDATE
 );
@@ -19,6 +20,7 @@ CREATE SEQUENCE docNum_seq;
 
 ALTER TABLE DOC_TAB ADD CONSTRAINT fk_doc_tab_send FOREIGN KEY(send) REFERENCES USER_TAB(id);
 ALTER TABLE DOC_TAB ADD CONSTRAINT fk_doc_tab_dest FOREIGN KEY(dest) REFERENCES USER_TAB(id);
+ALTER TABLE DOC_TAB ADD CONSTRAINT fk_doc_tab_dnum FOREIGN KEY(deptNum) REFERENCES DM_TAB(deptNum);
 
 --첨부파일 테이블 생성
 create table doc_attach(
