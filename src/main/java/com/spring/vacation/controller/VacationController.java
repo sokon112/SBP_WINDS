@@ -36,6 +36,7 @@ public class VacationController {
 
 
 	//vacationMine화면
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/")	
 	public String vacationMain() {
 		log.info("vacation 메인 접속....");
@@ -44,12 +45,13 @@ public class VacationController {
 	
 	//메인메뉴 3가지 
 	//id에 따라 휴가 목록 보여주는 페이지
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationUserList")
 	public void showUserMain(Model model,String id, VacationCriteria cri,String monthMove) {
 		//VacationCriteria cri=new VacationCriteria();
 		
 		
-		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth());
+		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth() +"~"+cri.getNextMonth());
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
 		
@@ -60,33 +62,16 @@ public class VacationController {
 		model.addAttribute("list",vlist);
 		
 	}
-	//화살표
-	@PostMapping("/vacationUserListMove")
-	public String vacationUserListMove(Model model,String id, VacationCriteria cri,String monthMove) {
-		log.info("showUser페이지1 " +id+" cri : "+cri.getNowMonth());
-		if(monthMove.equals("pre")) {
-			cri.downVacationMonth();
-		}else if(monthMove.equals("next")){
-			cri.upVacationMonth();
-		}
-		log.info("showUser페이지2 " +id+" cri : "+cri.getNowMonth());
-		
-		List<VacationVO> vlist=service.showUser(id,cri);
-		
-		
-		log.info(vlist);
-		int total = service.total(cri);
-		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
-		model.addAttribute("list",vlist);
-		return "/vacation/vacationUserList";
-	}
+	
 	//휴가신청서 작성하는 페이지
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationApply")
 	public void vacationApply(Model model) {
 		log.info("휴가신청 페이지");	
 
 		
 	}//관리자 페이지 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationManager")
 	public void showAdmin(Model model, VacationCriteria cri) {
 		log.info("휴가관리 페이지");
@@ -103,6 +88,7 @@ public class VacationController {
 	
 	//사용자 페이지에서 작동하는 컨트롤러
 	//리스트에 있는 목록 클릭시 작동
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationUserListCheckOne")
 	public void showUserOne(Model model, int vacationAppNum){
 		log.info("사용자의 페이지");
@@ -114,6 +100,7 @@ public class VacationController {
 
 	}
 	//목록에서 수정화면으로 이동
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationUserCheckModify")
 	public void vacationUserCheckModify(Model model, int vacationAppNum){
 		log.info("사용자의 페이지");
@@ -128,6 +115,7 @@ public class VacationController {
 	
 	//상태가 신청인 경우 선택할 수 있는 버튼
 	//사유 수정하는 부분
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/update")
 	public String update(VacationVO vacation,String id,Model model) {
 		log.info("수정버튼 눌렀을때");
@@ -143,6 +131,7 @@ public class VacationController {
 		}
 	}
 	//신청서 부분 삭제
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/delete")
 	public String delete(int vacationAppNum,String id,Model model) {
 		log.info("삭제버튼 눌렀을때");
@@ -159,6 +148,7 @@ public class VacationController {
 		
 	}
 	//승인 상태일때 날짜가 아직이면 반납 가능
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/cancle")
 	public String cancle(VacationVO vacation,String id, VacationCriteria cri,Model model,RedirectAttributes rttr) {
 		log.info("반납버튼 눌렀을때"+vacation);
@@ -230,12 +220,14 @@ public class VacationController {
 		}
 	}
 	//관리자가 신청리스트 보는 페이지 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationManagerConfirm")
 	public void applicationList(Model model) {
 		List<VacationVO> list = service.applicationList();
 		model.addAttribute("list", list);
 	}
 	//관리자가 목록중에 하나 눌렀을때 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationManagerCheckOne")
 	public void vacationManagerCheckOne(@RequestParam("vacationAppNum") int vacationAppNum,@ModelAttribute("cri") VacationCriteria cri,Model model){
 		log.info("관리자 페이지");
@@ -247,8 +239,12 @@ public class VacationController {
 	
 //	휴가심사 페이지
 //	승인 -> PutMapping("/ok")
+	@PreAuthorize("isAuthenticated()")
 	@PutMapping("/{vacationAppNum}/ok")
-	public ResponseEntity<String> ok(@PathVariable("vacation")VacationVO vacation){
+	public ResponseEntity<String> ok(@PathVariable("vacationAppNum") int vacationAppNum){
+		log.info("vacationAppNum "+vacationAppNum);
+		VacationVO vacation=service.showUserOne(vacationAppNum);
+		
 		int vCnt=0;
 
 		if(vacation.getType().equals("반차")) {
@@ -266,7 +262,8 @@ public class VacationController {
 	
 	
 //	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
-	@PutMapping("/{vacationAppNum}/no")
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/{vacationAppNum}/no")
 	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@PathVariable("refusalreason")String refusalreason){
 		log.info("문서 거절"+vacationAppNum);
 		return service.no(vacationAppNum,refusalreason)?new ResponseEntity<String>("success",HttpStatus.OK):

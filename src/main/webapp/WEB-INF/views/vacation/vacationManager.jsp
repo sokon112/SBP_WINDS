@@ -25,13 +25,22 @@
                         
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-    <button type="button" class="glyphicon glyphicon-arrow-left" onclick="preMonth()">왼쪽화살표</button>
-    <input class="form-control" name="bno" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
-	
-    <button class="glyphicon glyphicon-arrow-right" onclick="nextMonth">오른쪽화살표</button>
-
+   
         <table class="table table-striped table-bordered table-hover">
         <thead>
+        <tr>
+		<td >
+			<button type="button" class="glyphicon glyphicon-arrow-left" ></button>
+		</td>
+		<td colspan="4">
+		<h1></h1>
+			<input class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
+			<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
+		</td>
+		<td>
+			<button type="button" class="glyphicon glyphicon-arrow-right" ></button> 
+		</td>
+	</tr>
 	        <tr>
 	            <th>신청서번호</th>
 	            <th>사원번호</th>
@@ -41,6 +50,7 @@
 	            <th>상태</th>
 	            <th>신청날짜</th>
 	            <th>승인날짜</th>
+	            <th>확인</th>
             </tr>
         </thead>
         <tbody>
@@ -79,28 +89,31 @@
 			</c:forEach>
         </tbody>
     </table>
-
-
-    <div class="row"> <!-- start search -->
-                            	<div class="col-md-12">
-                            	  <div class="col-md-8"><!--search Form-->
+<div class="row">
+						<!-- start search -->
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<!--search Form-->
+								
                             		<form action="" id="searchForm" method="post">
+                            		<div class="col-md-2">
                             			<select name="keyType" id="" class="form-control">
                             				<option value="">-----------</option>
                             				<option value="I" <c:out value="${VacationPageVO.cri.keyType=='I'?'selected':''}"/>>사원번호</option>
                             				<option value="T" <c:out value="${VacationPageVO.cri.keyType=='T'?'selected':''}"/>>분류</option>
-                            				<%-- <option value="IT" <c:out value="${VacationPageVO.cri.keyType=='IT'?'selected':''}"/>>사원번호 or 분류</option> --%>
+                            				
                             			</select>
+                            			</div>
                             			<input type="text" name="keyword" value="${VacationPageVO.cri.keyword}" />
                             			<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
                             			<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}"/>
                             			<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-                            			<%-- <input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" /> --%>
                             			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             			<button type="submit" class="btn btn-default selectBtn">검색</button>
                             		</form>
                             	   </div>
-                            	   <div class="col-md-2 col-md-offset-2">
+                            	  <div class="col-md-4"></div>
+							<div class="col-md-1 col-md-offset-2">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
                             	   	<select name="" id="amount" class="form-control">
                             	   		<option value="10"  <c:out value="${VacationPageVO.cri.amount==10?'selected':''}"/> >10</option>
@@ -147,7 +160,6 @@
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
-<%-- 	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth}" />  --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>      
 <form action="" id="checkPageForm" method="post">

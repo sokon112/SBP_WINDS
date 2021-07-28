@@ -1,4 +1,4 @@
-var vacationService=(function(){
+/*var vacationService=(function(){
 	//private
 	function add(rejectReasonData,callback){
 		$.ajax({
@@ -20,4 +20,4 @@ var vacationService=(function(){
 	return {
 		add:add
 	}
-})();
+})();*/

@@ -9,6 +9,7 @@
 	<title>Vacation</title>
 </head>
 <body>
+<!-- 달을 스크립트로 끌어올려 계산하기  월 달 따로  -->
 <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">휴가신청관리</h1>
@@ -22,25 +23,46 @@
                         
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-    <form action="" method="post" id="leftForm">
-	<!-- <a href="" name="glyphiconl" class="glyphicon glyphicon-arrow-left"></a> -->
-	<button type="submit" class="glyphicon glyphicon-arrow-left" ></button>
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<input type="hidden" name="id" value="${info.username}"/> 
-	<input type="hidden" name="nowMonth" value="${VacationPageVO.cri.nowMonth} " />
-    </form>
-    <input class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
-	
-    <!-- <button type="button" class="glyphicon glyphicon-arrow-right" ></button> -->
+   
+			
+			<div class="col-md-4">
+			<div></div>
+			<button type="button" class="glyphicon glyphicon-arrow-left pull-right" ></button>
+			</div>
+			<div class="col-md-4">
+			<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
+			<input type="hidden" class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>"> 
+			<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
+			</div>
+			
+			<div class="col-md-4">
+			<div></div>
+			<button type="button" class="glyphicon glyphicon-arrow-right pull-left" ></button> 
+			</div>
 
         <table class="table table-striped table-bordered table-hover">
 	<thead>
+	<tr>
+	
+<%-- 		<td >
+			<button type="button" class="glyphicon glyphicon-arrow-left" ></button>
+		</td>
+		<td colspan="4">
+			<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
+			<input type="hidden" class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>"> 
+			<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
+		</td>
+		<td>
+			<button type="button" class="glyphicon glyphicon-arrow-right" ></button> 
+		</td> --%>
+	</tr>
 		<tr>
 			<th>분류</th>
 			<th>기간</th>
 			<th>상태</th>
 			<th>신청날짜</th>
 			<th>승인날짜</th>
+			<th>확인</th>
 		</tr>	
 	</thead>
 	<tbody>
@@ -79,10 +101,8 @@
 <form action="" method="post" id="preMonthForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 	<input type="hidden" name="cri" value="${VacationPageVO.cri} " />
-	
 	<input type="hidden" name="id" value="${info.username}"/>
-	
-	<input type="hidden" name="monthMove" value="basic"/>
+	<!-- <input type="hidden" name="monthMove" value="basic"/> -->
 </form>
 <div align="center">
 	<h1>SBP Winds Vacation</h1>

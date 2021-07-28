@@ -70,16 +70,6 @@ $(function(){
 		searchForm.submit();
 	})
 	
-	$(".glyphicon-arrow-left").click(function(e){
-		e.preventDefault();  //a 속성 중지
-		
-
-		actionForm.find("input[name='nowMonth']").val(this).attr("downVactionMonth()")
-		
-		
-		//actionForm 보내기
-		actionForm.submit();
-	})
 	
 	//operForm 가져온 후 전송하기
 	var checkPageForm = $("#checkPageForm");
@@ -91,6 +81,76 @@ $(function(){
 		checkPageForm.submit();
 	})
 	
+	var actionForm=$(".actionForm");
+	//화살표 이동
+	$(".glyphicon-arrow-left").click(function(e){
+		
+		var checkBtn = $(this);
+
+		var tr = checkBtn.parent().parent();
+        var td = tr.children();
+
+		var date=td.find('h1').val();
+alert(date);
+		var yyyyMMdd = String(date);
+		
+	    var sYear = yyyyMMdd.substring(0,4);
+	    var sMonth = yyyyMMdd.substring(6,8);
+
+		var nextDate=new Date(sYear,sMonth-1);
+		
+		if(sMonth==1){
+			sYear=sYear-1;
+			sMonth=12;
+		}else{
+			sMonth=sMonth-2;
+		}
+		
+		var newDate=new Date(sYear,sMonth);
+		
+		alert("newDate"+newDate);
+		alert("nextDate"+nextDate);
+		
+		actionForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
+		actionForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
+		actionForm.attr('action','vacationManager');
+		actionForm.submit();
+	})
+	
+	$(".glyphicon-arrow-right").click(function(e){
+		
+		var checkBtn = $(this);
+
+		var tr = checkBtn.parent().parent();
+        var td = tr.children();
+
+		var date=td.find('input[name="month"]').val();
+
+		var yyyyMMdd = String(date);
+		
+	    var sYear = yyyyMMdd.substring(0,4);
+	    var sMonth = yyyyMMdd.substring(6,8);
+
+
+		var newDate=new Date(sYear,sMonth-1);
+		
+		if(sMonth==12){
+			sYear=sYear+1;
+			sMonth=1;
+		}else{
+			sMonth=sMonth;
+		}
+		
+		var nextDate=new Date(sYear,sMonth);
+	
+		alert("newDate"+newDate);
+		alert("nextDate"+nextDate);
+		
+		actionForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
+		actionForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
+		actionForm.attr('action','vacationManager');
+		actionForm.submit();
+	})
 })
 
 

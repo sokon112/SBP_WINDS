@@ -106,7 +106,7 @@ public class VacationServiceImpl implements VacationService {
 
 	@Override
 	public boolean idCnt(String id) {
-		return mapper.vIdCnt(id)<40?true:false;
+		return mapper.vIdCnt(id)>40?true:false;
 	}
 
 	@Override
