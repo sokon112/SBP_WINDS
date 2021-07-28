@@ -43,7 +43,9 @@ public class StorageController {
 		
 		int deptNum = (int)user.getMemberVO().getDeptNum();
 		
+		log.info(cri);
 		List<StorageListVO> waitlist = service.WaitList(cri,deptNum);
+		
 		
 		int total = service.total(cri);
 		

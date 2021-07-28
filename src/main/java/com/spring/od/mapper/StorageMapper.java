@@ -12,6 +12,6 @@ public interface StorageMapper {
 	public List<StorageListVO> completeList(@Param("cri")Criteria cri,@Param("deptNum")int deptNum);
 	public List<StorageListVO> tempList(@Param("cri")Criteria cri,@Param("id")String id);
 	
-	public int totalCnt(@Param("cri") Criteria cri);
+	public int totalCnt(Criteria cri);
 	
 }
