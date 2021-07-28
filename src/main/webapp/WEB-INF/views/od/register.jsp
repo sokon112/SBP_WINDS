@@ -92,7 +92,7 @@
 						<label class="input-group-text" for="retentdate">보존기한</label>
 						<p></p>
 						<select class="form-select"
-							name="retentDate">
+							name="retentDate" id="retentdate">
 							<option value="0" selected>보존기한을 선택하세요</option>
 							<option value="1">1년</option>
 							<option value="2">2년</option>

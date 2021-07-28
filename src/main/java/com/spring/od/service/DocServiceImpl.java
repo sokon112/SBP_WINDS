@@ -37,11 +37,6 @@ public class DocServiceImpl implements DocService {
 	}
 
 	@Override
-	public boolean oreturned(OfficeNoticeVO vo) {
-		return mapper.oreturned(vo)>0?true:false;
-	}
-
-	@Override
 	public boolean oapprove(OfficeNoticeVO vo) {
 		return mapper.oapprove(vo)>0?true:false;
 	}

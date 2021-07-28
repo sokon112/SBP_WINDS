@@ -7,7 +7,6 @@ import com.spring.od.domain.OfficeNoticeVO;
 
 public interface DocService {
 	public boolean owrite(OfficeNoticeVO vo);
-	public boolean oreturned(OfficeNoticeVO vo);
 	public boolean oapprove(OfficeNoticeVO vo);
 	public boolean omodify(OfficeNoticeVO vo);
 	public boolean oremove(int docNum);

@@ -149,6 +149,7 @@ $(function(){
 	function checksubmit(){
 		var destin = $("#destinput").val();
 		var title = $("#title").val();
+		var retent = $("#retentdate").val();
 		
 		if(destin===''){
 			alert("결재선을 지정해주세요");
@@ -157,6 +158,10 @@ $(function(){
 		if(title===''){
 			alert("제목을 입력하세요");
 			title.focus();
+		}
+		if(retent==='0'){
+			alert("보존기한을 선택해주세요");
+			retent.focus();
 		}
 	}
 	

@@ -20,24 +20,116 @@ $(function(){
 		
 		str += "<input type='hidden' name='dest' value='"+dest+"'>";
 		
+		var deptNum;
 		var destname = "";
 		if(dest =='10030001'){
 			destname = "이지은(대표이사)";
+			deptNum = 1000;
 		}
 		else {
 			destname = "알 수 없음";
 		}
+		
+		str += "<input type='hidden' name='deptNum' value='"+deptNum+"'>";
 		$("#destinput").val(destname);
 		var form = $("form");
 		form.append(str);
 		modal.modal("hide");
 	})
+	function checksubmit(){
+		var destin = $("#destinput").val();
+		
+		if(destin==='${vo.dest}'){
+			alert("결재선을 지정해주세요");
+			destin.focus();
+		}
+	}
 	
+	//상신 버튼 클릭시
+	$("#request").click(function(e){
+		e.preventDefault();
+		
+		checksubmit();
+		
+		var str="";
+		$(".uploadResult ul li").each(function(idx,obj){
+			var job = $(obj);
+			//수집된 정보를 hidden 태그로 작성
+			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+		})
+		
+		str+="<input type='hidden' name='storage' value='미결'>";
+		str+="<input type='hidden' name='state' value='결재요청'>";
+		
+		//게시글 등록 폼 가져오기
+		var form = $("form");
+		//수집된 내용 폼에 추가하기
+		form.append(str);
+		//폼 전송하기
+		form.submit();
+	})
+	
+	//결재 완료 버튼 클릭시
+	$("#final").click(function(e){
+		e.preventDefault();
+		
+		checksubmit();
+		
+		var str="";
+		$(".uploadResult ul li").each(function(idx,obj){
+			var job = $(obj);
+			//수집된 정보를 hidden 태그로 작성
+			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+		})
+		
+		str+="<input type='hidden' name='storage' value='완결'>";
+		str+="<input type='hidden' name='state' value='결재완료'>";
+		
+		//게시글 등록 폼 가져오기
+		var form = $("form");
+		//수집된 내용 폼에 추가하기
+		form.append(str);
+		//폼 전송하기
+		form.submit();
+	})
+	
+	//반려 버튼 클릭시
+	$("#reject").click(function(e){
+		e.preventDefault();
+		
+		checksubmit();
+		
+		var str="";
+		$(".uploadResult ul li").each(function(idx,obj){
+			var job = $(obj);
+			//수집된 정보를 hidden 태그로 작성
+			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+		})
+		
+		str+="<input type='hidden' name='storage' value='완결'>";
+		str+="<input type='hidden' name='state' value='반려'>";
+		
+		//게시글 등록 폼 가져오기
+		var form = $("form");
+		//수집된 내용 폼에 추가하기
+		form.append(str);
+		//폼 전송하기
+		form.submit();
+	})
 	//첨부 파일 가져오기
 	$.getJSON({
 		url:'getAttachList',
 		data:{
-			bno:bno
+			docNum:docNum
 		},
 		success:function(data){
 			console.log(data);
@@ -91,8 +183,8 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//Modify버튼 클릭시  get방식 /board/modify
-	$(".btn-default").click(function(){
+	//Modify버튼 클릭시  get방식 /od/modify
+	$("#modify").click(function(){
 		operForm.attr('action','/od/modify');
 		operForm.submit();
 	})

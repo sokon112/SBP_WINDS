@@ -63,7 +63,7 @@ public class DocController {
 		OfficeNoticeVO vo = service.oread(docNum);
 		model.addAttribute("vo", vo);
 	}
-	
+
 	@PostMapping("/modify")
 	public String modify(OfficeNoticeVO vo,Criteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
@@ -84,8 +84,33 @@ public class DocController {
 		rttr.addAttribute("amount", cri.getAmount());
 		
 		
-		return "redirect:waitlist";
+		return "redirect:/od/";
 	}
+	
+	@PostMapping("/tempread")
+	public String tempreadPost(OfficeNoticeVO vo,Criteria cri,RedirectAttributes rttr) {
+		log.info("상신 요청 "+vo+" 페이지 나누기 "+cri);
+		
+		//첨부 파일 확인
+		if(vo.getAttach()!=null) {
+			vo.getAttach().forEach(attach -> log.info(""+attach));
+		}	
+		
+		service.omodify(vo);		
+		
+		
+		rttr.addFlashAttribute("result","성공");
+		
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
+		
+		return "redirect:/od/";
+	}
+	
+	
 	@PostMapping("/remove")
 	public String remove(int docNum,Criteria cri,RedirectAttributes rttr) {
 		log.info("공문 삭제"+docNum);
