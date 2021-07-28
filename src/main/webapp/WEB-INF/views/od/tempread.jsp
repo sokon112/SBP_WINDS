@@ -44,10 +44,16 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-								<c:if test="${vo.state == '결재요청'}">
+								<sec:authentication property="principal.memberVO" var="info"/>
+								<c:forEach items="${info.authority}" var="auth">
+                					<c:set var="userauth" value="${auth.authority}"/>
+                				</c:forEach>
+								<c:if test="${userauth=='ad'}">
+									<button type="submit" class="btn btn-danger" id="adreject">반려</button>
 									<button type="submit" class="btn btn-primary" id="final">결재완료</button>
 								</c:if>
-								<c:if test="${vo.state == '요청' }">
+								<c:if test="${userauth=='mg'}">
+									<button type="submit" class="btn btn-danger" id="mgreject">반려</button>
 									<button type="submit" class="btn btn-primary" id="request">상신</button>
 								</c:if>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -68,6 +74,7 @@
 									<label class="input-group-text" for="dest">결재자</label>
 									<select class="form-select" id="dest">
 										<option selected>결재자 선택</option>
+										<option value="0">없음</option>
 										<option value="10030001">이사장</option>
 									</select>
 									<p></p>
@@ -81,19 +88,17 @@
 						</div>
 					</div>
 					<sec:authentication property="principal.memberVO" var="info"/>
-                				<sec:authorize access="isAuthenticated()"><%--로그인 여부 확인--%>
+                				<sec:authorize access="isAuthenticated()">
 									<c:if test="${info.id==vo.send}"><%--로그인한 사용자와 작성자가 동일여부 확인 --%>
 										<button type="button" class="btn btn-info" id="modify">수정</button>
 										<button type="button" class="btn btn-info">삭제</button>
                 					</c:if>
-                					<c:if test="${info.id==vo.dest}">
+                					<c:if test="${userauth=='mg'}">
                 						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">상신</button>
-                						<button type="submit" class="btn btn-danger" id="reject">반려</button>
 										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal2">결재선</button>
                 					</c:if>
-                					<c:if test="${vo.state == '결재요청'}">
+                					<c:if test="${userauth=='ad'}">
                 						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">결재</button>
-                						<button type="submit" class="btn btn-danger" id="reject">반려</button>
                 					</c:if>
                 				</sec:authorize>	
 					<button type="reset" class="btn btn-info" onclick="location.href='/od/'">취소</button>
@@ -116,7 +121,7 @@
 					</div>
 					<div class="col-sm-4">
 						<label class="form-label">수신자</label> 
-						<input class="form-control" name="dest" readonly="readonly" value="${vo.dest}" id="destinput">
+						<input class="form-control" readonly="readonly" value="${vo.dest}" id="destinput">
 					</div>
 					<p></p>
 					<div class="col-md-6">
@@ -140,7 +145,10 @@
 			<div class="panel-heading">
 				<i class="fa fas fa-file"></i> Files
 			</div>
-			<div class="panel-body">				
+			<div class="panel-body">
+				<div class="form-group uploadDiv">
+					<input type="file" name="uploadFile" id="attachlist" multiple />
+				</div>				
 				<div class="uploadResult">
 					<ul></ul>
 				</div>
@@ -150,14 +158,7 @@
 </div> 
 <div class="bigPictureWrapper">
 	<div class="bigPicture"></div>
-</div>
-<form action="" id="operForm">
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />	
-	<input type="hidden" name="docNum"  value="${vo.docNum}"/>
-</form>       
+</div>      
 <script>
 	let docNum = ${vo.docNum};
 	

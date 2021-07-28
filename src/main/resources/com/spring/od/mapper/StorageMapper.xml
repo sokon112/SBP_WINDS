@@ -11,13 +11,13 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum 
-		where D1.storage = '미결' AND
-		
+		where D1.storage = '미결' and D1.deptNum = #{deptNum}
+		and
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
 				rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount})
+				where rn > ((#{pageNum}-1)*#{amount}) 
 		]]>
 </select>
 
@@ -31,8 +31,8 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
-		where D1.storage = '완결' AND
-		
+		where D1.storage = '완결' AND D1.deptNum = #{deptNum}
+		and
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
@@ -51,7 +51,8 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
-		where D1.storage = '임시' AND
+		where D1.storage = '임시' AND D1.send = #{id}
+		and
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 

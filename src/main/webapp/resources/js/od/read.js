@@ -64,6 +64,11 @@ $(function(){
 		str+="<input type='hidden' name='storage' value='미결'>";
 		str+="<input type='hidden' name='state' value='결재요청'>";
 		
+		str+="<input type='hidden' name='type' value='${cri.type}' />";
+		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";
+		str+="<input type='hidden' name='pageNum' value='${cri.pageNum}' />";
+		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
+		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
 		var form = $("form");
 		//수집된 내용 폼에 추가하기
@@ -88,9 +93,16 @@ $(function(){
 			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 		})
 		
+		str+="<input type='hidden' name='dest' value='10030001'>";
+		str+="<input type='hidden' name='deptNum' value='1000'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
 		str+="<input type='hidden' name='state' value='결재완료'>";
 		
+		str+="<input type='hidden' name='type' value='${cri.type}' />";
+		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";
+		str+="<input type='hidden' name='pageNum' value='${cri.pageNum}' />";
+		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
+		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
 		var form = $("form");
 		//수집된 내용 폼에 추가하기
@@ -98,9 +110,8 @@ $(function(){
 		//폼 전송하기
 		form.submit();
 	})
-	
-	//반려 버튼 클릭시
-	$("#reject").click(function(e){
+	// ad 반려 버튼 클릭시
+	$("#adreject").click(function(e){
 		e.preventDefault();
 		
 		checksubmit();
@@ -115,9 +126,48 @@ $(function(){
 			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 		})
 		
+		str+="<input type='hidden' name='dest' value='10030001'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
 		str+="<input type='hidden' name='state' value='반려'>";
 		
+		str+="<input type='hidden' name='type' value='${cri.type}' />";
+		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";
+		str+="<input type='hidden' name='pageNum' value='${cri.pageNum}' />";
+		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
+		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
+		//게시글 등록 폼 가져오기
+		var form = $("form");
+		//수집된 내용 폼에 추가하기
+		form.append(str);
+		//폼 전송하기
+		form.submit();
+	})
+	// mg 반려 버튼 클릭시
+	$("#mgreject").click(function(e){
+		e.preventDefault();
+		
+		checksubmit();
+		
+		var nodest = $("#dest").val();
+		var str="";
+		$(".uploadResult ul li").each(function(idx,obj){
+			var job = $(obj);
+			//수집된 정보를 hidden 태그로 작성
+			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+		})
+		
+		str+="<input type='hidden' name='dest' value='"+nodest+"'>";
+		str+="<input type='hidden' name='storage' value='완결'>";
+		str+="<input type='hidden' name='state' value='반려'>";
+		
+		str+="<input type='hidden' name='type' value='${cri.type}' />";
+		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";
+		str+="<input type='hidden' name='pageNum' value='${cri.pageNum}' />";
+		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
+		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
 		var form = $("form");
 		//수집된 내용 폼에 추가하기
