@@ -25,19 +25,18 @@ $(function(){
         var td = tr.children();
 		
 		var vacationAppNum = td.eq(0).find('input').val();
-		//var vacation={"vacationAppNum":vacationNum}
-		alert(vacationAppNum);
+
 		$.ajax({
-			url:'/vacation/'+vacationAppNum+'/ok',
-			type:'put',
+			url:'/vacation/'+vacationAppNum+'/ok',			
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-			},
-			data:JSON.stringify({vacationAppNum:vacationAppNum}),
-			contentType:'application/json; charset=UTF-8',
+			},			
 			success:function(result){
     			console.log(result);
-				alert="ok";
+				td.find("button[name='successBox']").hide();
+				td.find("button[name='rejectBox']").hide();
+				td.find("input[name='hiddenBox']").attr('value','승인');
+				td.find("input[name='hiddenBox']").attr('type','text');
     		}
 		});
 		
@@ -49,18 +48,15 @@ $(function(){
 		var tr = checkBtn.parent().parent();
         var td = tr.children();
 		
-		var vacationAppNum = td.eq(0).find('input').val();
 		var rejectReason = td.find('input[name="resonBox"]');
 		var rejectReasonCheck = td.find('input[name="resonBoxCheck"]');
 		var button1 = td.find('input[class="btn-primary"]');
-		alert(vacationAppNum);
-
 
 		rejectReason.attr("type","text");
 		rejectReasonCheck.attr("type","button");
 		button1.hide();
 	});
-	$(".btn-info").click(function(){
+	$(".btn-danger").click(function(){
 		
 		var checkBtn = $(this);
 
@@ -68,20 +64,28 @@ $(function(){
         var td = tr.children();
 		
 		var vacationAppNum = td.eq(0).find('input').val();
-		var rejectReason = td.find('input[name="resonBox"]').val();
-		//var vacation={"vacationAppNum":vacationNum}
-		alert(vacationAppNum);
+		var refusalReason = td.find('input[name="resonBox"]').val();
+		
+
 		$.ajax({
-			url:'/vacation/'+vacationAppNum+'/no',
 			type:'post',
+			url:'/vacation/'+vacationAppNum+'/no',
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 			},
-			data:JSON.stringify({vacationAppNum:vacationAppNum,refusalreason:rejectReason}),
-			contentType:'application/json; charset=UTF-8',
+			data:JSON.stringify({
+				"refusalReason":refusalReason
+			}),
+			contentType: "application/json; charset=UTF-8",
 			success:function(result){
     			console.log(result);
-				alert="ok";
+				td.find("button[name='successBox']").hide();
+				td.find("button[name='rejectBox']").hide();
+				td.find("input[name='resonBox']").hide();
+				td.find("input[name='resonBoxCheck']").hide();
+				
+				td.find("input[name='hiddenBox']").attr('value','거절');
+				td.find("input[name='hiddenBox']").attr('type','text');
     		}
 		});	
 	});//

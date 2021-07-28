@@ -9,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -240,7 +241,7 @@ public class VacationController {
 //	휴가심사 페이지
 //	승인 -> PutMapping("/ok")
 	@PreAuthorize("isAuthenticated()")
-	@PutMapping("/{vacationAppNum}/ok")
+	@GetMapping("/{vacationAppNum}/ok")
 	public ResponseEntity<String> ok(@PathVariable("vacationAppNum") int vacationAppNum){
 		log.info("vacationAppNum "+vacationAppNum);
 		VacationVO vacation=service.showUserOne(vacationAppNum);
@@ -264,9 +265,9 @@ public class VacationController {
 //	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/{vacationAppNum}/no")
-	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@PathVariable("refusalreason")String refusalreason){
-		log.info("문서 거절"+vacationAppNum);
-		return service.no(vacationAppNum,refusalreason)?new ResponseEntity<String>("success",HttpStatus.OK):
+	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@RequestBody  String refusalReason){
+		log.info("문서 거절"+vacationAppNum+refusalReason);
+		return service.no(vacationAppNum,refusalReason)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 //	닫기 -> showAdmin 페이지로 넘어감

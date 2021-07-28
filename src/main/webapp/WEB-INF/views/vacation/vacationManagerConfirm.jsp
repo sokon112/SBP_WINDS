@@ -64,10 +64,11 @@
 	                <td>
  	                
 		                
-		                <button type="button" class="btn btn-primary">승인</button> 
-		            	<button type="button"  class="btn btn-secondary">거절</button>
-						<input type="hidden" class="rejectReason" name="resonBox" value="reason" placeholder="거절 이유">
-						<input type="hidden" name="resonBoxCheck" class="btn btn-info" value="거절이유 작성완료">
+			                <button type="button" name="successBox" class="btn btn-primary">승인</button> 
+			            	<button type="button" name="rejectBox"  class="btn btn-secondary">거절</button>
+							<input type="hidden" class="rejectReason" name="resonBox" placeholder="거절 이유">
+							<input type="hidden" name="resonBoxCheck" class="btn btn-danger" value="거절이유 작성완료">
+							<input type="hidden" name="hiddenBox" class="hiddenBox" value="완료">
 	                 </td>
 	                 
 	            </tr>
@@ -94,12 +95,12 @@
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 <script type="text/javascript">
-var csrfHeaderName="${_csrf.parameterName}";
+
+var csrfHeaderName="${_csrf.headerName}";
 var csrfTokenValue="${_csrf.token}";
 
 </script>
- <script src="/resources/js/vacation/vacationFunction.js"></script>
-    <script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
-    <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
+<script src="/resources/js/vacation/vacationManagerConfirm.js"></script>
+<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

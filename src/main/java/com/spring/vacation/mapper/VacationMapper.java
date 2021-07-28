@@ -19,8 +19,8 @@ public interface VacationMapper {
 	public int vTotalCnt(VacationCriteria cri);
 	
 	//승인
-	public int vOk(int holidayAppNum);
-	public int vNo(@Param("holidayAppNum")int holidayAppNum,@Param("refusalreason")String refusalreason);
+	public int vOk(int vacationAppNum);
+	public int vNo(@Param("vacationAppNum")int vacationAppNum,@Param("refusalreason")String refusalreason);
 
 	//cnt계산 다시 하기
 	public int  vChangeCnt(@Param("vcnt")int vcnt,@Param("id")String id);

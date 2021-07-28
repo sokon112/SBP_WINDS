@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,11 @@
 </head>
 <body>
 <sec:authentication property="principal" var="info"/>
+<sec:authentication property="principal.memberVO" var="authinfo"/>
+                        <c:forEach items="${authinfo.authority}" var="auth">
+                               <c:set var="userauth" value="${auth.authority}"/>
+                            </c:forEach>
+                        
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:#ffffff">
@@ -48,12 +54,16 @@
                 </li>
                 <!-- /.dropdown -->
                 
+                
+                <c:if test="${userauth=='ad'}">
                 <li class="dropdown">
                     <a class="dropdown-toggle move-page" href="#" id="vacationManager">
                         <i class="fa fa-tasks fa-fw"></i>휴가 신청 관리
                     </a>
                     <!-- /.dropdown-user -->
                 </li>
+                </c:if>
+                
                 <!-- /.dropdown -->
                 <sec:authorize access="isAuthenticated()">
                 <li class="dropdown navbar-right" style="margin-right: 10px;">
