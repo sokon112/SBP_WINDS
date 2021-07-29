@@ -21,5 +21,5 @@ public interface BoardEventMapper { //이벤트게시글
 	public int betotalCnt(BoardCriteria cri); // 검색
 	public int beupdateviews(int eno); //조회수
 	public BoardEventVO becheckpw(@Param("eno")int eno, @Param("epassword")String epassword); //비밀번호 체크
-	public int beaddelete(int eno); // 관리자 삭제
+	public int beaddelete(int eno); //----------------------------------변경함 : 관리자 삭제
 }

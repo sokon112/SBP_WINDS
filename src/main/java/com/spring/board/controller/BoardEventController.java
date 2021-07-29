@@ -142,7 +142,7 @@ public class BoardEventController {    //이벤트
 		}
 	}
 	
-	//관리자 삭제
+	//----------------------------------변경함 : 관리자 삭제
 	@PostMapping("/event/beaddelete")
 	public String delete(int eno,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+eno);

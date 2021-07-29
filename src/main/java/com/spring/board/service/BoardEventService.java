@@ -18,7 +18,7 @@ public interface BoardEventService { //이벤트
 	public int betotalCnt(BoardCriteria cri); // 전체검색
 	public boolean beupdateviews(int eno); //조회수
 	public boolean becheckpw(@Param("eno") int eno,@Param("epassword") String epassword); //비번 확인
-	public boolean beaddelete(int eno); //관리자 삭제
+	public boolean beaddelete(int eno); //----------------------------------변경함 : 관리자 삭제
 
 	public List<BoardEventAttachFileDTO> beAttachList(int eno); //파일첨부
 
