@@ -153,6 +153,6 @@
 	
 	
 </script>
-<script src="/resources/js/board/hobby/read.js"></script>
-<script src="/resources/js/board/hobby/reply.js"></script>
+<script src="/resources/js/board/hobby/hread.js"></script>
+<script src="/resources/js/board/hobby/hreply.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>

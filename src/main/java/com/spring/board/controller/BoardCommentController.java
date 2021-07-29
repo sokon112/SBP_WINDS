@@ -66,7 +66,7 @@ public class BoardCommentController {
          new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
    }
    
-   @PostMapping("/pages/{bno}/{page}")
+   @GetMapping("/pages/{bno}/{page}")
    public ResponseEntity<BoardCommentPageVO> getList(@PathVariable("bno") int bno,@PathVariable("page") int page){
       log.info("댓글 가져오기 "+bno+" page "+page);
       

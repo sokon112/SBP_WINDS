@@ -161,6 +161,6 @@
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
 </script>
-<script src="/resources/js/board/event/read.js"></script>
-<script src="/resources/js/board/event/reply.js"></script>
+<script src="/resources/js/board/event/eread.js"></script>
+<script src="/resources/js/board/event/ereply.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp"%>

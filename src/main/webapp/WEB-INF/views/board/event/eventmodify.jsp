@@ -87,5 +87,5 @@
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
 </script>
-<script src="/resources/js/board/event/modify.js"></script>
+<script src="/resources/js/board/event/emodify.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp"%>
