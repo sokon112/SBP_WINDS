@@ -19,8 +19,7 @@ CREATE TABLE vacationApplicationTable
     vacationAppNum      NUMBER           NOT NULL, 
     id             varchar2(20)           NOT NULL, 
     type               VARCHAR2(20)     NOT NULL, 
-    startterm          DATE             NOT NULL, 
-    endterm            DATE             NOT NULL, 
+	term          DATE             NOT NULL, 
     state              VARCHAR2(10)     DEFAULT '신청' NOT NULL, 
     applicationDate    DATE             NOT NULL, 
     approvalDate       DATE             , 
@@ -42,7 +41,7 @@ values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-20',sysdate,'병�
 
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,applicationDate,reason,state,approvalDate) 
-values(vacationAppNum_SEQ.nextval,'15080002','반차','2021-07-28',sysdate,'병원','승인',sysdate);
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-30',sysdate,'병원','승인',sysdate);
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,applicationDate,reason,state,refusalReason,approvalDate) 
 values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05',sysdate,'병원','거절','회사 사정으로 인해 불가능',sysdate);

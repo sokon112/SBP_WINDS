@@ -6,6 +6,11 @@
 <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
 <html>
 <head>
+<style>
+th,td{
+text-align:center;
+width:15%;}
+</style>
 	<title>Vacation</title>
 </head>
 <body>
@@ -19,7 +24,7 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           휴가신청서
+                           
                         </div>
                         <!-- /.panel-heading -->
 <form action="/vacation/cancle" role="form" method="post">
@@ -57,14 +62,17 @@
 	                </c:if>
             </tbody>
         </table>
-        <c:if test="${vacation.state eq '신청' }">
-        <button type="button" class="btn btn-warning">수정</button>
-        <button type="button" class="btn btn-danger">삭제</button>
-        </c:if>
-        <c:if test="${vacation.state eq '승인' }">
-        <button type="button" class="btn btn-info">반납</button>
-        </c:if>
-        <button type="button" class="btn btn-primary">확인</button>
+
+         <button type="button" class="btn btn-primary pull-right">확인</button>
+	        <c:if test="${vacation.state eq '신청' }">
+	        <button type="button" class="btn btn-warning pull-right">수정</button>
+	        <button type="button" class="btn btn-danger pull-right">삭제</button>
+	        </c:if>
+	        <c:if test="${vacation.state eq '승인' }">
+	        <button type="button" class="btn btn-info pull-right">반납</button>
+	        </c:if>
+	       
+     
         </div>
 			
     </form>

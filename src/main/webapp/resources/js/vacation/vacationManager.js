@@ -81,17 +81,17 @@ $(function(){
 		checkPageForm.submit();
 	})
 	
-	var actionForm=$(".actionForm");
+	
+
 	//화살표 이동
 	$(".glyphicon-arrow-left").click(function(e){
 		
 		var checkBtn = $(this);
 
-		var tr = checkBtn.parent().parent();
-        var td = tr.children();
+		var monthDiv = checkBtn.parent().parent();
 
-		var date=td.find('h1').val();
-alert(date);
+		var date=monthDiv.find('input[name="month"]').val();
+
 		var yyyyMMdd = String(date);
 		
 	    var sYear = yyyyMMdd.substring(0,4);
@@ -99,7 +99,7 @@ alert(date);
 
 		var nextDate=new Date(sYear,sMonth-1);
 		
-		if(sMonth==1){
+		if(sMonth===1){
 			sYear=sYear-1;
 			sMonth=12;
 		}else{
@@ -108,23 +108,18 @@ alert(date);
 		
 		var newDate=new Date(sYear,sMonth);
 		
-		alert("newDate"+newDate);
-		alert("nextDate"+nextDate);
-		
 		actionForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
 		actionForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
 		actionForm.attr('action','vacationManager');
 		actionForm.submit();
 	})
-	
 	$(".glyphicon-arrow-right").click(function(e){
 		
 		var checkBtn = $(this);
 
-		var tr = checkBtn.parent().parent();
-        var td = tr.children();
+		var monthDiv = checkBtn.parent().parent();
 
-		var date=td.find('input[name="month"]').val();
+		var date=monthDiv.find('input[name="nmonth"]').val();
 
 		var yyyyMMdd = String(date);
 		
@@ -134,7 +129,7 @@ alert(date);
 
 		var newDate=new Date(sYear,sMonth-1);
 		
-		if(sMonth==12){
+		if(sMonth===12){
 			sYear=sYear+1;
 			sMonth=1;
 		}else{
@@ -143,9 +138,6 @@ alert(date);
 		
 		var nextDate=new Date(sYear,sMonth);
 	
-		alert("newDate"+newDate);
-		alert("nextDate"+nextDate);
-		
 		actionForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
 		actionForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
 		actionForm.attr('action','vacationManager');

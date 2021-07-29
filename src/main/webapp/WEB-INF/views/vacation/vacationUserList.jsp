@@ -6,6 +6,11 @@
 <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
 <html>
 <head>
+<style>
+th,td{
+text-align:center;
+width:15%;}
+</style>
 	<title>Vacation</title>
 </head>
 <body>
@@ -24,22 +29,22 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
    
-			
-			<div class="col-md-4">
-			<div></div>
-			<button type="button" class="glyphicon glyphicon-arrow-left pull-right" ></button>
+			<div class="selectMonth">
+				<div class="col-md-4">
+					<div></div>
+					<button type="button" class="glyphicon glyphicon-arrow-left pull-right" ></button>
+				</div>
+				<div class="col-md-4">
+					<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
+					<input type="hidden" class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>"> 
+					<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
+				</div>
+					
+				<div class="col-md-4">
+					<div></div>
+					<button type="button" class="glyphicon glyphicon-arrow-right pull-left" ></button> 
+				</div>
 			</div>
-			<div class="col-md-4">
-			<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
-			<input type="hidden" class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>"> 
-			<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
-			</div>
-			
-			<div class="col-md-4">
-			<div></div>
-			<button type="button" class="glyphicon glyphicon-arrow-right pull-left" ></button> 
-			</div>
-
         <table class="table table-striped table-bordered table-hover">
 	<thead>
 	<tr>

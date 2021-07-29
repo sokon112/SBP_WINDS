@@ -267,6 +267,7 @@ public class VacationController {
 	@PostMapping("/{vacationAppNum}/no")
 	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@RequestBody  String refusalReason){
 		log.info("문서 거절"+vacationAppNum+refusalReason);
+			
 		return service.no(vacationAppNum,refusalReason)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}

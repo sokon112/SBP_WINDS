@@ -7,11 +7,16 @@
 <head>
     <meta charset="utf-8">
 <title>Insert title here</title>
+<style>
+th,td{
+text-align:center;
+width:15%;}
+</style>
 </head>
 <body>
 <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">휴가신청서</h1>
+                    <h1 class="page-header">휴가심사</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>            
@@ -19,14 +24,15 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                           Board Read Page
+                          
                         </div>
                         <!-- /.panel-heading -->
-<!-- <form action="/vacation/vacationManagerConfirm"> -->
-<input type="text" id="yearMonth" class="form-control" name="bno" readonly="readonly"  value="휴가심사" disabled>
+
 
 <div class="panel-body">
+
         <table class="table table-striped table-bordered table-hover">
+        
         <thead>
         <tr>
             <th>신청서번호</th>
@@ -39,6 +45,7 @@
             </tr>
         </thead>
         <tbody>
+        
 	        <c:forEach var="vacation" items="${list}">
 	        
 	            <tr class="chat">
@@ -73,11 +80,13 @@
 	                 
 	            </tr>
 	            
-  			</c:forEach>        
+  			</c:forEach>  
+  
         </tbody>
+        
     </table>
 </div>
-    <button type='button' class="btn btn-info">닫기</button>
+  			   <button type='button' class="btn btn-info pull-right">닫기</button>     
 <!--     </form> -->
      </div>
                 	</div>

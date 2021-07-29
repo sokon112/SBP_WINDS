@@ -23,10 +23,9 @@ $(function(){
 		
 		var checkBtn = $(this);
 
-		var tr = checkBtn.parent().parent();
-        var td = tr.children();
+		var monthDiv = checkBtn.parent().parent();
 
-		var date=td.find('input[name="month"]');
+		var date=monthDiv.find('input[name="month"]').val();
 
 		var yyyyMMdd = String(date);
 		
@@ -35,7 +34,7 @@ $(function(){
 
 		var nextDate=new Date(sYear,sMonth-1);
 		
-		if(sMonth==1){
+		if(sMonth===1){
 			sYear=sYear-1;
 			sMonth=12;
 		}else{
@@ -53,10 +52,9 @@ $(function(){
 		
 		var checkBtn = $(this);
 
-		var tr = checkBtn.parent().parent();
-        var td = tr.children();
+		var monthDiv = checkBtn.parent().parent();
 
-		var date=td.find('h1').val();
+		var date=monthDiv.find('input[name="nmonth"]').val();
 
 		var yyyyMMdd = String(date);
 		
@@ -66,7 +64,7 @@ $(function(){
 
 		var newDate=new Date(sYear,sMonth-1);
 		
-		if(sMonth==12){
+		if(sMonth===12){
 			sYear=sYear+1;
 			sMonth=1;
 		}else{
@@ -75,8 +73,6 @@ $(function(){
 		
 		var nextDate=new Date(sYear,sMonth);
 	
-		alert("newDate"+newDate);
-		alert("nextDate"+nextDate);
 		
 		preMonthForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
 		preMonthForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");

@@ -5,6 +5,7 @@
 
 <html>
 <head>
+
     <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
@@ -34,10 +35,8 @@
                 	<tr>
 	                    <th>사원번호</th>
 	                    <td colspan="3">
-	                    <label for="">댓글 내용</label>
-        	
 							<sec:authentication property="principal" var="info"/>
-	                    	<input type="text" class="form-control" name="id" value="${info.username}">
+	                    	<input type="text" class="form-control" name="id" value="${info.username}" readonly="readonly">
 	                    </td>
                     </tr>
                 <tr>

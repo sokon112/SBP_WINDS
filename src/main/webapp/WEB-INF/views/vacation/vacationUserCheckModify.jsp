@@ -5,6 +5,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
+<style>
+th,td{
+text-align:center;
+width:15%;}
+</style>
     <meta charset="utf-8">
 <title>Insert title here</title>
 </head>

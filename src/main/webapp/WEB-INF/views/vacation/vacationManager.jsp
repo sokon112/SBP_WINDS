@@ -8,6 +8,11 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
+<style>
+th,td{
+text-align:center;
+width:15%;}
+</style>
     <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
@@ -25,22 +30,25 @@
                         
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-   
+   <div class="selectMonth">
+				<div class="col-md-4">
+					<div></div>
+					<button type="button" class="glyphicon glyphicon-arrow-left pull-right" ></button>
+				</div>
+				<div class="col-md-4">
+					<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
+					<input type="hidden" class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>"> 
+					<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
+				</div>
+					
+				<div class="col-md-4">
+					<div></div>
+					<button type="button" class="glyphicon glyphicon-arrow-right pull-left" ></button> 
+				</div>
+			</div>
         <table class="table table-striped table-bordered table-hover">
         <thead>
-        <tr>
-		<td >
-			<button type="button" class="glyphicon glyphicon-arrow-left" ></button>
-		</td>
-		<td colspan="4">
-		<h1></h1>
-			<input class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>">
-			<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
-		</td>
-		<td>
-			<button type="button" class="glyphicon glyphicon-arrow-right" ></button> 
-		</td>
-	</tr>
+        
 	        <tr>
 	            <th>신청서번호</th>
 	            <th>사원번호</th>

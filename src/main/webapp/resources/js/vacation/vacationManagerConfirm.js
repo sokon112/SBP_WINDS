@@ -73,9 +73,8 @@ $(function(){
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 			},
-			data:JSON.stringify({
-				"refusalReason":refusalReason
-			}),
+			data:JSON.stringify(refusalReason
+			),
 			contentType: "application/json; charset=UTF-8",
 			success:function(result){
     			console.log(result);
