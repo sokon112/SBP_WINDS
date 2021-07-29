@@ -4,12 +4,7 @@
 $(function(){
 	
 	//결재선 모달 관련
-	$("#reg").click(function(){
-		var title = $("#title").val()
-		var attach = $("#attachlist").val();
-		$("#modaltitle").val(title);
-		$("#modalattach").val(attach);
-	})
+	
 	
 	let modal = $("#modal2");
 	
@@ -115,7 +110,7 @@ $(function(){
 				// 원본 이미지 경로
 				var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
 				originPath = originPath.replace(new RegExp(/\\/g),"/");
-			
+				$("#modalattach").val(obj.fileName);
 				str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
 				str+="<a href=\"javascript:showImage(\'"+originPath+"\')\">";
@@ -125,6 +120,7 @@ $(function(){
 				str+="<img src='/display?fileName="+fileCallPath+"'></a>";
 				str+="</li>";
 			}else{
+				$("#modalattach").val(obj.fileName);
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
 				str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
@@ -138,6 +134,12 @@ $(function(){
 		})		
 		uploadResult.append(str);
 	}// showUploadedFile 종료	
+	
+	$("#reg").click(function(){
+		var title = $("#title").val()
+		$("#modaltitle").val(title);
+		
+	})
 	
 	function checksubmit(){
 		var destin = $("#destinput").val();

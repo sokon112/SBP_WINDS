@@ -154,5 +154,5 @@ th, td {
 <script>
 	let result = '${result}';
 </script>
-<script src="/resources/js/board/hobby/list.js"></script>
+<script src="/resources/js/board/hobby/hlist.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp"%>

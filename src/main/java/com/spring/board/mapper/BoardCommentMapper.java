@@ -15,7 +15,7 @@ public interface BoardCommentMapper { //댓글
 	public int bcupdate(BoardCommentVO comment); //댓글 수정
 	public int bcdelete(int rno); //댓글 삭제
 	public int bcdeleteAll(int ano); //댓글 전체 삭제
-	public int bcCountByBno(int bno); // 댓글 수
+	public int bcCountByBno(int bno); // 댓글 전체수
 	public List<BoardCommentVO> bclist(@Param("cri") BoardCriteria cri,@Param("dno") int dno);
 	//댓글 검색리스트
 	public int bctotal(BoardCriteria cri);

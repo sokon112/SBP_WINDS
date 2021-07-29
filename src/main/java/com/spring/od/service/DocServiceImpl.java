@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.od.domain.AttachFileDTO;
 import com.spring.od.domain.OfficeNoticeVO;
@@ -19,7 +20,7 @@ public class DocServiceImpl implements DocService {
 	@Autowired
 	private DocAttachMapper attachMapper;
 	
-	
+	@Transactional
 	@Override
 	public boolean owrite(OfficeNoticeVO vo) {
 		
@@ -50,12 +51,14 @@ public class DocServiceImpl implements DocService {
 	public List<AttachFileDTO> getAttachList(int docNum) {
 		return attachMapper.oafindByDocNum(docNum);
 	}
-
+	
+	@Transactional
 	@Override
 	public boolean oremove(int docNum) {
 		return mapper.oremove(docNum)>0?true:false;
 	}
-
+	
+	@Transactional
 	@Override
 	public boolean omodify(OfficeNoticeVO vo) {
 		boolean result = mapper.omodify(vo)>0?true:false;

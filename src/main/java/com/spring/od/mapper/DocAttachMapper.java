@@ -8,4 +8,5 @@ public interface DocAttachMapper {
 	public int oainsert(AttachFileDTO attach);
 	public int oadelete(int docNum);
 	public List<AttachFileDTO> oafindByDocNum(int docNum);
+	public List<AttachFileDTO> getOldFiles();
 }

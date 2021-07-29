@@ -5,49 +5,49 @@
 <!-- 댓글 : 게시판에만 -->
 
 	<!-- insert : 게시판-->
-	<insert id="bcommentinsert">
+	<insert id="bcinsert">
 		insert into comment_table(dno,bno,dnickname, password, content)
 		values(comment_tb_seq.nextval,#{bno},#{dnickname},#{password},#{content})
 	</insert>
 		
 	<!-- 댓글 하나 가져오기  : dno 가 일치-->
-	<select id="bcommentread" resultType="com.spring.board.domain.BoardCommentVO">
+	<select id="bcread" resultType="com.spring.board.domain.BoardCommentVO">
 		select * from comment_table where dno=#{dno}
 	</select>
 	
 	<!-- 댓글 수정 : 댓글 내용만 수정, updatedate, dno 일치하면 -->
-	<update id="bcommentupdate">
+	<update id="bcupdate">
 		update comment_table
 		set content=#{content}, uploaddate=sysdate
 		where dno=#{dno} and password=#{password}
 	</update>
 	
 	<!-- 댓글 삭제 : rno, password 일치 -->
-	<delete id="bcommentdelete">
+	<delete id="bcdelete">
 		delete from comment_table where dno=#{dno} and password=#{password}
 	</delete>
 	
 	<!-- 댓글 페이지 처리 -->
-	<select id="bcommentlist" resultType="com.spring.board.domain.BoardCommentPageVO">
+	<select id="bclist" resultType="com.spring.board.domain.BoardCommentPageVO">
 		<![CDATA[	
-			select dno,bno,nickname,password,content,uploaddate
+			select dno,bno,dnickname,password,content,uploaddate
 			from(
 					select /*+INDEX(comment_table idx_comment)*/
 					       rownum rn, dno,bno,dnickname,password,content,uploaddate
 					from comment_table
-					where dno=#{dno} and rno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
+					where dno=#{dno} and dno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
 			     )
 			where rn > (#{cri.pageNum}-1) * #{cri.amount}		
 		]]>
 	</select>
 	
 	<!-- 하나의 글번호에 대한 전체 댓글 게시물 수 -->
-	<select id="bcommentCountByBno" resultType="int">
+	<select id="bcCountByBno" resultType="int">
 		select count(*) from comment_table where dno=#{dno}	
 	</select>
 	
 	<!-- 글을 삭제 할떄 글에 딸려있는 댓글들도 삭제  -->
-	<delete id="bcommentdeleteAll">
+	<delete id="bcdeleteAll">
 		delete from comment_table where dno=#{dno}	
 	</delete>
 

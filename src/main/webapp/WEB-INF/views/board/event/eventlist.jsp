@@ -147,5 +147,5 @@ th,td{
 <script>
    let result='${result}';
 </script>
-<script src="/resources/js/board/event/list.js"></script>
+<script src="/resources/js/board/event/elist.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp" %>
