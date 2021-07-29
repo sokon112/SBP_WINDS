@@ -33,48 +33,48 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping("/comment/*")
 public class BoardCommentController {
-	
-	@Autowired
-	private BoardCommentService service;
-	
-	
-	@PostMapping("/new")
-	public ResponseEntity<String> create(@RequestBody BoardCommentVO comment){
-		log.info("댓글 삽입 요청 "+comment);
-		
-		return service.bcinsert(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
-			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	
-	
-	
-	@PutMapping("/{dno}")
-	public ResponseEntity<String> update(@PathVariable("dno") int dno,@RequestBody BoardCommentVO comment){
-		log.info("댓글 수정 "+dno+" 수정 내용 "+comment);
-				
-		comment.setDno(dno);
-		
-		return service.bcupdate(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
-			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	
-	@DeleteMapping("/{dno}")
-	public ResponseEntity<String> delete(@PathVariable("dno") int dno,@RequestBody BoardCommentVO vo){
-		log.info("댓글 삭제 "+dno);		
-		
-		return service.bcdelete(dno)?new ResponseEntity<String>("success",HttpStatus.OK):
-			new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
-	}
-	
-	@PostMapping("/pages/{dno}/{page}")
-	public ResponseEntity<BoardCommentPageVO> getList(@PathVariable("dno") int dno,@PathVariable("page") int page){
-		log.info("댓글 가져오기 "+dno+" page "+page);
-		
-		BoardCriteria cri = new BoardCriteria(page, 10);
-		
-		return new ResponseEntity<BoardCommentPageVO>(service.bclist(cri, dno),HttpStatus.OK);
-		
-	}
-	
-	
+   
+   @Autowired
+   private BoardCommentService service;
+   
+   
+   @PostMapping("/new")
+   public ResponseEntity<String> create(@RequestBody BoardCommentVO comment){
+      log.info("댓글 삽입 요청 "+comment);
+      
+      return service.bcinsert(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
+         new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+   }
+   
+   
+   
+   @PutMapping("/{dno}")
+   public ResponseEntity<String> update(@PathVariable("dno") int dno,@RequestBody BoardCommentVO comment){
+      log.info("댓글 수정 "+dno+" 수정 내용 "+comment);
+            
+      comment.setDno(dno);
+      
+      return service.bcupdate(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
+         new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+   }
+   
+   @DeleteMapping("/{dno}")
+   public ResponseEntity<String> delete(@PathVariable("dno") int dno,@RequestBody BoardCommentVO vo){
+      log.info("댓글 삭제 "+dno);      
+      
+      return service.bcdelete(dno)?new ResponseEntity<String>("success",HttpStatus.OK):
+         new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
+   }
+   
+   @PostMapping("/pages/{bno}/{page}")
+   public ResponseEntity<BoardCommentPageVO> getList(@PathVariable("bno") int bno,@PathVariable("page") int page){
+      log.info("댓글 가져오기 "+bno+" page "+page);
+      
+      BoardCriteria cri = new BoardCriteria(page, 10);
+      
+      return new ResponseEntity<BoardCommentPageVO>(service.bclist(cri, bno),HttpStatus.OK);
+      
+   }
+   
+   
 }
