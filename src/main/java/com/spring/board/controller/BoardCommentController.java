@@ -38,34 +38,31 @@ public class BoardCommentController {
 	private BoardCommentService service;
 	
 	
-//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/new")
 	public ResponseEntity<String> create(@RequestBody BoardCommentVO comment){
 		log.info("댓글 삽입 요청 "+comment);
 		
-		return service.bcommentinsert(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
+		return service.bcinsert(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	
 	
-//	@PreAuthorize("principal.username == #comment.replyer")
 	@PutMapping("/{dno}")
 	public ResponseEntity<String> update(@PathVariable("dno") int dno,@RequestBody BoardCommentVO comment){
 		log.info("댓글 수정 "+dno+" 수정 내용 "+comment);
 				
 		comment.setDno(dno);
 		
-		return service.bcommentupdate(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
+		return service.bcupdate(comment)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-//	@PreAuthorize("principal.username == #vo.replyer") //권한
 	@DeleteMapping("/{dno}")
 	public ResponseEntity<String> delete(@PathVariable("dno") int dno,@RequestBody BoardCommentVO vo){
 		log.info("댓글 삭제 "+dno);		
 		
-		return service.bcommentdelete(dno)?new ResponseEntity<String>("success",HttpStatus.OK):
+		return service.bcdelete(dno)?new ResponseEntity<String>("success",HttpStatus.OK):
 			new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
 	}
 	
@@ -75,7 +72,7 @@ public class BoardCommentController {
 		
 		BoardCriteria cri = new BoardCriteria(page, 10);
 		
-		return new ResponseEntity<BoardCommentPageVO>(service.bcommentlist(cri, dno),HttpStatus.OK);
+		return new ResponseEntity<BoardCommentPageVO>(service.bclist(cri, dno),HttpStatus.OK);
 		
 	}
 	

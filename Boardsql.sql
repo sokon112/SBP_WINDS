@@ -51,14 +51,20 @@ CREATE TABLE comment_table
 (
     dno         NUMBER     PRIMARY KEY        NOT NULL, 
     bno         NUMBER            NOT NULL, 
-    nickname    VARCHAR2(20)      NOT NULL, 
+    dnickname    VARCHAR2(20)      NOT NULL, 
     uploaddate        DATE      default sysdate        NOT NULL, 
     password    VARCHAR2(20)      NOT NULL, 
-    contents    VARCHAR2(1000)    NOT NULL 
+    content   VARCHAR2(1000)    NOT NULL 
     
 );
 --댓글 테이블 시퀸스 생성
 create SEQUENCE comment_tb_seq;
+
+-- 댓글테이블과 게시판 테이블 번호 연결
+ALTER TABLE comment_table
+    ADD CONSTRAINT FK_board_table_bno FOREIGN KEY (bno)
+        REFERENCES board_table (bno);
+
 
 -- 파일 첨부 테이블        
 create table special_attach(

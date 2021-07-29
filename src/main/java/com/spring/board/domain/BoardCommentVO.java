@@ -14,9 +14,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardCommentVO { //댓글
-	private int dno; //댓글 번호
 	private int bno; //게시물 번호
-	private String nickname; //닉네임
+	private int dno; //댓글 번호
+	private String dnickname; //닉네임
 	private String content; //내용
 	private String password; //비번
 	private Date uploaddate; //날짜
@@ -26,7 +26,7 @@ public class BoardCommentVO { //댓글
 	
 	
 	
-	
+
 
 	
 }
