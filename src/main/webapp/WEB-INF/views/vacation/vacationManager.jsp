@@ -158,6 +158,11 @@
 					<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
 					<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" />
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form> 
+				<form action="" method="post" id="monthManager">
+					<input type="hidden" name="keyType" value="${VacationPageVO.cri.keyType}" />
+					<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</form>      
 				<form action="" id="checkPageForm" method="post">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

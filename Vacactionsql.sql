@@ -38,29 +38,29 @@ ALTER TABLE vacationApplicationTable add CONSTRAINT fk_vacationSceduleid FOREIGN
 
 --신청서 분류별로 삽입하는 구문
 insert into vacationApplicationTable(vacationAppNum,id,type,term,applicationDate,reason,state,approvalDate) 
-values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-20',sysdate,'병원','승인',sysdate);
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-06-05','2021-06-05','병원','승인',sysdate);
 
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,applicationDate,reason,state,approvalDate) 
-values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-30',sysdate,'병원','승인',sysdate);
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-06-05','2021-06-15','병원','승인',sysdate);
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,applicationDate,reason,state,refusalReason,approvalDate) 
-values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05',sysdate,'병원','거절','회사 사정으로 인해 불가능',sysdate);
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-06-05','2021-06-25','병원','거절','회사 사정으로 인해 불가능',sysdate);
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
-values(vacationAppNum_SEQ.nextval,'10030001','월차','2021-07-06','신청',sysdate,'병원');
+values(vacationAppNum_SEQ.nextval,'10030001','월차','2021-07-06','신청','2021-06-08','병원');
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
-values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05','신청',sysdate,'병원');
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05','신청','2021-06-08','병원');
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason)  
-values(vacationAppNum_SEQ.nextval,'19080013','반차','2021-07-05',sysdate,'강아지 산책');
+values(vacationAppNum_SEQ.nextval,'19080013','반차','2021-07-05','2021-06-08','강아지 산책');
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
-values(vacationAppNum_SEQ.nextval,'19080013','반차','2021-08-05',sysdate,'집안사정');
+values(vacationAppNum_SEQ.nextval,'19080013','반차','2021-08-05','2021-06-08','집안사정');
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
-values(vacationAppNum_SEQ.nextval,'19080013','월차','2021-08-05',sysdate,'호캉스');
+values(vacationAppNum_SEQ.nextval,'19080013','월차','2021-08-05','2021-06-08','호캉스');
 
 select * from vacationScedule;
 select * from vacationApplicationTable;

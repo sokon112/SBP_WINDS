@@ -77,6 +77,8 @@ $(function(){
 		checkPageForm.submit();
 	})
 	
+	var monthManager = $("#monthManager");
+	
 	//월 이동하는 것 왼쪽 화살표  => 이전달
 	$(".glyphicon-arrow-left").click(function(e){
 		
@@ -102,10 +104,10 @@ $(function(){
 		
 		var newDate=new Date(sYear,sMonth);
 		
-		actionForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
-		actionForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
-		actionForm.attr('action','vacationManager');
-		actionForm.submit();
+		monthManager.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
+		monthManager.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
+		monthManager.attr('action','vacationManager');
+		monthManager.submit();
 	})
 		//월 이동하는 것 왼쪽 화살표  => 다음달
 	$(".glyphicon-arrow-right").click(function(e){
@@ -133,10 +135,10 @@ $(function(){
 		
 		var nextDate=new Date(sYear,sMonth);
 	
-		actionForm.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
-		actionForm.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
-		actionForm.attr('action','vacationManager');
-		actionForm.submit();
+		monthManager.append("<input type='hidden' name='nowMonth' value='"+newDate+"'>");
+		monthManager.append("<input type='hidden' name='nextMonth' value='"+nextDate+"'>");
+		monthManager.attr('action','vacationManager');
+		monthManager.submit();
 	})
 })
 
