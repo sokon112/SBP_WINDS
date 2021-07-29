@@ -36,7 +36,7 @@ public class BoardServieImpl implements BoardService {
 	public boolean boarddelete(int bno, String password) { //게시글 삭제
 		
 		//댓글 삭제
-		bcommentMapper.bcommentdeleteAll(bno);		
+		bcommentMapper.bcdeleteAll(bno);		
 		
 		//게시글 삭제
 		return bmapper.boarddelete(bno, password)>0?true:false;

@@ -3,7 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../includes/od/header.jsp"%>
 <link rel="stylesheet" href="/resources/dist/css/attach.css" />
-<div class="center">
+<div class="container-fluid" style="margin: 20px">
+<div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">공문 보기</h1>
 	</div>
@@ -90,10 +91,12 @@
 					<sec:authentication property="principal.memberVO" var="info"/>
                 				<sec:authorize access="isAuthenticated()">
 									<c:if test="${info.id==vo.send}"><%--로그인한 사용자와 작성자가 동일여부 확인 --%>
+									<c:if test="${vo.state=='임시저장'}">
 									<c:if test="${vo.storage!='완결' }">
 										<button type="button" class="btn btn-info" id="modify">수정</button>
 										<button type="button" class="btn btn-info" id="remove">삭제</button>
 									</c:if>
+                					</c:if>
                 					</c:if>
                 					<c:if test="${userauth=='mg'}">
                 					<c:if test="${vo.state!='임시저장'}">
@@ -139,28 +142,31 @@
 						<textarea class="form-control" rows="20" name="contents" readonly="readonly">${vo.contents}</textarea>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
+					<%-- 첨부파일 목록 보여주기 --%>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<i class="fa fas fa-file"></i> 첨부파일
+								</div>
+								<div class="panel-body"></div>
+								<div class="uploadResult row">
+									<div class="col-md-4">
+										<ul></ul>
+									</div>		
+										<div class="bigPictureWrapper col-md-8">
+										<div class="bigPicture"></div>
+									</div>
+								</div>			
+							</div>
+						</div>
+					</div> 
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<%-- 첨부파일 목록 보여주기 --%>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<i class="fa fas fa-file"></i> Files
-			</div>
-			<div class="panel-body">
-				<div class="uploadResult">
-					<ul></ul>
-				</div>
-			</div>			
-		</div>
-	</div>
-</div> 
-<div class="bigPictureWrapper">
-	<div class="bigPicture"></div>
+
 </div>
 <form action="" method="get" id="actionForm">	
 	<input type="hidden" name="type" value="${cri.type}" />
@@ -168,12 +174,10 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />
 	<input type='hidden' name='docNum'  value='${vo.docNum}'/>
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		
 </form> 
 <script>
 	let docNum = ${vo.docNum};
-	
-	var csrfHeaderName="${_csrf.parameterName}";
+	var csrfHeaderName="${_csrf.HeaderName}";
 	var csrfTokenValue="${_csrf.token}";
 </script>
 <script src="/resources/js/od/read.js"></script>

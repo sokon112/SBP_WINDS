@@ -22,38 +22,38 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	private BoardMapper bmapper;
 	
 	@Override	
-	public boolean bcommentinsert(BoardCommentVO comment) {
+	public boolean bcinsert(BoardCommentVO comment) {
 		
-		boolean result = bcmapper.bcommentinsert(comment)>0?true:false;
+		boolean result = bcmapper.bcinsert(comment)>0?true:false;
 		return result;
 	}
 	
 	@Override
-	public boolean bcommentupdate(BoardCommentVO comment) {
-		return bcmapper.bcommentupdate(comment)>0?true:false;
+	public boolean bcupdate(BoardCommentVO comment) {
+		return bcmapper.bcupdate(comment)>0?true:false;
 	}
 
 	@Override
-	public boolean bcommentdelete(int rno) {
+	public boolean bcdelete(int rno) {
 
-		BoardCommentVO comment = bcmapper.bcommentread(rno);
-		return bcmapper.bcommentdelete(rno)>0?true:false;
+		BoardCommentVO comment = bcmapper.bcread(rno);
+		return bcmapper.bcdelete(rno)>0?true:false;
 	}
 
 	
 	@Override
-	public BoardCommentPageVO bcommentlist(BoardCriteria cri, int dno) {
-		return new BoardCommentPageVO(bcmapper.bcommentCountByBno(dno),bcmapper.bcommentlist(cri, dno));
+	public BoardCommentPageVO bclist(BoardCriteria cri, int dno) {
+		return new BoardCommentPageVO(bcmapper.bcCountByBno(dno),bcmapper.bclist(cri, dno));
 	}
 
 	@Override
-	public BoardCommentVO bcommentread(int rno) {
-		return bcmapper.bcommentread(rno);
+	public BoardCommentVO bcread(int rno) {
+		return bcmapper.bcread(rno);
 	}
 
 	@Override
-	public int bcommenttotal(BoardCriteria cri) {
-		return bcmapper.bcommenttotal(cri);
+	public int bctotal(BoardCriteria cri) {
+		return bcmapper.bctotal(cri);
 
 	}
 

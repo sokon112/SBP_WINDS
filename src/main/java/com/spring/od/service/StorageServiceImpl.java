@@ -34,5 +34,9 @@ public class StorageServiceImpl implements StorageService {
 	public List<StorageListVO> TempList(Criteria cri,String id) {
 		return mapper.tempList(cri,id);
 	}
+	@Override
+	public void checkboxDelete(int doc_num) {
+		mapper.checkboxDelete(doc_num);
+	}
 
 }

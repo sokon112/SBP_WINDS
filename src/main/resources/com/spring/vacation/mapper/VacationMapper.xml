@@ -47,7 +47,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		]]>	
 	<include refid="vacationCriteria"></include>
 	<![CDATA[
-		vacationAppNum>0 and state not like ('신청')
+		vacationAppNum>0 and state not like ('신청')and rownum <=(#{pageNum})*#{amount} and vat.term >= #{nowMonth} and vat.term < #{nextMonth}
 		]]>	
 	</select>
 	

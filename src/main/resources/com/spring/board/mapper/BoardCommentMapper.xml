@@ -6,8 +6,8 @@
 
 	<!-- insert : 게시판-->
 	<insert id="bcommentinsert">
-		insert into comment_table(dno,bno,nickname, password, contents)
-		values(comment_tb_seq.nextval,#{bno},#{nickname},#{password},#{contents})
+		insert into comment_table(dno,bno,dnickname, password, content)
+		values(comment_tb_seq.nextval,#{bno},#{dnickname},#{password},#{content})
 	</insert>
 		
 	<!-- 댓글 하나 가져오기  : dno 가 일치-->
@@ -18,7 +18,7 @@
 	<!-- 댓글 수정 : 댓글 내용만 수정, updatedate, dno 일치하면 -->
 	<update id="bcommentupdate">
 		update comment_table
-		set contents=#{contents}, uploaddate=sysdate
+		set content=#{content}, uploaddate=sysdate
 		where dno=#{dno} and password=#{password}
 	</update>
 	
@@ -30,10 +30,10 @@
 	<!-- 댓글 페이지 처리 -->
 	<select id="bcommentlist" resultType="com.spring.board.domain.BoardCommentPageVO">
 		<![CDATA[	
-			select dno,bno,nickname,password,contents,uploaddate
+			select dno,bno,nickname,password,content,uploaddate
 			from(
 					select /*+INDEX(comment_table idx_comment)*/
-					       rownum rn, dno,bno,nickname,password,contents,uploaddate
+					       rownum rn, dno,bno,dnickname,password,content,uploaddate
 					from comment_table
 					where dno=#{dno} and rno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
 			     )

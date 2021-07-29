@@ -48,7 +48,7 @@ $(function(){
 	//업로드 되는 파일의 종류와 크기 제한
 	function checkExtension(fileName,fileSize){
 		
-		var regex = new RegExp("(.*?)\.(hwp|txt|jpg|gif|png|bmp)");
+		var regex = new RegExp("(.*?)\.(pptx|xlsx|pdf|hwp|txt|jpg|gif|png|bmp)");
 		
 		var maxSize = 10242880; //5MB
 		
@@ -83,14 +83,14 @@ $(function(){
 		// enctype="multipart/form-data" => processData:false,contentType:false,
 		
 		$.ajax({
-			url:'/uploadAjax', //도착지
 			type:'post',
+			url:'/uploadAjax', //도착지
+			data:formData,
 			processData:false,
 			contentType:false,
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 			},
-			data:formData,
 			success:function(result){
 				console.log(result);
 				showUploadedFile(result);

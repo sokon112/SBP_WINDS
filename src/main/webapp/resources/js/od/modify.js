@@ -20,7 +20,6 @@ $(function(){
 		console.log(dest);
 		
 		str += "<input type='hidden' name='dest' value='"+dest+"'>";
-		var deptNum;
 		var destname = "";
 		if(dest=='15080002'){
 			destname = "한소희(인사팀장)";
@@ -51,7 +50,9 @@ $(function(){
 		var title = $("#title").val();
 		var retent = $("#retentdate").val();
 		
-		if(destin==='${vo.dest}'){
+		console.log(destin);
+		
+		if(destin===''){
 			alert("결재선을 지정해주세요");
 			destin.focus();
 		}
@@ -84,6 +85,7 @@ $(function(){
 		
 		str+="<input type='hidden' name='storage' value='미결'>";
 		str+="<input type='hidden' name='state' value='요청'>";
+		str+="<input type='hidden' name='message' value=''>";
 		
 		str+="<input type='hidden' name='type' value='${cri.type}' />";
 		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";

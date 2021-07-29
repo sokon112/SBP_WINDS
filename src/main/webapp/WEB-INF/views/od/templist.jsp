@@ -4,6 +4,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="../../includes/od/header.jsp" %>
+
+<script src="/resources/js/od/storagelist.js"></script>
+
 <style>
 .small {font-size:12px;}
 /* Hide for mobile, show later */
@@ -93,15 +96,14 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <input type="button" value="선택삭제" class="btn btn-danger btn-sm"/>
+                            <input type="button" value="선택삭제" class="btn btn-danger btn-sm" onclick="checkdelete()"/>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                    	<th><input type="checkbox" id="total" /></th>
-                                        <th>공문번호</th>
+                                        <th><input type="checkbox" id="total"/>공문번호</th>
                                         <th>공문제목</th>
                                         <th>송신부서</th>
                                         <th>송신자</th>
@@ -110,16 +112,18 @@
                                 </thead>
 								<tbody>
 								<!-- 게시판 리스트 반복문 -->
+								<sec:authentication property="principal.memberVO" var="info"/>
 							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="vo" items="${templist}">
+								<c:if test="${info.id==vo.id}">
 									<tr>
-										<td><input type="checkbox" class="normal" /></td>
-										<td>${vo.docNum}</td>
+										<td><input type="checkbox" name="chkbox" value="${vo.docNum}" class="normal"/>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
 										<td>${vo.deptName}</td>
 										<td>${vo.name}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.regDate}"/></td>
 									</tr>
+								</c:if>
 								</c:forEach>
 								</sec:authorize>								
 								</tbody>
@@ -193,5 +197,5 @@
 <script>
 	let result='${result}';
 </script>
-<script src="/resources/js/od/storagelist.js"></script>
+
 <%@include file="../../includes/od/footer.jsp" %>      

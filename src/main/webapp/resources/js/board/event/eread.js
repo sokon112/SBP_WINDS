@@ -74,9 +74,9 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
-	//관리자 삭제버튼 클릭시 모달창 보이기
+	//----------------------------------변경함 : 관리자 삭제버튼 클릭시 모달창 보이기
 	$("#addelete").click(function(){
-		operForm.attr('action','/board/event/addelete');
+		operForm.attr('action','/board/event/beaddelete');
 		operForm.attr('method','post');
 		operForm.submit();
 	})	
@@ -141,23 +141,3 @@ $(function(){
 	
 	
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

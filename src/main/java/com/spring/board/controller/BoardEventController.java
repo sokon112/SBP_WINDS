@@ -142,22 +142,29 @@ public class BoardEventController {    //이벤트
 		}
 	}
 	
-	//관리자 삭제
-	@PostMapping("/main/beaddelete")
+	//----------------------------------변경함 : 관리자 삭제
+	@PostMapping("/event/beaddelete")
 	public String delete(int eno,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+eno);
-			
+		
+		List<BoardEventAttachFileDTO> eattachList=beservice.beAttachList(eno);
+		
+		deleteFiles(eattachList);
+		beservice.beaddelete(eno);	
+		
+		rttr.addFlashAttribute("result","성공");
+	
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
-			
+		
 		return "redirect:eventlist";
 	}
 	
 	//게시글 삭제 + post
 	@PostMapping("/event/eventdelete")
-	public String remove(int eno,String epassword, String ewriter,BoardCriteria cri,RedirectAttributes rttr) {
+	public String remove(int eno,String epassword,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+eno);
 		
 		
@@ -169,9 +176,11 @@ public class BoardEventController {    //이벤트
 
 		//게시글 삭제 + 첨부파일 삭제
 		if(result) {
-			beservice.bedelete(eno,epassword);
 			//② 폴더 파일 삭제
 			deleteFiles(eattachList);
+			
+			beservice.bedelete(eno,epassword);
+			
 			rttr.addFlashAttribute("result","성공");
 		
 		

@@ -1,6 +1,8 @@
 /**
  * list.jsp 스크립트
  */
+
+ 
 $(function(){
 	// 모달 창 띄우기
 	//checkModal(result);
@@ -118,9 +120,32 @@ $(function(){
 		}	
 	})
 	
+
 })
 
+function checkdelete(){
+	console.log("삭제 버튼 눌림")
+	//체크박스에 있는 값들을 받아온다
+	var checkBoxArr = [];
+	
+	$("input[name=chkbox]:checked").each(function(i){
+		checkBoxArr.push($(this).val());
+		
+	 console.log(checkBoxArr);
+	})
 
+	//받은 값들을 컨트롤러로 보낸다
+	$.ajax({
+    url: '/od/templist/ajax',
+    type: 'get',
+    data: {"checkBoxArr" : checkBoxArr},
+    success: function (data) {
+            alert("삭제가 완료되었습니다.");
+			location.reload();
+        }
+	});
+
+}
 
 
 

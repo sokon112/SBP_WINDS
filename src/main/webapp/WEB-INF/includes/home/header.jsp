@@ -34,7 +34,7 @@
                 <sec:authorize access="isAuthenticated()">              
 	                <li class="dropdown">
 	                    <a class="dropdown-toggle" href="#" id="od">
-	                        <i class="fa fa-folder fa-fw"></i> 전자 결 시스템
+	                        <i class="fa fa-folder fa-fw"></i> 전자 결재 시스템
 	                    </a>
 	                    <!-- /.dropdown-alerts -->
 	                </li>

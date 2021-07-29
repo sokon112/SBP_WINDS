@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -67,8 +69,8 @@ public class DocController {
 		model.addAttribute("vo", vo);
 	}
 
-	@PostMapping("/modifypost")
-	public String modifyPost(OfficeNoticeVO vo,Criteria cri,RedirectAttributes rttr) {
+	@PostMapping("/modify")
+	public String modify(OfficeNoticeVO vo,Criteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
 		//첨부 파일 확인
@@ -109,7 +111,7 @@ public class DocController {
 			service.oapprove(vo);
 		}
 		else {
-			log.info("실패");
+			service.omodify(vo);
 		}		
 		//첨부 파일 확인
 		if(vo.getAttach()!=null) {
@@ -148,6 +150,13 @@ public class DocController {
 		rttr.addAttribute("amount", cri.getAmount());
 		
 		return "redirect:/od/";
+	}
+	
+	@GetMapping("/getAttachList")
+	public ResponseEntity<List<AttachFileDTO>> getAttachList(int docNum){
+		log.info("첨부파일 가져오기"+docNum);
+		
+		return new ResponseEntity<List<AttachFileDTO>>(service.getAttachList(docNum),HttpStatus.OK);
 	}
 	
 	private void deleteFiles(List<AttachFileDTO> attachList) {

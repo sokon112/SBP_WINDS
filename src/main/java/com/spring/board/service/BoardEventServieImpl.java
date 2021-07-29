@@ -89,8 +89,8 @@ public class BoardEventServieImpl implements BoardEventService {
 	}
 
 	@Override
-	public BoardEventVO beread(int bno) {		
-		return emapper.beread(bno);
+	public BoardEventVO beread(int eno) {		
+		return emapper.beread(eno);
 	}
 
 	@Override
@@ -116,9 +116,13 @@ public class BoardEventServieImpl implements BoardEventService {
 
 	}
 
+	//----------------------------------변경함
+	@Transactional
 	@Override
-	public boolean beaddelete(int bno) {
-		return emapper.beaddelete(bno)>0?true:false;
+	public boolean beaddelete(int eno) {
+		//첨부파일 삭제
+		eattachMapper.bedelete(eno);
+		return emapper.beaddelete(eno)>0?true:false;
 	}
 
 	
