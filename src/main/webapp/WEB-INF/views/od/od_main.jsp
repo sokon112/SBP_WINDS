@@ -21,7 +21,7 @@ width:15%;}
 
  	<div class="container-fluid">
        <div class="col-lg-12">
-         <h2 class="page-header">전자 결재 시스템</h2>
+         <h2 class="page-header">전자 결재  시스템</h2>
        </div>       <!-- /.col-lg-12 -->
 	     <div class="row"> <!-- start search -->
 	     	<div class="col-md-12">	<!--search Form-->
