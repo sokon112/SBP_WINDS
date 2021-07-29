@@ -19,8 +19,8 @@
 
 <!-- 완료 -->
 <select id ="maincompletelist" resultType="com.spring.od.domain.StorageListVO">
-	select rownum rn,docNum,title,name,deptNum,regDate
-	from (select docNum,title,U.name name,D1.deptNum deptNum,regDate 
+	select rownum rn,docNum,title,name,deptNum,state,regDate
+	from (select docNum,title,U.name name,D1.deptNum deptNum,state,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id

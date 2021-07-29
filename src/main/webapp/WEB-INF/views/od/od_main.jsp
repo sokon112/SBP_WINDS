@@ -90,6 +90,7 @@ width:15%;}
 									<th>문서번호</th>
 	                                <th>제   목</th>
 	                                <th>송 신 자</th>
+	                                <th>상   태</th>
 	                                <th>수신일자</th>
 								</tr>								
 	                         </thead>
@@ -103,6 +104,7 @@ width:15%;}
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
 										<td>${vo.name}</td>
+										<td>${vo.state}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
 								</c:if>
@@ -150,13 +152,16 @@ width:15%;}
 	                  </div>
 	              </div>
 	          </div>
-	       </div>
-	       <!-- end panel-body -->
-	     </div>
-	     <!-- /row -->
+	       </div><!-- end panel-body -->
+	     </div><!-- /row -->
 	 </div>
-	</div>           
-    <!-- /container-fluid-->
+	</div><!-- /container-fluid-->
+<form action="" method="get" id="actionForm">	
+	<input type="hidden" name="type" value="${pageVO.cri.type}" />
+	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" />
+	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />	
+</form>
 <script src="/resources/js/od/mainlist.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 

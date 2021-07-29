@@ -4,7 +4,7 @@
 	<!-- 공문 작성 -->
 	<insert id="owrite">
 		INSERT INTO DOC_TAB (docNum,title,contents,authority,retentDate,send,dest,state,storage,deptNum,message,regDate)
-		VALUES(docNum.NEXTVAL,#{title},#{contents},(select authority from auth_tab where id = #{send}),#{retentDate},#{send},#{dest},#{state},#{storage},#{deptNum},#{message},SYSDATE)
+		VALUES(docNum.NEXTVAL,#{title},#{contents},(select authority from auth_tab where id = #{send}),#{retentDate},#{send},#{dest},#{state},#{storage},(select deptNum from user_tab where id=#{dest}),#{message},SYSDATE)
 	</insert>
 	<update id="omodify">
 		UPDATE DOC_TAB SET title = #{title}, contents = #{contents}, retentDate = #{retentDate}, dest = #{dest}, state = #{state}, storage = #{storage},deptNum = #{deptNum}, message = #{message}, regDate = SYSDATE

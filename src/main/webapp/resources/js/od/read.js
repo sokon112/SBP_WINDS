@@ -20,17 +20,14 @@ $(function(){
 		
 		str += "<input type='hidden' name='dest' value='"+dest+"'>";
 		
-		var deptNum;
 		var destname = "";
 		if(dest =='10030001'){
 			destname = "이지은(대표이사)";
-			deptNum = 1000;
 		}
 		else {
 			destname = "알 수 없음";
 		}
 		
-		str += "<input type='hidden' name='deptNum' value='"+deptNum+"'>";
 		$("#destinput").val(destname);
 		var form = $("form");
 		form.append(str);
@@ -94,7 +91,6 @@ $(function(){
 		})
 		
 		str+="<input type='hidden' name='dest' value='10030001'>";
-		str+="<input type='hidden' name='deptNum' value='1000'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
 		str+="<input type='hidden' name='state' value='결재완료'>";
 		
