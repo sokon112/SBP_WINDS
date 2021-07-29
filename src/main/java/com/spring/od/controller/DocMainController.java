@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.home.domain.CustomUser;
 import com.spring.od.domain.Criteria;
 import com.spring.od.domain.PageVO;
 import com.spring.od.domain.StorageListVO;
@@ -27,12 +29,15 @@ public class DocMainController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/")
-	public String odMain(Model model,Criteria cri) {
+	public String odMain(Model model,Criteria cri,@AuthenticationPrincipal CustomUser user) {
 		log.info("od 메인 접속....");
 		
-		List<StorageListVO> completelist =service.maincompletelist();
-		List<StorageListVO> templist =service.maintemplist();
-		List<StorageListVO> waitlist =service.mainwaitlist();
+		int deptNum = (int)user.getMemberVO().getDeptNum();
+		String id = user.getMemberVO().getId();
+		
+		List<StorageListVO> completelist =service.maincompletelist(deptNum);
+		List<StorageListVO> templist =service.maintemplist(id);
+		List<StorageListVO> waitlist =service.mainwaitlist(deptNum);
 		
 		log.info("completelist : "+completelist + "templist : "+templist + "waitlist : "+waitlist+"criteria : "+cri);
 		
