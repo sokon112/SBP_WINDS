@@ -12,22 +12,22 @@
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
 		where D1.storage = '미결'
-		order by regDate desc)
+		order by regDate asc)
 	where rownum between 0 and 11 order by rn desc
 </select>
 
 
 <!-- 완료 -->
 <select id ="maincompletelist" resultType="com.spring.od.domain.StorageListVO">
-	select rownum rn,docNum,title,name,deptNum,regDate
-	from (select docNum,title,U.name name,D1.deptNum deptNum,regDate 
+	select rownum rn,docNum,title,name,deptNum,state,regDate
+	from (select docNum,title,U.name name,D1.deptNum deptNum,state,regDate 
 		from DOC_TAB D1
 		inner join USER_TAB U
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
 		where D1.storage = '완결'
-		order by regDate desc)
+		order by regDate asc)
 	where rownum between 0 and 4 order by rn desc
 </select>
 
@@ -42,7 +42,7 @@
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
 		where D1.storage = '임시'
-		order by regDate desc)
+		order by regDate asc)
 	where rownum between 0 and 4 order by rn desc
 
 </select>

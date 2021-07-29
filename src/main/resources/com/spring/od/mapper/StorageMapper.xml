@@ -16,7 +16,7 @@
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
-				rownum <= (#{cri.pageNum}*#{cri.amount}))
+				rownum <= (#{cri.pageNum}*#{cri.amount}) order by regDate desc)
 				where rn > ((#{cri.pageNum}-1)*#{cri.amount}) 
 		]]>
 </select>
@@ -25,7 +25,7 @@
 	<![CDATA[
 	select * from (
 		select /*+INDEX_DESC(doc_tab PK_DOC_TAB)*/ 
-		rownum rn,docNum,title,D1.deptNum,D2.deptName,U.name,regDate
+		rownum rn,docNum,title,D1.deptNum,D2.deptName,U.name,state,regDate
 		from doc_tab D1
 		inner join User_TAB U
 		on D1.send = U.id
@@ -36,8 +36,8 @@
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
-			rownum <= (#{pageNum}*#{amount}))
-			where rn > ((#{pageNum}-1)*#{amount})
+			rownum <= (#{cri.pageNum}*#{cri.amount}) order by regDate desc)
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
 		]]>
 </select>
 
@@ -56,7 +56,7 @@
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
-			rownum <= (#{cri.pageNum}*#{cri.amount}))
+			rownum <= (#{cri.pageNum}*#{cri.amount}) order by regDate desc)
 			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
 		]]>
 </select>

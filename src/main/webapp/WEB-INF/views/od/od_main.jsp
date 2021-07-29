@@ -90,6 +90,7 @@ width:15%;}
 									<th>문서번호</th>
 	                                <th>제   목</th>
 	                                <th>송 신 자</th>
+	                                <th>상   태</th>
 	                                <th>수신일자</th>
 								</tr>								
 	                         </thead>
@@ -103,6 +104,7 @@ width:15%;}
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
 										<td>${vo.name}</td>
+										<td>${vo.state}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
 								</c:if>
