@@ -4,24 +4,13 @@
 $(function(){
 	
 	
-	//operForm 가져온 후 전송하기
-	var operForm = $("#operForm");
-	
-	
-	//완료버튼 클릭시 get emodifypassword
-	$("#emodifySubmit").click(function(){
-		operForm.attr('action','/board/event/eventlist');
-		operForm.submit();
-	})
-	
-	
 	
 	
 	
 	//remove와 list를 위한 폼 가져오기
 	var operForm = $("#operForm");
 	
-	/*
+	
 	$("button").click(function(e){
 		//button submit 기능 멈추기
 		e.preventDefault();
@@ -35,30 +24,28 @@ $(function(){
 			$(".uploadResult ul li").each(function(idx,obj){
 				var job = $(obj);
 				//수집된 정보를 hidden 태그로 작성
-				str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-				str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-				str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-				str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+				str+="<input type='hidden' name='eattachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+				str+="<input type='hidden' name='eattachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+				str+="<input type='hidden' name='eattachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+				str+="<input type='hidden' name='eattachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 			})
 			
 			console.log(str);
 			operForm.append(str);				
-		}else if(oper==="remove"){
-			operForm.attr('action','/board/remove');
-		}else if(oper==="list"){			
-			operForm.find("input[name='bno']").remove();
+		}else if(oper==="list"){				
+			operForm.find("input[name='eno']").remove();
 			operForm.attr('method','get');
-			operForm.attr('action','/board/list');
+			operForm.attr('action','/board/event/eventlist');
 		}
 		operForm.submit();		
 	})
-	*/
+	
 	
 	//첨부 파일 가져오기
 	$.getJSON({
-		url:'getAttachList',
+		url:'/board/event/getEattachList',
 		data:{
-			bno:bno
+			eno:eno
 		},
 		success:function(data){
 			console.log(data);
@@ -73,7 +60,7 @@ $(function(){
 					str+="<span>"+obj.fileName+"</span>";
 					str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 					str+="<i class='fa fa-times'></i></button><br>";							
-					str+="<img src='/display?fileName="+fileCallPath+"'>";
+					str+="<img src='/bdisplay?fileName="+fileCallPath+"'>";
 					str+="</li>";
 				}else{					
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
@@ -104,7 +91,7 @@ $(function(){
 	$("input[type='file']").change(function(){
 		
 		//첨부 파일 가져오기
-		var files=$("input[name='uploadFile']")[0].files;
+		var files=$("input[name='euploadFile']")[0].files;
 		console.log(files);
 		
 		//첨부파일을 formData 로 만들어 전송
@@ -113,13 +100,13 @@ $(function(){
 			if(!checkExtension(files[i].name,files[i].size)){
 				return false;
 			}
-			formData.append("uploadFile",files[i]);
+			formData.append("euploadFile",files[i]);
 		}		
 		
 		// enctype="multipart/form-data" => processData:false,contentType:false,
 		
 		$.ajax({
-			url:'/uploadAjax', //도착지
+			url:'/euploadAjax', //도착지
 			type:'post',
 			processData:false,
 			contentType:false,
@@ -130,7 +117,7 @@ $(function(){
 			success:function(result){
 				console.log(result);
 				showUploadedFile(result);
-				$("input[name='uploadFile']").val("");
+				$("input[name='euploadFile']").val("");
 			},
 			error:function(xhr,status,error){
 				console.log("에러");
@@ -158,7 +145,7 @@ $(function(){
 				str+="<span>"+obj.fileName+"</span>";
 				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 				str+="<i class='fa fa-times'></i></button><br>";			
-				str+="<img src='/display?fileName="+fileCallPath+"'></a>";
+				str+="<img src='/bdisplay?fileName="+fileCallPath+"'></a>";
 				str+="</li>";
 			}else{
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
@@ -167,7 +154,7 @@ $(function(){
 				str+="<span>"+obj.fileName+"</span>";
 				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
 				str+="<i class='fa fa-times'></i></button><br>";
-				str+="<a href='/download?fileName="+fileCallPath+"'>";
+				str+="<a href='/bdownload?fileName="+fileCallPath+"'>";
 				str+="<img src='/resources/img/attach.png'></a>";
 				str+="</li>";				
 			}

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.domain.BoardCriteria;
+import com.spring.board.domain.BoardEventVO;
 import com.spring.board.domain.BoardHobbyAttachFileDTO;
 import com.spring.board.domain.BoardHobbyVO;
 import com.spring.board.domain.BoardPageVO;
@@ -51,14 +52,12 @@ public class BoardHobbyController { //동호회
 	}	
 	
 	
-//	@PreAuthorize("isAuthenticated()") 
 	@GetMapping("/hobby/hobbyregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
-//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/hobby/hobbyregister")
 	public String registerPost(BoardHobbyVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
@@ -83,7 +82,7 @@ public class BoardHobbyController { //동호회
 	@GetMapping("/hobby/hhitread")
 	public String read(int hno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+hno+" cri : "+cri);  
-		bhservice.boardupdateviews(hno);
+		bhservice.bhupdateviews(hno);
 		model.addAttribute("cri", cri);
 		model.addAttribute("hno",hno);
 		return "redirect:hobbyread";
@@ -99,7 +98,6 @@ public class BoardHobbyController { //동호회
 	}
 	
 	// modify+post 수정한 후 list
-//	@PreAuthorize("principal.username == #vo.writer")
 	@PostMapping("/hobby/hobbymodify")
 	public String modify(BoardHobbyVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
@@ -123,30 +121,77 @@ public class BoardHobbyController { //동호회
 		return "redirect:hobbylist";
 	}
 	
+	//수정처리 비밀번호 확인
+	@PostMapping("/hobby/hmodifypassword")
+	public String eventUpdate(int hno, String hpassword, @ModelAttribute BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
+		//비밀번호 체크
+		log.info("정보 : ",vo);
+		boolean result = bhservice.bhcheckpw(hno, hpassword);
+		if(result) {
+			model.addAttribute("vo",vo);
+			rttr.addAttribute("eno",hno);
+
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+					
+			return "redirect:hobbymodify";
+		}else {
+			return "redirect:hobbylist";
+		}
+	}
+		
+		//관리자 삭제
+		@PostMapping("/main/bhaddelete")
+		public String delete(int hno,BoardCriteria cri,RedirectAttributes rttr) {
+			log.info("게시글 삭제 "+hno);
+				
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+				
+			return "redirect:hobbylist";
+		}
+	
+	
 	//게시글 삭제 + post
-//	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/hobby/hobbydelete")
-	public String remove(int bno,String writer,BoardCriteria cri,RedirectAttributes rttr) {
-		log.info("게시글 삭제 "+bno);
+	public String remove(int hno,String hpassword,String hwriter,BoardCriteria cri,RedirectAttributes rttr) {
+		log.info("게시글 삭제 "+hno);
 		
 		
 		//서버(폴더)에 저장된 첨부파일 삭제
-		//① bno에 해당하는 첨부파일 목록 알아내기
-		List<BoardHobbyAttachFileDTO> attachList=bhservice.bhAttachList(bno);
+		//① hno에 해당하는 첨부파일 목록 알아내기
+		List<BoardHobbyAttachFileDTO> attachList=bhservice.bhAttachList(hno);
+		
+		boolean result = bhservice.bhcheckpw(hno, hpassword);
 		
 		//게시글 삭제 + 첨부파일 삭제
-		if(bhservice.bhdelete(bno)) {
+		if(result) {
+			bhservice.bhdelete(hno,hpassword);
 			//② 폴더 파일 삭제
-//			deleteFiles(attachList);
+			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
-		}	
 		
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:hobbylist";
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
+			return "redirect:hobbylist";
+		}else {
+			rttr.addAttribute("hno",hno);
+	
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
+			return "redirect:hobbyread";
+		}
 	}
 	
 	

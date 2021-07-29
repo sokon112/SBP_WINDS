@@ -6,7 +6,7 @@ $(function(){
 	//업로드 되는 파일의 종류와 크기 제한
 	function checkExtension(fileName,fileSize){
 		
-		var regex = new RegExp("(.*?)\.(txt|jpg|gif|png|bmp)");
+		var regex = new RegExp("(.*?)\.(jpg|gif|png|bmp|jpeg|PNG|JPG|GIF|BMP|JPEG)");
 		
 		var maxSize = 10242880; //5MB
 		
@@ -26,7 +26,7 @@ $(function(){
 	$("input[type='file']").change(function(){
 		
 		//첨부 파일 가져오기
-		var files=$("input[name='uploadFile']")[0].files;
+		var files=$("input[name='euploadFile']")[0].files;
 		console.log(files);
 		
 		//첨부파일을 formData 로 만들어 전송
@@ -35,13 +35,13 @@ $(function(){
 			if(!checkExtension(files[i].name,files[i].size)){
 				return false;
 			}
-			formData.append("uploadFile",files[i]);
+			formData.append("euploadFile",files[i]);
 		}		
 		
 		// enctype="multipart/form-data" => processData:false,contentType:false,
 		
 		$.ajax({
-			url:'/uploadAjax', //도착지
+			url:'/euploadAjax', //도착지
 			type:'post',
 			processData:false,
 			contentType:false,
@@ -52,7 +52,7 @@ $(function(){
 			success:function(result){
 				console.log(result);
 				showUploadedFile(result);
-				$("input[name='uploadFile']").val("");
+				$("input[name='euploadFile']").val("");
 			},
 			error:function(xhr,status,error){
 				console.log("에러");
@@ -80,7 +80,7 @@ $(function(){
 				str+="<span>"+obj.fileName+"</span>";
 				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 				str+="<i class='fa fa-times'></i></button><br>";			
-				str+="<img src='/display?fileName="+fileCallPath+"'></a>";
+				str+="<img src='/bdisplay?fileName="+fileCallPath+"'></a>";
 				str+="</li>";
 			}else{
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
@@ -89,7 +89,7 @@ $(function(){
 				str+="<span>"+obj.fileName+"</span>";
 				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
 				str+="<i class='fa fa-times'></i></button><br>";
-				str+="<a href='/download?fileName="+fileCallPath+"'>";
+				str+="<a href='/bdownload?fileName="+fileCallPath+"'>";
 				str+="<img src='/resources/img/attach.png'></a>";
 				str+="</li>";				
 			}
@@ -107,10 +107,10 @@ $(function(){
 		$(".uploadResult ul li").each(function(idx,obj){
 			var job = $(obj);
 			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+			str+="<input type='hidden' name='eattachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='eattachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='eattachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='eattachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 		})
 		
 		console.log(str);
@@ -133,7 +133,7 @@ $(function(){
 		var targetLi = $(this).closest("li");
 		
 		$.ajax({
-			url:'/deleteFile',
+			url:'/bdeleteFile',
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 			},

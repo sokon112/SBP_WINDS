@@ -20,8 +20,7 @@
 				<div class="panel-body">
 					<form action="" method="post" role="form">
 						<div class="form-group">
-							<label>제목</label> <input class="form-control" name="etitle"
-								value="${vo.etitle}">
+							<label>제목</label> <input class="form-control" name="etitle" value="${vo.etitle}">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
@@ -31,18 +30,38 @@
 							<label>작성자</label> 
 							<input class="form-control" name="ewriter" readonly="readonly" value="${vo.ewriter}">
 						</div>
+						<!-- 파일첨부 -->
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">File 첨부</div>
+									<div class="panel-body">
+										<div class="form-group uploadDiv">
+											<input type="file" name="euploadFile" multiple  value="${vo.eattachList}"/>
+										</div>
+										<div class="uploadResult">
+											<ul></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
 						<%-- spring security 추가 --%>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-						<button type="button"  class="btn btn-primary pull-right" onclick="location.href='boardlist'">목록</button>
-						<button type="submit" data-oper='list' style="margin-right: 3px;"  class="btn btn-success pull-right" id="emodifySubmit">완료</button>
-
-					</form>
+						<button type="submit" data-oper='list' style="margin-right: 3px;"  class="btn btn-success pull-right">목록</button>
+						<button type="submit" data-oper='modify' style="margin-right: 3px;"  class="btn btn-primary pull-right">수정</button>
+				
+				</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
 <%-- remove와 list를 위한 폼--%>
 <form action="" id="operForm" method="post">
 	<input type="hidden" name="type" value="${cri.type}" /> 
@@ -52,7 +71,8 @@
 	<input type="hidden" name="eno" value="${vo.eno}" />	
 	<input type="hidden" name="epassword" value="${vo.epassword}">
 	<input type="hidden" name="econtents" value="${vo.econtents}">
-		
+	<input type="hidden" name="eattachList" value="${vo.eattachList}">
+	
 
 	<%-- spring security 추가 --%>
 	<input type="hidden" name="${_csrf.parameterName}"
@@ -62,10 +82,8 @@
 
 <%-- 스크립트 --%>
 <script>
-	let eno = $
-	{
-		vo.eno
-	};
+	let eno = ${vo.eno};
+	
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
 </script>

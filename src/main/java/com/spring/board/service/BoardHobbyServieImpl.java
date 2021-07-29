@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardHobbyAttachFileDTO;
 import com.spring.board.domain.BoardHobbyVO;
+import com.spring.board.mapper.BoardCommentMapper;
 import com.spring.board.mapper.BoardHobbyAttachMapper;
 import com.spring.board.mapper.BoardHobbyMapper;
 
@@ -22,6 +23,8 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 	@Autowired
 	private BoardHobbyAttachMapper hattachMapper;
 	
+	@Autowired
+	private BoardCommentMapper echMapper;
 	
 	
 	@Transactional
@@ -46,14 +49,14 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 
 	@Transactional
 	@Override
-	public boolean bhdelete(int bno) {
+	public boolean bhdelete(int bno,String hpassword) {
 		
 
 		//첨부파일 삭제
 		hattachMapper.bhdelete(bno);
 		
 		//게시글 삭제
-		return hmapper.bhdelete(bno)>0?true:false;
+		return hmapper.bhdelete(bno,hpassword)>0?true:false;
 	}
 
 	@Transactional
@@ -82,21 +85,25 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 		return modifyResult;
 	}
 
+	//검색리스트
 	@Override
 	public List<BoardHobbyVO> bhlist(BoardCriteria cri) {		
 		return hmapper.bhlist(cri);
 	}
-
+	
+	//읽기
 	@Override
 	public BoardHobbyVO bhread(int bno) {		
 		return hmapper.bhread(bno);
 	}
-
+	
+	//검색
 	@Override
 	public int bhtotalCnt(BoardCriteria cri) {		
 		return hmapper.bhtotalCnt(cri);
 	}
-
+	
+	//파일첨부
 	@Override
 	public List<BoardHobbyAttachFileDTO> bhAttachList(int bno) {		
 		return hattachMapper.bhfindByBno(bno);
@@ -104,14 +111,20 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 
 	// 조회수 올리기
 	@Override
-	public boolean boardupdateviews(int bno){
-		return hmapper.boardupdateviews(bno)>0? true:false;
+	public boolean bhupdateviews(int hno){
+		return hmapper.bhupdateviews(hno)>0? true:false;
 	}
 		
 	//비밀번호 체크
 	@Override
-	public boolean boardcheckpw(int bno, String password) {
-		return hmapper.boardcheckpw(bno, password)!=null?true:false;
+	public boolean bhcheckpw(int hno, String hpassword) {
+		return hmapper.bhcheckpw(hno, hpassword)!=null?true:false;
+	}
+
+	//관리자 삭제
+	@Override
+	public boolean bhaddelete(int bno) {
+		return hmapper.bhaddelete(bno)>0?true:false;
 	}
 
 	

@@ -104,10 +104,10 @@ $(function(){
 		$(".uploadResult ul li").each(function(idx,obj){
 			var job = $(obj);
 			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+			str+="<input type='hidden' name='hattachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='hattachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='hattachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='hattachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 		})
 		
 		console.log(str);

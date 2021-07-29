@@ -6,21 +6,25 @@
 
 	<!-- 파일insert : 이벤트,동호회-->
 	<insert id="beinsert">
-		insert into special_attach(uuid,uploadpath,filename,filetype,sno)
-		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{eno})
+		insert into special_attach(uuid,uploadPath,fileName,fileType,sno,seltable)
+		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{eno},'e')
 	</insert>
 	
 	<!-- 파일찾기 -->
-	<select id="befindsno">
-		select * from special_attach where sno= #{eno} 
+	<select id="befindBySno" resultType="com.spring.board.domain.BoardEventAttachFileDTO">
+		select * from special_attach where sno= #{eno} and seltable = 'e'
 	</select>
 
 	
 	<!-- 파일삭제  -->
 	<delete id="bedelete">
-		delete from special_attach where sno=#{eno} 
+		delete from special_attach where sno=#{eno} and seltable = 'e'
 	</delete>
 	
-	
+	<!-- 전일자 첨부파일 리스트 -->
+	<select id="geteOldFiles" resultType="com.spring.board.domain.BoardEventAttachFileDTO">
+		select * from special_attach
+		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
+	</select>
 
 </mapper>

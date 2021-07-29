@@ -22,7 +22,7 @@ $(function(){
 		operForm.submit();
 	})
 	
-	//모달 영역 가져오기
+	//수정,삭제 모달 영역 가져오기
 	let modifymodal = $(".modifymodal");
 	let deletemodal = $(".deletemodal");	
 	

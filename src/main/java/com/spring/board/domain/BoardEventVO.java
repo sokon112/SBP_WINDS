@@ -26,6 +26,6 @@ public class BoardEventVO { //이벤트
 
 	
 	//첨부파일 리스트
-	private List<BoardEventAttachFileDTO> eimages;
+	private List<BoardEventAttachFileDTO> eattachList;
 	
 }

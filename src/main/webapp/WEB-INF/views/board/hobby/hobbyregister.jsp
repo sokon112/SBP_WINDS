@@ -20,25 +20,27 @@
 				<div class="panel-body">
 					<form action="" method="post" role="form">
 						<div class="form-group">
-							<label>제목</label> <input class="form-control" name="title">
+							<label>제목</label> <input class="form-control" name="htitle">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
-							<textarea class="form-control" rows="3" name="contents"></textarea>
+							<textarea class="form-control" rows="3" name="hcontents"></textarea>
 						</div>
 						<div class="form-group">
-							<label>작성자</label> <input class="form-control" name="writer">
+							<label>작성자</label> <input class="form-control" name="hwriter">
 						</div>
 						<div class="form-group">
-							<label>비밀번호</label> <input class="form-control" name="password">
+							<label>비밀번호</label> <input class="form-control" name="hpassword">
 						</div>
+						
+						<!-- 파일첨부 -->
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="panel panel-default">
 									<div class="panel-heading">File 첨부</div>
 									<div class="panel-body">
 										<div class="form-group uploadDiv">
-											<input type="file" name="buploadFile" multiple />
+											<input type="file" name="huploadFile" multiple />
 										</div>
 										<div class="uploadResult">
 											<ul></ul>

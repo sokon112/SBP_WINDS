@@ -22,7 +22,9 @@ th, td {
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">커뮤니티 > 동호회</div>
+				<div class="panel-heading">
+					커뮤니티 > 동호회
+				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<table class="table table-striped table-bordered table-hover">
@@ -32,6 +34,8 @@ th, td {
 								<th style="width: 50%">제 목</th>
 								<th style="width: 12%">작성자</th>
 								<th style="width: 16%">작성일</th>
+								<th style="width: 12%">조회수</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -41,8 +45,9 @@ th, td {
 									<td>${vo.hno}</td>
 									<td><a href="${vo.hno}" class="move">${vo.htitle}</a></td>
 									<td>${vo.hwriter}</td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-											value="${vo.huploaddate}" /></td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.huploaddate}" /></td>
+									<td><span class="badge badge-pill badge-primary">${vo.hviews}</span></td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -53,40 +58,35 @@ th, td {
 							<div class="col-md-8">
 								<!--search Form-->
 								<form action="" id="searchForm">
+								<div class="col-md-2">
 									<select name="type" id="" class="form-control">
 										<option value="">-----------</option>
-										<option value="T"
-											<c:out value="${BoardHobbyVO.cri.type=='T'?'selected':''}"/>>제목</option>
-										<option value="C"
-											<c:out value="${BoardHobbyVO.cri.type=='C'?'selected':''}"/>>내용</option>
-										<option value="TC"
-											<c:out value="${BoardHobbyVO.cri.type=='TC'?'selected':''}"/>>제목
-											or 내용</option>
-									</select> <input type="text" name="keyword"
-										value="${BoardHobbyVO.cri.keyword}" />
+										<option value="T" <c:out value="${BoardHobbyVO.cri.type=='T'?'selected':''}"/>>제목</option>
+										<option value="C" <c:out value="${BoardHobbyVO.cri.type=='C'?'selected':''}"/>>내용</option>
+										<option value="TC" <c:out value="${BoardHobbyVO.cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
+									</select> 
+									</div>
+									<input type="text" name="keyword" value="${BoardHobbyVO.cri.keyword}" />
 
 									<!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
-									<input type="hidden" name="pageNum"
-										value="${BoardHobbyVO.cri.pageNum}" /> <input type="hidden"
-										name="amount" value="${BoardHobbyVO.cri.amount}" />
+									<input type="hidden" name="pageNum" value="${BoardHobbyVO.cri.pageNum}" />
+									<input type="hidden"name="amount" value="${BoardHobbyVO.cri.amount}" />
 									<button type="button" class="btn btn-default">검색</button>
 								</form>
 							</div>
-							<div class="col-md-2 col-md-offset-2">
+							<div class="col-md-4"></div>
+							<div class="col-md-1 col-md-offset-2">
 								<!--페이지 목록 갯수 지정하는 폼-->
 								<select name="" id="amount" class="form-control">
-									<option value="10"
-										<c:out value="${BoardHobbyVO.cri.amount==10?'selected':''}"/>>10</option>
-									<option value="20"
-										<c:out value="${BoardHobbyVO.cri.amount==20?'selected':''}"/>>20</option>
-									<option value="30"
-										<c:out value="${BoardHobbyVO.cri.amount==30?'selected':''}"/>>30</option>
-									<option value="40"
-										<c:out value="${BoardHobbyVO.cri.amount==40?'selected':''}"/>>40</option>
+									<option value="10" <c:out value="${BoardHobbyVO.cri.amount==10?'selected':''}"/>>10</option>
+									<option value="20" <c:out value="${BoardHobbyVO.cri.amount==20?'selected':''}"/>>20</option>
+									<option value="30" <c:out value="${BoardHobbyVO.cri.amount==30?'selected':''}"/>>30</option>
+									<option value="40" <c:out value="${BoardHobbyVO.cri.amount==40?'selected':''}"/>>40</option>
 								</select>
 								<p></p>
+								</div>
 								<a href="hobbyregister" class="btn btn-primary pull-right">글쓰기</a>
-							</div>
+							
 						</div>
 					</div>
 					<!-- end search -->
@@ -123,11 +123,11 @@ th, td {
 </div>
 <!-- /.row -->
 <!-- 페이지 나누기 추가 -->
-<form action="list" method="get" id="actionForm">
-	<input type="hidden" name="type" value="${BoardHobbyVO.cri.type}" /> <input
-		type="hidden" name="keyword" value="${BoardHobbyVO.cri.keyword}" /> <input
-		type="hidden" name="pageNum" value="${BoardHobbyVO.cri.pageNum}" /> <input
-		type="hidden" name="amount" value="${BoardHobbyVO.cri.amount}" />
+<form action="hobbylist" method="get" id="actionForm">
+	<input type="hidden" name="type" value="${BoardHobbyVO.cri.type}" /> 
+	<input type="hidden" name="keyword" value="${BoardHobbyVO.cri.keyword}" /> 
+	<input type="hidden" name="pageNum" value="${BoardHobbyVO.cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${BoardHobbyVO.cri.amount}" />
 </form>
 
 <!-- 모달 추가 -->
