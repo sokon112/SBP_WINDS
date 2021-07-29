@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardEventAttachFileDTO;
 import com.spring.board.domain.BoardEventVO;
+import com.spring.board.mapper.BoardCommentMapper;
 import com.spring.board.mapper.BoardEventAttachMapper;
 import com.spring.board.mapper.BoardEventMapper;
 
@@ -22,7 +23,7 @@ public class BoardEventServieImpl implements BoardEventService {
 	@Autowired
 	private BoardEventAttachMapper eattachMapper;
 	
-	
+
 	
 	@Transactional
 	@Override
@@ -31,11 +32,11 @@ public class BoardEventServieImpl implements BoardEventService {
 		boolean result=emapper.beinsert(vo)>0?true:false;
 			
 		//첨부파일 등록
-		if(vo.getEimages()==null || vo.getEimages().size()<=0) {
+		if(vo.getEattachList()==null || vo.getEattachList().size()<=0) {
 			return result;
 		}		
 		
-		vo.getEimages().forEach(attach ->{
+		vo.getEattachList().forEach(attach ->{
 			attach.setEno(vo.getEno());
 			eattachMapper.beinsert(attach);			
 		});
@@ -46,14 +47,14 @@ public class BoardEventServieImpl implements BoardEventService {
 
 	@Transactional
 	@Override
-	public boolean bedelete(int bno,String epassword) {
+	public boolean bedelete(int eno,String epassword) {
 		
 
 		//첨부파일 삭제
-		eattachMapper.bedelete(bno);
+		eattachMapper.bedelete(eno);
 		
 		//게시글 삭제
-		return emapper.bedelete(bno,epassword)>0?true:false;
+		return emapper.bedelete(eno,epassword)>0?true:false;
 	}
 
 	@Transactional
@@ -66,15 +67,15 @@ public class BoardEventServieImpl implements BoardEventService {
 		//게시글 수정
 		boolean modifyResult = emapper.beupdate(vo)>0?true:false;
 		
-		if(vo.getEimages() == null) {
+		if(vo.getEattachList() == null) {
 			return modifyResult;
 		}
 		
 		
 		
 		//첨부파일 삽입
-		if(modifyResult && vo.getEimages().size()>0) {
-			for(BoardEventAttachFileDTO dto:vo.getEimages()) {
+		if(modifyResult && vo.getEattachList().size()>0) {
+			for(BoardEventAttachFileDTO dto:vo.getEattachList()) {
 				dto.setEno(vo.getEno());
 				eattachMapper.beinsert(dto);
 			}
@@ -98,8 +99,8 @@ public class BoardEventServieImpl implements BoardEventService {
 	}
 
 	@Override
-	public List<BoardEventAttachFileDTO> beAttachList(int bno) {		
-		return eattachMapper.befindByBno(bno);
+	public List<BoardEventAttachFileDTO> beAttachList(int eno) {		
+		return eattachMapper.befindBySno(eno);
 	}
 	
 

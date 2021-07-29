@@ -10,7 +10,7 @@
 			select event_tb_seq.nextval from dual		
 		</selectKey>
 		insert into event_table(eno,ewriter,etitle,epassword, econtents ,eviews)
-		values(event_tb_seq.nextval,#{ewriter},#{etitle},#{epassword},#{econtents},#{eviews})</insert>
+		values(#{eno},#{ewriter},#{etitle},#{epassword},#{econtents},#{eviews})</insert>
 		
 	<!--  하나 가져오기  : eno 가 일치-->
 	<select id="beread" resultType="com.spring.board.domain.BoardEventVO">
@@ -21,11 +21,11 @@
 	<update id="beupdate">
 		update event_table
 		set econtents=#{econtents}, euploaddate=sysdate
-		where eno=#{eno} and password=#{password}
+		where eno=#{eno}
 	</update>
 	
 	<!-- 삭제 : no, password 일치 -->
-	<delete id="beldelete">
+	<delete id="bedelete">
 		delete from event_table where eno=#{eno} and epassword=#{epassword}
 	</delete>
 	
@@ -34,10 +34,6 @@
 		delete from event_table where eno=#{eno} 	
 	</delete>
 	
-	<delete id="bedeleteAll">
-		delete from event_table where eno=#{eno}	
-	</delete>
-
 	
 	
 	<!-- 전체 게시물 수 (검색)-->

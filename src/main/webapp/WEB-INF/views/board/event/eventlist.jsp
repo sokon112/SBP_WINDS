@@ -85,7 +85,7 @@ th,td{
                                      <p></p>
                                     </div>
                                      <a href="eventregister" class="btn btn-primary pull-right">글쓰기</a>
-                          
+                          			
                                  </div>                                 
                              </div><!-- end search -->
                             <!-- start Pagination -->

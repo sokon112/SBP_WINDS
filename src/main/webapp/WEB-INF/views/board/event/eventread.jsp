@@ -37,6 +37,28 @@
 							<label>작성자</label> <input class="form-control" name="ewriter"
 								readonly="readonly" value="${vo.ewriter}">
 						</div>
+
+
+						<%-- 첨부파일 목록 보여주기 --%>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fas fa-file"></i> Files
+									</div>
+									<div class="panel-body"></div>
+									<div class="uploadResult row">
+										<div class="col-md-4">
+											<ul></ul>
+										</div>
+											<div class="ebigPictureWrapper col-md-8">
+											<div class="ebigPicture"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
@@ -46,9 +68,13 @@
 								<button type="button" class="btn btn-info" id="addelete">삭제</button>
 							</c:if>
 						</sec:authorize>
+
 						<button type="button" class="btn btn-primary pull-right">목록</button>
-						<button type="button" style="margin-right: 3px;" name="eventdelete" class="btn btn-danger pull-right"  id="edeleteBtn">삭제</button>
-						<button type="button" style="margin-right: 3px;" name="emodify" class="btn btn-warning pull-right" id="emodifyBtn">수정</button>
+						<button type="button" style="margin-right: 3px;"
+							name="eventdelete" class="btn btn-danger pull-right"
+							id="edeleteBtn">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="emodify"
+							class="btn btn-warning pull-right" id="emodifyBtn">수정</button>
 
 					</form>
 				</div>
@@ -56,6 +82,8 @@
 		</div>
 	</div>
 </div>
+
+
 <!-- 수정 버튼 모달 추가 -->
 <div class="modal emodifymodal" tabindex="-1" id="myModal">
 	<div class="modal-dialog">
@@ -71,13 +99,16 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="inpassword" type="text" name="epassword"></td>
+						<td><input class="form-control" id="inpassword" type="text"
+							name="epassword"></td>
 					</tr>
 				</table>
 			</div>
+
 			<div class="modal-footer">
 				<button type="button" id="emmodalSubmit" class="btn btn-success">완료</button>
-				<button type="button" id="emmodalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" id="emmodalcansle" class="btn btn-default"
+					data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -98,29 +129,31 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="delpassword" type="text" name="epassword"></td>
+						<td><input class="form-control" id="delpassword" type="text"
+							name="epassword"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="edmodalSubmit" class="btn btn-success">완료</button>
-				<button type="button" id="edmodalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" id="edmodalcansle" class="btn btn-default"
+					data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
 </div>
 <%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="" id="operForm">
-	<input type="hidden" name="type" value="${cri.type}" /> 
-	<input type="hidden" name="keyword" value="${cri.keyword}" /> 
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
-	<input type="hidden" name="amount" value="${cri.amount}" /> 
-	<input type="hidden" name="eno" value="${vo.eno}" />
-	<input type="hidden" name="etitle" value="${vo.etitle}" />
-	<input type="hidden" name="econtents" value="${vo.econtents}" />
-	<input type="hidden" name="ewriter" value="${vo.ewriter}" />
-	<input type="hidden" name="epassword" value="" />
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+	<input type="hidden" name="type" value="${cri.type}" /> <input
+		type="hidden" name="keyword" value="${cri.keyword}" /> <input
+		type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
+		type="hidden" name="amount" value="${cri.amount}" /> <input
+		type="hidden" name="eno" value="${vo.eno}" /> <input type="hidden"
+		name="etitle" value="${vo.etitle}" /> <input type="hidden"
+		name="econtents" value="${vo.econtents}" /> <input type="hidden"
+		name="ewriter" value="${vo.ewriter}" /> <input type="hidden"
+		name="epassword" value="" /> <input type="hidden"
+		name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 <script>
 	let eno = ${vo.eno};

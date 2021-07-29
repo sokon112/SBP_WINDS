@@ -15,7 +15,8 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">커뮤니티 > 익명게시판 > 게시물 읽기</div>
+				<div class="panel-heading">
+					커뮤니티 > 익명게시판 > 게시물 읽기</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<form action="" role="form">
@@ -110,6 +111,7 @@
 		</div>
 	</div>
 </div>
+
 
 <%-- 댓글 리스트 보여주는 부분 --%>
 <div class="container-fluid" style="margin: 20px">

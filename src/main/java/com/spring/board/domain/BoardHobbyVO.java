@@ -22,9 +22,9 @@ public class BoardHobbyVO { //이벤트,동호회
 	private String hcontents; //내용
 	private String hpassword; //비번
 	private Date huploaddate; //날짜
-	private int views; //조회수
+	private int hviews; //조회수
 
 	//첨부파일 리스트
 	private List<BoardHobbyAttachFileDTO> hattachList;
-	
+
 }
