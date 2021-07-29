@@ -50,7 +50,6 @@ $(function(){
 		
 		//actionForm에 docNum 값을 추가하여 actionForm 보내기		
 		actionForm.append("<input type='hidden' name='docNum' value='"+$(this).attr('href')+"'>");
-		actionForm.attr('action','tempread');
 		actionForm.submit();		
 	})
 	

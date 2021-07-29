@@ -71,10 +71,10 @@
 		<trim prefix="(" suffix=") AND">
 					<choose>
 						<when test="cri.type=='T'.toString()">
-							title like '%'||#{keyword}||'%'
+							title like '%'||#{cri.keyword}||'%'
 						</when>
 						<when test="cri.type=='U'.toString()">
-							U.name like '%'||#{keyword}||'%'
+							U.name like '%'||#{cri.keyword}||'%'
 						</when>
 					</choose>
 		</trim>

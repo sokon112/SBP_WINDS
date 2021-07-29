@@ -36,10 +36,13 @@ public class DocMainController {
 		
 		log.info("completelist : "+completelist + "templist : "+templist + "waitlist : "+waitlist+"criteria : "+cri);
 		
+		int total = service.odmaintotal(cri);
+		
 		model.addAttribute("completelist",completelist);
 		model.addAttribute("templist",templist);
 		model.addAttribute("waitlist",waitlist);
 		model.addAttribute("Critera", cri);
+		model.addAttribute("pageVO",new PageVO(cri, total));
 		
 		
 		return "/od/od_main";

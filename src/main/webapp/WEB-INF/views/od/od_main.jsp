@@ -155,10 +155,14 @@ width:15%;}
 	       </div>
 	       <!-- end panel-body -->
 	     </div>
-	     <!-- /row -->
-	 </div>
-	</div>           
-    <!-- /container-fluid-->
+	 </div> <!-- /row -->
+	</div><!-- /container-fluid-->
+<form action="tempread" method="get" id="actionForm">	
+	<input type="hidden" name="type" value="${pageVO.cri.type}" />
+	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" />
+	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />	
+</form> 	
 <script src="/resources/js/od/mainlist.js"></script>
 <%@include file="/WEB-INF/includes/od/footer.jsp" %>
 
