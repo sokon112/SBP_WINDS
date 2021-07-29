@@ -2,10 +2,8 @@
  * vacationUser.jsp 스크립트
  */
 $(function(){
-	// 모달 창 띄우기
-	checkModal(result);
 	
-	//history.replaceState({},null,null);
+	checkModal(result);
 	
 	function checkModal(result){
 		console.log(result);
@@ -15,8 +13,7 @@ $(function(){
 		console.log(result);
 		alert(result);
 	}
-	
-	//하단의 페이지 나누기 번호 클릭시 
+		
 	var listCheckForm = $("#listCheckForm");	
 	//게시글 제목 클릭시
 	$(".move").click(function(e){
@@ -28,8 +25,7 @@ $(function(){
 		listCheckForm.attr('action','vacationUserListCheckOne');
 		listCheckForm.submit();		
 	})
-		
-		var preMonthForm=$("#preMonthForm");
+	var preMonthForm=$("#preMonthForm");
 	
 	$(".glyphicon-arrow-left").click(function(e){
 		

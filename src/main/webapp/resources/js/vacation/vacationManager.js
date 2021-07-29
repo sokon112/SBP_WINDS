@@ -51,8 +51,6 @@ $(function(){
 		//keyword 가져오기
 		var keyword = $("input[name='keyword']").val();
 		
-
-		
 		if(keyType===''){
 			alert("검색 기준을 확인하세요");
 			$("select[name='keyType']").focus();
@@ -69,7 +67,6 @@ $(function(){
 		searchForm.submit();
 	})
 	
-	
 	//operForm 가져온 후 전송하기
 	var checkPageForm = $("#checkPageForm");
 	
@@ -80,8 +77,6 @@ $(function(){
 		checkPageForm.submit();
 	})
 	
-	
-
 	//월 이동하는 것 왼쪽 화살표  => 이전달
 	$(".glyphicon-arrow-left").click(function(e){
 		

@@ -2,10 +2,8 @@
  * vacationUserCheckOne.jsp 에서 사용할 스크립트
  */
 
-
 $(function(){
 	
-
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
@@ -25,9 +23,6 @@ $(function(){
 	$(".btn-info").click(function(){
 		
 		//현재 날짜와 비교해 이후 날짜라면 반납 가능 아니라면 알람창으로 불가능하다고 알리기 
-		
-		
-		
 		operForm.attr('action','/vacation/cancle');
 		operForm.submit();
 	})

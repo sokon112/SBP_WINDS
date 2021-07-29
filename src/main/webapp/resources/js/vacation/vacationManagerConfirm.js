@@ -2,28 +2,19 @@
  * vacationManagerConfirm.jsp
  */
 $(function(){
-
-
-//닫기 버튼 누르면 manager페이지로 넘어감
+	//닫기 버튼 누르면 manager페이지로 넘어감
 	var manageForm = $("#manageForm");
 	
-
 	//닫기 버튼을 눌렀을때 실행되는 구문
 	$(".btn-info").click(function(){
 		manageForm.attr('action','/vacation/vacationManager');
 		manageForm.submit();
 	})
-	 var successRejectForm = $("#successRejectForm")
-
-
-
 	$(".btn-primary").click(function(){
 		
 		var checkBtn = $(this);
-
 		var tr = checkBtn.parent().parent();
         var td = tr.children();
-		
 		var vacationAppNum = td.eq(0).find('input').val();
 
 		$.ajax({
@@ -45,7 +36,7 @@ $(function(){
 		});
 		
 	});
-//csrf 토큰값이 안넘어와서  302에러가 발생함
+	
 	$(".btn-secondary").click(function(){
 		var checkBtn = $(this);
 
@@ -60,6 +51,7 @@ $(function(){
 		rejectReasonCheck.attr("type","button");
 		button1.hide();
 	});
+	
 	$(".btn-danger").click(function(){
 		
 		var checkBtn = $(this);
@@ -71,11 +63,10 @@ $(function(){
 		var refusalReason = td.find('input[name="resonBox"]').val();
 		
 		if(refusalReason===''){
-			//alert(vacationAppNum+"번의 거절 이유를 입력해 주세요");
-			$("select[name='refusalReason']").focus();
+			alert(vacationAppNum+"번 거절 이유를 입력해 주세요");
+			$("input[name='refusalReason']").focus();
 			return false;
 		}
-
 		$.ajax({
 			type:'post',
 			url:'/vacation/'+vacationAppNum+'/no',
@@ -95,10 +86,6 @@ $(function(){
 				td.find("input[name='hiddenBox']").attr('value','거절');
 				td.find("input[name='hiddenBox']").attr('type','text');
     		}
-
-
 		});	
-	});//
-	
-	
+	});
 })
