@@ -2,13 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.od.mapper.DocAttachMapper">
 	<insert id="oainsert">
-		insert into spring_attach(uuid,uploadpath,filename,filetype,docNum)
-		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{docNum})
+		insert into doc_attach(uuid,uploadPath,fileName,fileType,docNum)
+		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{docNum})
 	</insert>
 	<delete id="oadelete">
 		delete from doc_attach where docNum = #{docNum}
 	</delete>
 	<select id="oafindByDocNum" resultType="com.spring.od.domain.AttachFileDTO">
 		select * from doc_attach where docNum = #{docNum}
+	</select>
+	<select id="getOldFiles" resultType="com.spring.od.domain.AttachFileDTO">
+		select * from doc_attach
+		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
 	</select>
 </mapper>

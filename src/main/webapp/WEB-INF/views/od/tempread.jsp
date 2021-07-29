@@ -177,7 +177,7 @@
 </form> 
 <script>
 	let docNum = ${vo.docNum};
-	var csrfHeaderName="${_csrf.HeaderName}";
+	var csrfHeaderName="${_csrf.headerName}";
 	var csrfTokenValue="${_csrf.token}";
 </script>
 <script src="/resources/js/od/read.js"></script>

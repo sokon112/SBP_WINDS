@@ -103,7 +103,7 @@ $(function(){
 	
 	//첨부 파일 가져오기
 	$.getJSON({
-		url:'getAttachList',
+		url:'/od/getAttachList',
 		data:{
 			docNum:docNum
 		},
