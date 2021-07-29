@@ -83,14 +83,14 @@ $(function(){
 		// enctype="multipart/form-data" => processData:false,contentType:false,
 		
 		$.ajax({
-			url:'/uploadAjax', //도착지
 			type:'post',
+			url:'/uploadAjax', //도착지
+			data:formData,
 			processData:false,
 			contentType:false,
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 			},
-			data:formData,
 			success:function(result){
 				console.log(result);
 				showUploadedFile(result);

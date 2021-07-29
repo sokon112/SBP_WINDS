@@ -50,7 +50,6 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">										
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 									<button type="submit" class="btn btn-primary">상신</button>
 								</div>
@@ -126,32 +125,34 @@
 						<label>내용</label>
 						<textarea class="form-control" rows="20" name="contents"></textarea>
 					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">File 첨부</div>
+									<div class="panel-body">
+										<div class="form-group uploadDiv">
+											<input type="file" name="uploadFile" id="attachlist" multiple />
+										</div>
+										<div class="uploadResult">
+											<ul></ul>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">File 첨부</div>
-			<div class="panel-body">
-				<div class="form-group uploadDiv">
-					<input type="file" name="uploadFile" id="attachlist" multiple />
-				</div>
-				<div class="uploadResult">
-					<ul></ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<script src="/resources/js/od/register.js"></script>
+
 <script>
-var csrfHeaderName="${_csrf.parameterName}";
+var csrfHeaderName="${_csrf.headerName}";
 var csrfTokenValue="${_csrf.token}";
 document.getElementById('regdate').valueAsDate = new Date();
 </script>
+<script src="/resources/js/od/register.js"></script>
 <%@include file="../../includes/od/footer.jsp"%>
 
 

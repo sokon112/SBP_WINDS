@@ -142,30 +142,31 @@
 						<textarea class="form-control" rows="20" name="contents" readonly="readonly">${vo.contents}</textarea>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
+					<%-- 첨부파일 목록 보여주기 --%>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<i class="fa fas fa-file"></i> 첨부파일
+								</div>
+								<div class="panel-body"></div>
+								<div class="uploadResult row">
+									<div class="col-md-4">
+										<ul></ul>
+									</div>		
+										<div class="bigPictureWrapper col-md-8">
+										<div class="bigPicture"></div>
+									</div>
+								</div>			
+							</div>
+						</div>
+					</div> 
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<%-- 첨부파일 목록 보여주기 --%>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<i class="fa fas fa-file"></i> 첨부파일
-			</div>
-			<div class="panel-body"></div>
-			<div class="uploadResult row">
-				<div class="col-md-4">
-					<ul></ul>
-				</div>		
-					<div class="bigPictureWrapper col-md-8">
-					<div class="bigPicture"></div>
-				</div>
-			</div>			
-		</div>
-	</div>
-</div> 
+
 </div>
 <form action="" method="get" id="actionForm">	
 	<input type="hidden" name="type" value="${cri.type}" />
@@ -176,8 +177,7 @@
 </form> 
 <script>
 	let docNum = ${vo.docNum};
-	
-	var csrfHeaderName="${_csrf.parameterName}";
+	var csrfHeaderName="${_csrf.HeaderName}";
 	var csrfTokenValue="${_csrf.token}";
 </script>
 <script src="/resources/js/od/read.js"></script>
