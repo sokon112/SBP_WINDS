@@ -42,6 +42,7 @@ public class StorageController {
 		log.info(user.getMemberVO().getDeptNum());
 		
 		int deptNum = (int)user.getMemberVO().getDeptNum();
+		
 		log.info(cri);
 		List<StorageListVO> waitlist = service.WaitList(cri,deptNum);
 		

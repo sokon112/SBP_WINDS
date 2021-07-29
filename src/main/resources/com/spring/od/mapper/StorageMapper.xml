@@ -16,7 +16,7 @@
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
-				rownum <= (#{cri.pageNum}*#{cri.amount}))
+				rownum <= (#{cri.pageNum}*#{cri.amount}) order by regDate desc)
 				where rn > ((#{cri.pageNum}-1)*#{cri.amount}) 
 		]]>
 </select>
@@ -36,7 +36,7 @@
 		]]> 
 		<include refid="criteria"></include>
 		<![CDATA[ 
-			rownum <= (#{pageNum}*#{amount}))
+			rownum <= (#{pageNum}*#{amount}) order by regDate desc)
 			where rn > ((#{pageNum}-1)*#{amount})
 		]]>
 </select>
