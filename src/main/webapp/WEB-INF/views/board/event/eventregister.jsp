@@ -32,14 +32,15 @@
 						<div class="form-group">
 							<label>비밀번호</label> <input class="form-control" name="epassword">
 						</div>
-
+						
+						<!-- 파일첨부 -->
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="panel panel-default">
 									<div class="panel-heading">File 첨부</div>
 									<div class="panel-body">
 										<div class="form-group uploadDiv">
-											<input type="file" name="buploadFile" multiple />
+											<input type="file" name="euploadFile" multiple />
 										</div>
 										<div class="uploadResult">
 											<ul></ul>

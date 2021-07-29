@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.board.domain.BoardEventAttachFileDTO;
+import com.spring.board.domain.BoardHobbyAttachFileDTO;
 
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -34,10 +35,9 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j2
 public class BoardUploadAjaxController {	
-	
-//	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/buploadAjax")
-	public ResponseEntity<List<BoardEventAttachFileDTO>> uploadFormPost(MultipartFile[] uploadFile) {
+	//이벤트
+	@PostMapping("/euploadAjax")
+	public ResponseEntity<List<BoardEventAttachFileDTO>> euploadFormPost(MultipartFile[] euploadFile) {
 		log.info("파일 업로드 요청");
 		
 		
@@ -55,7 +55,7 @@ public class BoardUploadAjaxController {
 		List<BoardEventAttachFileDTO> attachList = new ArrayList<BoardEventAttachFileDTO>();
 		
 		
-		for(MultipartFile f:uploadFile) {
+		for(MultipartFile f:euploadFile) {
 //			log.info("upload File Name : "+f.getOriginalFilename());
 //			log.info("upload File Size : "+f.getSize());	
 			
@@ -93,10 +93,73 @@ public class BoardUploadAjaxController {
 				e.printStackTrace();
 			}
 		}
+		
 		return new ResponseEntity<List<BoardEventAttachFileDTO>>(attachList,HttpStatus.OK);
 	}
+	//동호회
+	@PostMapping("/huploadAjax")
+	public ResponseEntity<List<BoardHobbyAttachFileDTO>> huploadFormPost(MultipartFile[] huploadFile) {
+		log.info("파일 업로드 요청");
+		
+		
+		String uploadFileName=null;
+		String uploadFolder = "e:\\upload";
+		
+		String uploadFolderPath = getFolder();
+		
+		File uploadPath = new File(uploadFolder,uploadFolderPath);
+		
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs(); //폴더 생성
+		}
+		
+		List<BoardHobbyAttachFileDTO> attachList = new ArrayList<BoardHobbyAttachFileDTO>();
+		
+		
+		for(MultipartFile f:huploadFile) {
+//			log.info("upload File Name : "+f.getOriginalFilename());
+//			log.info("upload File Size : "+f.getSize());	
+			
+			
+			//서버 폴더에 전송된 파일 저장하기
+			//UUID 값 생성
+			UUID uuid = UUID.randomUUID();			
+			uploadFileName = uuid.toString()+"_"+f.getOriginalFilename();	
+			
+			BoardHobbyAttachFileDTO attach = new BoardHobbyAttachFileDTO();
+			attach.setFileName(f.getOriginalFilename());
+			attach.setUploadPath(uploadFolderPath);
+			attach.setUuid(uuid.toString());			
+			
+			try {
+				File saveFile = new File(uploadPath,uploadFileName);
+				
+				if(checkImageType(saveFile)) {
+					attach.setFileType(true);
+					//썸네일 저장
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s_"+uploadFileName));
+					InputStream in = f.getInputStream();
+					Thumbnailator.createThumbnail(in, thumbnail, 100, 100);
+					in.close();
+					thumbnail.close();					
+				}
+				
+				//파일 저장(원본 그대로)
+				f.transferTo(saveFile);
+				attachList.add(attach);
+				
+			} catch (IllegalStateException e) {				
+				e.printStackTrace();
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
+		}
+		
+		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(attachList,HttpStatus.OK);
+	}
 	
-	//썸네일 보여주기
+	
+	// 이벤트 썸네일 보여주기
 	@GetMapping("/bdisplay")
 	public ResponseEntity<byte[]> getFile(String fileName){
 		log.info("썸네일 요청 "+fileName);
@@ -142,7 +205,6 @@ public class BoardUploadAjaxController {
 	}
 	
 	//upload 폴더에 있는 파일 삭제
-//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/bdeleteFile")
 	public ResponseEntity<String> deleteFile(String fileName,String type){
 		log.info("파일 삭제 : "+fileName+" type : "+type);
@@ -169,11 +231,6 @@ public class BoardUploadAjaxController {
 	
 	
 	
-	
-	
-	
-	
-	
 	//첨부 파일이 이미지인지 아닌지 판단
 	private boolean checkImageType(File file) {
 		String contentType;
@@ -195,6 +252,10 @@ public class BoardUploadAjaxController {
 		
 		return str.replace("-", File.separator); // "2021\06\17"
 	}
+	
+	
+	
+	
 }
 
 

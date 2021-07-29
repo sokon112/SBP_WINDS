@@ -4,7 +4,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/board/header.jsp" %>
-<div class="row">
+
+<div class="container-fluid" style="margin: 20px">
+	<div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">게시물 읽기</h1>
                 </div>
@@ -35,28 +37,48 @@
                 					<label>작성자</label>
                 					<input class="form-control" name="hwriter" readonly="readonly" value="${vo.hwriter}">                				
                 				</div>  
+                				<%-- 첨부파일 목록 보여주기 --%>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<i class="fa fas fa-file"></i> Files
+											</div>
+											<div class="panel-body">				
+												<div class="uploadResult">
+													<ul></ul>
+												</div>
+											</div>			
+										</div>
+									</div>
+								</div> 
+								<div class="bigPictureWrapper">
+									<div class="bigPicture"></div>
+								</div> 
                 				<%-- 로그인한 사용자와 작성자가 동일할 때 Modify 버튼 보여주기 --%>
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
 							<%-- 로그인 여부 확인 --%>
 							<c:if test="${info.memberVO.id=='10030001'}">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-								<button type="button" class="btn btn-warning">삭제!</button>
+								<button type="button" class="btn btn-info" id="addelete">삭제하기</button>
 							</c:if>
 						</sec:authorize>
 						<button type="button" class="btn btn-info pull-right">목록</button>
-						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right" id="deleteBtn">삭제</button>
-						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
+						<button type="button" style="margin-right: 3px;" name="hobbydelete" class="btn btn-danger pull-right" id="hdeleteBtn">삭제</button>
+						<button type="button" style="margin-right: 3px;" name="hmodify" class="btn btn-warning pull-right" id="hmodifyBtn">수정</button>
 
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	
 
+
+</div>
+</div>
 <!-- 수정 버튼 모달 추가 -->
-<div class="modal modifymodal" tabindex="-1" id="myModal">
+<div class="modal hmodifymodal" tabindex="-1" id="myModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -70,7 +92,7 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="password" type="number"></td>
+						<td><input class="form-control" id="inpassword" type="text" name="password"></td>
 					</tr>
 				</table>
 			</div>
@@ -83,7 +105,7 @@
 </div>
 
 <!-- 삭제 버튼 모달 추가 -->
-<div class="modal deletemodal" tabindex="-1" id="myModal">
+<div class="modal hdeletemodal" tabindex="-1" id="myModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -97,13 +119,13 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="password" type="number"></td>
+						<td><input class="form-control" id="delpassword" type="text" name="epassword"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="modalSubmit" class="btn btn-success">완료</button>
-				<button type="button" id="modalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" id="hmodalSubmit" class="btn btn-success">완료</button>
+				<button type="button" id="hmodalcansle" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -115,10 +137,10 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />	
 	<input type="hidden" name="hno"  value="${vo.hno}"/>
-	<input type="hidden" name="title" value="${vo.title}" />
-	<input type="hidden" name="contents" value="${vo.contents}" />
-	<input type="hidden" name="writer" value="${vo.writer}" />
-	<input type="hidden" name="password" value="" />
+	<input type="hidden" name="htitle" value="${vo.htitle}" />
+	<input type="hidden" name="hcontents" value="${vo.hcontents}" />
+	<input type="hidden" name="hwriter" value="${vo.hwriter}" />
+	<input type="hidden" name="hpassword" value="" />
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 </form>
 <script>

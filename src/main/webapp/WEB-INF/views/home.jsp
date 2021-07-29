@@ -14,7 +14,7 @@
 <tr></tr>
 <tr>
 	<td>
-		<img src="/resources/img/iu2.png" alt="" style="width: 100%;max-width: 1100px; min-width: 400px;height: auto;">
+		<img src="/resources/img/SBP_Winds_logo_4.png" alt="" style="width: 100%;max-width: 1100px; min-width: 400px;height: auto;">
 	</td>
     <sec:authorize access="!isAuthenticated()">   
 	<td style="min-width:300px">

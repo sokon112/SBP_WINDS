@@ -176,6 +176,7 @@ $(function(){
 		
 		str+="<input type='hidden' name='storage' value='미결'>";
 		str+="<input type='hidden' name='state' value='요청'>";
+		str+="<input type='hidden' name='message' value=''>";
 		
 		//게시글 등록 폼 가져오기
 		var form = $("form");
@@ -201,6 +202,7 @@ $(function(){
 		
 		str+="<input type='hidden' name='storage' value='임시' />";
 		str+="<input type='hidden' name='state' value='임시저장' />";
+		str+="<input type='hidden' name='message' value=''>";
 		
 		//게시글 등록 폼 가져오기
 		var form = $("form");

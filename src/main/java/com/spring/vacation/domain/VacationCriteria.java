@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @Getter
 public class VacationCriteria { 
-	
+	//달 , 페이지, 검색 기능 
 	private Date nowMonth;
 	private Date nextMonth;
 	

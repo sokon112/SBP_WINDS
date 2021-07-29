@@ -8,6 +8,14 @@ function showImage(fileCallPath){
 	$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>")
 	                .animate({width:'100%', height:'100%'},1000);
 }
+function uploadfile(){
+	var str = "";
+	
+	str+="<div class='form-group uploadDiv'>";
+	str+="<input type='file' name='uploadFile' id='attachlist' multiple />";
+	str+="</div>"
+	
+}
 $(function(){
 	//결재선 모달 관련
 	let modal = $("#modal2");
@@ -48,6 +56,8 @@ $(function(){
 		
 		checksubmit();
 		
+		uploadfile();
+		
 		var str="";
 		$(".uploadResult ul li").each(function(idx,obj){
 			var job = $(obj);
@@ -79,6 +89,8 @@ $(function(){
 		e.preventDefault();
 		
 		checksubmit();
+		
+		uploadfile();
 		
 		var str="";
 		$(".uploadResult ul li").each(function(idx,obj){
@@ -112,6 +124,7 @@ $(function(){
 		
 		checksubmit();
 		
+		uploadfile();
 		var str="";
 		$(".uploadResult ul li").each(function(idx,obj){
 			var job = $(obj);
@@ -144,6 +157,7 @@ $(function(){
 		
 		checksubmit();
 		
+		uploadfile();
 		var nodest = $("#dest").val();
 		var str="";
 		$(".uploadResult ul li").each(function(idx,obj){
@@ -226,15 +240,21 @@ $(function(){
 		},1000);		
 	})
 	
-	//operForm 가져온 후 전송하기
-	var operForm = $("#operForm");
 	
 	//Modify버튼 클릭시  get방식 /od/modify
 	$("#modify").click(function(){
-		operForm.attr('action','/od/modify');
-		operForm.submit();
+		
+		var form = $("#actionForm");
+		form.attr('action','/od/modify');
+		form.submit();
 	})
 	
+	$("#remove").click(function(){
+		var form = $("#actionForm");
+		form.attr('method','post');
+		form.attr('action','/od/remove');
+		form.submit();
+	})
 	
 })
 

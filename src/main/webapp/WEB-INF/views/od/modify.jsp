@@ -39,10 +39,16 @@
 												리스트:</label> <input type="text" class="form-control"
 												id="modalattach" readonly="readonly">
 										</div>
+										<sec:authentication property="principal.memberVO" var="info"/>
+											<c:forEach items="${info.authority}" var="auth">
+                								<c:set var="userauth" value="${auth.authority}"/>
+                							</c:forEach>
+                						<c:if test="${userauth=='ad'||userauth=='mg'}">
 										<div class="form-group">
 											<label for="message-text" class="control-label">의견:</label>
 											<textarea class="form-control" id="message" name="message"></textarea>
 										</div>
+										</c:if>
 									</div>
 								</div>
 								<div class="modal-footer">

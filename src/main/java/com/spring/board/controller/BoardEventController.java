@@ -62,10 +62,9 @@ public class BoardEventController {    //이벤트
 		log.info("새글 등록 요청 "+vo);
 		
 		//첨부 파일 확인
-		if(vo.getEimages()!=null) {
-			vo.getEimages().forEach(attach -> log.info(""+attach));
+		if(vo.getEattachList()!=null) {
+			vo.getEattachList().forEach(attach -> log.info(""+attach));
 		}	
-		
 		
 		if(beservice.beinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
@@ -91,6 +90,8 @@ public class BoardEventController {    //이벤트
 	public void modifyget(int eno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+eno+" cri : "+cri);  
 		
+		
+		
 		BoardEventVO vo=beservice.beread(eno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 		model.addAttribute("cri", cri);
@@ -102,8 +103,8 @@ public class BoardEventController {    //이벤트
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
 		//첨부 파일 확인
-		if(vo.getEimages()!=null) {
-			vo.getEimages().forEach(attach -> log.info(""+attach));
+		if(vo.getEattachList()!=null) {
+			vo.getEattachList().forEach(attach -> log.info(""+attach));
 			
 		
 		beservice.beupdate(vo);		
@@ -161,8 +162,8 @@ public class BoardEventController {    //이벤트
 		
 		
 		//서버(폴더)에 저장된 첨부파일 삭제
-		//① bno에 해당하는 첨부파일 목록 알아내기
-		List<BoardEventAttachFileDTO> attachList=beservice.beAttachList(eno);
+		//① eno에 해당하는 첨부파일 목록 알아내기
+		List<BoardEventAttachFileDTO> eattachList=beservice.beAttachList(eno);
 		
 		boolean result = beservice.becheckpw(eno, epassword);
 
@@ -170,7 +171,7 @@ public class BoardEventController {    //이벤트
 		if(result) {
 			beservice.bedelete(eno,epassword);
 			//② 폴더 파일 삭제
-			deleteFiles(attachList);
+			deleteFiles(eattachList);
 			rttr.addFlashAttribute("result","성공");
 		
 		
@@ -194,10 +195,9 @@ public class BoardEventController {    //이벤트
 	
 	
 	//첨부물 가져오기
-	@GetMapping("/event/getAttachList")
-	public ResponseEntity<List<BoardEventAttachFileDTO>> getAttachList(int eno){
+	@GetMapping("/event/getEattachList")
+	public ResponseEntity<List<BoardEventAttachFileDTO>> getEattachList(int eno){
 		log.info("첨부물 가져오기 "+eno);
-		
 		return new ResponseEntity<List<BoardEventAttachFileDTO>>(beservice.beAttachList(eno),HttpStatus.OK);
 	}
 	

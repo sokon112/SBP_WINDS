@@ -90,12 +90,18 @@
 					<sec:authentication property="principal.memberVO" var="info"/>
                 				<sec:authorize access="isAuthenticated()">
 									<c:if test="${info.id==vo.send}"><%--로그인한 사용자와 작성자가 동일여부 확인 --%>
+									<c:if test="${vo.storage!='완결' }">
 										<button type="button" class="btn btn-info" id="modify">수정</button>
-										<button type="button" class="btn btn-info">삭제</button>
+										<button type="button" class="btn btn-info" id="remove">삭제</button>
+									</c:if>
                 					</c:if>
                 					<c:if test="${userauth=='mg'}">
+                					<c:if test="${vo.state!='임시저장'}">
+                					<c:if test="${vo.storage!='완결' }">
                 						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">상신</button>
 										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal2">결재선</button>
+                					</c:if>
+                					</c:if>
                 					</c:if>
                 					<c:if test="${userauth=='ad'}">
                 						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">결재</button>
@@ -146,9 +152,6 @@
 				<i class="fa fas fa-file"></i> Files
 			</div>
 			<div class="panel-body">
-				<div class="form-group uploadDiv">
-					<input type="file" name="uploadFile" id="attachlist" multiple />
-				</div>				
 				<div class="uploadResult">
 					<ul></ul>
 				</div>
@@ -158,7 +161,15 @@
 </div> 
 <div class="bigPictureWrapper">
 	<div class="bigPicture"></div>
-</div>      
+</div>
+<form action="" method="get" id="actionForm">	
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type='hidden' name='docNum'  value='${vo.docNum}'/>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		
+</form> 
 <script>
 	let docNum = ${vo.docNum};
 	

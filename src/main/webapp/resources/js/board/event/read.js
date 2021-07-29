@@ -3,16 +3,15 @@
  */
 
 function showImage(fileCallPath){
-	$(".bigPictureWrapper").css("display","flex").show();
-	
-	$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>")
+	$(".ebigPictureWrapper").css("bdisplay","flex").show();
+	$(".ebigPicture").html("<img src='/bdisplay?fileName="+fileCallPath+"' style='max-width:500px;'>")
 	                .animate({width:'100%', height:'100%'},1000);
 }
 $(function(){
 	
 	//첨부 파일 가져오기
 	$.getJSON({
-		url:'getAttachList',
+		url:'/board/event/getEattachList',
 		data:{
 			eno:eno
 		},
@@ -26,7 +25,7 @@ $(function(){
 											
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";							
-					str+="<img src='/display?fileName="+fileCallPath+"'>";
+					str+="<img src='/bdisplay?fileName="+fileCallPath+"'>";
 					str+="</li>";
 				}else{					
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
@@ -50,20 +49,20 @@ $(function(){
 		if(liObj.data("type")){
 			showImage(path.replace(new RegExp(/\\/g),"/"));			
 		}else{
-			self.location="/download?fileName="+path;
+			self.location="/bdownload?fileName="+path;
 		}
 	})
 	
 	
 	
 	//확대된 사진 영역 없애기
-	$(".bigPictureWrapper").click(function(){
+	$(".ebigPictureWrapper").click(function(){
 		//원본 사진 줄이기
-		$(".bigPicture").animate({width:'0%', height:'0%'},1000);
+		$(".ebigPicture").animate({width:'0%', height:'0%'},1000);
 		
 		//확대된 영역 없애기
 		setTimeout(function(){
-			$(".bigPictureWrapper").hide();
+			$(".ebigPictureWrapper").hide();
 		},1000);		
 	})
 	

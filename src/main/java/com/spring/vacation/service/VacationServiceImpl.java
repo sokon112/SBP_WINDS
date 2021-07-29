@@ -21,56 +21,41 @@ public class VacationServiceImpl implements VacationService {
 	private VacationMapper mapper;
 
 	@Override
-	public List<VacationVO> selectMonth(VacationCriteria cri) {
+	public List<VacationVO> selectMonth(VacationCriteria cri) {//선택한 월별로 정보 가져오기
 		List<VacationVO> selectMapper = mapper.vSelectMonth(cri);
-		log.info("selectMonth : "+selectMapper);
-//		for(VacationVO vo : selectMapper) {
-//
-//			 
-//			VacationApplicationVO vo1=mapper.vSelectMonthUserData(vo.getVacationAppNum());
-//
-//			vo.getVacationApplication().setId(vo1.getId());
-//			vo.getVacationApplication().setName(vo1.getName());
-//		}
-		log.info("selectMonth : "+selectMapper);
-		
 		return selectMapper;
 		
 	}
 
 	@Override
-	public int countApp() {
-		// TODO Auto-generated method stub
+	public int countApp() {//심사를 하지 않은 신청서의 갯수 추출
 		return mapper.vCountApp();
 	}
 
 	@Override
-	public List<VacationVO> applicationList() {
-		// TODO Auto-generated method stub
+	public List<VacationVO> applicationList() {//심사를 받지 않은 신청서 리스트 조회
 		return mapper.vApplicationList();
 	}
 
 	@Override
-	public boolean ok(int vacationAppNum) {
+	public boolean ok(int vacationAppNum) {//심사- 승인
 		boolean flag=mapper.vOk(vacationAppNum)>0?true:false;
 		return flag;
 	}
 
 	@Override
-	public boolean no(int vacationAppNum,String refusalreason) {
-		
+	public boolean no(int vacationAppNum,String refusalreason) {//심사 거절
 		return mapper.vNo(vacationAppNum,refusalreason)>0?true:false;
 	}
 
 	@Override
-	public boolean insertUserApp(VacationVO vacation) {
-		
+	public boolean insertUserApp(VacationVO vacation) {//신청서 등록
 		return mapper.vInsertUserApp(vacation)>0?true:false;
 	}
 
 	
 	  @Override 
-	  public List<VacationVO> showUser(String id,VacationCriteria cri) {
+	  public List<VacationVO> showUser(String id,VacationCriteria cri) {//사용자 페이지 목록
 		  return mapper.vShowUser(id,cri);
 	  }
 	 
@@ -78,25 +63,25 @@ public class VacationServiceImpl implements VacationService {
 
 
 	@Override
-	public VacationVO showUserOne(int vacationAppNum) {
+	public VacationVO showUserOne(int vacationAppNum) {// 원하는 문서를 선택시 보여줌
 		// TODO Auto-generated method stub
 		return mapper.vShowUserOne(vacationAppNum);
 	}
 
 	@Override
-	public boolean userUpdateApp(VacationVO vacation) {
+	public boolean userUpdateApp(VacationVO vacation) {// 문서 내용 수정
 
 		return mapper.vUserUpdateApp(vacation)>0?true:false;
 	}
 
 	@Override
-	public boolean deleteUserApp(int vacationAppNum) {
+	public boolean deleteUserApp(int vacationAppNum) {// 문서 삭제
 		// TODO Auto-generated method stub
 		return mapper.vDeleteUserApp(vacationAppNum)>0?true:false;
 	}
 
 	@Override
-	public boolean cancleVacation(VacationVO vacation) {
+	public boolean cancleVacation(VacationVO vacation) { //승인된 문서 반납
 		boolean flag=mapper.vCancleVacation(vacation)>0?true:false;
 		
 		//mapper.changeCnt(vacation.getVacationApplication().getUserid());
@@ -105,23 +90,22 @@ public class VacationServiceImpl implements VacationService {
 	}
 
 	@Override
-	public boolean idCnt(String id) {
-		return mapper.vIdCnt(id)>40?true:false;
+	public boolean idCnt(String id) {// 사원의 휴가 개수 가져옴
+		return mapper.vIdCnt(id)<40?true:false;
 	}
 
 	@Override
-	public Date vacationDay(int vacationAppNum) {
-
+	public Date vacationDay(int vacationAppNum) { // 신청서 날짜 불러오는 구문
 		return mapper.vVacationDay(vacationAppNum);
 	}
 
 	@Override
-	public int total(VacationCriteria cri) {
+	public int total(VacationCriteria cri) {// 조건에 맞는 문서 갯수
 		return mapper.vTotalCnt(cri);
 	}
 
 	@Override
-	public boolean vChangeCnt(int vcnt, String id) {
+	public boolean vChangeCnt(int vcnt, String id) {// 승인에 변동이 생기는 경우 
 		// TODO Auto-generated method stub
 		return mapper.vChangeCnt(vcnt, id)>0?true:false;
 	}
