@@ -115,7 +115,7 @@
 					</div>
 					<div class="col-sm-4">
 						<label class="form-label">수신자</label> 
-						<input class="form-control" readonly="readonly" value="${vo.dest}" id="destinput">
+						<input class="form-control" readonly="readonly" id="destinput">
 					</div>
 					<p></p>
 					<div class="col-md-6">
