@@ -39,7 +39,7 @@ $(function(){
 				td.find("input[name='hiddenBox']").attr('type','text');
     		},
 			error:function(xhr,status,error){
-		        //alert("휴가 갯수가 20개가 넘어 더이상 신청이 불가능 합니다.");
+		        alert("승인이 불가능 합니다.");
 				td.find("button[name='successBox']").hide();
 		       }
 		});
@@ -70,6 +70,11 @@ $(function(){
 		var vacationAppNum = td.eq(0).find('input').val();
 		var refusalReason = td.find('input[name="resonBox"]').val();
 		
+		if(refusalReason===''){
+			//alert(vacationAppNum+"번의 거절 이유를 입력해 주세요");
+			$("select[name='refusalReason']").focus();
+			return false;
+		}
 
 		$.ajax({
 			type:'post',

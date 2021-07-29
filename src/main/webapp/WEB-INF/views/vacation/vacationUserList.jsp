@@ -6,16 +6,21 @@
 <%@include file="/WEB-INF/includes/vacation/header.jsp" %>
 <html>
 <head>
+
 <style>
 th,td{
 text-align:center;
 width:15%;}
+
+h3{
+margin-top:1px;
+}
 </style>
 	<title>Vacation</title>
 </head>
 <body>
 <!-- 달을 스크립트로 끌어올려 계산하기  월 달 따로  -->
-<div class="row">
+<div class="container-fluid" style="margin: 20px">
                 <div class="col-lg-12">
                     <h1 class="page-header">휴가신청관리</h1>
                 </div>
@@ -49,17 +54,7 @@ width:15%;}
 	<thead>
 	<tr>
 	
-<%-- 		<td >
-			<button type="button" class="glyphicon glyphicon-arrow-left" ></button>
-		</td>
-		<td colspan="4">
-			<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
-			<input type="hidden" class="form-control" name="month" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/>"> 
-			<input type="hidden" class="form-control11" name="nmonth" readonly="readonly" value="<fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nextMonth}'/>">
-		</td>
-		<td>
-			<button type="button" class="glyphicon glyphicon-arrow-right" ></button> 
-		</td> --%>
+
 	</tr>
 		<tr>
 			<th>분류</th>

@@ -11,13 +11,26 @@
 <style>
 th,td{
 text-align:center;
-width:15%;}
+width:10%;}
+
+#amount {
+	margin-bottom:10px;
+	width:65px;
+	position:sticky;
+	left:200%;
+}
+
+h3{
+margin-top:1px;
+}
+
 </style>
     <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="row">
+<div class="container-fluid" style="margin-top:20px">
+
                 <div class="col-lg-12">
                     <h1 class="page-header">휴가신청관리</h1>
                 </div>
@@ -46,7 +59,7 @@ width:15%;}
 					<button type="button" class="glyphicon glyphicon-arrow-right pull-left" ></button> 
 				</div>
 			</div>
-        <table class="table table-striped table-bordered table-hover">
+       <table class="table table-striped table-bordered table-hover">
         <thead>
         
 	        <tr>
@@ -121,7 +134,7 @@ width:15%;}
                             		</form>
                             	   </div>
                             	  <div class="col-md-4"></div>
-							<div class="col-md-1 col-md-offset-2">
+							<div class="col-md-1 col-md-offset-3">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
                             	   	<select name="" id="amount" class="form-control">
                             	   		<option value="10"  <c:out value="${VacationPageVO.cri.amount==10?'selected':''}"/> >10</option>
@@ -133,7 +146,7 @@ width:15%;}
                              	 </div>                             	 
                       		 </div><!-- end search -->
                       		     
-    <button type="button" class="btn btn-success" id="modalRegisterBtn" onclick="location.href='vacationManagerConfirm'">휴가심사(${cnt})</button>
+       <button type="button" class="btn btn-success" id="modalRegisterBtn" onclick="location.href='vacationManagerConfirm'">휴가심사(${cnt})</button>
 <!-- start Pagination -->
                             <div class="text-center">
                             	<ul class="pagination">
@@ -159,10 +172,10 @@ width:15%;}
                         </div>
                         <!-- end panel -->
                     </div>                   
-                </div>    
-<!-- 페이지 나누기 추가 -->            
+                </div> 
+  
+                <!-- 페이지 나누기 추가 -->    
 <form action="vacationManager" method="post" id="actionForm">
-<%-- 	<input type="hidden" name="cri" value="${VacationCriteria }"> --%>
 	
 	<input type="hidden" name="keyType" value="${VacationPageVO.cri.keyType}" />
 	<input type="hidden" name="keyword" value="${VacationPageVO.cri.keyword}" />
@@ -171,7 +184,6 @@ width:15%;}
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>      
 <form action="" id="checkPageForm" method="post">
-	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 

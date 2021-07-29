@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationPageVO;
@@ -32,11 +31,8 @@ public class VacationController {
 
 	@Autowired
 	private VacationServiceImpl service;
-	
 
-
-
-	//vacationl에 들어오면 처음으로 보여주는화면=> 신청서 작성
+	//휴가 관리에 들어오면 처음으로 보여주는화면=> 신청서 작성
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/")	
 	public String vacationMain() {
@@ -49,15 +45,10 @@ public class VacationController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationUserList")
 	public void showUserMain(Model model,String id, VacationCriteria cri,String monthMove) {
-		//VacationCriteria cri=new VacationCriteria();
-		
-		
-		log.info("showUser페이지 " +id+" cri : "+cri.getNowMonth() +"~"+cri.getNextMonth());
+		log.info("showUser페이지 " );
 		
 		List<VacationVO> vlist=service.showUser(id,cri);
 		
-		
-		log.info(vlist);
 		int total = service.total(cri);
 		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 		model.addAttribute("list",vlist);
@@ -69,17 +60,16 @@ public class VacationController {
 	@PostMapping("/vacationApply")
 	public void vacationApply(Model model) {
 		log.info("휴가신청 페이지");	
-
-		
+	
 	}//관리자 페이지 
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationManager")
 	public void showAdmin(Model model, VacationCriteria cri) {
 		log.info("휴가관리 페이지");
-		log.info(" cri : "+cri);
 		
-		List<VacationVO> list=service.selectMonth(cri);
 		int total=service.total(cri);
+		List<VacationVO> list=service.selectMonth(cri);
+		
 		int cnt=service.countApp();
 		
 		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
@@ -151,7 +141,7 @@ public class VacationController {
 	//승인 상태일때 날짜가 아직이면 반납 가능
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/cancle")
-	public String cancle(VacationVO vacation,String id, VacationCriteria cri,Model model,RedirectAttributes rttr) {
+	public String cancle(VacationVO vacation,String id, VacationCriteria cri,Model model) {
 		log.info("반납버튼 눌렀을때"+vacation);
 		Date date=new Date();
 		//VacationCriteria cri=new VacationCriteria();
@@ -163,16 +153,16 @@ public class VacationController {
 			if(result) {
 				
 				service.vChangeCnt(-1,id);
-				rttr.addFlashAttribute("result","반납 성공");
+				model.addAttribute("result","반납 성공");
 				
 			}else {
-				rttr.addFlashAttribute("result","반납 실패");
+				model.addAttribute("result","반납 실패");
 			}
 			
 		}
 		else {
 			log.info("날짜 실패"+vacation);
-			rttr.addFlashAttribute("cancleError","기간이 지난 휴가입니다.");
+			model.addAttribute("result","기간이 지난 휴가입니다.");
 		}
 			
 		List<VacationVO> vlist=service.showUser( id,cri);
@@ -185,26 +175,21 @@ public class VacationController {
 //	휴가신청서 작성 페이지
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationApplyResult")
-	public String applyPost(VacationVO vacation,Model model,RedirectAttributes rttr){
-		log.info("휴가 신청!!" + vacation);
+	public String applyPost(VacationVO vacation,Model model){
 		Date nowtoday=new Date();
 		VacationCriteria cri=new VacationCriteria();
-		Date term= vacation.getTerm();
-		boolean resultTerm=term.after(nowtoday);
-		log.info("휴가 신청!!" + nowtoday+" term : "+term+" resultTerm : "+resultTerm);
-		if(service.idCnt(vacation.getId())) {
-			//휴가가 20개 이상이면 알람창
-			rttr.addFlashAttribute("result","휴가승인 갯수가 20가 넘어 신청할 수 없습니다.");
-			
+		//휴가 신청 가능 기간을 넘겼는지 아닌지 확인
+		if(!service.idCnt(vacation.getId())) {
+			//휴가갯수가 초과하면 알람창
+			model.addAttribute("result","휴가승인 갯수가 20가 넘어 신청할 수 없습니다.");
 			log.info("신청 실패 !");
 			return "/vacation/vacationApply";
-		}else if(!resultTerm){
-			String result="기간이 잘못되어 신청이 불가능합니다.";
-			rttr.addFlashAttribute("result",result);
-			log.info("기간을 다시 설정해야합니다."+result);
+		}// 휴가 신청기간이 이전일이면 휴가 신청이 불가능하게 설정
+		else if(!vacation.getTerm().after(nowtoday)){
+			model.addAttribute("result","기간이 잘못되어 신청이 불가능합니다.");
 			return "/vacation/vacationApply";
 		}else {
-			//휴가가 20개 이하이고 신청날짜가 이전이 아니라면
+			//휴가가 20개 이하이고 신청날짜가 이전이 아니라면 신청
 				log.info("성공");
 				if(vacation.getType().equals("half")) {
 					vacation.setType("반차");
@@ -212,12 +197,9 @@ public class VacationController {
 				else {
 					vacation.setType("월차");
 				}
-				log.info("휴가 종류 : "+vacation.getType());
-				boolean insertVacation=service.insertUserApp(vacation);
-		
-
+				boolean insertVacation=service.insertUserApp(vacation);	
 				if(insertVacation) {
-					rttr.addFlashAttribute("result", vacation.getVacationAppNum());
+					model.addAttribute("result", vacation.getId()+" 휴가가 신청되었습니다.");
 					List<VacationVO> vlist=service.showUser(vacation.getId(),cri);
 					int total = service.total(cri);
 					model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
@@ -247,30 +229,43 @@ public class VacationController {
 	}
 	
 //	휴가심사 페이지
-//	승인 -> PutMapping("/ok")
+//	승인버튼을 누르게되면 승인으로 update
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/{vacationAppNum}/ok")
 	public ResponseEntity<String> ok(@PathVariable("vacationAppNum") int vacationAppNum){
 		log.info("vacationAppNum "+vacationAppNum);
 		VacationVO vacation=service.showUserOne(vacationAppNum);
-		
-		int vCnt=0;
+		//승인 갯수 확인
+		if(service.idCnt(vacation.getId())) {
+			//날짜 확인=> 승인 날짜와 신청서를 낸 날짜의 이후라면 승인 불가능
+			Date nowtoday=new Date();
+			if(!vacation.getTerm().after(nowtoday)){
 
-		if(vacation.getType().equals("반차")) {
-			vCnt=1;
+				return new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);}
+				else {
+			int vCnt=0;
+//휴가 type에 따라 더해지는 값이 다름
+			if(vacation.getType().equals("반차")) {
+				vCnt=1;
+			}
+			else {
+				vCnt=2;
+			}
+			service.vChangeCnt(vCnt, vacation.getId());
+			log.info("문서 승인"+vacation.getVacationAppNum());
+			return service.ok(vacation.getVacationAppNum())?new ResponseEntity<String>("success",HttpStatus.OK):
+				new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			
+		}else {
+			return new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		else {
-			vCnt=2;
-		}
-		service.vChangeCnt(vCnt, vacation.getId());
-		log.info("문서 승인"+vacation.getVacationAppNum());
-		return service.ok(vacation.getVacationAppNum())?new ResponseEntity<String>("success",HttpStatus.OK):
-			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+		
 		
 	}
 	
 	
-//	거절 -> 모달창 거절사유 작성 후 '확인' ->  PutMapping("/no")
+//	거절버튼을 누르게되면 거절과 이유가 update
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/{vacationAppNum}/no")
 	public ResponseEntity<String> no(@PathVariable("vacationAppNum") int vacationAppNum,@RequestBody  String refusalReason){

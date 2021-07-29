@@ -3,16 +3,6 @@
 <mapper namespace="com.spring.vacation.mapper.VacationMapper">
 
 	
-	<!-- 관리자 -->
-	<!--신청서 보기 ilst(관리자가 보는방법-전체)  -->
-<!--<select  id="selectAll" resultType="com.spring.vacation.domain.VacationVO">
-		select vacationAppNum,userid,name,type,startterm,endterm,state,applicationDate,approvalDate,reason,refusalreason
-		from vacationApplicationTable vat, vacationScedule hs
-		where vat.userid=hs.id and state not in('신청') order by vacationAppNum
-	</select> -->
-	<!-- 관리자가 처음으로 보는 페이지 - 승인, 거부 인 사람 -->
-	
-	
 
 	<resultMap type="com.spring.vacation.domain.VacationVO" id="selectMonthInfo">
 		<id property="vacationAppNum" column="vacationAppNum"/>
@@ -76,7 +66,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		order by vacationAppNum
 	</select>
 	<!-- 휴가신청 승인해주기 -->
-	<!-- 승인 -승인할때 휴가 갯수 깍이도록 or join을 사용해서 계산=> 하나더 만들기~~  => join은 실패 하나 더만들기 됬다!-->
+	<!-- 승인-->
 	<update id="vOk">
 		update vacationApplicationTable 
 		set approvalDate=sysdate, state='승인'  
@@ -92,16 +82,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		set approvalDate=sysdate, state='거절',refusalreason=#{refusalreason}   
 		where vacationAppNum=#{vacationAppNum}
 	</update>
-	<!-- 휴가 갯수의 변화 -->
-	<!-- <update id="updateCnt">
-		update vacationScedule 
-		set VacationCnt =(select count(userid) 
-						  from vacationApplicationTable 
-						  where userid=#{userid} and state not in('거절'))
-		where id = #{id}
-	</update> -->
-	
-	
+
 	<!-- 사용자 -->
 		<!-- 신청서 등록 구문 -->
 	<insert id="vInsertUserApp">
