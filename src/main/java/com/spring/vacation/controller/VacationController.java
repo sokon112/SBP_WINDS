@@ -36,12 +36,12 @@ public class VacationController {
 
 
 
-	//vacationMine화면
+	//vacationl에 들어오면 처음으로 보여주는화면=> 신청서 작성
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/")	
 	public String vacationMain() {
 		log.info("vacation 메인 접속....");
-		return "/vacation/vacation_home";
+		return "/vacation/vacationApply";
 	}
 	
 	//메인메뉴 3가지 
@@ -163,10 +163,10 @@ public class VacationController {
 			if(result) {
 				
 				service.vChangeCnt(-1,id);
-				rttr.addFlashAttribute("message","반납 성공");
+				rttr.addFlashAttribute("result","반납 성공");
 				
 			}else {
-				rttr.addFlashAttribute("message","반납 실패");
+				rttr.addFlashAttribute("result","반납 실패");
 			}
 			
 		}
@@ -182,20 +182,29 @@ public class VacationController {
 		return "/vacation/vacationUserList";
 	}
 
-//	휴가신청 작성 페이지
+//	휴가신청서 작성 페이지
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationApplyResult")
 	public String applyPost(VacationVO vacation,Model model,RedirectAttributes rttr){
 		log.info("휴가 신청!!" + vacation);
+		Date nowtoday=new Date();
 		VacationCriteria cri=new VacationCriteria();
+		Date term= vacation.getTerm();
+		boolean resultTerm=term.after(nowtoday);
+		log.info("휴가 신청!!" + nowtoday+" term : "+term+" resultTerm : "+resultTerm);
 		if(service.idCnt(vacation.getId())) {
 			//휴가가 20개 이상이면 알람창
-			rttr.addFlashAttribute("error","휴가신청 갯수가 넘어 더이상 신청할 수 없습니다.");
+			rttr.addFlashAttribute("result","휴가승인 갯수가 20가 넘어 신청할 수 없습니다.");
+			
 			log.info("신청 실패 !");
 			return "/vacation/vacationApply";
+		}else if(!resultTerm){
+			String result="기간이 잘못되어 신청이 불가능합니다.";
+			rttr.addFlashAttribute("result",result);
+			log.info("기간을 다시 설정해야합니다."+result);
+			return "/vacation/vacationApply";
 		}else {
-			//휴가가 20개 이하이면
-			
+			//휴가가 20개 이하이고 신청날짜가 이전이 아니라면
 				log.info("성공");
 				if(vacation.getType().equals("half")) {
 					vacation.setType("반차");
@@ -207,17 +216,16 @@ public class VacationController {
 				boolean insertVacation=service.insertUserApp(vacation);
 		
 
-			if(insertVacation) {
-				rttr.addFlashAttribute("result", vacation.getVacationAppNum());
-				List<VacationVO> vlist=service.showUser(vacation.getId(),cri);
-				int total = service.total(cri);
-				model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
-				model.addAttribute("list",vlist);
-				return "/vacation/vacationUserList";
-			}else {
-				log.info("실패 포기하지마!");
-				return "/vacation/vacationApply";
-			}
+				if(insertVacation) {
+					rttr.addFlashAttribute("result", vacation.getVacationAppNum());
+					List<VacationVO> vlist=service.showUser(vacation.getId(),cri);
+					int total = service.total(cri);
+					model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+					model.addAttribute("list",vlist);
+					return "/vacation/vacationUserList";
+				}else {
+					return "/vacation/vacationApply";
+				}
 		}
 	}
 	//관리자가 신청리스트 보는 페이지 

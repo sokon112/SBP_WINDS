@@ -47,7 +47,7 @@ insert into vacationApplicationTable(vacationAppNum,id,type,term,applicationDate
 values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05',sysdate,'병원','거절','회사 사정으로 인해 불가능',sysdate);
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
-values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-06','신청',sysdate,'병원');
+values(vacationAppNum_SEQ.nextval,'10030001','월차','2021-07-06','신청',sysdate,'병원');
 
 insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
 values(vacationAppNum_SEQ.nextval,'19080014','반차','2021-07-05','신청',sysdate,'병원');

@@ -12,7 +12,7 @@
 <body>
 <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">휴가 신청서</h1>
+                    <h1 class="page-header">휴가 신청서${result }</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>            
@@ -73,9 +73,23 @@
                     	</div>
                 </div>
             </div> 
-<!--     <script type="text/javascript">
-    	let id=${vo.id}
-    </script> -->
+<script type="text/javascript">
+let result='${result}';
+
+$(function(){
+	// 모달 창 띄우기
+	checkModal(result);
+	
+	//history.replaceState({},null,null);
+	
+	function checkModal(result){
+		if(result===''||history.state){
+			return;
+		}
+		 alert(result);
+	}
+})
+</script>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

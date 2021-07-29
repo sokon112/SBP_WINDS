@@ -174,11 +174,7 @@ width:15%;}
 	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
-<script>
-//아작스 사용 해야함 
-	//let id='${vacation.id}';
 
-</script>
 <script src="/resources/js/vacation/vacationManager.js"></script>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>

@@ -117,7 +117,10 @@ Soldesk Big-Data Professional Winds
 test
 	</pre>
 
-</div>     
+</div>  
+<script type="text/javascript">
+let result='${result}';
+</script>   
 <script src="/resources/js/vacation/vacationUser.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

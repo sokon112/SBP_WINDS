@@ -75,7 +75,7 @@ width:15%;}
 			            	<button type="button" name="rejectBox"  class="btn btn-secondary">거절</button>
 							<input type="hidden" class="rejectReason" name="resonBox" placeholder="거절 이유">
 							<input type="hidden" name="resonBoxCheck" class="btn btn-danger" value="거절이유 작성완료">
-							<input type="hidden" name="hiddenBox" class="hiddenBox" value="완료">
+							<input type="hidden" name="hiddenBox" class="hiddenBox" value="완료" style="border:none" readonly="readonly">
 	                 </td>
 	                 
 	            </tr>
@@ -87,14 +87,11 @@ width:15%;}
     </table>
 </div>
   			   <button type='button' class="btn btn-info pull-right">닫기</button>     
-<!--     </form> -->
+
      </div>
                 	</div>
                 </div>   
-<!-- <form action="vacationManagerCheckOne" method="get" id="actionForm">	
-	
 
-</form>  -->
 <form action="" id="manageForm" method="post">
 	<%-- 	<input type="hidden" name="id"  value="${vacation.id}"/> --%>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

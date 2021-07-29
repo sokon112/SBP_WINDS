@@ -37,7 +37,11 @@ $(function(){
 				td.find("button[name='rejectBox']").hide();
 				td.find("input[name='hiddenBox']").attr('value','승인');
 				td.find("input[name='hiddenBox']").attr('type','text');
-    		}
+    		},
+			error:function(xhr,status,error){
+		        //alert("휴가 갯수가 20개가 넘어 더이상 신청이 불가능 합니다.");
+				td.find("button[name='successBox']").hide();
+		       }
 		});
 		
 	});
@@ -86,6 +90,8 @@ $(function(){
 				td.find("input[name='hiddenBox']").attr('value','거절');
 				td.find("input[name='hiddenBox']").attr('type','text');
     		}
+
+
 		});	
 	});//
 	
