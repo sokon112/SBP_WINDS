@@ -28,7 +28,7 @@ var replyService=(function(){
       var page = param.page || 1;
       
       $.getJSON({
-         url:'/replies/pages/'+bno+'/'+page,
+         url:'/comment/pages/'+bno+'/'+page,
          success:function(data){
             if(callback){
                callback(data.replyCnt,data.list);
@@ -37,10 +37,10 @@ var replyService=(function(){
       })
    }//getList 종료   
    
-   function remove(rno,replyer,callback){
+   function remove(dno,replyer,callback){
       
       $.ajax({
-         url:'/replies/'+rno,  // /replies/3
+         url:'/comment/'+dno,  // /replies/3
          type:'delete',
          beforeSend:function(xhr){
             xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
@@ -60,7 +60,7 @@ var replyService=(function(){
    
    function update(reply,callback){
       $.ajax({
-         url:'/replies/'+reply.rno,
+         url:'/comment/'+reply.dno,
          type:'put',
          beforeSend:function(xhr){
             xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
@@ -79,7 +79,7 @@ var replyService=(function(){
    function get(rno,callback){
       
       $.getJSON({
-         url:'/replies/'+rno,
+         url:'/comment/'+rno,
          success:function(data){
             if(callback){
                callback(data);
