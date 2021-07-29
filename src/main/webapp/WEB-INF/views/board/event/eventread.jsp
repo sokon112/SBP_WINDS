@@ -144,16 +144,16 @@
 </div>
 <%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="" id="operForm">
-	<input type="hidden" name="type" value="${cri.type}" /> <input
-		type="hidden" name="keyword" value="${cri.keyword}" /> <input
-		type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
-		type="hidden" name="amount" value="${cri.amount}" /> <input
-		type="hidden" name="eno" value="${vo.eno}" /> <input type="hidden"
-		name="etitle" value="${vo.etitle}" /> <input type="hidden"
-		name="econtents" value="${vo.econtents}" /> <input type="hidden"
-		name="ewriter" value="${vo.ewriter}" /> <input type="hidden"
-		name="epassword" value="" /> <input type="hidden"
-		name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" /> 
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="eno" value="${vo.eno}" /> 
+	<input type="hidden" name="etitle" value="${vo.etitle}" /> 
+	<input type="hidden" name="econtents" value="${vo.econtents}" /> 
+	<input type="hidden" name="ewriter" value="${vo.ewriter}" /> 
+	<input type="hidden" name="epassword" value="" /> 
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 <script>
 	let eno = ${vo.eno};

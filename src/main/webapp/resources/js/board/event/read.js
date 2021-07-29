@@ -76,7 +76,7 @@ $(function(){
 	
 	//관리자 삭제버튼 클릭시 모달창 보이기
 	$("#addelete").click(function(){
-		operForm.attr('action','/board/event/addelete');
+		operForm.attr('action','/board/event/beaddelete');
 		operForm.attr('method','post');
 		operForm.submit();
 	})	
