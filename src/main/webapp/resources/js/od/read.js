@@ -226,15 +226,32 @@ $(function(){
 		},1000);		
 	})
 	
-	//operForm 가져온 후 전송하기
-	var operForm = $("#operForm");
 	
 	//Modify버튼 클릭시  get방식 /od/modify
 	$("#modify").click(function(){
-		operForm.attr('action','/od/modify');
-		operForm.submit();
+		var dest = $("#destinput").val();
+		
+		var str = "";
+		str+="<input type='hidden' name='dest' value'"+dest+"'>";
+		str+="<input type='hidden' name='storage' value='임시'>";
+		str+="<input type='hidden' name='state' value='임시저장'>";
+		
+		str+="<input type='hidden' name='type' value='${cri.type}' />";
+		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";
+		str+="<input type='hidden' name='pageNum' value='${cri.pageNum}' />";
+		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
+		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
+		var form = $("form");
+		form.append(str);
+		form.attr('action','/od/modify');
+		form.submit();
 	})
 	
+	$("#remove").click(function(){
+		var form = $("form");
+		form.attr('action','/od/remove');
+		form.submit();
+	})
 	
 })
 

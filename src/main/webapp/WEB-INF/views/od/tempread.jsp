@@ -91,7 +91,7 @@
                 				<sec:authorize access="isAuthenticated()">
 									<c:if test="${info.id==vo.send}"><%--로그인한 사용자와 작성자가 동일여부 확인 --%>
 										<button type="button" class="btn btn-info" id="modify">수정</button>
-										<button type="button" class="btn btn-info">삭제</button>
+										<button type="button" class="btn btn-info" id="remove">삭제</button>
                 					</c:if>
                 					<c:if test="${userauth=='mg'}">
                 						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">상신</button>
@@ -158,7 +158,7 @@
 </div> 
 <div class="bigPictureWrapper">
 	<div class="bigPicture"></div>
-</div>      
+</div>  
 <script>
 	let docNum = ${vo.docNum};
 	

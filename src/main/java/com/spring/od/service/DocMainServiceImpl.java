@@ -17,20 +17,20 @@ public class DocMainServiceImpl implements DocMainService {
 	
 	//미결 불러오기
 	@Override
-	public List<StorageListVO> mainwaitlist() {
-		return mapper.mainwaitlist();
+	public List<StorageListVO> mainwaitlist(int deptNum) {
+		return mapper.mainwaitlist(deptNum);
 	}
 
 	//결재완료보관함 불러오기
 	@Override
-	public List<StorageListVO> maincompletelist() {
-		return mapper.maincompletelist();
+	public List<StorageListVO> maincompletelist(int deptNum) {
+		return mapper.maincompletelist(deptNum);
 	}
 
 	//임시보관함 불러오기!
 	@Override
-	public List<StorageListVO> maintemplist() {
-		return mapper.maintemplist();
+	public List<StorageListVO> maintemplist(String id) {
+		return mapper.maintemplist(id);
 	}
 	
 	//검색

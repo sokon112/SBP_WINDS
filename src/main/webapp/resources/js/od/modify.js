@@ -24,28 +24,22 @@ $(function(){
 		var destname = "";
 		if(dest=='15080002'){
 			destname = "한소희(인사팀장)";
-			deptNum = 1001;
 		}
 		else if(dest=='15080003'){
 			destname = "채수빈(기획팀장)";
-			deptNum = 1002;
 		}
 		else if(dest=='15080004'){
 			destname = "배수지(개발팀장)";
-			deptNum = 1003;
 		}
 		else if(dest=='15080005'){
 			destname = "김소현(재무홍보팀장)";
-			deptNum = 1004;
 		}
 		else if(dest=='15080006'){
 			destname = "김유정(총무팀장)";
-			deptNum = 1005;
 		}
 		else {
 			destname = "알 수 없음";
 		}
-		str += "<input type='hidden' name='deptNum' value='"+deptNum+"'>";
 		$("#destinput").val(destname);
 		var form = $("form");
 		form.append(str);
