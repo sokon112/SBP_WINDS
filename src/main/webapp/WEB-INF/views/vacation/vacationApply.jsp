@@ -5,14 +5,22 @@
 
 <html>
 <head>
+<style>
 
+
+th,td {
+text-align:center;
+
+}
+</style>
     <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container-fluid" style="margin: 20px">
 <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">휴가 신청서${result }</h1>
+                    <h1 class="page-header">휴가 신청서</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>            
@@ -20,18 +28,19 @@
                 <div class="col-lg-12">
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                          휴가 신청서
+                          
                         </div>
-<form action="/vacation/vacationApplyResult" method="post" role="form">
+<form action="/vacation/vacationApplyResult" method="post" role="form" class="applyForm">
         <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
            	 <tr>
-                <th colspan="3">휴가신청서</th>
+                <th colspan="3" style="text-align:center">휴가신청서</th>
                 </tr> 
             </thead>
             <tbody>
-                <tr>
+                
+
                 	<tr>
 	                    <th>사원번호</th>
 	                    <td colspan="3">
@@ -60,7 +69,7 @@
                     <td colspan="3">
                     	<textarea class="form-control" rows="3" name="reason"></textarea> 
                     </td>
-                </tr>
+             	</tr>
             </tbody>
         </table>
         </div>
@@ -68,28 +77,17 @@
         <%-- spring security 추가 --%>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-        <button type="submit" class="btn btn-success" id="modalRegisterBtn">신청</button>
+        <button type="button" class="btn btn-success" id="modalRegisterBtn">신청</button>
     </form>
                     	</div>
                 </div>
             </div> 
+            </div>
 <script type="text/javascript">
 let result='${result}';
 
-$(function(){
-	// 모달 창 띄우기
-	checkModal(result);
-	
-	//history.replaceState({},null,null);
-	
-	function checkModal(result){
-		if(result===''||history.state){
-			return;
-		}
-		 alert(result);
-	}
-})
 </script>
+<script src="/resources/js/vacation/vacationApply.js"></script>
 <%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 </body>
 </html>

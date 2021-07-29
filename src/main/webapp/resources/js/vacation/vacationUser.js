@@ -5,7 +5,7 @@ $(function(){
 	// 모달 창 띄우기
 	checkModal(result);
 	
-	history.replaceState({},null,null);
+	//history.replaceState({},null,null);
 	
 	function checkModal(result){
 		console.log(result);

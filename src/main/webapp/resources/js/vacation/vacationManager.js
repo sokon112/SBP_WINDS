@@ -2,9 +2,8 @@
  * vacationManager.jsp 스크립트
  */
 $(function(){
-	
-	
-	//하단의 페이지 나누기 번호 클릭시 
+
+	//하단의 페이지 나누기 번호 클릭시 이동하는 js
 	var actionForm = $("#actionForm");
 	$(".paginate_button a").click(function(e){
 		e.preventDefault();  //a 속성 중지
@@ -16,7 +15,7 @@ $(function(){
 		actionForm.submit();
 	})
 	
-	//게시물 수 변경
+	//게시물 수 변경 => checkbox
 	$("#amount").change(function(){
 		//사용자가 선택한 게시물 수 가져오기
 		let amount = $(this).val();
@@ -28,7 +27,7 @@ $(function(){
 		actionForm.submit();
 	})
 	
-	//게시글 제목 클릭시
+	//게시글 제목 클릭시 => 해당 게시글로 이동
 	$(".move").click(function(e){
 		e.preventDefault(); //타이틀 a 속성 막기
 		
@@ -39,7 +38,7 @@ $(function(){
 	})
 	
 	//검색
-	//type or keyword 가 값이 없는 경우 경고 메세지를 주기
+	//keyType or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
 	$(".selectBtn").click(function(){
 		e.preventDefault();
@@ -74,7 +73,7 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var checkPageForm = $("#checkPageForm");
 	
-
+	//심사 버튼을 눌렀을 때 
 	$(".btn-success").click(function(){
 		
 		checkPageForm.attr('action','/vacation/vacationManagerConfirm');
@@ -83,7 +82,7 @@ $(function(){
 	
 	
 
-	//화살표 이동
+	//월 이동하는 것 왼쪽 화살표  => 이전달
 	$(".glyphicon-arrow-left").click(function(e){
 		
 		var checkBtn = $(this);
@@ -113,6 +112,7 @@ $(function(){
 		actionForm.attr('action','vacationManager');
 		actionForm.submit();
 	})
+		//월 이동하는 것 왼쪽 화살표  => 다음달
 	$(".glyphicon-arrow-right").click(function(e){
 		
 		var checkBtn = $(this);

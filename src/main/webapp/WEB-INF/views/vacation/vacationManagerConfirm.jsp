@@ -10,7 +10,14 @@
 <style>
 th,td{
 text-align:center;
-width:15%;}
+width:10%;}
+
+
+
+h3{
+margin-top:1px;
+}
+
 </style>
 </head>
 <body>
@@ -74,7 +81,7 @@ width:15%;}
 			                <button type="button" name="successBox" class="btn btn-primary">승인</button> 
 			            	<button type="button" name="rejectBox"  class="btn btn-secondary">거절</button>
 							<input type="hidden" class="rejectReason" name="resonBox" placeholder="거절 이유">
-							<input type="hidden" name="resonBoxCheck" class="btn btn-danger" value="거절이유 작성완료">
+							<input type="hidden" name="resonBoxCheck" class="btn btn-danger" value="완료">
 							<input type="hidden" name="hiddenBox" class="hiddenBox" value="완료" style="border:none" readonly="readonly">
 	                 </td>
 	                 

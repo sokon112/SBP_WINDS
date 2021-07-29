@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 public class VacationApplicationVO {
 
-
+//사용자 정보 가져오는 vo
 	private String name;
 	private int VacationCnt;
 }

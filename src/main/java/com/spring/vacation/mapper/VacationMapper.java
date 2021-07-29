@@ -18,11 +18,11 @@ public interface VacationMapper {
 	public List<VacationVO> vApplicationList();
 	public int vTotalCnt(VacationCriteria cri);
 	
-	//승인
+	// 휴가 심사 버튼
 	public int vOk(int vacationAppNum);
 	public int vNo(@Param("vacationAppNum")int vacationAppNum,@Param("refusalreason")String refusalreason);
 
-	//cnt계산 다시 하기
+	// 관리자의 승인과 type, 반납 버튼등 행동에 따라 사용자의 휴가 갯수를 변화
 	public int  vChangeCnt(@Param("vcnt")int vcnt,@Param("id")String id);
 	
 	//사용자
