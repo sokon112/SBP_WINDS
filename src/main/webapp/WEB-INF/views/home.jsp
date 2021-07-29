@@ -19,7 +19,7 @@
     <sec:authorize access="!isAuthenticated()">   
 	<td style="min-width:300px">
 		<form class="form-signin" name="loginform" action="/login" method="post">
-			<h1 class="h3 mb-3 font-weight-normal">로그인</h1>
+			<h1 class="h3 mb-3 font-weight-normal">로 그 인</h1>
 		  
 		    <label for="userid" class="sr-only">로그인 아이디</label>
 		    <input type="text" id="username" name="username" class="form-control" 
