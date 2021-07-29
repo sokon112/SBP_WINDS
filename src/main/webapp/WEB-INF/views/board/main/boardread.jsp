@@ -120,7 +120,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> 댓글
-
+					
+					<button type="button" class="btn btn-info btn-xs pull-right"  id="addcomment">댓글달기</button>
+			
 				</div>
 				<div class="panel-body">
 					<ul class="chat">
@@ -128,7 +130,7 @@
 							<div>
 								<div class="header">
 									<strong class="primary-font">user00</strong> <small
-										class="pull-right text-muted">2021-06-15 14:25</small>
+										class="pull-right text-muted">2021-07-28 14:25</small>
 									<p>Good Job!!</p>
 								</div>
 							</div>
@@ -158,16 +160,20 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="">댓글 내용</label> <input type="text" name="reply"
+					<label for="">댓글 내용</label> <input type="text" name="content"
 						class="form-control" value="댓글내용" />
 				</div>
 				<div class="form-group">
-					<label for="">닉네임</label> <input type="text" name="nickname"
+					<label for="">닉네임</label> <input type="text" name="dnickname"
 						class="form-control" value="닉네임" />
 				</div>
 				<div class="form-group">
 					<label for="">작성일</label> <input type="text" name="uploaddate"
 						class="form-control" value="작성일" />
+				</div>
+				<div class="form-group">
+					<label for="">비밀번호</label> <input type="text" name="password"
+						class="form-control" value="비밀번호" />
 				</div>
 			</div>
 			<div class="modal-footer">

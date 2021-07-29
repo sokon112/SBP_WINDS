@@ -91,10 +91,12 @@
 					<sec:authentication property="principal.memberVO" var="info"/>
                 				<sec:authorize access="isAuthenticated()">
 									<c:if test="${info.id==vo.send}"><%--로그인한 사용자와 작성자가 동일여부 확인 --%>
+									<c:if test="${vo.state=='임시저장'}">
 									<c:if test="${vo.storage!='완결' }">
 										<button type="button" class="btn btn-info" id="modify">수정</button>
 										<button type="button" class="btn btn-info" id="remove">삭제</button>
 									</c:if>
+                					</c:if>
                 					</c:if>
                 					<c:if test="${userauth=='mg'}">
                 					<c:if test="${vo.state!='임시저장'}">
@@ -171,7 +173,6 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />
 	<input type='hidden' name='docNum'  value='${vo.docNum}'/>
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		
 </form> 
 <script>
 	let docNum = ${vo.docNum};

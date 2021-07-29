@@ -66,6 +66,11 @@ $(function(){
 		modifymodal.modal('hide');
 	})
 	
+	
+	
+	
+	
+	
 	//댓글 작업
 	
 	//댓글이 보여질 영역 가져오기
@@ -73,13 +78,14 @@ $(function(){
 	showList(1);	
 	
 	//모달 영역 가져오기
-	let modal = $(".modal");	
+	let cmodal = $(".commentmodal");	
 	
 	
 	//모달 영역 안에 있는 input 가져오기
-	var modalReply = modal.find("input[name='reply']");
-	var modalReplyer = modal.find("input[name='replyer']");
-	var modalDate = modal.find("input[name='replyDate']");
+	var modalcontent = cmodal.find("input[name='content']");
+	var modaldnickname = cmodal.find("input[name='dnickname']");
+	var modaldate = cmodal.find("input[name='uploaddate']");
+	var modalpassword = cmodal.find("input[name='password']");
 		
 	//모달 영역 안에 있는 버튼 가져오기
 	var modalModifyBtn = $("#modalModifyBtn");
@@ -88,47 +94,43 @@ $(function(){
 	
 	
 	
-	
-	
-	
-	
-	$("#addReplyBtn").click(function(){
+	//댓글달기 버튼 클릭시  
+	$("#addcomment").click(function(){
 		
 		//input안에 들어있는 value 제거
-		modal.find("input").val("");	
-		
-		//로그인 사용자 댓글작성자 란에 아이디 보여주기
-		modalReplyer.val(replyer);
+		cmodal.find("input").val("");
 		
 		
 		//작성날짜 제거한 후 모달 보여주기
-		modalDate.closest("div").hide();
+		modaldate.closest("div").hide();
 		
 		// 수정,삭제버튼 제거 
-		modal.find("button[id!='modalCloseBtn']").hide();
+		cmodal.find("button[id!='modalCloseBtn']").hide();
 		modalRegisterBtn.show();
 		
-		modal.modal("show");
+		
+		cmodal.modal("show");
 	})	
 	
-	//댓글 삽입 - bno,reply(댓글내용),replyer(작성자)
+	//댓글 삽입 - bno,content(댓글내용),nickname(작성자)
 	$("#modalRegisterBtn").click(function(){
 		
 		//모달안에 있는 댓글 작성자, 댓글 내용 가져오기
-		var reply = {
+		var content = {
 			bno:bno,
-			reply: modalReply.val(),
-			replyer: modalReplyer.val()
+			content: modalcontent.val(),
+			dnickname: modaldnickname.val(),
+			password: modalpassword.val()
 		};		
 		
-		replyService.add(reply,function(result){
+		replyService.add(content,function(result){
 			
 			/*if(result){
 				alert(result);
 			}	*/		
 			
-			modal.find("input").val("");
-			modal.modal("hide");
+			cmodal.find("input").val("");
+			cmodal.modal("hide");
 			
 			showList(-1);
 			
@@ -160,12 +162,12 @@ $(function(){
 			//댓글이 있는 경우
 			var str="";
 			for(var i=0,len=data.length||0;i<len;i++){
-				str+="<li class='left clearfix' data-rno='"+data[i].rno+"'>";
+				str+="<li class='left clearfix' data-dno='"+data[i].dno+"'>";
 				str+="<div>"
 				str+="<div class='header'>"
-				str+="<strong class='primary-font'>"+data[i].replyer+"</strong>"
+				str+="<strong class='primary-font'>"+data[i].dnickname+"</strong>"
 				str+="<small class='pull-right text-muted'>"+replyService.displayTime(data[i].replyDate)+"</small>"
-				str+="<p>"+data[i].reply+"</p>";
+				str+="<p>"+data[i].content+"</p>";
 				str+="</div></div></li>";
 			}
 			replyUl.html(str);	
@@ -229,33 +231,22 @@ $(function(){
 	//댓글 삭제
 	$("#modalRemoveBtn").click(function(){
 		
-		//로그인 여부 확인
-		if(!replyer){
+		//닉네임 여부 확인
+		if(!dnickname){
 			alert("로그인 한 후 삭제가 가능합니다.");
-			modal.modal("hide");
+			cmodal.modal("hide");
 			return;
 		}		
-		
-		//현재 모달창에 있는 작성자와 로그인 사용자가 같은지 확인
-		
-		//현재 모달창 작성자 가져오기
-		var oriReplyer = modalReplyer.val();
-		//비교
-		if(oriReplyer!=replyer){
-			alert('자신의 댓글만 삭제가 가능합니다.');
-			modal.modal("hide");
-			return;
-		}
 				
 		
-		// rno 가져오기	
-		var rno = modal.data("rno");	
+		// dno 가져오기	
+		var dno = cmodal.data("dno");	
 		
-		replyService.remove(rno,oriReplyer,function(result){
+		replyService.remove(dno,oridnickname,function(result){
 			//alert(result);
 			
 			//모달 창 닫기
-			modal.modal("hide");
+			cmodal.modal("hide");
 			showList(pageNum);			
 		});		
 	}) //#modalRemoveBtn 종료		
@@ -263,40 +254,19 @@ $(function(){
 	//댓글 수정
 	$("#modalModifyBtn").click(function(){
 		
-		
-		//로그인 여부 확인
-		if(!replyer){
-			alert("로그인 한 후 수정이 가능합니다.");
-			modal.modal("hide");
-			return;
-		}		
-		
-		//현재 모달창에 있는 작성자와 로그인 사용자가 같은지 확인
-		
-		//현재 모달창 작성자 가져오기
-		var oriReplyer = modalReplyer.val();
-		//비교
-		if(oriReplyer!=replyer){
-			alert('자신의 댓글만 수정이 가능합니다.');
-			modal.modal("hide");
-			return;
-		}
-		
-		
-		
-		var reply= {
-			rno:modal.data("rno"),
-			reply: modalReply.val(),
-			replyer : modalReplyer.val()
+		var content= {
+			dno:cmodal.data("dno"),
+			content: modalcontent.val(),
+			dnickname : modaldnickname.val()
 		}	
 		
-		replyService.update(reply,function(result){
+		replyService.update(content,function(result){
 			/*if(result){
 				alert(result);
 			}*/
 			
 			//모달 창 닫기
-			modal.modal("hide");
+			cmodal.modal("hide");
 			//showList 호출
 			showList(pageNum);		
 			
@@ -309,26 +279,26 @@ $(function(){
 	$(replyUl).on("click","li",function(){
 		
 		//현재 클릭된 li 요소의 rno 가져오기
-		var rno = $(this).data("rno");	
+		var dno = $(this).data("dno");	
 		
 		
-		replyService.get(rno,function(data){
+		replyService.get(dno,function(data){
 			console.log(data)
 			
 			//댓글 모달 창에 보여주기
-			modalReply.val(data.reply);
-			modalReplyer.val(data.replyer);
-			modalDate.val(replyService.displayTime(data.replyDate)).prop("readonly","readonly");
+			modalcontent.val(data.content);
+			modaldnickname.val(data.dnickname);
+			modaldate.val(replyService.displayTime(data.uploaddate)).prop("readonly","readonly");
 			// rno 값 필수로 담기(PK)
-			modal.data("rno",data.rno);
+			cmodal.data("dno",data.dno);
 			
 			
 			//작성날짜 영역 보여주기 => 등록 후 댓글 보는 작업을 진행할 수도 있기 때문
-			modalDate.closest("div").show();
-			modal.find('button').show();
-			modal.find("button[id='modalRegisterBtn']").hide();
+			modaldate.closest("div").show();
+			cmodal.find('button').show();
+			cmodal.find("button[id='modalRegisterBtn']").hide();
 			
-			modal.modal("show");			
+			cmodal.modal("show");			
 		})		
 	})
 	

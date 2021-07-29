@@ -9,11 +9,11 @@ import com.spring.board.domain.BoardCriteria;
 
 public interface BoardCommentService {
 
-	public boolean bcommentinsert(BoardCommentVO comment);
-	public boolean bcommentdelete(int dno);
-	public boolean bcommentupdate(BoardCommentVO comment);
-	public BoardCommentPageVO bcommentlist(BoardCriteria cri,int dno);
-	public BoardCommentVO bcommentread(int dno);
-	public int bcommenttotal(BoardCriteria cri);
+	public boolean bcinsert(BoardCommentVO comment);
+	public boolean bcdelete(int dno);
+	public boolean bcupdate(BoardCommentVO comment);
+	public BoardCommentPageVO bclist(BoardCriteria cri,int dno);
+	public BoardCommentVO bcread(int dno);
+	public int bctotal(BoardCriteria cri);
 	
 }
