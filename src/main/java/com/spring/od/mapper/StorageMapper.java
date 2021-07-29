@@ -11,7 +11,7 @@ public interface StorageMapper {
 	public List<StorageListVO> waitList(@Param("cri")Criteria cri,@Param("deptNum")int deptNum);
 	public List<StorageListVO> completeList(@Param("cri")Criteria cri,@Param("deptNum")int deptNum);
 	public List<StorageListVO> tempList(@Param("cri")Criteria cri,@Param("id")String id);
-	
+	public void checkboxDelete(int doc_num);
 	
 	public int totalCnt(Criteria cri);
 	

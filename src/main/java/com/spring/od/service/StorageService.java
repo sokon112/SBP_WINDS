@@ -9,7 +9,7 @@ public interface StorageService {
 	public List<StorageListVO> WaitList(Criteria cri,int deptNum);
 	public List<StorageListVO> CompleteList(Criteria cri,int deptNum);
 	public List<StorageListVO> TempList(Criteria cri,String id);
-	
+	public void checkboxDelete(int doc_num);
 	public int total(Criteria cri);
 	
 }

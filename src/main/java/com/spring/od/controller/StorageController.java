@@ -2,6 +2,9 @@ package com.spring.od.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -83,5 +86,15 @@ public class StorageController {
 		model.addAttribute("pageVO", new PageVO(cri, total));
 	}
 	
-	
+	@ResponseBody
+	@GetMapping("/templist/ajax")
+	public void checkdelete(Model model,Criteria cri, HttpServletRequest request, HttpServletResponse response) {
+
+		String[] checkBoxArr = request.getParameterValues("checkBoxArr[]");
+		
+		for (int i=0; i<checkBoxArr.length; i++) {
+			service.checkboxDelete(Integer.parseInt(checkBoxArr[i]));
+		}
+		
+	}
 }

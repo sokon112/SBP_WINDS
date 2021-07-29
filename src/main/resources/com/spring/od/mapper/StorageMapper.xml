@@ -61,7 +61,9 @@
 		]]>
 </select>
 
-
+<delete id="checkboxDelete">
+delete from doc_tab where docNum = #{doc_num} 
+</delete>
 
 <select id="totalCnt" resultType="int">
 	select count(*) from doc_tab 
