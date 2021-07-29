@@ -116,6 +116,7 @@ public class VacationController {
 			int total = service.total(cri);
 			model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 			model.addAttribute("list",vlist);
+			model.addAttribute("result","휴가가 수정되었습니다.");
 			return "/vacation/vacationUserList";
 		}else {
 			return "/vacation/vacation_home";
@@ -132,6 +133,7 @@ public class VacationController {
 			int total = service.total(cri);
 			model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 			model.addAttribute("list",vlist);
+			model.addAttribute("result","휴가를 삭제 했습니다.");
 			return "/vacation/vacationUserList";
 		}else {
 			return "/vacation/vacation_home";
@@ -153,10 +155,10 @@ public class VacationController {
 			if(result) {
 				
 				service.vChangeCnt(-1,id);
-				model.addAttribute("result","반납 성공");
+				model.addAttribute("result","휴가 반납을 성공했습니다.");
 				
 			}else {
-				model.addAttribute("result","반납 실패");
+				model.addAttribute("result","반납 반납을 실패했습니다.");
 			}
 			
 		}

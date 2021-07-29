@@ -2,43 +2,39 @@
  *  vacationApply.js 유효성 검사 하는 페이지
  */
 
-/*//keyword 가져오기
-		var keyword = $("input[name='keyword']").val();
-		
-
-		
-		if(keyType===''){
-			alert("검색 기준을 확인하세요");
-			$("select[name='keyType']").focus();
-			return false;
-		}*/
 $(function(){
-	// 모달 창 띄우기
+	
+	//이전 컨트롤러에서 메세지 있다면 띄움
 	checkModal(result);
-	
-	//history.replaceState({},null,null);
-	
 	function checkModal(result){
 		if(result===''||history.state){
 			return;
 		}
 		 alert(result);
 	}
-
-var applyForm = $("#applyForm");
-	
-
+	//휴가 신청 버튼 클릭하는 경우 값이 있는지 확인
+	var applyForm = $(".applyForm");
 	$("#modalRegisterBtn").click(function(){
 		//e.preventDefault();
-	
 
-		var selectType=$("select[name='type']").val();	
+		var selectType=$("select[name='type']").val();
+		var selectTerm=$("input[name='term']").val();	
+		var writeReason=$("textarea[name='reason']").val();	
+			
 		if(selectType==='none'){
-			$("select[name='type']").forcus();
+			alert("휴가 종류를 선택해 주세요");
 			return false;
 		}
 		
-	
+		if(selectTerm===''){
+			alert("기간을 선택해 주세요");
+			return false;
+		}
+		if(writeReason===''){
+			alert("이유를 입력해 주세요");
+			return false;
+		}
+		
 		applyForm.submit();
 	})
 })

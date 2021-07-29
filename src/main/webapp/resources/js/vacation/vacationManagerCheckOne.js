@@ -3,8 +3,6 @@
  */
 
 $(function(){
-	
-
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
@@ -14,10 +12,6 @@ $(function(){
 		operForm.attr('action','/vacation/vacationManager');
 		operForm.submit();
 	})
-	
-
-	
-	
 })
 
 
