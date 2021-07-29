@@ -5,7 +5,7 @@
 function showImage(fileCallPath){
 	$(".bigPictureWrapper").css("display","flex").show();
 	
-	$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>")
+	$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"' style='max-width:500px;'>")
 	                .animate({width:'100%', height:'100%'},1000);
 }
 function uploadfile(){
@@ -187,7 +187,7 @@ $(function(){
 	})
 	//첨부 파일 가져오기
 	$.getJSON({
-		url:'getAttachList',
+		url:'/od/getAttachList',
 		data:{
 			docNum:docNum
 		},

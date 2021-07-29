@@ -3,7 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../includes/od/header.jsp"%>
 <link rel="stylesheet" href="/resources/dist/css/attach.css" />
-<div class="center">
+<div class="container-fluid" style="margin: 20px">
+<div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">공문 보기</h1>
 	</div>
@@ -149,18 +150,20 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fas fa-file"></i> Files
+				<i class="fa fas fa-file"></i> 첨부파일
 			</div>
-			<div class="panel-body">
-				<div class="uploadResult">
+			<div class="panel-body"></div>
+			<div class="uploadResult row">
+				<div class="col-md-4">
 					<ul></ul>
+				</div>		
+					<div class="bigPictureWrapper col-md-8">
+					<div class="bigPicture"></div>
 				</div>
 			</div>			
 		</div>
 	</div>
 </div> 
-<div class="bigPictureWrapper">
-	<div class="bigPicture"></div>
 </div>
 <form action="" method="get" id="actionForm">	
 	<input type="hidden" name="type" value="${cri.type}" />

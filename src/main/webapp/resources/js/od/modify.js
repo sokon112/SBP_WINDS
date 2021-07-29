@@ -84,6 +84,7 @@ $(function(){
 		
 		str+="<input type='hidden' name='storage' value='미결'>";
 		str+="<input type='hidden' name='state' value='요청'>";
+		str+="<input type='hidden' name='message' value=''>";
 		
 		str+="<input type='hidden' name='type' value='${cri.type}' />";
 		str+="<input type='hidden' name='keyword' value='${cri.keyword}' />";

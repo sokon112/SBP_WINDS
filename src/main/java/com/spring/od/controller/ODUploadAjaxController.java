@@ -20,7 +20,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +36,6 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class ODUploadAjaxController {
 	
 	
-	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/uploadAjax")
 	public ResponseEntity<List<AttachFileDTO>> uploadFormPost(MultipartFile[] uploadFile) {
 		log.info("파일업로드 요청");
@@ -141,7 +139,6 @@ public class ODUploadAjaxController {
 	}
 	
 	//upload 폴더 안에 있는 파일 삭제
-	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/deleteFile")
 	public ResponseEntity<String> deleteFile(String fileName,String type){
 		log.info("파일 삭제 : "+fileName+" type : "+type);
