@@ -16,7 +16,6 @@
 	where rownum between 0 and 11 order by rn desc
 </select>
 
-
 <!-- 완료 -->
 <select id ="maincompletelist" resultType="com.spring.od.domain.StorageListVO">
 	select rownum rn,docNum,title,name,deptNum,state,regDate
