@@ -132,17 +132,15 @@ public class DocController {
 	public String remove(int docNum,Criteria cri,RedirectAttributes rttr) {
 		log.info("공문 삭제"+docNum);
 		
-		
-		//서버(폴더)에 저장된 첨부파일 삭제
-		//① bno에 해당하는 첨부파일 목록 알아내기
 		List<AttachFileDTO> attachList=service.getAttachList(docNum);
 		
-		//공문 삭제 + 첨부파일 삭제
 		if(service.oremove(docNum)) {
-			//② 폴더 파일 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
-		}	
+		}
+		else {
+			log.info("실패");
+		}
 		
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
