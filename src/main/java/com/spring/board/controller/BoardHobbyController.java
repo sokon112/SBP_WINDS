@@ -80,20 +80,20 @@ public class BoardHobbyController { //동호회
 	
 	
 	
-	@GetMapping("/hobby/hitread")
-	public String read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
-		bhservice.boardupdateviews(bno);
+	@GetMapping("/hobby/hhitread")
+	public String read(int hno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+hno+" cri : "+cri);  
+		bhservice.boardupdateviews(hno);
 		model.addAttribute("cri", cri);
-		model.addAttribute("bno",bno);
-		return "redirect:boardread";
+		model.addAttribute("hno",hno);
+		return "redirect:hobbyread";
 	}
 	
 	@GetMapping({"/hobby/hobbymodify","/hobby/hobbyread"})
-	public void modifyget(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
+	public void modifyget(int hno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+hno+" cri : "+cri);  
 		
-		BoardHobbyVO vo=bhservice.bhread(bno);
+		BoardHobbyVO vo=bhservice.bhread(hno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 		model.addAttribute("cri", cri);
 	}

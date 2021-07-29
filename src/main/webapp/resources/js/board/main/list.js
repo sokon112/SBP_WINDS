@@ -19,7 +19,7 @@ $(function(){
 		$("#myModal").modal("show");
 	}
 	
-	//조회수 증가
+	
 	
 	
 	

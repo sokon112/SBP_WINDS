@@ -1,12 +1,27 @@
 /**
- * modify.jsp 스크립트
+ * eventmodify.jsp 스크립트
  */
 $(function(){
+	
+	
+	//operForm 가져온 후 전송하기
+	var operForm = $("#operForm");
+	
+	
+	//완료버튼 클릭시 get emodifypassword
+	$("#emodifySubmit").click(function(){
+		operForm.attr('action','/board/event/eventlist');
+		operForm.submit();
+	})
+	
+	
+	
+	
 	
 	//remove와 list를 위한 폼 가져오기
 	var operForm = $("#operForm");
 	
-	
+	/*
 	$("button").click(function(e){
 		//button submit 기능 멈추기
 		e.preventDefault();
@@ -37,7 +52,7 @@ $(function(){
 		}
 		operForm.submit();		
 	})
-	
+	*/
 	
 	//첨부 파일 가져오기
 	$.getJSON({

@@ -118,7 +118,7 @@ public class BoardController {
 		boolean result = service.boardcheckpw(bno, password);
 		if(result) {
 			model.addAttribute("vo",vo);
-			model.addAttribute("bno",bno);
+			rttr.addAttribute("bno",bno);
 
 			rttr.addAttribute("type", cri.getType());
 			rttr.addAttribute("keyword", cri.getKeyword());
@@ -132,7 +132,19 @@ public class BoardController {
 //		return "redirect:/";
 	}
 	
-	
+	//관리자 삭제
+	@PostMapping("/main/addelete")
+	public String delete(int bno,BoardCriteria cri,RedirectAttributes rttr) {
+		log.info("게시글 삭제 "+bno);
+		
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
+		return "redirect:boardlist";
+	}
+		 
 	
 	
 	//게시글 삭제 + post

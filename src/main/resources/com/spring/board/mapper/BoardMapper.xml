@@ -20,6 +20,10 @@
 		delete from board_table where bno=#{bno} and password=#{password}	
 	</delete>
 	
+	<!-- 관리자 삭제 : bno,password가 일치하면 삭제(delete) -->
+	<delete id="boardaddelete">
+		delete from board_table where bno=#{bno} 	
+	</delete>
 	
 	<!-- 수정 : title,contents,uploaddate 가 일치시(update) -->
 	<update id="boardupdate">
@@ -28,25 +32,12 @@
 		where bno=#{bno} and password=#{password}
 	</update>
 	
-	
-	<!-- 페이지 나누기 적용 -->
-	<select id="boardlist" resultType="com.spring.board.domain.BoardVO">
-		<![CDATA[
-				select *
-				from(select /*+INDEX_DESC(board_table board_tb_seq)*/
-				          rownum rn,bno,nickname,title, contents, uploaddate, views
-				     from board_table
-				     where 
-		]]>		
-		
-		<include refid="boardcommentcriteria"></include>
-		     
-		<![CDATA[		     
-				     
-				     rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount}) order by bno		
-		]]>	
+	<!-- 비번 확인 -->
+	<select id="boardcheckpw" resultType="com.spring.board.domain.BoardVO">
+		select bno from board_table
+		where bno=#{bno} and password=#{password}
 	</select>
+	
 	
 	<!-- 전체 게시물 수 (검색)-->
 	<select id="boardtotalCnt" resultType="int">
@@ -76,6 +67,24 @@
 		update board_table set views = views + 1 where bno = #{bno}
 	</update>
 	
+	<!-- 페이지 나누기 적용 -->
+	<select id="boardlist" resultType="com.spring.board.domain.BoardVO">
+		<![CDATA[
+				select *
+				from(select /*+INDEX_DESC(board_table board_tb_seq)*/
+				          rownum rn,bno,nickname,title, contents, uploaddate, views
+				     from board_table
+				     where 
+		]]>		
+		
+		<include refid="boardcommentcriteria"></include>
+		     
+		<![CDATA[		     
+				     
+				     rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount}) order by bno		
+		]]>	
+	</select>
 	
 	
 	<!-- 동적 SQL -->
@@ -97,10 +106,7 @@
 		</trim>
 	</sql>
 	
-	<select id="boardcheckpw" resultType="com.spring.board.domain.BoardVO">
-		select bno from board_table
-		where bno=#{bno} and password=#{password}
-	</select>
+	
 
 
 

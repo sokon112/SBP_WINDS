@@ -41,12 +41,12 @@
 						<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal" var="info" />
 							<%-- 로그인 여부 확인 --%>
-							<c:if test="${info.memberVO.authority}=='ad'">
+							<c:if test="${info.memberVO.id=='10030001'}">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-								<button type="button" class="btn btn-warning">삭제!</button>
+								<button type="button" class="btn btn-info" id="addelete">삭제하기</button>
 							</c:if>
 						</sec:authorize>
-						<button type="button" class="btn btn-info pull-right">목록</button>
+						<button type="button" class="btn btn-primary pull-right">목록</button>
 						<button type="button" style="margin-right: 3px;" name="boarddelete" class="btn btn-danger pull-right" id="deleteBtn">삭제</button>
 						<button type="button" style="margin-right: 3px;" name="modify" class="btn btn-warning pull-right" id="modifyBtn">수정</button>
 

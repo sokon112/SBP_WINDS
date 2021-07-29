@@ -87,6 +87,12 @@ public class BoardServieImpl implements BoardService {
 	}
 
 
+	@Override
+	public boolean boardaddelete(int bno) {
+		return bmapper.boardaddelete(bno)>0?true:false;
+	}
+
+
 	
 
 

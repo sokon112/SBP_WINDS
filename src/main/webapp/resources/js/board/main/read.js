@@ -8,9 +8,15 @@ $(function(){
 	//operForm 가져온 후 전송하기
 	var operForm = $("#operForm");
 	
+	//관리자 삭제버튼 클릭시 모달창 보이기
+	$("#addelete").click(function(){
+		operForm.attr('action','/board/main/addelete');
+		operForm.attr('method','post');
+		operForm.submit();
+	})	
 	
 	//목록버튼 클릭시 get /board/main/boardlist
-	$(".btn-info").click(function(){
+	$(".btn-primary").click(function(){
 		operForm.find("input[name='bno']").remove();
 		operForm.attr('action','/board/main/boardlist');
 		operForm.submit();

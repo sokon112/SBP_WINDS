@@ -37,7 +37,7 @@
 							value="${_csrf.token}" />
 
 						<button type="submit" name="boardregister"
-							class="btn btn-default move">올리기</button>
+							class="btn btn-default">올리기</button>
 						<button type="reset" name="boardlist" class="btn btn-default"
 							onclick="location.href='boardlist'">취소</button>
 					</form>

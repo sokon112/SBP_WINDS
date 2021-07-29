@@ -51,14 +51,12 @@ public class BoardEventController {    //이벤트
 	}	
 	
 	
-//	@PreAuthorize("isAuthenticated()") 
 	@GetMapping("/event/eventregister")
 	public void register() {
 		log.info("새글 등록 폼 요청");
 	}
 	
 	//게시글 등록
-//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/event/eventregister")
 	public String registerPost(BoardEventVO vo,RedirectAttributes rttr) {
 		log.info("새글 등록 요청 "+vo);
@@ -80,26 +78,25 @@ public class BoardEventController {    //이벤트
 	
 	
 	
-	@GetMapping("/event/hitread")
-	public String read(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
-		beservice.boardupdateviews(bno);
+	@GetMapping("/event/ehitread")
+	public String read(int eno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+eno+" cri : "+cri);  
+		beservice.beupdateviews(eno);
 		model.addAttribute("cri", cri);
-		model.addAttribute("bno",bno);
+		model.addAttribute("eno",eno);
 		return "redirect:eventread";
 	}
 	
 	@GetMapping({"/event/eventmodify","/event/eventread"})
-	public void modifyget(int bno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
-		log.info("글 하나 가져오기 "+bno+" cri : "+cri);  
+	public void modifyget(int eno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
+		log.info("글 하나 가져오기 "+eno+" cri : "+cri);  
 		
-		BoardEventVO vo=beservice.beread(bno);
+		BoardEventVO vo=beservice.beread(eno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 		model.addAttribute("cri", cri);
 	}
 	
 	// modify+post 수정한 후 list
-//	@PreAuthorize("principal.username == #vo.ewriter")
 	@PostMapping("/event/eventmodify")
 	public String modify(BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
@@ -107,7 +104,7 @@ public class BoardEventController {    //이벤트
 		//첨부 파일 확인
 		if(vo.getEimages()!=null) {
 			vo.getEimages().forEach(attach -> log.info(""+attach));
-		}	
+			
 		
 		beservice.beupdate(vo);		
 		
@@ -119,14 +116,47 @@ public class BoardEventController {    //이벤트
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		
+		}
+		return "redirect:eventlist";
+	}
+	
+	//수정처리 비밀번호 확인
+	@PostMapping("/event/emodifypassword")
+	public String eventUpdate(int eno, String epassword, @ModelAttribute BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
+		//비밀번호 체크
+		log.info("정보 : ",vo);
+		boolean result = beservice.becheckpw(eno, epassword);
+		if(result) {
+			model.addAttribute("vo",vo);
+			rttr.addAttribute("eno",eno);
+
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+				
+			return "redirect:eventmodify";
+		}else {
+			return "redirect:eventlist";
+		}
+	}
+	
+	//관리자 삭제
+	@PostMapping("/main/beaddelete")
+	public String delete(int eno,BoardCriteria cri,RedirectAttributes rttr) {
+		log.info("게시글 삭제 "+eno);
+			
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+			
 		return "redirect:eventlist";
 	}
 	
 	//게시글 삭제 + post
-//	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/event/eventdelete")
-	public String remove(int eno,String writer,BoardCriteria cri,RedirectAttributes rttr) {
+	public String remove(int eno,String epassword, String ewriter,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+eno);
 		
 		
@@ -134,19 +164,32 @@ public class BoardEventController {    //이벤트
 		//① bno에 해당하는 첨부파일 목록 알아내기
 		List<BoardEventAttachFileDTO> attachList=beservice.beAttachList(eno);
 		
+		boolean result = beservice.becheckpw(eno, epassword);
+
 		//게시글 삭제 + 첨부파일 삭제
-		if(beservice.bedelete(eno)) {
+		if(result) {
+			beservice.bedelete(eno,epassword);
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");
-		}	
 		
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:eventlist";
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
+			return "redirect:eventlist";
+		}else {
+			rttr.addAttribute("eno",eno);
+	
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
+			return "redirect:eventread";
+		}
 	}
 	
 	
