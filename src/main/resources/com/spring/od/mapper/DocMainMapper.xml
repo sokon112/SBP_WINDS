@@ -11,7 +11,7 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
-		where D1.storage = '미결'
+		where D1.storage = '미결' and D1.deptNum = #{deptNum}
 		order by regDate asc)
 	where rownum between 0 and 11 order by rn desc
 </select>
@@ -25,7 +25,7 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
-		where D1.storage = '완결'
+		where D1.storage = '완결' and D1.deptNum = #{deptNum}
 		order by regDate asc)
 	where rownum between 0 and 4 order by rn desc
 </select>
@@ -40,7 +40,7 @@
 		on D1.send = U.id
 		inner join DM_TAB D2
 		on D2.deptNum = U.deptNum
-		where D1.storage = '임시'
+		where D1.storage = '임시' AND D1.send = #{id}
 		order by regDate desc)
 	where rownum between 0 and 4 order by rn desc
 

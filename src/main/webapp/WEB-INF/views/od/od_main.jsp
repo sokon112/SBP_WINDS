@@ -48,7 +48,6 @@ width:15%;}
 									<th>문서번호</th>
 	                                <th>제   목</th>
 	                                <th>송 신 자</th>
-	                                <th>수 신 처</th>
 	                                <th>단   계</th>
 	                                <th>수신일자</th>
 								</tr>								
@@ -58,16 +57,13 @@ width:15%;}
 							 <sec:authentication property="principal.memberVO" var="info"/>
 							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="doc" items="${waitlist}">
-								<c:if test="${info.deptNum==doc.deptNum}">
 									<tr>
 										<td>${doc.docNum}</td>
 										<td><a href="${doc.docNum}" class="move">${doc.title}</a></td>
 										<td>${doc.name}</td>
-										<td>${info.deptName}</td>
 										<td>${doc.state}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${doc.regDate}"/></td>
 									</tr>
-								</c:if>
 								</c:forEach>
 								</sec:authorize>								
 							</tbody>
@@ -99,7 +95,6 @@ width:15%;}
 							  <sec:authentication property="principal.memberVO" var="info"/>
 							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="vo" items="${completelist}">
-								<c:if test="${info.deptNum==vo.deptNum}">
 									<tr>
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
@@ -107,7 +102,6 @@ width:15%;}
 										<td>${vo.state}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
-								</c:if>
 								</c:forEach>
 								</sec:authorize>								
 							</tbody>
@@ -137,14 +131,12 @@ width:15%;}
 							  <sec:authentication property="principal.memberVO" var="info"/>
 							 	<sec:authorize access="isAuthenticated()">
 								<c:forEach var="vo" items="${templist}">
-								<c:if test="${info.id==vo.id}">
 									<tr>
 										<td>${vo.docNum}</td>
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
 										<td>${vo.name}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vo.regDate}"/></td>
 									</tr>
-								</c:if>
 								</c:forEach>
 								</sec:authorize>								
 							</tbody>
