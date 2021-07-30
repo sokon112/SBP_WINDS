@@ -14,6 +14,12 @@
 			h3{
 				margin-top:1px;
 			}
+			.glyphicon{
+				background: 0;
+				border: 0;
+				padding: 0;
+				cursor: pointer
+			}
 		</style>
 		<title>Vacation</title>
 	</head>
@@ -31,7 +37,7 @@
 						<div class="selectMonth">
 							<div class="col-md-4">
 								<div></div>
-								<button type="button" class="glyphicon glyphicon-arrow-left pull-right" ></button>
+								<button type="button" class="glyphicon glyphicon-arrow-left pull-right btn-lg" ></button>
 							</div>
 							<div class="col-md-4">
 								<h3 align="center"><fmt:formatDate pattern='yyyy년 MM월'  value='${VacationPageVO.cri.nowMonth}'/></h3>
@@ -40,7 +46,7 @@
 							</div>
 							<div class="col-md-4">
 								<div></div>
-								<button type="button" class="glyphicon glyphicon-arrow-right pull-left" ></button> 
+								<button type="button" class="glyphicon glyphicon-arrow-right pull-left btn-lg" ></button> 
 							</div>
 						</div>
 		        		<table class="table table-striped table-bordered table-hover">

@@ -12,6 +12,10 @@
 		text-align:center;
 		width:15%;
 	}
+	input{
+		text-align: center;
+		border: 0px;
+	}
 	</style>
 </head>
 	<body>
@@ -55,7 +59,7 @@
 									       		<button type="button" name="rejectBox"  class="btn btn-secondary">거절</button>
 												<input type="hidden" class="rejectReason" name="resonBox" placeholder="거절 이유">
 												<input type="hidden" name="resonBoxCheck" class="btn btn-danger" value="완료">
-												<input type="hidden" name="hiddenBox" class="hiddenBox" value="완료" style="border:none" readonly="readonly">
+												<input type="hidden" name="hiddenBox" class="hiddenBox" value="완료" style="border:none" readonly="readonly" >
 							                </td>
 							            </tr>
 						  			</c:forEach>  

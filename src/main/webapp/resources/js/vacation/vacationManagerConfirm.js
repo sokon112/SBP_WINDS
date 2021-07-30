@@ -26,6 +26,8 @@ $(function(){
     			console.log(result);
 				td.find("button[name='successBox']").hide();
 				td.find("button[name='rejectBox']").hide();
+				td.find("input[name='resonBox']").hide();
+				td.find("input[name='resonBoxCheck']").hide();
 				td.find("input[name='hiddenBox']").attr('value','승인');
 				td.find("input[name='hiddenBox']").attr('type','text');
     		},
