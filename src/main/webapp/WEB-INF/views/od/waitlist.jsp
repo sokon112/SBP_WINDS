@@ -6,7 +6,6 @@
 <%@include file="../../includes/od/header.jsp" %>
 
 <style>
-.small {font-size:12px;}
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
@@ -14,12 +13,12 @@
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 0px;
+    top: 55px;
     bottom: 0;
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
+    margin-top:0;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color:  #f8f8f8;
@@ -35,13 +34,9 @@
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
-}
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  font-size:24px;
-  color: #fff;
-  background-color: #428bca;
+  font-size:15px;
+  color: black;
+  height:45px;
 }
 /*
  * Main content
@@ -56,6 +51,9 @@
   }
 }
 
+th,td{
+text-align:center;
+width:15%;}
 
 </style>
     		<div class="container-fluid">
@@ -164,7 +162,7 @@
                         </div>
                         <!-- end panel -->
                    </div>               
-                </div>               
+                               
             <!-- /.row -->
 <!-- 페이지 나누기 추가 -->            
 <form action="waitlist" method="get" id="actionForm">	
