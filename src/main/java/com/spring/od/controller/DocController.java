@@ -104,6 +104,7 @@ public class DocController {
 			auth = avo.getAuthority();
 		}
 		
+		log.info(auth);
 		if(auth.equals("mg")) {
 			service.omodify(vo);					
 		}

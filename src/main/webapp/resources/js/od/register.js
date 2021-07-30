@@ -112,10 +112,10 @@ $(function(){
 				originPath = originPath.replace(new RegExp(/\\/g),"/");
 				$("#modalattach").val(obj.fileName);
 				str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
-				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
+				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"' style='list-style:none;'>";
 				str+="<a href=\"javascript:showImage(\'"+originPath+"\')\">";
 				str+="<span>"+obj.fileName+"</span>";
-				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
+				str+=" <button type='button' class='btn btn-dark btn-square btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 				str+="<i class='fa fa-times'></i></button><br>";			
 				str+="<img src='/display?fileName="+fileCallPath+"'></a>";
 				str+="</li>";
@@ -123,12 +123,12 @@ $(function(){
 				$("#modalattach").val(obj.fileName);
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
 				str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
-				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
+				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"' style='list-style:none;'>";
 				str+="<span>"+obj.fileName+"</span>";
-				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
+				str+=" <button type='button' class='btn btn-dark btn-square btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
 				str+="<i class='fa fa-times'></i></button><br>";
 				str+="<a href='/download?fileName="+fileCallPath+"'>";
-				str+="<img src='/resources/img/attach.png'></a>";
+				str+="<img src='/resources/img/attach2.png' style='width:50px;'></a>";
 				str+="</li>";				
 			}
 		})		

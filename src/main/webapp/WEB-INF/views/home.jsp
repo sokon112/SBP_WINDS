@@ -10,6 +10,8 @@
 	<title>Home</title>
 </head>
 <body style="background-color:#ffffff">
+<div class="row" style="margin-left:8px;">
+<div>
 <table style="width:100%; height:95%;">
 <tr></tr>
 <tr>
@@ -67,11 +69,16 @@
 <tr></tr>
 <tr>
 <td colspan="3">
-	<pre class="mt-5 mb-3 text-muted text-center">
-@Soldesk Big-Data Professional Winds
-& 김석현 남광우 심태현 이채은 박다영 황다빈
-	</pre>
 </td>
 </tr>
 </table>
+</div>
+	<div style=" position:fixed; bottom: 0; width:99%;">
+	<pre class="mt-5 mb-3 text-muted text-center">
+		@Soldesk Big-Data Professional Winds
+		& 김석현 남광우 심태현 이채은 박다영 황다빈
+	</pre>
+	</div>
+</div>
+
 <%@include file="../includes/home/footer.jsp" %>

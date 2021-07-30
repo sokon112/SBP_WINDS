@@ -59,14 +59,6 @@ $(function(){
 		uploadfile();
 		
 		var str="";
-		$(".uploadResult ul li").each(function(idx,obj){
-			var job = $(obj);
-			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
-		})
 		
 		str+="<input type='hidden' name='storage' value='미결'>";
 		str+="<input type='hidden' name='state' value='결재요청'>";
@@ -77,7 +69,7 @@ $(function(){
 		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
 		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
-		var form = $("form");
+		var form = $("#mainform");
 		//수집된 내용 폼에 추가하기
 		form.append(str);
 		//폼 전송하기
@@ -93,14 +85,7 @@ $(function(){
 		uploadfile();
 		
 		var str="";
-		$(".uploadResult ul li").each(function(idx,obj){
-			var job = $(obj);
-			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
-		})
+		
 		
 		str+="<input type='hidden' name='dest' value='10030001'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
@@ -112,7 +97,7 @@ $(function(){
 		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
 		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
-		var form = $("form");
+		var form = $("#mainform");
 		//수집된 내용 폼에 추가하기
 		form.append(str);
 		//폼 전송하기
@@ -126,14 +111,7 @@ $(function(){
 		
 		uploadfile();
 		var str="";
-		$(".uploadResult ul li").each(function(idx,obj){
-			var job = $(obj);
-			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
-		})
+		
 		
 		str+="<input type='hidden' name='dest' value='10030001'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
@@ -145,7 +123,7 @@ $(function(){
 		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
 		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
-		var form = $("form");
+		var form = $("#mainform");
 		//수집된 내용 폼에 추가하기
 		form.append(str);
 		//폼 전송하기
@@ -160,14 +138,7 @@ $(function(){
 		uploadfile();
 		var nodest = $("#dest").val();
 		var str="";
-		$(".uploadResult ul li").each(function(idx,obj){
-			var job = $(obj);
-			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
-		})
+		
 		
 		str+="<input type='hidden' name='dest' value='"+nodest+"'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
@@ -179,7 +150,7 @@ $(function(){
 		str+="<input type='hidden' name='amount' value='${cri.amount}' />	";
 		str+="<input type='hidden' name='docNum'  value='${vo.docNum}'/>";
 		//게시글 등록 폼 가져오기
-		var form = $("form");
+		var form = $("#mainform");
 		//수집된 내용 폼에 추가하기
 		form.append(str);
 		//폼 전송하기
@@ -198,12 +169,13 @@ $(function(){
 			$(data).each(function(i,obj){
 				if(obj.fileType){ //image				
 					var fileCallPath = encodeURIComponent(obj.uploadPath+"\\s_"+obj.uuid+"_"+obj.fileName);
-											
+					$("#modalattach").val(obj.fileName);						
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"' style='list-style:none;'>";							
 					str+="<img src='/display?fileName="+fileCallPath+"'>";
 					str+="</li>";
-				}else{					
+				}else{
+					$("#modalattach").val(obj.fileName);					
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"' style='list-style:none;'>";
 					str+="<span>"+obj.fileName+"</span><br>";				

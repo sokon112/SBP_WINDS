@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../includes/od/header.jsp"%>
-<link rel="stylesheet" href="/resources/dist/css/attach.css" />
 <div class="center">
 	<div class="col-lg-12">
 		<h1 class="page-header">공문 작성</h1>
@@ -125,10 +124,11 @@
 						<label>내용</label>
 						<textarea class="form-control" rows="20" name="contents"></textarea>
 					</div>
+					<div class="col-md-12">
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-default">
-								<div class="panel-heading">File 첨부</div>
+								<div class="panel-heading">첨부파일</div>
 									<div class="panel-body">
 										<div class="form-group uploadDiv">
 											<input type="file" name="uploadFile" id="attachlist" multiple />
@@ -139,6 +139,7 @@
 									</div>
 							</div>
 						</div>
+					</div>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
 				</form>

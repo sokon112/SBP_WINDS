@@ -13,7 +13,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form action="" method="post" role="form">
+				<form action="" method="post" id="mainform" role="form">
 					<!-- 상신 Modal -->
 					<div class="modal fade" id="modal1" data-backdrop="static"
 						tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
