@@ -43,7 +43,7 @@ $(function(){
 	//업로드 되는 파일의 종류와 크기 제한
 	function checkExtension(fileName,fileSize){
 		
-		var regex = new RegExp("(.*?)\.(pptx|xlsx|pdf|hwp|txt|jpg|gif|png|bmp)");
+		var regex = new RegExp("(.*?)\.(pptx|xlsx|pdf|hwp|txt|jpg|gif|png|bmp|PNG|JPG|GIF|BMP|JPEG)");
 		
 		var maxSize = 10242880; //5MB
 		
@@ -167,14 +167,15 @@ $(function(){
 		checksubmit();
 		
 		var str="";
-		$(".uploadResult ul li").each(function(idx,obj){
+		$(".uploadResult ul li").each(function(i,obj){
 			var job = $(obj);
 			//수집된 정보를 hidden 태그로 작성
-			str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-			str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+			str+="<input type='hidden' name='attachList["+i+"].uuid' value='"+job.data("uuid")+"'>";
+			str+="<input type='hidden' name='attachList["+i+"].uploadPath' value='"+job.data("path")+"'>";
+			str+="<input type='hidden' name='attachList["+i+"].fileName' value='"+job.data("filename")+"'>";
+			str+="<input type='hidden' name='attachList["+i+"].fileType' value='"+job.data("type")+"'>";
 		})
+		console.log(str);
 		
 		str+="<input type='hidden' name='storage' value='미결'>";
 		str+="<input type='hidden' name='state' value='요청'>";

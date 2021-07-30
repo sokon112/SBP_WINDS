@@ -49,8 +49,8 @@ public class DocController {
 	public String registerPost(OfficeNoticeVO vo,RedirectAttributes rttr) {
 		log.info("새 공문 등록 요청"+vo);
 		
-		if(vo.getAttach()!=null) {
-			vo.getAttach().forEach(attach -> log.info(""+attach));
+		if(vo.getAttachList()!=null) {
+			vo.getAttachList().forEach(attach -> log.info(""+attach));
 		}
 		
 		if(service.owrite(vo)) {
@@ -74,8 +74,8 @@ public class DocController {
 		log.info("수정 요청 "+vo+" 페이지 나누기 "+cri);
 		
 		//첨부 파일 확인
-		if(vo.getAttach()!=null) {
-			vo.getAttach().forEach(attach -> log.info(""+attach));
+		if(vo.getAttachList()!=null) {
+			vo.getAttachList().forEach(attach -> log.info(""+attach));
 		}	
 		
 		service.omodify(vo);		
@@ -114,8 +114,8 @@ public class DocController {
 			service.omodify(vo);
 		}		
 		//첨부 파일 확인
-		if(vo.getAttach()!=null) {
-			vo.getAttach().forEach(attach -> log.info(""+attach));
+		if(vo.getAttachList()!=null) {
+			vo.getAttachList().forEach(attach -> log.info(""+attach));
 		}
 		
 		rttr.addFlashAttribute("result","성공");
