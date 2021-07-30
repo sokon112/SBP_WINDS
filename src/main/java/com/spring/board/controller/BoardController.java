@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.BoardCriteria;
 import com.spring.board.domain.BoardPageVO;
+import com.spring.board.service.BoardCommentService;
 import com.spring.board.service.BoardService;
 
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +25,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping("/board/*")
 public class BoardController {
-
+	
+	@Autowired
+	private BoardCommentService cservice;
 
 	@Autowired
 	private BoardService service;
@@ -133,9 +137,13 @@ public class BoardController {
 	}
 	
 	//관리자 삭제
+	@Transactional
 	@PostMapping("/main/addelete")
 	public String delete(int bno,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+bno);
+		
+		cservice.bcdeleteAll(bno);
+		service.boardaddelete(bno);
 		
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
@@ -148,12 +156,14 @@ public class BoardController {
 	
 	
 	//게시글 삭제 + post
+	@Transactional
 	@PostMapping("/main/boarddelete")
 	public String delete(int bno,String password,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+bno);
 		
 		boolean result = service.boardcheckpw(bno, password);
 		if(result) {
+			cservice.bcdeleteAll(bno);
 			service.boarddelete(bno, password);
 
 			rttr.addAttribute("type", cri.getType());

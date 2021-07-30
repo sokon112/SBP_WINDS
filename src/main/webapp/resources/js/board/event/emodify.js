@@ -5,8 +5,6 @@ $(function(){
 	
 	
 	
-	
-	
 	//remove와 list를 위한 폼 가져오기
 	var operForm = $("#operForm");
 	

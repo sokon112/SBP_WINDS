@@ -23,9 +23,7 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 	@Autowired
 	private BoardHobbyAttachMapper hattachMapper;
 	
-	@Autowired
-	private BoardCommentMapper echMapper;
-	
+
 	
 	@Transactional
 	@Override
@@ -49,14 +47,14 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 
 	@Transactional
 	@Override
-	public boolean bhdelete(int bno,String hpassword) {
+	public boolean bhdelete(int hno,String hpassword) {
 		
 
 		//첨부파일 삭제
-		hattachMapper.bhdelete(bno);
+		hattachMapper.bhdelete(hno);
 		
 		//게시글 삭제
-		return hmapper.bhdelete(bno,hpassword)>0?true:false;
+		return hmapper.bhdelete(hno,hpassword)>0?true:false;
 	}
 
 	@Transactional
@@ -93,8 +91,8 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 	
 	//읽기
 	@Override
-	public BoardHobbyVO bhread(int bno) {		
-		return hmapper.bhread(bno);
+	public BoardHobbyVO bhread(int hno) {		
+		return hmapper.bhread(hno);
 	}
 	
 	//검색
@@ -105,8 +103,8 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 	
 	//파일첨부
 	@Override
-	public List<BoardHobbyAttachFileDTO> bhAttachList(int bno) {		
-		return hattachMapper.bhfindByBno(bno);
+	public List<BoardHobbyAttachFileDTO> bhAttachList(int hno) {		
+		return hattachMapper.bhfindBySno(hno);
 	}
 
 	// 조회수 올리기
@@ -123,8 +121,10 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 
 	//관리자 삭제
 	@Override
-	public boolean bhaddelete(int bno) {
-		return hmapper.bhaddelete(bno)>0?true:false;
+	public boolean bhaddelete(int hno) {
+		//첨부파일삭제
+		hattachMapper.bhdelete(hno);
+		return hmapper.bhaddelete(hno)>0?true:false;
 	}
 
 	

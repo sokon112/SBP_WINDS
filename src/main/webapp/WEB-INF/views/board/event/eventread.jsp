@@ -9,7 +9,7 @@
 <div class="container-fluid" style="margin: 20px">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">게시물 읽기</h1>
+			<h1 class="page-header">이벤트 게시물 읽기</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -65,7 +65,7 @@
 							<%-- 로그인 여부 확인 --%>
 							<c:if test="${info.memberVO.id=='10030001'}">
 								<%-- 로그인한 사용자와 작성자 동일여부 확인 --%>
-								<button type="button" class="btn btn-info" id="addelete">삭제</button>
+								<button type="button" class="btn btn-info" id="addelete">삭제하기</button>
 							</c:if>
 						</sec:authorize>
 
@@ -162,5 +162,4 @@
 	var csrfTokenValue = "${_csrf.token}";
 </script>
 <script src="/resources/js/board/event/eread.js"></script>
-<script src="/resources/js/board/event/ereply.js"></script>
 <%@include file="/WEB-INF/includes/board/footer.jsp"%>

@@ -20,15 +20,15 @@
 				<div class="panel-body">
 					<form action="" method="post" role="form">
 						<div class="form-group">
-							<label>제목</label> <input class="form-control" name="title"
+							<label>제목</label> <input class="form-control" name="htitle"
 								value="${vo.htitle}">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
-							<textarea class="form-control" rows="3" name="content">${vo.hcontents}</textarea>
+							<textarea class="form-control" rows="3" name="hcontents">${vo.hcontents}</textarea>
 						</div>
 						<div class="form-group">
-							<label>작성자</label> <input class="form-control" name="writer"
+							<label>작성자</label> <input class="form-control" name="hwriter"
 								readonly="readonly" value="${vo.hwriter}">
 						</div>
 						
@@ -39,7 +39,7 @@
 									<div class="panel-heading">File 첨부</div>
 									<div class="panel-body">
 										<div class="form-group uploadDiv">
-											<input type="file" name="buploadFile" multiple  value="${vo.himages}"/>
+											<input type="file" name="buploadFile" multiple  value="${vo.hattachList}"/>
 										</div>
 										<div class="uploadResult">
 											<ul></ul>
@@ -52,10 +52,9 @@
 						<%-- spring security 추가 --%>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-
-						<button type="button"  class="btn btn-primary pull-right" onclick="location.href='hobbylist'">목록</button>
-						<button type="submit" data-oper='list' style="margin-right: 3px;"  class="btn btn-success pull-right" id="emodifySubmit">완료</button>
-
+						<button type="submit" data-oper='list' style="margin-right: 3px;"  class="btn btn-success pull-right">목록</button>
+						<button type="submit" data-oper='modify' style="margin-right: 3px;"  class="btn btn-primary pull-right">수정</button>
+				
 					</form>
 				</div>
 			</div>
@@ -71,21 +70,18 @@
 	<input type="hidden" name="hno" value="${vo.hno}" />
 	<input type="hidden" name="hpassword" value="${vo.hpassword}">
 	<input type="hidden" name="hcontents" value="${vo.hcontents}">
-	<input type="hidden" name="himages" value="${vo.himages}">
+	<input type="hidden" name="himages" value="${vo.hattachList}">
 	
 
 	<%-- spring security 추가 --%>
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" /> <input type="hidden" name="writer"
-		value="${vo.writer}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+	<input type="hidden" name="hwriter" value="${vo.hwriter}" />
 </form>
 
 <%-- 스크립트 --%>
 <script>
-	let hno = $
-	{
-		vo.hno
-	};
+	let hno = ${vo.hno};
+	
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
 </script>

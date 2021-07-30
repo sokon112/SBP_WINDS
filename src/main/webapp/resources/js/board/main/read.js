@@ -142,8 +142,8 @@ $(function(){
    function showList(page){
       //댓글 목록 가져오기
       replyService.getList({bno:bno,page:page||1},function(total,data){
-         console.log(total);
-         console.log(data);
+         console.log("total:"+total);
+         console.log("data:"+data);
          
          if(page==-1){
             //마지막 페이지 계산
@@ -166,7 +166,7 @@ $(function(){
             str+="<div>"
             str+="<div class='header'>"
             str+="<strong class='primary-font'>"+data[i].dnickname+"</strong>"
-            str+="<small class='pull-right text-muted'>"+replyService.displayTime(data[i].replyDate)+"</small>"
+            str+="<small class='pull-right text-muted'>"+replyService.displayTime(data[i].uploaddate)+"</small>"
             str+="<p>"+data[i].content+"</p>";
             str+="</div></div></li>";
          }
@@ -229,20 +229,13 @@ $(function(){
    
       
    //댓글 삭제
-   $("#modalRemoveBtn").click(function(){
-      
-      //닉네임 여부 확인
-      if(!dnickname){
-         alert("로그인 한 후 삭제가 가능합니다.");
-         cmodal.modal("hide");
-         return;
-      }      
-            
+   $("#modalRemoveBtn").click(function(){            
       
       // dno 가져오기   
-      var dno = cmodal.data("dno");   
+      var dno = cmodal.data("dno");
+	  var password = modalpassword.val();
       
-      replyService.remove(dno,oridnickname,function(result){
+      replyService.remove(dno,password,function(result){
          //alert(result);
          
          //모달 창 닫기
@@ -257,7 +250,8 @@ $(function(){
       var content= {
          dno:cmodal.data("dno"),
          content: modalcontent.val(),
-         dnickname : modaldnickname.val()
+         dnickname : modaldnickname.val(),
+         password: modalpassword.val()
       }   
       
       replyService.update(content,function(result){
@@ -279,7 +273,7 @@ $(function(){
    $(replyUl).on("click","li",function(){
       
       //현재 클릭된 li 요소의 rno 가져오기
-      var dno = $(this).data("dno");   
+      var dno = $(this).data("dno"); 
       
       
       replyService.get(dno,function(data){
@@ -287,7 +281,9 @@ $(function(){
          
          //댓글 모달 창에 보여주기
          modalcontent.val(data.content);
-         modaldnickname.val(data.dnickname);
+         modaldnickname.val(data.dnickname).prop("readonly","readonly");
+		
+		 modalpassword.val("");
          modaldate.val(replyService.displayTime(data.uploaddate)).prop("readonly","readonly");
          // rno 값 필수로 담기(PK)
          cmodal.data("dno",data.dno);

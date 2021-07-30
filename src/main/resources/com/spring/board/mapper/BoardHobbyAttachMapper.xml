@@ -4,23 +4,28 @@
 
 <!-- 동호회 : 파일첨부 -->
 
-	<!-- 파일insert : 이벤트,동호회-->
+	<!-- 파일insert : 동호회-->
 	<insert id="bhinsert">
-		insert into hobby_table(uuid,uploadpath,filename,filetype,sno,seltable)
-		values(#{uuid},#{uploadpath},#{filename},#{filetype},#{hno},'h')
+		insert into special_attach(uuid,uploadPath,fileName,fileType,sno,seltable)
+		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{hno},'h')
 	</insert>
 	
 	<!-- 파일찾기 -->
-	<select id="bhfindsno">
-		select * from hobby_table where sno= #{hno} and seltable = 'h'
+	<select id="bhfindBySno" resultType="com.spring.board.domain.BoardHobbyAttachFileDTO">
+		select * from special_attach where sno= #{hno} and seltable = 'h'
 	</select>
 
 	
 	<!-- 파일삭제  -->
 	<delete id="bhdelete">
-		delete from hobby_table where sno=#{hno} and seltable = 'h'
+		delete from special_attach where sno=#{hno} and seltable = 'h'
 	</delete>
 	
+	<!-- 전일자 첨부파일 리스트 -->
+	<select id="gethOldFiles" resultType="com.spring.board.domain.BoardHobbyAttachFileDTO">
+		select * from special_attach
+		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
+	</select>
 	
 
 </mapper>

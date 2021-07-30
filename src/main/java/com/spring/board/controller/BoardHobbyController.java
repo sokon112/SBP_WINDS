@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.domain.BoardCriteria;
+import com.spring.board.domain.BoardEventAttachFileDTO;
 import com.spring.board.domain.BoardEventVO;
 import com.spring.board.domain.BoardHobbyAttachFileDTO;
 import com.spring.board.domain.BoardHobbyVO;
@@ -123,13 +124,13 @@ public class BoardHobbyController { //동호회
 	
 	//수정처리 비밀번호 확인
 	@PostMapping("/hobby/hmodifypassword")
-	public String eventUpdate(int hno, String hpassword, @ModelAttribute BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
+	public String eventUpdate(int hno, String hpassword, @ModelAttribute BoardHobbyVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
 		//비밀번호 체크
 		log.info("정보 : ",vo);
 		boolean result = bhservice.bhcheckpw(hno, hpassword);
 		if(result) {
 			model.addAttribute("vo",vo);
-			rttr.addAttribute("eno",hno);
+			rttr.addAttribute("hno",hno);
 
 			rttr.addAttribute("type", cri.getType());
 			rttr.addAttribute("keyword", cri.getKeyword());
@@ -143,10 +144,17 @@ public class BoardHobbyController { //동호회
 	}
 		
 		//관리자 삭제
-		@PostMapping("/main/bhaddelete")
+		@PostMapping("/hobby/bhaddelete")
 		public String delete(int hno,BoardCriteria cri,RedirectAttributes rttr) {
 			log.info("게시글 삭제 "+hno);
 				
+			List<BoardHobbyAttachFileDTO> hattachList=bhservice.bhAttachList(hno);
+			
+			deleteFiles(hattachList);
+			bhservice.bhaddelete(hno);	
+			
+			rttr.addFlashAttribute("result","성공");
+		
 			rttr.addAttribute("type", cri.getType());
 			rttr.addAttribute("keyword", cri.getKeyword());
 			rttr.addAttribute("pageNum", cri.getPageNum());
@@ -196,10 +204,10 @@ public class BoardHobbyController { //동호회
 	
 	
 	//첨부물 가져오기
-	@GetMapping("/hobby/getAttachList")
-	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int bno){
-		log.info("첨부물 가져오기 "+bno);		
-		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(bhservice.bhAttachList(bno),HttpStatus.OK);
+	@GetMapping("/hobby/getHattachList")
+	public ResponseEntity<List<BoardHobbyAttachFileDTO>> getAttachList(int hno){
+		log.info("첨부물 가져오기 "+hno);		
+		return new ResponseEntity<List<BoardHobbyAttachFileDTO>>(bhservice.bhAttachList(hno),HttpStatus.OK);
 	}
 	
 	

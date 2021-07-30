@@ -116,7 +116,7 @@ public class BoardEventServieImpl implements BoardEventService {
 
 	}
 
-	//----------------------------------변경함
+	//관리자
 	@Transactional
 	@Override
 	public boolean beaddelete(int eno) {

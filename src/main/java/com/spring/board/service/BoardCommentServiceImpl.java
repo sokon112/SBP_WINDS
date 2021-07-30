@@ -1,15 +1,11 @@
 package com.spring.board.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.board.domain.BoardCommentPageVO;
 import com.spring.board.domain.BoardCommentVO;
 import com.spring.board.domain.BoardCriteria;
-import com.spring.board.mapper.BoardMapper;
 import com.spring.board.mapper.BoardCommentMapper;
 
 @Service
@@ -17,9 +13,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 	@Autowired
 	private BoardCommentMapper bcmapper;
-
-	@Autowired
-	private BoardMapper bmapper;
 	
 	@Override	
 	public boolean bcinsert(BoardCommentVO comment) {
@@ -34,27 +27,29 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	}
 
 	@Override
-	public boolean bcdelete(int rno) {
-
-		BoardCommentVO comment = bcmapper.bcread(rno);
-		return bcmapper.bcdelete(rno)>0?true:false;
+	public boolean bcdelete(int dno) {
+		return bcmapper.bcdelete(dno)>0?true:false;
 	}
 
 	
 	@Override
-	public BoardCommentPageVO bclist(BoardCriteria cri, int dno) {
-		return new BoardCommentPageVO(bcmapper.bcCountByBno(dno),bcmapper.bclist(cri, dno));
+	public BoardCommentPageVO bclist(BoardCriteria cri, int bno) {
+		return new BoardCommentPageVO(bcmapper.bcCountByBno(bno),bcmapper.bclist(cri, bno));
 	}
 
 	@Override
-	public BoardCommentVO bcread(int rno) {
-		return bcmapper.bcread(rno);
+	public BoardCommentVO bcread(int bno) {
+		return bcmapper.bcread(bno);
 	}
 
 	@Override
-	public int bctotal(BoardCriteria cri) {
-		return bcmapper.bctotal(cri);
+	public boolean bcdeleteAll(int bno) {
+		return bcmapper.bcdeleteAll(bno)>0?true:false;
+	}
 
+	@Override
+	public int bcCountByBno(int bno) {
+		return bcmapper.bcCountByBno(bno);
 	}
 
 	

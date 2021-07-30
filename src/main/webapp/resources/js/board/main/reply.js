@@ -31,13 +31,15 @@ var replyService=(function(){
          url:'/comment/pages/'+bno+'/'+page,
          success:function(data){
             if(callback){
-               callback(data.replyCnt,data.list);
+               callback(data.bcCnt,data.bclist);
+				console.log("data.bcCnt:"+data.bcCnt);
+         		console.log("data.bclist:"+data.bclist);
             }
          }
       })
    }//getList 종료   
    
-   function remove(dno,replyer,callback){
+   function remove(dno,password,callback){
       
       $.ajax({
          url:'/comment/'+dno,  // /replies/3
@@ -47,8 +49,11 @@ var replyService=(function(){
          },
          contentType:"application/json",
          data:JSON.stringify({
-            replyer:replyer
+            password:password
          }),
+		 /*data:{
+			"password":password
+		},*/
          success:function(result){
             if(callback){
                callback(result);
@@ -76,10 +81,10 @@ var replyService=(function(){
       })
    }//update 종료
    
-   function get(rno,callback){
+   function get(dno,callback){
       
       $.getJSON({
-         url:'/comment/'+rno,
+         url:'/comment/'+dno,
          success:function(data){
             if(callback){
                callback(data);

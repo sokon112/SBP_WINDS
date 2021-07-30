@@ -20,10 +20,10 @@ $(function(){
 			$(".uploadResult ul li").each(function(idx,obj){
 				var job = $(obj);
 				//수집된 정보를 hidden 태그로 작성
-				str+="<input type='hidden' name='attachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
-				str+="<input type='hidden' name='attachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
-				str+="<input type='hidden' name='attachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
-				str+="<input type='hidden' name='attachList["+idx+"].fileType' value='"+job.data("type")+"'>";
+				str+="<input type='hidden' name='hattachList["+idx+"].uuid' value='"+job.data("uuid")+"'>";
+				str+="<input type='hidden' name='hattachList["+idx+"].uploadPath' value='"+job.data("path")+"'>";
+				str+="<input type='hidden' name='hattachList["+idx+"].fileName' value='"+job.data("filename")+"'>";
+				str+="<input type='hidden' name='hattachList["+idx+"].fileType' value='"+job.data("type")+"'>";
 			})
 			
 			console.log(str);
@@ -31,9 +31,9 @@ $(function(){
 		}else if(oper==="remove"){
 			operForm.attr('action','/board/remove');
 		}else if(oper==="list"){			
-			operForm.find("input[name='bno']").remove();
+			operForm.find("input[name='hno']").remove();
 			operForm.attr('method','get');
-			operForm.attr('action','/board/list');
+			operForm.attr('action','/board/hobby/hobbylist');
 		}
 		operForm.submit();		
 	})
@@ -41,9 +41,9 @@ $(function(){
 	
 	//첨부 파일 가져오기
 	$.getJSON({
-		url:'getAttachList',
+		url:'/board/hobby/getHattachList',
 		data:{
-			bno:bno
+			hno:hno
 		},
 		success:function(data){
 			console.log(data);
@@ -58,7 +58,7 @@ $(function(){
 					str+="<span>"+obj.fileName+"</span>";
 					str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 					str+="<i class='fa fa-times'></i></button><br>";							
-					str+="<img src='/display?fileName="+fileCallPath+"'>";
+					str+="<img src='/bdisplay?fileName="+fileCallPath+"'>";
 					str+="</li>";
 				}else{					
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
@@ -89,7 +89,7 @@ $(function(){
 	$("input[type='file']").change(function(){
 		
 		//첨부 파일 가져오기
-		var files=$("input[name='uploadFile']")[0].files;
+		var files=$("input[name='buploadFile']")[0].files;
 		console.log(files);
 		
 		//첨부파일을 formData 로 만들어 전송
@@ -98,13 +98,13 @@ $(function(){
 			if(!checkExtension(files[i].name,files[i].size)){
 				return false;
 			}
-			formData.append("uploadFile",files[i]);
+			formData.append("huploadFile",files[i]);
 		}		
 		
 		// enctype="multipart/form-data" => processData:false,contentType:false,
 		
 		$.ajax({
-			url:'/uploadAjax', //도착지
+			url:'/huploadAjax', //도착지
 			type:'post',
 			processData:false,
 			contentType:false,
@@ -115,7 +115,7 @@ $(function(){
 			success:function(result){
 				console.log(result);
 				showUploadedFile(result);
-				$("input[name='uploadFile']").val("");
+				$("input[name='huploadFile']").val("");
 			},
 			error:function(xhr,status,error){
 				console.log("에러");
@@ -143,7 +143,7 @@ $(function(){
 				str+="<span>"+obj.fileName+"</span>";
 				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 				str+="<i class='fa fa-times'></i></button><br>";			
-				str+="<img src='/display?fileName="+fileCallPath+"'></a>";
+				str+="<img src='/bdisplay?fileName="+fileCallPath+"'></a>";
 				str+="</li>";
 			}else{
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
@@ -152,7 +152,7 @@ $(function(){
 				str+="<span>"+obj.fileName+"</span>";
 				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
 				str+="<i class='fa fa-times'></i></button><br>";
-				str+="<a href='/download?fileName="+fileCallPath+"'>";
+				str+="<a href='/bdownload?fileName="+fileCallPath+"'>";
 				str+="<img src='/resources/img/attach.png'></a>";
 				str+="</li>";				
 			}

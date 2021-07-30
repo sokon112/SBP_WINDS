@@ -21,8 +21,8 @@
 	<!--  수정 :  내용만 수정, updatedate, hno 일치하면 -->
 	<update id="bhupdate">
 		update hobby_table
-		set contents=#{hcontents}, huploaddate=sysdate
-		where hno=#{hno} and password=#{password}
+		set hcontents=#{hcontents}, huploaddate=sysdate
+		where hno=#{hno} 
 	</update>
 	
 	<!-- 삭제 : hno, password 일치 -->
