@@ -200,12 +200,12 @@ $(function(){
 					var fileCallPath = encodeURIComponent(obj.uploadPath+"\\s_"+obj.uuid+"_"+obj.fileName);
 											
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
-					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";							
+					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"' style='list-style:none;'>";							
 					str+="<img src='/display?fileName="+fileCallPath+"'>";
 					str+="</li>";
 				}else{					
 					str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
-					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
+					str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"' style='list-style:none;'>";
 					str+="<span>"+obj.fileName+"</span><br>";				
 					str+="<img src='/resources/img/attach.png'>";
 					str+="</li>";				

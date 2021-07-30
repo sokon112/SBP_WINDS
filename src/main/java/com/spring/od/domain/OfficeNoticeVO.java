@@ -29,5 +29,5 @@ public class OfficeNoticeVO {
 	private String message; // 결재/반려시 메세지 추가
 	private Date regDate; //수신일자
 	
-	private List<AttachFileDTO> attach;	
+	private List<AttachFileDTO> attachList;	
 }

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../includes/od/header.jsp"%>
-<link rel="stylesheet" href="/resources/dist/css/attach.css" />
 <div class="container-fluid" style="margin: 20px">
 <div class="row">
 	<div class="col-lg-12">
@@ -143,8 +142,10 @@
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
 					<%-- 첨부파일 목록 보여주기 --%>
-					<div class="row">
-						<div class="col-lg-12">
+					<p></p>
+					<div class="col-md-12">
+						<div class="row">
+						<div class="col-md-12">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<i class="fa fas fa-file"></i> 첨부파일
@@ -154,13 +155,15 @@
 									<div class="col-md-4">
 										<ul></ul>
 									</div>		
-										<div class="bigPictureWrapper col-md-8">
+										<div class="bigPictureWrapper col-md-4">
 										<div class="bigPicture"></div>
 									</div>
 								</div>			
 							</div>
 						</div>
 					</div> 
+					</div>
+					
 				</form>
 			</div>
 		</div>

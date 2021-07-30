@@ -26,10 +26,10 @@ public class DocServiceImpl implements DocService {
 		
 		boolean result = mapper.owrite(vo)>0?true:false;
 		
-		if(vo.getAttach()==null||vo.getAttach().size()<=0) {
+		if(vo.getAttachList()==null||vo.getAttachList().size()<=0) {
 			return result;
 		}
-		vo.getAttach().forEach(attach ->{
+		vo.getAttachList().forEach(attach ->{
 			attach.setDocNum(vo.getDocNum());
 			attachMapper.oainsert(attach);
 		});
@@ -63,11 +63,11 @@ public class DocServiceImpl implements DocService {
 	public boolean omodify(OfficeNoticeVO vo) {
 		boolean result = mapper.omodify(vo)>0?true:false;
 		
-		if(vo.getAttach()==null||vo.getAttach().size()<=0) {
+		if(vo.getAttachList()==null||vo.getAttachList().size()<=0) {
 			return result;
 		}
 		
-		vo.getAttach().forEach(attach ->{
+		vo.getAttachList().forEach(attach ->{
 			attach.setDocNum(vo.getDocNum());
 			attachMapper.oainsert(attach);
 		});
