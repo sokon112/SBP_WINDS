@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.vacation.mapper.VacationMapper">
 
-	
-
 	<resultMap type="com.spring.vacation.domain.VacationVO" id="selectMonthInfo">
 		<id property="vacationAppNum" column="vacationAppNum"/>
 		<result property="id" column="id"/>
 		<result property="type" column="type"/>
+      	<result property="startterm" column="startterm"/>
+      	<result property="endterm" column="endterm"/>
 		<result property="term" column="term"/>
 		<result property="state" column="state"/>
 		<result property="applicationDate" column="applicationDate"/>
@@ -17,29 +17,30 @@
 		<collection property="vacationApplication" resultMap="userMap"/>
 	</resultMap>
 
-	<resultMap type="com.spring.vacation.domain.VacationApplicationVO" id="userMap">
-		
+	<resultMap type="com.spring.vacation.domain.VacationApplicationVO" id="userMap">	
 		<result property="name" column="name"/>
 	</resultMap>
+	
+	<!-- 월에 따라 분류해 정보를 가져옴 -->
 	<select  id="vSelectMonth" resultMap="selectMonthInfo">
 	<![CDATA[
 	
 	select *
 from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/ 
-            rownum rn,vat.vacationAppNum,vat.id,hs.name,vat.type,vat.term,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
+            rownum rn,vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.term,vat.state,vat.applicationDate,vat.approvalDate,vat.reason
 		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id  
         where 
        	]]>	
 	<include refid="vacationCriteria"></include>
 	<![CDATA[
 	
-		vat.state not in('신청') and rownum <=(#{pageNum})*#{amount} and vat.term >= #{nowMonth} and vat.term < #{nextMonth}
+		vat.state not in('신청') and rownum <=(#{pageNum})*#{amount} and vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth}
 		)
 		where rn>(#{pageNum}-1)*#{amount} 
-	]]>	
+    ]]>	
 	</select>
 	
-	
+	<!-- 월에 따라 가져오는 정보를 다르게 해서  총 계수를 가져옴-페이지 넘기기에서 사용 -->
 	<select id="vTotalCnt" resultType="int">
 	<![CDATA[
 		select count(*) from vacationApplicationTable vat
@@ -47,7 +48,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		]]>	
 	<include refid="vacationCriteria"></include>
 	<![CDATA[
-		vacationAppNum>0 and state not like ('신청')and rownum <=(#{pageNum})*#{amount} and vat.term >= #{nowMonth} and vat.term < #{nextMonth}
+		vacationAppNum>0 and state not like ('신청')and rownum <=(#{pageNum})*#{amount} and vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth}
 		]]>	
 	</select>
 	
@@ -60,7 +61,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 	</select>
 	<!-- type이 '신청'인 리스트만 조회 -->
 	<select id="vApplicationList" resultMap="selectMonthInfo">
-		select vat.vacationAppNum,vat.id,vs.name,vat.type,vat.term,vat.reason,vat.state
+		select vat.vacationAppNum,vat.id,vs.name,vat.type,vat.startterm,vat.endterm,vat.term,vat.reason,vat.state
 		from vacationApplicationTable vat, vacationScedule vs
 		where vat.id=vs.id and vat.state like ('신청')
 		order by vacationAppNum
@@ -72,10 +73,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		set approvalDate=sysdate, state='승인'  
 		where vacationAppNum=#{vacationAppNum}
 	</update>
-	<!-- 승인에 변동사항 생기는 경우! -->
-	<update id="vChangeCnt">
-		update vacationScedule set vacationcnt=vacationcnt+#{vcnt} where id=#{id}
-	</update>
+
 	<!-- 거절 -->
 	<update id="vNo">
 		update vacationApplicationTable 
@@ -83,35 +81,41 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		where vacationAppNum=#{vacationAppNum}
 	</update>
 
+	<!-- 승인,거절,반납  변동사항 생기는 경우! -->
+	<update id="vChangeCnt">
+		update vacationScedule set vacationcnt=vacationcnt+#{vcnt} where id=#{id}
+	</update>
+
 	<!-- 사용자 -->
 		<!-- 신청서 등록 구문 -->
 	<insert id="vInsertUserApp">
 	
-		insert into vacationApplicationTable(vacationAppNum,id,type,term,state,applicationDate,reason) 
-		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{term},'신청',sysdate,#{reason})
+		insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,state,applicationDate,reason) 
+		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},#{term},'신청',sysdate,#{reason})
 		
 	</insert>
 	
 	<!--사용자 페이지 보여주는 구문-->
 	<select id="vShowUser" resultType="com.spring.vacation.domain.VacationVO">
 <![CDATA[
-		select vacationAppNum,id,type,term,state,applicationDate,approvaldate
+		select vacationAppNum,id,type,startterm,endterm,term,state,applicationDate,approvaldate
 		from vacationApplicationTable 
- 		where id=#{id} and term >= #{cri.nowMonth} and term < #{cri.nextMonth}
+ 		where id=#{id} and startterm >= #{cri.nowMonth} and startterm < #{cri.nextMonth}
 	]]>
 	</select >
 	<select id="vShowUserOne" resultMap="selectMonthInfo">
 
-		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.term,vat.state,vat.applicationDate,vat.approvalDate,vat.reason,vat.refusalReason
+		select vat.vacationAppNum,vat.id,hs.name,vat.type,vat.startterm,vat.endterm,vat.term,vat.state,vat.applicationDate,vat.approvalDate,vat.reason,vat.refusalReason
 		from vacationApplicationTable vat join vacationScedule hs on  vat.id=hs.id
 		where vat.vacationAppNum=#{vacationAppNum}
 	</select>
-	<!-- 수정해야함 -->
+	<!-- 수정하는 구문 -->
 	<update id="vUserUpdateApp" >
 		update vacationApplicationTable 
 		set applicationDate=sysdate,reason=#{reason}
 		where vacationAppNum=#{vacationAppNum}
 	</update>
+	<!-- 삭제하는 구문 -->
 	<delete id="vDeleteUserApp">
 		delete from vacationApplicationTable
 		where vacationAppNum=#{vacationAppNum}
@@ -122,14 +126,14 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		set approvalDate=sysdate, state='반납'  
 		where vacationAppNum=#{vacationAppNum}
 	</update>
-	<!-- 휴가 갯수를 가져오는 mapper -->
+	<!-- 휴가 개수를 불러오는 구문 -->
 	<select id="vIdCnt" resultType="int">
 		select VacationCnt from vacationScedule where id=#{id}
 	</select>	
 	
 	<!-- 현재 월 불러오는 mapper?? -->
 	<select id="vVacationDay" resultType="Date" >
-		select term 
+		select startterm 
 		from vacationApplicationTable 
 		where vacationAppNum=#{vacationAppNum}
 	</select>
@@ -153,3 +157,9 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		</trim>
 	</sql>
 </mapper>
+
+
+
+
+
+

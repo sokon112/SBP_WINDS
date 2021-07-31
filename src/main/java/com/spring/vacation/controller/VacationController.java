@@ -178,29 +178,28 @@ public class VacationController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationApplyResult")
 	public String applyPost(VacationVO vacation,Model model){
-		Date nowtoday=new Date();
 		VacationCriteria cri=new VacationCriteria();
+		int cnt=service.idCnt(vacation.getId());
 		//휴가 신청 가능 기간을 넘겼는지 아닌지 확인
-		if(!service.idCnt(vacation.getId())) {
+		if((cnt+(vacation.getTerm()*2))>40) {
 			//휴가갯수가 초과하면 알람창
-			model.addAttribute("result","휴가승인 갯수가 20가 넘어 신청할 수 없습니다.");
+			model.addAttribute("result","현재 신청된 휴가 갯수 : "+cnt/2+"신청한 휴가 일수 : "+vacation.getTerm()+"이므로 신청 불가능 합니다.");
 			log.info("신청 실패 !");
-			return "/vacation/vacationApply";
-		}// 휴가 신청기간이 이전일이면 휴가 신청이 불가능하게 설정
-		else if(!vacation.getTerm().after(nowtoday)){
-			model.addAttribute("result","기간이 잘못되어 신청이 불가능합니다.");
 			return "/vacation/vacationApply";
 		}else {
 			//휴가가 20개 이하이고 신청날짜가 이전이 아니라면 신청
+
 				log.info("성공");
 				if(vacation.getType().equals("half")) {
 					vacation.setType("반차");
+					vacation.setEndterm(vacation.getStartterm());
 				}
 				else {
 					vacation.setType("월차");
 				}
+				log.info("vacation"+vacation);
 				boolean insertVacation=service.insertUserApp(vacation);	
-				if(insertVacation) {
+				if(insertVacation) {//사용자 리스트로 이동하는 부분
 					model.addAttribute("result", vacation.getId()+" 휴가가 신청되었습니다.");
 					List<VacationVO> vlist=service.showUser(vacation.getId(),cri);
 					int total = service.total(cri);
@@ -238,26 +237,21 @@ public class VacationController {
 		log.info("vacationAppNum "+vacationAppNum);
 		VacationVO vacation=service.showUserOne(vacationAppNum);
 		//승인 갯수 확인
-		if(service.idCnt(vacation.getId())) {
+		if(service.idCnt(vacation.getId())<40) {
 			//날짜 확인=> 승인 날짜와 신청서를 낸 날짜의 이후라면 승인 불가능
 			Date nowtoday=new Date();
-			if(!vacation.getTerm().after(nowtoday)){
+			if(!vacation.getStartterm().after(nowtoday)){
 
 				return new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);}
 				else {
-			int vCnt=0;
-//휴가 type에 따라 더해지는 값이 다름
-			if(vacation.getType().equals("반차")) {
-				vCnt=1;
-			}
-			else {
-				vCnt=2;
-			}
-			service.vChangeCnt(vCnt, vacation.getId());
-			log.info("문서 승인"+vacation.getVacationAppNum());
-			return service.ok(vacation.getVacationAppNum())?new ResponseEntity<String>("success",HttpStatus.OK):
-				new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
-				}
+				int vCnt=vacation.getTerm();
+	//휴가 type에 따라 더해지는 값이 다름
+				
+				service.vChangeCnt(vCnt, vacation.getId());
+				log.info("문서 승인"+vacation.getVacationAppNum());
+				return service.ok(vacation.getVacationAppNum())?new ResponseEntity<String>("success",HttpStatus.OK):
+					new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+					}
 			
 		}else {
 			return new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);

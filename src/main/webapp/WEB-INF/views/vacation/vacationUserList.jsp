@@ -64,15 +64,21 @@
 									<c:forEach var="vacation" items="${list}">
 										<tr>
 											<td>${vacation.type}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/></td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
+											<c:if test="${vacation.type eq '월차'}">
+											~
+											<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
+											</c:if>
+											</td>
 											<td>${vacation.state}</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/></td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/></td>
 											<td>
-												<a href="${vacation.vacationAppNum}" class="move">확인</a> 
+												<a href="${vacation.vacationAppNum}" class="move">확인${vacation.term }</a> 
 											</td>
 										</tr>
-									</c:forEach>								
+									</c:forEach>	
+																
 								</tbody>
 						    </table>
 						</div>
@@ -81,7 +87,10 @@
 			</div>
 		</div>
 	<form action="/vacation/vacationManager" method="post" id="listCheckForm">
-	        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+       	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="hidden" name="pageNum" value="${VacationPageVO.cri.pageNum}" />
+		<input type="hidden" name="amount" value="${VacationPageVO.cri.amount}" /> 
+		<input type="hidden" name="amount" value="${VacationPageVO.cri.nowMonth}" /> 
 	</form>
 	<form action="" method="post" id="preMonthForm">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 

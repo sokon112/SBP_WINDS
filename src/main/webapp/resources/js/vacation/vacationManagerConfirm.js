@@ -11,32 +11,33 @@ $(function(){
 		manageForm.submit();
 	})
 	$(".btn-primary").click(function(){
+	
 		
-		var checkBtn = $(this);
-		var tr = checkBtn.parent().parent();
-        var td = tr.children();
-		var vacationAppNum = td.eq(0).find('input').val();
+			var checkBtn = $(this);
+			var tr = checkBtn.parent().parent();
+	        var td = tr.children();
+			var vacationAppNum = td.eq(0).find('input').val();
+	
+			$.ajax({
+				url:'/vacation/'+vacationAppNum+'/ok',			
+				beforeSend:function(xhr){
+					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+				},			
+				success:function(result){
+	    			console.log(result);
+					td.find("button[name='successBox']").hide();
+					td.find("button[name='rejectBox']").hide();
+					td.find("input[name='resonBox']").hide();
+					td.find("input[name='resonBoxCheck']").hide();
+					td.find("input[name='hiddenBox']").attr('value','승인');
+					td.find("input[name='hiddenBox']").attr('type','text');
+	    		},
+				error:function(xhr,status,error){
+			        alert("승인이 불가능 합니다.");
+					td.find("button[name='successBox']").hide();
+			       }
+			});
 
-		$.ajax({
-			url:'/vacation/'+vacationAppNum+'/ok',			
-			beforeSend:function(xhr){
-				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-			},			
-			success:function(result){
-    			console.log(result);
-				td.find("button[name='successBox']").hide();
-				td.find("button[name='rejectBox']").hide();
-				td.find("input[name='resonBox']").hide();
-				td.find("input[name='resonBoxCheck']").hide();
-				td.find("input[name='hiddenBox']").attr('value','승인');
-				td.find("input[name='hiddenBox']").attr('type','text');
-    		},
-			error:function(xhr,status,error){
-		        alert("승인이 불가능 합니다.");
-				td.find("button[name='successBox']").hide();
-		       }
-		});
-		
 	});
 	
 	$(".btn-secondary").click(function(){

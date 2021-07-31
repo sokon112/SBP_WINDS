@@ -43,7 +43,13 @@
 					                    <td colspan="3">${vacation.type }</td>
 					                <tr>
 					                    <th>기간</th>
-										<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/></td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
+											<c:if test="${vacation.type eq '월차'}">
+												~
+												<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
+											</c:if>
+										</td>
 					                </tr>
 					                <tr>
 					                    <th>사유</th>
@@ -71,11 +77,7 @@
 				 </div>
  			</div>  
 		<!--  modify 실행시 실행됨 -->
-			<form action="" id="operForm" method="post">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<input type="hidden" name="id" value="${info.username}"/>
-				<input type="hidden" name="vacationAppNum" value="${vacation.vacationAppNum}" />	
-			</form>
+
 			<form action="" id="operForm" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" name="id" value="${info.username}"/>

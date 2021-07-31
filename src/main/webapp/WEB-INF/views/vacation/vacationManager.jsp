@@ -84,7 +84,11 @@
 											<td>${vacation.vacationApplication.name}</td>
 											<td>${vacation.type}</td>
 											<td>
-												<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>
+												<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
+												<c:if test="${vacation.type eq '월차'}">
+													~
+													<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
+												</c:if>
 											</td>
 											<td>${vacation.state}</td>
 											<td>

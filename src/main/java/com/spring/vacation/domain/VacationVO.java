@@ -23,8 +23,10 @@ public class VacationVO {
 	private String id;
 	private String type;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date term;
-
+	private Date startterm;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date endterm;
+	private int term;
 	private String state;
 	private Date applicationDate;
 	private Date approvalDate;

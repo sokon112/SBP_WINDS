@@ -47,7 +47,7 @@
 						                <tr>
 							               <th>분류</th>
 							                    <td colspan="3">
-							                        <select name="type" class="form-control" >
+							                        <select name="type" id="selectOption" class="form-control">
 							                            <option value="none">=== 선택 ===</option>
 							                            <option value="half">반차</option>
 							                            <option value="monthly">월차</option>
@@ -55,8 +55,15 @@
 							                    </td>
 						                </tr>
 						                <tr>
+						                	
 						                    <th>기간</th>
-						                    <td><input type="date" class="form-control" name="term" id="startDay"></td>
+						                    <td><input type="date" class="form-control" name="startterm" id="startDay">
+						                    <input type="hidden" class="form-control" name="connect" value="~">
+						                    <input type="hidden" class="form-control" name="endterm" id="endDay">
+						                    <input type="hidden" class="btn btn-info" name="cal" id="cal" value="완료">
+						                    
+						                    <input type="hidden" class="form-control" name="term" id="term" value="" readonly="readonly"></td>
+						                    
 						                </tr>
 						
 						                <tr>
@@ -70,7 +77,8 @@
 							</div>
 							<%-- spring security 추가 --%>
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-						    <button type="button" class="btn btn-success" id="modalRegisterBtn">신청</button>
+						    <button type="button" class="btn btn-success" id="registerBtn">신청</button>
+						    <button type="reset" class="btn btn-danger" id="resetBtn">다시신청</button>
 						</form>
 	                    	</div>
 	                </div>

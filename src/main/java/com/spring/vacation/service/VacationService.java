@@ -4,15 +4,14 @@ package com.spring.vacation.service;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationVO;
 
 public interface VacationService {
-	//관리자
+//관리자
 	//월별 조회
 	public List<VacationVO> selectMonth(VacationCriteria cri);
+	//게시글 갯수 조회
 	public int total(VacationCriteria cri);
 	
 	public int countApp();
@@ -37,7 +36,7 @@ public interface VacationService {
 	//반려
 	public boolean cancleVacation(VacationVO vacation);
 	
-	public boolean idCnt(String id);
+	public int idCnt(String id);
 	
 	
 	public Date vacationDay(int vacationAppNum);

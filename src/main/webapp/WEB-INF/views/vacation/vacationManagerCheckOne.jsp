@@ -59,7 +59,11 @@
 							                    <td>${vacation.type }</td>
 							                    <th>기간</th>
 												<td>
-													<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>
+													<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
+												<c:if test="${vacation.type eq '월차'}">
+													~
+													<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
+												</c:if>
 												</td>
 							                </tr>
 							                <tr>

@@ -45,7 +45,11 @@
 						                <tr>
 						                    <th>기간</th>
 						                    <td>
-						                    	<input type="text" name="term" value="<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/>" readonly="readonly" disabled="disabled">
+						                    	<input type="text" name="term" value="<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>" readonly="readonly" disabled="disabled">
+						                    	<c:if test="${vacation.type eq '월차'}">
+												~
+												<input type="text" name="term" value="<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>" readonly="readonly" disabled="disabled">
+											</c:if>
 						                    </td>
 						                </tr>
 						                <tr>

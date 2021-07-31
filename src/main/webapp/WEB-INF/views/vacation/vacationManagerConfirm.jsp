@@ -52,7 +52,13 @@
 											<td>${vacation.id}</td>
 											<td>${vacation.vacationApplication.name}</td>
 											<td>${vacation.type}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.term}"/></td>
+											<td>
+												<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.startterm}"/>
+												<c:if test="${vacation.type eq '월차'}">
+													~
+													<fmt:formatDate pattern="yyyy-MM-dd"  value="${vacation.endterm}"/>
+												</c:if>
+											</td>
 							                <td>${vacation.reason}</td>
 							                <td>
 									            <button type="button" name="successBox" class="btn btn-primary">승인</button> 
@@ -72,6 +78,7 @@
 			</div> 
 			<form action="" id="manageForm" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					
 			</form>
 			<form action="" id=successRejectForm method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
