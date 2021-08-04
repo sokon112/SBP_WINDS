@@ -72,7 +72,7 @@ $(function(){
 					alert("기간을 선택해 주세요");
 				}
 				else{
-					alert("selectStart : "+selectStart);
+					//alert("selectStart : "+selectStart);
 					applyForm.find('input[name="startterm"]').attr('readonly','readonly');
 					applyForm.find('input[name="term"]').attr('type','text');
 					applyForm.find('input[name="term"]').attr('value',1);
@@ -91,7 +91,7 @@ $(function(){
 						
 					    diff = Math.ceil(diff / (1000 * 3600 * 24))+1;
 		
-						alert(diff);
+						//alert(diff);
 						applyForm.find('input[name="startterm"]').attr('readonly','readonly');
 						applyForm.find('input[name="endterm"]').attr('readonly','readonly');
 						applyForm.find('input[name="term"]').attr('type','text');
