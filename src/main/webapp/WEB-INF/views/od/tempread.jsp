@@ -7,7 +7,6 @@
 	<div class="col-lg-12">
 		<h1 class="page-header">공문 보기</h1>
 	</div>
-	<!-- /.col-lg-12 -->
 </div>
 <div class="row">
 	<div class="col-lg-12">
@@ -177,6 +176,7 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />
 	<input type='hidden' name='docNum'  value='${vo.docNum}'/>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form> 
 <script>
 	let docNum = ${vo.docNum};
