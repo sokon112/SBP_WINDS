@@ -66,7 +66,7 @@
 		    <p id="empTEL">연락처 : &nbsp&nbsp${info.memberVO.telNum}</p>
 		</form>
 		<form class="form-signin" action="/logout" method="post" id="logoutForm">
-			<button class="btn btn-lg btn-success btn-block" type="submit">로그아웃</button>	
+			<button class="btn btn-lg btn-success btn-block" type="submit" id="logoutButton">로그아웃</button>	
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>
 	</td>
@@ -87,5 +87,25 @@
 	</pre>
 	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(function(){
+	$("#logoutButton").click(function(e){
+		//a 태그 동작 막기
+		e.preventDefault();
+		swal({
+			  title: "로그아웃 하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    $('#logoutForm').submit();
+			  }
+			});		
+	})
+})
+</script>
 
 <%@include file="../includes/home/footer.jsp" %>
