@@ -98,15 +98,24 @@
         </form>
        <!--  <div id="page-wrapper"> --><!-- 오류 발생 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
         //let id='${info.username}';
         $(function(){
         	$("#logout").click(function(e){
         		//a 태그 동작 막기
         		e.preventDefault();
-        		
-        		//form을 보낼때 csrf 값 포함해서 전송
-        		$('#logoutForm').submit();
+        		swal({
+        			  title: "로그아웃 하시겠습니까?",
+        			  icon: "warning",
+        			  buttons: true,
+        			  dangerMode: true,
+        			})
+        			.then((willDelete) => {
+        			  if (willDelete) {
+        			    $('#logoutForm').submit();
+        			  }
+        			});	
         	})
         	$("#vacationList").click(function(e){
         		//a 태그 동작 막기
