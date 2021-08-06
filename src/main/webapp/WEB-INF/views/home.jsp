@@ -44,7 +44,14 @@
 	</td>
 	</sec:authorize>
     <sec:authorize access="isAuthenticated()"> 
-	<sec:authentication property="principal" var="info"/>  
+	<sec:authentication property="principal" var="info"/> 
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<c:if test="${loginSuccessKey.equals('true')}">
+		<script>
+			console.log(${loginSuccessKey});
+			swal("어서오십시오", "", "success");
+		</script> 
+	</c:if>
 	<td style="min-width:300px">
 		<form class="form-signin" action="">
 			<h1 class="h3 mb-3 font-weight-normal">로그인 정보</h1>

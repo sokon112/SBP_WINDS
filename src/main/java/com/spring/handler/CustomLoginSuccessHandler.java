@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -27,6 +28,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		authentication.getAuthorities().forEach(auth -> roleNames.add(auth.getAuthority()));
 		
 		log.info("roleNames "+roleNames);
+
+		
+		HttpSession session = request.getSession();		
+		session.setAttribute("loginSuccessKey", "true");
+		log.info(session.getAttribute("loginSuccessKey"));
 		
 		
 		if(roleNames.contains("ad")) {
@@ -38,6 +44,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			response.sendRedirect("/");
 			return;
 		}
+		
 		response.sendRedirect("/");
 	}
 }

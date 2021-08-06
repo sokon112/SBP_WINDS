@@ -1,5 +1,8 @@
 package com.spring.home;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +23,20 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String home(Model model,HttpServletRequest request) {
 		log.info("SBP_Winds MAIN ");
+		
+		String loginSuccessKey = "";
+		
+		HttpSession session = request.getSession();		
+		loginSuccessKey = (String)session.getAttribute("loginSuccessKey");
+		log.info(loginSuccessKey);
+		
+		if(loginSuccessKey!="") {;
+			model.addAttribute("loginSuccessKey", loginSuccessKey);
+		}
+		session.removeAttribute("loginSuccessKey");
+		
 		return "home";
 	}
 	
