@@ -137,6 +137,7 @@ public class DocController {
 		
 		List<AttachFileDTO> attachList=service.getAttachList(docNum);
 		
+		
 		if(service.oremove(docNum)) {
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","성공");

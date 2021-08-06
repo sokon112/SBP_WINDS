@@ -55,7 +55,9 @@ public class DocServiceImpl implements DocService {
 	@Transactional
 	@Override
 	public boolean oremove(int docNum) {
+		attachMapper.oadelete(docNum);
 		return mapper.oremove(docNum)>0?true:false;
+		
 	}
 	
 	@Transactional
