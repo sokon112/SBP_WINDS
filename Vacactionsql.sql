@@ -37,9 +37,98 @@ alter table vacationScedule add VacationCnt INT default 0 not null;
 ALTER TABLE vacationApplicationTable add CONSTRAINT fk_vacationSceduleid FOREIGN KEY (id) REFERENCES vacationScedule(id);
 
 --신청서 분류별로 삽입하는 구문
---승인 된 데이터(신청 안되는 거 보여주실 꺼면 사용해 주세요...)
+--신청서 분류별로 삽입하는 구문
+--승인
 insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
-values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-06-05','테스트 입니다1.','승인',sysdate);
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05','2021-07-05',1,'2021-07-05','승인 테스트 입니다1.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','월차','2021-07-07','2021-07-08',2,'2021-07-05','승인 테스트 입니다2.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-08-05','2021-08-05',1,'2021-07-05','승인 테스트 입니다3.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','월차','2021-08-07','2021-08-08',2,'2021-07-05','승인 테스트 입니다4.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-08-10','2021-08-10',1,'2021-07-05','승인 테스트 입니다5.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','월차','2021-08-24','2021-08-27',4,'2021-07-05','승인 테스트 입니다6.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','반차','2021-08-16','2021-08-16',1,'2021-07-05','승인 테스트 입니다7.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','월차','2021-06-05','2021-06-05',1,'2021-07-05','승인 테스트 입니다8.','승인',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','승인 테스트 입니다9.','승인',sysdate);
+
+--거절
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-07-05','2021-07-05',1,'2021-07-05','거절 테스트 입니다1.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','월차','2021-07-07','2021-07-08',2,'2021-07-05','거절 테스트 입니다2.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-08-05','2021-08-05',1,'2021-07-05','거절 테스트 입니다3.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','월차','2021-08-07','2021-08-08',2,'2021-07-05','거절 테스트 입니다4.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-08-10','2021-08-10',1,'2021-07-05','거절 테스트 입니다5.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','월차','2021-08-24','2021-08-27',4,'2021-07-05','거절 테스트 입니다6.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-08-16','2021-08-16',1,'2021-07-05','거절 테스트 입니다7.','거절',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','월차','2021-06-05','2021-06-05',1,'2021-07-05','거절 테스트 입니다8.','거절',sysdate);
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,state,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','거절 테스트 입니다9.','거절',sysdate);
+
+--신청
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다1.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다2.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다3.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다4.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다5.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다6.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'10030001','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다7.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다8.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다9.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다10.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'15080003','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다11.',sysdate);
+
+insert into vacationApplicationTable(vacationAppNum,id,type,startterm,endterm,term,applicationDate,reason,approvalDate) 
+values(vacationAppNum_SEQ.nextval,'21030020','반차','2021-06-05','2021-06-05',1,'2021-07-05','신청 테스트 입니다12.',sysdate);
 
 
 select * from vacationScedule;
