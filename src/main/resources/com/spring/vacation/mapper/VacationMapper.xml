@@ -36,7 +36,8 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 	
 		vat.state not in('신청') and rownum <=(#{pageNum})*#{amount} and vat.startterm >= #{nowMonth} and vat.startterm < #{nextMonth}
 		)
-		where rn>(#{pageNum}-1)*#{amount} 
+		where rn>(#{pageNum}-1)*#{amount}  
+		
     ]]>	
 	</select>
 	
@@ -101,6 +102,7 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		select vacationAppNum,id,type,startterm,endterm,term,state,applicationDate,approvaldate
 		from vacationApplicationTable 
  		where id=#{id} and startterm >= #{cri.nowMonth} and startterm < #{cri.nextMonth}
+ 		order by applicationDate
 	]]>
 	</select >
 	<select id="vShowUserOne" resultMap="selectMonthInfo">

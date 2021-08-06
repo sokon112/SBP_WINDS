@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.home.domain.CustomUser;
 import com.spring.vacation.domain.VacationCriteria;
 import com.spring.vacation.domain.VacationPageVO;
 import com.spring.vacation.domain.VacationVO;
@@ -35,18 +37,29 @@ public class VacationController {
 	//휴가 관리에 들어오면 처음으로 보여주는화면=> 신청서 작성
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/")	
-	public String vacationMain() {
+	public String vacationMain(Model model,@AuthenticationPrincipal CustomUser user,VacationCriteria cri) {
 		log.info("vacation 메인 접속....");
-		return "/vacation/vacationApply";
+		//VacationCriteria cri=new VacationCriteria();
+		String id = user.getMemberVO().getId();
+		log.info("id : "+id);
+		log.info("cri : "+cri);
+		
+		List<VacationVO> vlist=service.showUser(id,cri);
+		
+		int total = service.total(cri);
+		model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
+		model.addAttribute("list",vlist);
+		return "/vacation/vacationUserList";
 	}
 	
 	//메인메뉴 3가지 
 	//id에 따라 휴가 목록 보여주는 페이지
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/vacationUserList")
-	public void showUserMain(Model model,String id, VacationCriteria cri,String monthMove) {
+	public void showUserMain(Model model,String id, VacationCriteria cri) {
 		log.info("showUser페이지 " );
-		
+		log.info("id : "+id);
+		log.info("cri : "+cri);
 		List<VacationVO> vlist=service.showUser(id,cri);
 		
 		int total = service.total(cri);
