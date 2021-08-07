@@ -105,6 +105,11 @@ public class VacationServiceImpl implements VacationService {
 	public Date vacationDay(int vacationAppNum) {
 		return mapper.vVacationDay(vacationAppNum);
 	}
+	@Override
+	public List<VacationVO> ShowUserTerm(String id) {
+		
+		return mapper.vShowUserTerm(id);
+	}
 
 	
 

@@ -34,6 +34,9 @@ public interface VacationMapper {
 //사용자
 	//신청서 등록 구문
 	public int vInsertUserApp(VacationVO vacation);
+	//사용자 기간 확인하는 구문
+	public List<VacationVO> vShowUserTerm(String id);
+	
 	//사용자 페이지에서 보여주는 리스트
 	public List<VacationVO> vShowUser(@Param("id")String id,@Param("cri")VacationCriteria cri);
 	//신청서 보는 페이지

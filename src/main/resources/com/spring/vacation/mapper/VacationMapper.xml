@@ -95,6 +95,16 @@ from (select /*+INDEX_DESC(vacationApplicationTable vactionAppNum)*/
 		values(vacationAppNum_SEQ.nextval,#{id},#{type},#{startterm},#{endterm},#{term},'신청',sysdate,#{reason})
 		
 	</insert>
+	<!--사용자 기간확인하는 구문-->
+	<select id="vShowUserTerm" resultType="com.spring.vacation.domain.VacationVO">
+<![CDATA[
+		select startterm,endterm
+		from vacationApplicationTable 
+ 		where id=#{id}  and (state like '승인' or state like '신청')
+ 		order by applicationDate
+	]]>
+	</select >
+	
 	
 	<!--사용자 페이지 보여주는 구문-->
 	<select id="vShowUser" resultType="com.spring.vacation.domain.VacationVO">

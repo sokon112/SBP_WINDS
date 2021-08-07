@@ -196,7 +196,7 @@ public class VacationController {
 		
 		//리스트를 가져와 겹치는 기간이 있는지 확인
 
-		List<VacationVO> nowlist=service.showUser(vacation.getId(),cri);
+		List<VacationVO> nowlist=service.ShowUserTerm(vacation.getId());
 		Date start=null;
 		Date end=null;
 		

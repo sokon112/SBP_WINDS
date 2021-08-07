@@ -24,6 +24,9 @@ public interface VacationService {
 	//사용자 
 	//휴가 신청서 제출
 	public boolean insertUserApp(VacationVO vacation);
+	//사용자 기간 확인하는 구문
+	public List<VacationVO> ShowUserTerm(String id);
+	
 	//userid에 맞게 정보 검색
 	public List<VacationVO> showUser( String id,VacationCriteria cri);
 	
