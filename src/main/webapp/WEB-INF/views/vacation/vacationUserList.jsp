@@ -74,7 +74,7 @@
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.applicationDate}"/></td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vacation.approvalDate}"/></td>
 											<td>
-												<a href="${vacation.vacationAppNum}" class="move">확인${vacation.term }</a> 
+												<a href="${vacation.vacationAppNum}" class="move">확인</a> 
 											</td>
 										</tr>
 									</c:forEach>	
@@ -100,10 +100,12 @@
  
 	<script type="text/javascript">
 		let result='${result}';
+		let error='${error}';
 	</script>   
 
 	<script src="/resources/js/vacation/vacationUser.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 	<% response.setHeader("Cache-Control","no-store"); response.setHeader("Pragma","no-cache"); response.setDateHeader("Expires",0); if (request.getProtocol().equals("HTTP/1.1")) response.setHeader("Cache-Control", "no-cache"); %>
 	</body>

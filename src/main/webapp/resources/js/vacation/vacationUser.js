@@ -10,9 +10,32 @@ $(function(){
 		if(result===''||history.state){
 			return;
 		}
-		console.log(result);
-		alert(result);
+		if(result!==''){
+			Swal.fire({
+						  icon: 'success',
+						  title: result,  
+						showConfirmButton: false,
+			  			timer: 1500
+						});
+		}
 	}
+	checkError(error);
+	
+	function checkError(error){
+		console.log(error);
+		if(error===''||history.state){
+			return;
+		}
+		if(error!==''){
+			Swal.fire({
+						  icon: 'error',
+						  title: error,
+							showConfirmButton: false,
+			  				timer: 1500
+						});
+		}
+	}
+	
 		
 	var listCheckForm = $("#listCheckForm");	
 	//게시글 제목 클릭시

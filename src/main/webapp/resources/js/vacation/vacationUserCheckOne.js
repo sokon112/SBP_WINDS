@@ -15,16 +15,36 @@ $(function(){
 	})
 	//삭제 버튼 클릭시  get방식 /vacation/delete
 	$(".btn-danger").click(function(){
+		Swal.fire({
+					icon: 'info',
+				  title: '정말 삭제하시겠습니까?',
+				  showCancelButton: true,
+				  confirmButtonText: `삭제`,
+					cancelButtonText: `취소`,
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					operForm.attr('action','/vacation/delete');
+					operForm.submit();
+				  } 
+				})
 		
-		operForm.attr('action','/vacation/delete');
-		operForm.submit();
+		
 	})
 	//반납 버튼 클릭시  get방식 /vacation/cancle
 	$(".btn-info").click(function(){
-		
-		//현재 날짜와 비교해 이후 날짜라면 반납 가능 아니라면 알람창으로 불가능하다고 알리기 
-		operForm.attr('action','/vacation/cancle');
-		operForm.submit();
+		Swal.fire({
+					icon: 'info',
+				  title: '정말 반납하시겠습니까?',
+				  showCancelButton: true,
+				  confirmButtonText: `반납`,
+					cancelButtonText: `취소`,
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					//현재 날짜와 비교해 이후 날짜라면 반납 가능 아니라면 알람창으로 불가능하다고 알리기 
+					operForm.attr('action','/vacation/cancle');
+					operForm.submit();
+				  } 
+				})
 	})
 	//확인버튼 클릭시 get /vacation/list
 	$(".btn-primary").click(function(){		

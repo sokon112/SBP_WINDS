@@ -85,7 +85,7 @@
 				<input type="hidden" name="cri" value="${VacationPageVO.cri} " />
 			</form>
 		</div>
-		
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 	<script src="/resources/js/vacation/vacationUserCheckOne.js"></script>
 	<% response.setHeader("Cache-Control","no-store"); response.setHeader("Pragma","no-cache"); response.setDateHeader("Expires",0); if (request.getProtocol().equals("HTTP/1.1")) response.setHeader("Cache-Control", "no-cache"); %>

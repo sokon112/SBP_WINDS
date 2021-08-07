@@ -55,12 +55,12 @@
 							                    </td>
 						                </tr>
 						                <tr>
-						                	
 						                    <th>기간</th>
 						                    <td><input type="date" class="form-control" name="startterm" id="startDay">
-						                    <input type="hidden" class="form-control" name="connect" value="~">
+						                    <input type="hidden" class="form-control" name="connect" value="~" readonly>
 						                    <input type="hidden" class="form-control" name="endterm" id="endDay">
-						                    <input type="hidden" class="btn btn-info" name="cal" id="cal" value="완료">
+						                    <input type="hidden" class="btn btn-info" name="cal"  value="완료">
+		<!-- 				                    <input type="hidden" class="btn btn-warning" name="reterm"  value="다시선택"> -->
 						                    
 						                    <input type="hidden" class="form-control" name="term" id="term" value="" readonly="readonly"></td>
 						                    
@@ -87,7 +87,7 @@
 	<script type="text/javascript">
 		let result='${result}';
 	</script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/resources/js/vacation/vacationApply.js"></script>
 	<%@include file="/WEB-INF/includes/vacation/footer.jsp" %>
 	<% response.setHeader("Cache-Control","no-store"); response.setHeader("Pragma","no-cache"); response.setDateHeader("Expires",0); if (request.getProtocol().equals("HTTP/1.1")) response.setHeader("Cache-Control", "no-cache"); %>

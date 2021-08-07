@@ -129,7 +129,7 @@ public class VacationController {
 			int total = service.total(cri);
 			model.addAttribute("VacationPageVO",new VacationPageVO(cri, total));
 			model.addAttribute("list",vlist);
-			model.addAttribute("result","휴가가 수정되었습니다.");
+			model.addAttribute("result","휴가를 수정되었습니다.");
 			return "/vacation/vacationUserList";
 		}else {
 			return "/vacation/vacation_home";
@@ -171,13 +171,13 @@ public class VacationController {
 				model.addAttribute("result","휴가 반납을 성공했습니다.");
 				
 			}else {
-				model.addAttribute("result","반납 반납을 실패했습니다.");
+				model.addAttribute("error","반납 반납을 실패했습니다.");
 			}
 			
 		}
 		else {
 			log.info("날짜 실패"+vacation);
-			model.addAttribute("result","기간이 지난 휴가입니다.");
+			model.addAttribute("error","기간이 지난 휴가입니다.");
 		}
 			
 		List<VacationVO> vlist=service.showUser( id,cri);
@@ -193,23 +193,95 @@ public class VacationController {
 	public String applyPost(VacationVO vacation,Model model){
 		VacationCriteria cri=new VacationCriteria();
 		int cnt=service.idCnt(vacation.getId());
+		
+		//리스트를 가져와 겹치는 기간이 있는지 확인
+
+		List<VacationVO> nowlist=service.showUser(vacation.getId(),cri);
+		Date start=null;
+		Date end=null;
+		
+		Date newStart=vacation.getStartterm();
+		Date newEnd=vacation.getEndterm();
+		boolean flge = false;
+		
+		//반차 월차 여부에 따라 반차는 start end동일하게 설정
+		if(vacation.getType().equals("half")) {
+			vacation.setType("반차");
+			vacation.setEndterm(vacation.getStartterm());
+			for (VacationVO list:nowlist) {
+				start=list.getStartterm();
+				end=list.getEndterm();
+				log.info("newStart : "+newStart);
+				log.info("start : "+start+" end : "+end);
+				log.info("start.after(newStart) || end.before(newStart)"+newStart.after(start) +" || "+ newStart.before(end)+" || "+newStart.equals(start));
+				if ((newStart.after(start) &&newStart.before(end))||newStart.equals(start)||newStart.equals(end)) {
+						flge =true;
+				        log.info("통과");
+				        break;	
+					}else {
+						log.info("재심사");
+				}
+			}
+		}
+		else {
+			vacation.setType("월차");
+			for (VacationVO list:nowlist) {
+				start=list.getStartterm();
+				end=list.getEndterm();
+				log.info("newStart : "+newStart+"  newEnd : "+newEnd);
+				log.info("start : "+start+" end : "+end);
+				
+				log.info("newStart.after(start) && newStart.before(end)"+start.after(newEnd) +" && "+ end.before(newEnd) );
+				log.info("newEnd.after(start) && newEnd.before(end) "+start.after(newEnd) +" && "+ end.before(newEnd) );
+				log.info("start.after(newStart) && start.before(newEnd)"+newStart.after(start) +" && "+ newEnd.before(start));
+				log.info("end.after(newStart) && end.before(newEnd)"+newStart.after(end) +" && "+ newEnd.before(end));
+				
+				
+				if(newStart.equals(start)||newEnd.equals(end)||newStart.equals(end)||newEnd.equals(start)) {
+					flge =true;log.info("통과");
+			        break;
+				}else if (newStart.after(start) && newStart.before(end)) {
+			        flge =true;log.info("통과");
+			        break;
+			    } else if (newEnd.after(start) && newEnd.before(end)) {
+			        flge =true;log.info("통과");
+			        break;
+			    } else if (start.after(newStart) && start.before(newEnd)) {
+			        flge =true;log.info("통과");
+			        break;
+			    } else if (end.after(newStart) && end.before(newEnd)) {
+			        flge =true;log.info("통과");
+			        break;
+			    }else {
+			    	log.info("재심사");
+			    }
+			}
+		}
+				
+		
+		
+		
 		//휴가 신청 가능 기간을 넘겼는지 아닌지 확인
 		if((cnt+(vacation.getTerm()*2))>40) {
 			//휴가갯수가 초과하면 알람창
 			model.addAttribute("result","현재 신청된 휴가 갯수 : "+cnt/2+"신청한 휴가 일수 : "+vacation.getTerm()+"이므로 신청 불가능 합니다.");
 			log.info("신청 실패 !");
 			return "/vacation/vacationApply";
+		}else if(flge){
+			model.addAttribute("result","중복되는 기간이 있어 신청이 불가능합니다.");
+			log.info("신청 실패 !222");
+			return "/vacation/vacationApply";
 		}else {
 			//휴가가 20개 이하이고 신청날짜가 이전이 아니라면 신청
 
 				log.info("성공");
-				if(vacation.getType().equals("half")) {
-					vacation.setType("반차");
-					vacation.setEndterm(vacation.getStartterm());
-				}
-				else {
-					vacation.setType("월차");
-				}
+//				if(vacation.getType().equals("half")) {
+//					vacation.setType("반차");
+//					vacation.setEndterm(vacation.getStartterm());
+//				}
+//				else {
+//					vacation.setType("월차");
+//				}
 				log.info("vacation"+vacation);
 				boolean insertVacation=service.insertUserApp(vacation);	
 				if(insertVacation) {//사용자 리스트로 이동하는 부분

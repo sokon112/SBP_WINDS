@@ -40,7 +40,7 @@ $(function(){
 	//검색
 	//keyType or keyword 가 값이 없는 경우 경고 메세지를 주기
 	//둘 다 값이 있다면 submit 하기
-	$(".selectBtn").click(function(){
+	$(".selectBtn").click(function(e){
 		e.preventDefault();
 		//검색 폼 가져오기
 		var searchForm = $("#searchForm");
@@ -50,13 +50,19 @@ $(function(){
 		
 		//keyword 가져오기
 		var keyword = $("input[name='keyword']").val();
-		
+		console.log(keyType+"   "+keyword);
 		if(keyType===''){
-			alert("검색 기준을 확인하세요");
+			Swal.fire({
+						  icon: 'error',
+						  title: '검색 기준을 확인하세요.',
+						});
 			$("select[name='keyType']").focus();
 			return false;
 		}else if(keyword===''){
-			alert("검색어를 확인하세요");
+			Swal.fire({
+						  icon: 'error',
+						  title: '검색 기준을 입력해 주세요.',
+						});
 			$("input[name='keyword']").focus();
 			return false;
 		}

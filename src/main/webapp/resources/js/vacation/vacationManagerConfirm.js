@@ -10,7 +10,7 @@ $(function(){
 		manageForm.attr('action','/vacation/vacationManager');
 		manageForm.submit();
 	})
-	$(".btn-primary").click(function(){
+	$(".btn-primary").click(function(e){
 	
 		
 			var checkBtn = $(this);
@@ -25,6 +25,10 @@ $(function(){
 				},			
 				success:function(result){
 	    			console.log(result);
+				Swal.fire({
+						  icon: 'success',
+						  title: vacationAppNum+'이 승인되었습니다.',
+						});
 					td.find("button[name='successBox']").hide();
 					td.find("button[name='rejectBox']").hide();
 					td.find("input[name='resonBox']").hide();
@@ -33,7 +37,10 @@ $(function(){
 					td.find("input[name='hiddenBox']").attr('type','text');
 	    		},
 				error:function(xhr,status,error){
-			        alert("승인이 불가능 합니다.");
+					Swal.fire({
+						  icon: 'error',
+						  title: '승인이 불가능 합니다.',
+						});
 					td.find("button[name='successBox']").hide();
 			       }
 			});
@@ -55,7 +62,7 @@ $(function(){
 		button1.hide();
 	});
 	
-	$(".btn-danger").click(function(){
+	$(".btn-danger").click(function(e){
 		
 		var checkBtn = $(this);
 
@@ -66,7 +73,10 @@ $(function(){
 		var refusalReason = td.find('input[name="resonBox"]').val();
 		
 		if(refusalReason===''){
-			alert(vacationAppNum+"번 거절 이유를 입력해 주세요");
+			Swal.fire({
+						  icon: 'error',
+						  title: vacationAppNum+"번 거절 이유를 입력해 주세요",
+						});
 			$("input[name='refusalReason']").focus();
 			return false;
 		}
@@ -80,7 +90,10 @@ $(function(){
 			),
 			contentType: "application/json; charset=UTF-8",
 			success:function(result){
-    			console.log(result);
+				Swal.fire({
+						  icon: 'success',
+						  title: vacationAppNum+'이 거절되었습니다.',
+						});
 				td.find("button[name='successBox']").hide();
 				td.find("button[name='rejectBox']").hide();
 				td.find("input[name='resonBox']").hide();
