@@ -64,9 +64,16 @@ width:15%;}
 	margin-bottom:10px;
 	width:65px;
 	position:relative;
-	left:100px;
+	left:65%;
 }
 
+.move{
+white-space:normal;
+display:-webkit-box; 
+-webkit-line-clamp:1; 
+-webkit-box-orient:vertical; 
+overflow:hidden;
+}
 </style>
 
 		<div class="container-fluid">
@@ -79,7 +86,7 @@ width:15%;}
 		          	</ul>
 		        </div>
             	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-               		<h3 class="page-header">검색 결과</h3>
+               		<h2 class="page-header">검색 결과</h2>
                 		<div class="col-lg-12">
                     		<div class="panel panel-default">
                         		<div class="panel-heading">

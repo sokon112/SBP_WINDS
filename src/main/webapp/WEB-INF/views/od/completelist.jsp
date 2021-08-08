@@ -54,6 +54,13 @@ th,td{
 text-align:center;
 width:15%;}
 
+.move{
+white-space:normal;
+display:-webkit-box; 
+-webkit-line-clamp:1; 
+-webkit-box-orient:vertical; 
+overflow:hidden;
+}
 </style>
             <div class="container-fluid">
             <div class="col-sm-3 col-md-2 sidebar" >
@@ -72,7 +79,7 @@ width:15%;}
                             		<form action="" id="searchForm">
                             		<div class="col-md-7"></div>
                             		<div class="col-md-2">
-                            			<select name="type" id="" class="form-control">
+                            			<select name="type" id=" " class="form-control">
                             				<option value="">-----------</option>
                             				<option value="T" <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
                             				<option value="U" <c:out value="${pageVO.cri.type=='U'?'selected':''}"/>>송신자</option>
@@ -83,8 +90,8 @@ width:15%;}
                             			<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}"/>
                             			<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
                             			<button type="button" class="btn btn-default">검색</button>
-                            		</div>
-                            	</form>
+                            		</form>
+                            	</div>	
                             </div>
                 <!-- /.col-lg-12 -->
             </div>

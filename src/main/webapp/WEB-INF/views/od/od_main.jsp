@@ -7,6 +7,7 @@
 <style>
 #searchForm  {
 float: right;
+margin-right:30px;
 margin-bottom:10px;
 }
 .page-header {
@@ -15,6 +16,14 @@ margin-top: 10px;
 th,td{
 text-align:center;
 width:15%;}
+
+.move{
+white-space:normal;
+display:-webkit-box; 
+-webkit-line-clamp:1; 
+-webkit-box-orient:vertical; 
+overflow:hidden;
+}
 
 
 </style>
@@ -36,6 +45,7 @@ width:15%;}
 			<!-- end search -->
 	     <div class="container-fluid">
 	      	<div class="col-xs-6">
+	      	
 	      		<div class="panel panel-default">
 	      			<div class="panel-heading" onclick="location.href='waitlist'" style="padding :8px">
 	      				<button type="button" class="btn btn-link"><strong>미결 문서 보관함</strong> <span class="badge" style="background-color:#FF5A5A">N</span></button>
@@ -46,7 +56,7 @@ width:15%;}
 	            			<thead >
 								<tr>
 									<th>문서번호</th>
-	                                <th>제   목</th>
+	                                <th >제   목</th>
 	                                <th>송 신 자</th>
 	                                <th>단   계</th>
 	                                <th>수신일자</th>
