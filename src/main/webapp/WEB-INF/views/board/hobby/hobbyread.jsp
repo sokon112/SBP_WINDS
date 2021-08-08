@@ -94,7 +94,7 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="inpassword" type="text"
+						<td><input class="form-control" id="inpassword" type="password"
 							name="hpassword"></td>
 					</tr>
 				</table>
@@ -123,7 +123,7 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="delpassword" type="text"
+						<td><input class="form-control" id="delpassword" type="password"
 							name="hpassword"></td>
 					</tr>
 				</table>

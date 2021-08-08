@@ -74,7 +74,7 @@
             <table class="table">
                <tr>
                   <td>비밀번호 입력</td>
-                  <td><input class="form-control" id="inpassword" type="text" name="password"></td>
+                  <td><input class="form-control" id="inpassword" type="hpassword" name="hpassword"></td>
                </tr>
             </table>
          </div>
@@ -101,7 +101,7 @@
             <table class="table">
                <tr>
                   <td>비밀번호 입력</td>
-                  <td><input class="form-control" id="delpassword" type="text" name="password"></td>
+                  <td><input class="form-control" id="delpassword" type="hpassword" name="hpassword"></td>
                </tr>
             </table>
          </div>
@@ -173,7 +173,7 @@
                   class="form-control" value="작성일" />
             </div>
             <div class="form-group">
-               <label for="">비밀번호</label> <input type="text" name="password"
+               <label for="">비밀번호</label> <input type="password" name="password"
                   class="form-control" value="비밀번호" />
             </div>
          </div>
