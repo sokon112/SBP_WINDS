@@ -111,7 +111,7 @@ public class BoardController { //게시판
 			
 		service.boardupdate(vo);		
 			
-		rttr.addFlashAttribute("result","성공");
+		rttr.addFlashAttribute("result","수정 완료");
 		
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
@@ -162,6 +162,9 @@ public class BoardController { //게시판
 		cservice.bcdeleteAll(bno);
 		service.boardaddelete(bno);
 		
+		rttr.addFlashAttribute("result","삭제 완료");
+
+		
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addAttribute("pageNum", cri.getPageNum());
@@ -185,6 +188,8 @@ public class BoardController { //게시판
 		if(check) {
 			cservice.bcdeleteAll(bno);
 			service.boardaddelete(bno);
+
+			rttr.addFlashAttribute("result","삭제 완료");
 
 			rttr.addAttribute("type", cri.getType());
 			rttr.addAttribute("keyword", cri.getKeyword());

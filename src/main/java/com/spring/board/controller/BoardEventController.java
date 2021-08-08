@@ -74,7 +74,7 @@ public class BoardEventController {    //이벤트
 	      
 		if(beservice.beinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
-			rttr.addFlashAttribute("result", vo.getEno());
+			rttr.addFlashAttribute("result", vo.getEno()+"번을 입력했습니다.");
 			return "redirect:eventlist";    
 		}else {
 			return "redirect:eventregister"; 
@@ -114,7 +114,7 @@ public class BoardEventController {    //이벤트
 		beservice.beupdate(vo);		
 		
 		
-		rttr.addFlashAttribute("result","성공");
+		rttr.addFlashAttribute("result","수정 완료");
 		
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
@@ -162,7 +162,7 @@ public class BoardEventController {    //이벤트
 		deleteFiles(eattachList);
 		beservice.beaddelete(eno);	
 		
-		rttr.addFlashAttribute("result","성공");
+		rttr.addFlashAttribute("result","삭제 완료");
 	
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
@@ -195,7 +195,7 @@ public class BoardEventController {    //이벤트
 			
 			beservice.bedelete(eno,epassword);
 			
-			rttr.addFlashAttribute("result","성공");
+			rttr.addFlashAttribute("result","삭제 완료");
 		
 		
 			rttr.addAttribute("type", cri.getType());

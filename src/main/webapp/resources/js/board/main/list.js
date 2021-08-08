@@ -13,9 +13,10 @@ $(function(){
 			return;
 		}
 		
+			
 		Swal.fire({
 		  icon: 'success',
-		  title: '올리기 완료'
+		  title: result
 		})
 		
 		
@@ -26,11 +27,6 @@ $(function(){
 		
 //		$("#myModal").modal("show");
 	}
-	
-	
-	
-	
-	
 	
 	
 	//하단의 페이지 나누기 번호 클릭시 

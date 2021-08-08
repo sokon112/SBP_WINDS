@@ -14,7 +14,7 @@ $(function(){
 		
 		Swal.fire({
 		  icon: 'success',
-		  title: '올리기 완료'
+		  title: result
 		})
 		
 //		if(parseInt(result)>0){

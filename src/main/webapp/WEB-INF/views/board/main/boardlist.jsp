@@ -156,6 +156,7 @@ th, td {
 	</div>
 </div>-->
 <!-- 스크립트 -->
+
 <script>
 	let result = '${result}';
 </script>

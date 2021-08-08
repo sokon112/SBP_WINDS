@@ -4,6 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="/WEB-INF/includes/board/header.jsp" %>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
 th,td{
@@ -124,7 +125,7 @@ th,td{
    <input type="hidden" name="amount" value="${BoardEventVO.cri.amount}" />   
 </form>            
           
-<!-- 모달 추가 -->
+<!-- 모달 추가 
 <div class="modal" tabindex="-1" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -142,7 +143,7 @@ th,td{
       </div>
     </div>
   </div>
-</div>
+</div>-->
 <!-- 스크립트 -->
 <script>
    let result='${result}';

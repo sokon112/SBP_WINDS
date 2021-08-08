@@ -117,7 +117,7 @@ public class BoardHobbyController { //동호회
 		bhservice.bhupdate(vo);		
 		
 		
-		rttr.addFlashAttribute("result","성공");
+		rttr.addFlashAttribute("result","수정 완료");
 		
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
@@ -165,7 +165,7 @@ public class BoardHobbyController { //동호회
 			deleteFiles(hattachList);
 			bhservice.bhaddelete(hno);	
 			
-			rttr.addFlashAttribute("result","성공");
+			rttr.addFlashAttribute("result","삭제 완료");
 		
 			rttr.addAttribute("type", cri.getType());
 			rttr.addAttribute("keyword", cri.getKeyword());
@@ -198,7 +198,7 @@ public class BoardHobbyController { //동호회
 			bhservice.bhdelete(hno,hpassword);
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);
-			rttr.addFlashAttribute("result","성공");
+			rttr.addFlashAttribute("result","삭제 완료");
 		
 		
 			rttr.addAttribute("type", cri.getType());
