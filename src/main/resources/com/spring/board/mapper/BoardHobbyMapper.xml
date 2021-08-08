@@ -25,9 +25,15 @@
 		where hno=#{hno} 
 	</update>
 	
+	<!-- 암호화  -->
+	<select id="bhsalt"  resultType="com.spring.board.domain.BoardHobbyVO">
+		select hpassword from hobby_table where hno=#{hno}
+	</select>
+	
+	
 	<!-- 삭제 : hno, password 일치 -->
 	<delete id="bhdelete">
-		delete from hobby_table where hno=#{hno} and hpassword=#{hpassword}
+		delete from hobby_table where hno=#{hno} 
 	</delete>
 	
 	<!-- 관리자 삭제 : bno,password가 일치하면 삭제(delete) -->
@@ -50,7 +56,7 @@
 		<![CDATA[		     
 				     
 				     rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount})		
+				where rn > ((#{pageNum}-1)*#{amount}) order by hno desc			
 		]]>	
 	</select>
 	

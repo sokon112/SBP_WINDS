@@ -4,6 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="/WEB-INF/includes/board/header.jsp"%>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container-fluid" style="margin: 20px">
    <div class="row">
@@ -58,7 +59,7 @@
    </div>
 </div>
 
-<!-- 수정 버튼 모달 추가 -->
+<!-- 수정 버튼 모달 추가  -->
 <div class="modal modifymodal" tabindex="-1" id="myModal">
    <div class="modal-dialog">
       <div class="modal-content">

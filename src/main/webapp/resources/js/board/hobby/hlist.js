@@ -12,11 +12,16 @@ $(function(){
 			return;
 		}
 		
-		if(parseInt(result)>0){
-			$(".modal-body").html("게시글 "+parseInt(result)+" 번이 등록되었습니다.");
-		}
+		Swal.fire({
+		  icon: 'success',
+		  title: '올리기 완료'
+		})
 		
-		$("#myModal").modal("show");
+//		if(parseInt(result)>0){
+//			$(".modal-body").html("게시글 "+parseInt(result)+" 번이 등록되었습니다.");
+//		}
+		
+//		$("#myModal").modal("show");
 	}
 	
 	

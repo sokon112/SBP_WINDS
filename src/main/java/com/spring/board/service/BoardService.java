@@ -1,3 +1,4 @@
+
 package com.spring.board.service;
 
 import java.util.List;
@@ -18,5 +19,6 @@ public interface BoardService { //게시판
 	public boolean boardupdateviews(int bno); //조회수
 	public boolean boardcheckpw(@Param("bno") int bno,@Param("password") String password);
 	public boolean boardaddelete(int bno); //관리자 삭제
+	public BoardVO boardsalt(int bno);//암호화
 	
 }

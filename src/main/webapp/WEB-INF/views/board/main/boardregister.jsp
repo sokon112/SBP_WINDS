@@ -30,7 +30,7 @@
 							<label>닉네임</label> <input class="form-control" name="nickname">
 						</div>
 						<div class="form-group">
-							<label>비밀번호</label> <input class="form-control" name="password">
+							<label>비밀번호</label> <input class="form-control" name="password" required>
 						</div>
 						<%-- spring security 추가 --%>
 						<input type="hidden" name="${_csrf.parameterName}"

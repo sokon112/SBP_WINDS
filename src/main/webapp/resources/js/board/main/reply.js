@@ -6,6 +6,12 @@ var replyService=(function(){
    function add(reply,callback){
       console.log("add method 호출");
       
+	Swal.fire({
+		  icon: 'success',
+		  title: '댓글 달기 완료'
+		})
+		
+
       $.ajax({
          type:'post',
          url:'/comment/new',

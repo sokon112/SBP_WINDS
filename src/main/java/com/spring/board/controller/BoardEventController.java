@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,9 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/board/*")
 public class BoardEventController {    //이벤트
 
-
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private BoardEventService beservice;
 	
@@ -66,12 +69,15 @@ public class BoardEventController {    //이벤트
 			vo.getEattachList().forEach(attach -> log.info(""+attach));
 		}	
 		
+		vo.setEpassword(passwordEncoder.encode(vo.getEpassword()));
+	      log.info("암호화 패스워드"+vo.getEpassword());
+	      
 		if(beservice.beinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getEno());
-			return "redirect:eventlist";    //   redirect:/board/list
+			return "redirect:eventlist";    
 		}else {
-			return "redirect:eventregister"; //  redirect:/board/register
+			return "redirect:eventregister"; 
 		}
 	}
 	
@@ -89,9 +95,7 @@ public class BoardEventController {    //이벤트
 	@GetMapping({"/event/eventmodify","/event/eventread"})
 	public void modifyget(int eno,@ModelAttribute("cri") BoardCriteria cri,Model model) {
 		log.info("글 하나 가져오기 "+eno+" cri : "+cri);  
-		
-		
-		
+			
 		BoardEventVO vo=beservice.beread(eno);
 		model.addAttribute("vo", vo);	//	/board/read  or  /board/modify 
 		model.addAttribute("cri", cri);
@@ -125,9 +129,15 @@ public class BoardEventController {    //이벤트
 	@PostMapping("/event/emodifypassword")
 	public String eventUpdate(int eno, String epassword, @ModelAttribute BoardEventVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
 		//비밀번호 체크
-		log.info("정보 : ",vo);
-		boolean result = beservice.becheckpw(eno, epassword);
-		if(result) {
+		//log.info("정보 : ",vo);
+		
+		BoardEventVO pwvo=beservice.besalt(eno);
+		
+		boolean check=passwordEncoder.matches(vo.getEpassword(), pwvo.getEpassword());
+		log.info("비밀번호 확인!! ");
+		log.info(check+vo.getEpassword());
+		
+		if(check) {		
 			model.addAttribute("vo",vo);
 			rttr.addAttribute("eno",eno);
 
@@ -166,8 +176,7 @@ public class BoardEventController {    //이벤트
 	@PostMapping("/event/eventdelete")
 	public String remove(int eno,String epassword,BoardCriteria cri,RedirectAttributes rttr) {
 		log.info("게시글 삭제 "+eno);
-		
-		
+				
 		//서버(폴더)에 저장된 첨부파일 삭제
 		//① eno에 해당하는 첨부파일 목록 알아내기
 		List<BoardEventAttachFileDTO> eattachList=beservice.beAttachList(eno);
@@ -175,7 +184,12 @@ public class BoardEventController {    //이벤트
 		boolean result = beservice.becheckpw(eno, epassword);
 
 		//게시글 삭제 + 첨부파일 삭제
-		if(result) {
+		BoardEventVO pwvo=beservice.besalt(eno);
+		boolean check=passwordEncoder.matches(epassword, pwvo.getEpassword());
+		log.info(check);
+		
+		if(check) {
+		
 			//② 폴더 파일 삭제
 			deleteFiles(eattachList);
 			

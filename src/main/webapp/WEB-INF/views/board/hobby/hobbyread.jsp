@@ -4,6 +4,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="/WEB-INF/includes/board/header.jsp"%>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <div class="container-fluid" style="margin: 20px">
 	<div class="row">

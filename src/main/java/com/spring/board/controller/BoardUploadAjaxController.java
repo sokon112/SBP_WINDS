@@ -42,7 +42,7 @@ public class BoardUploadAjaxController {
 		
 		
 		String uploadFileName=null;
-		String uploadFolder = "c:\\upload";
+		String uploadFolder = "e:\\upload";
 		
 		String uploadFolderPath = getFolder();
 		
@@ -103,7 +103,7 @@ public class BoardUploadAjaxController {
 		
 		
 		String uploadFileName=null;
-		String uploadFolder = "c:\\upload";
+		String uploadFolder = "e:\\upload";
 		
 		String uploadFolderPath = getFolder();
 		
@@ -164,7 +164,7 @@ public class BoardUploadAjaxController {
 	public ResponseEntity<byte[]> getFile(String fileName){
 		log.info("썸네일 요청 "+fileName);
 		
-		File file = new File("c:\\upload\\"+fileName);
+		File file = new File("e:\\upload\\"+fileName);
 		
 		ResponseEntity<byte[]> entity=null;
 		
@@ -211,7 +211,7 @@ public class BoardUploadAjaxController {
 		
 		
 		try {
-			File file=new File("c:\\upload\\"+URLDecoder.decode(fileName,"utf-8"));
+			File file=new File("e:\\upload\\"+URLDecoder.decode(fileName,"utf-8"));
 			
 			file.delete(); //일반 파일 삭제, 이미지인 경우 썸네일만 삭제
 			

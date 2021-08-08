@@ -19,8 +19,13 @@
 	<update id="bcupdate">
 		update comment_table
 		set content=#{content}, uploaddate=sysdate
-		where dno=#{dno} and password=#{password}
+		where dno=#{dno} 
 	</update>
+	
+	<!-- 암호화  -->
+	<select id="bcsalt"  resultType="com.spring.board.domain.BoardCommentVO">
+		select password from comment_table where dno=#{dno}
+	</select>
 	
 	<!-- 댓글 삭제 : rno, password 일치 -->
 	<delete id="bcdelete">
@@ -35,9 +40,9 @@
 					select /*+INDEX(comment_table idx_comment)*/
 					       rownum rn, dno,bno,dnickname,password,content,uploaddate
 					from comment_table
-					where bno=#{bno} and bno > 0 and rownum <= #{cri.pageNum} * #{cri.amount}		
+					where bno=#{bno} and bno > 0 and rownum <= #{cri.pageNum} * #{cri.amount} order by dno desc				
 			     )
-			where rn > (#{cri.pageNum}-1) * #{cri.amount}		
+			where rn > (#{cri.pageNum}-1) * #{cri.amount} 	
 		]]>
 	</select>
 	

@@ -61,7 +61,7 @@ $(function(){
          
    })
    
-   //삭제-취소버튼 클릭시  get방식 /board/boardlist
+   //삭제-취소버튼 클릭시  get방식 /board/boardread
    $("#dmodalCansle").click(function(){
       modifymodal.modal('hide');
    })

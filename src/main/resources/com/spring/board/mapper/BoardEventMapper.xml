@@ -24,9 +24,14 @@
 		where eno=#{eno}
 	</update>
 	
-	<!-- 삭제 : no, password 일치 -->
+	<!-- 암호화  -->
+	<select id="besalt"  resultType="com.spring.board.domain.BoardEventVO">
+		select epassword from event_table where eno=#{eno}
+	</select>
+	
+	<!-- 삭제 : eno, epassword 일치 -->
 	<delete id="bedelete">
-		delete from event_table where eno=#{eno} and epassword=#{epassword}
+		delete from event_table where eno=#{eno}
 	</delete>
 	
 	<!-- 관리자 삭제 : bno,password가 일치하면 삭제(delete) -->
@@ -75,7 +80,7 @@
 		<![CDATA[		     
 				     
 				     rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount})		
+				where rn > ((#{pageNum}-1)*#{amount}) order by eno desc			
 		]]>	
 	</select>
 	

@@ -23,6 +23,8 @@ public class BoardServieImpl implements BoardService {
 	
 	@Override
 	public boolean boardinsert(BoardVO vo) {
+		
+		
 		//새글 등록		
 		boolean result=bmapper.boardinsert(vo)>0?true:false;
 				
@@ -90,6 +92,12 @@ public class BoardServieImpl implements BoardService {
 	@Override
 	public boolean boardaddelete(int bno) {
 		return bmapper.boardaddelete(bno)>0?true:false;
+	}
+
+
+	@Override
+	public BoardVO boardsalt(int bno) {
+		return bmapper.boardsalt(bno);
 	}
 
 

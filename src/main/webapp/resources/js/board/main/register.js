@@ -116,7 +116,7 @@ $(function(){
 		var form = $("form");
 		//수집된 내용 폼에 추가하기
 		form.append(str);
-		//폼 전송하기
+		//폼 전송하기		
 		form.submit();
 	})
 	

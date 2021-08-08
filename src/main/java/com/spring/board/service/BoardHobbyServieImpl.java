@@ -126,6 +126,11 @@ public class BoardHobbyServieImpl implements BoardHobbyService {
 		hattachMapper.bhdelete(hno);
 		return hmapper.bhaddelete(hno)>0?true:false;
 	}
+	//암호화
+	@Override
+	public BoardHobbyVO bhsalt(int hno) {
+		return hmapper.bhsalt(hno);
+	}
 
 	
 

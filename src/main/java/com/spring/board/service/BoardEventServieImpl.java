@@ -124,6 +124,12 @@ public class BoardEventServieImpl implements BoardEventService {
 		eattachMapper.bedelete(eno);
 		return emapper.beaddelete(eno)>0?true:false;
 	}
+	
+	//암호화
+	@Override
+	public BoardEventVO besalt(int eno) {
+		return emapper.besalt(eno);
+	}
 
 	
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,9 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/board/*")
 public class BoardHobbyController { //동호회
 
-
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private BoardHobbyService bhservice;
 	
@@ -69,12 +72,15 @@ public class BoardHobbyController { //동호회
 		}	
 		
 		
+		vo.setHpassword(passwordEncoder.encode(vo.getHpassword()));
+	      log.info("암호화 패스워드"+vo.getHpassword());
+	      
 		if(bhservice.bhinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
 			rttr.addFlashAttribute("result", vo.getHno());
-			return "redirect:hobbylist";    //   redirect:/board/list
+			return "redirect:hobbylist";    
 		}else {
-			return "redirect:hobbyregister"; //  redirect:/board/register
+			return "redirect:hobbyregister"; 
 		}
 	}
 	
@@ -124,11 +130,17 @@ public class BoardHobbyController { //동호회
 	
 	//수정처리 비밀번호 확인
 	@PostMapping("/hobby/hmodifypassword")
-	public String eventUpdate(int hno, String hpassword, @ModelAttribute BoardHobbyVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
+	public String hobbyUpdate(int hno, String hpassword, @ModelAttribute BoardHobbyVO vo,BoardCriteria cri,RedirectAttributes rttr, Model model) {
 		//비밀번호 체크
-		log.info("정보 : ",vo);
-		boolean result = bhservice.bhcheckpw(hno, hpassword);
-		if(result) {
+		//log.info("정보 : ",vo);
+		
+		BoardHobbyVO pwvo=bhservice.bhsalt(hno);
+		
+		boolean check=passwordEncoder.matches(vo.getHpassword(), pwvo.getHpassword());
+		log.info("비밀번호 확인!! ");
+		log.info(check+vo.getHpassword());
+		
+		if(check) {	
 			model.addAttribute("vo",vo);
 			rttr.addAttribute("hno",hno);
 
@@ -177,7 +189,12 @@ public class BoardHobbyController { //동호회
 		boolean result = bhservice.bhcheckpw(hno, hpassword);
 		
 		//게시글 삭제 + 첨부파일 삭제
-		if(result) {
+		BoardHobbyVO pwvo=bhservice.bhsalt(hno);
+		boolean check=passwordEncoder.matches(hpassword, pwvo.getHpassword());
+		log.info(check);
+		
+		if(check) {
+			
 			bhservice.bhdelete(hno,hpassword);
 			//② 폴더 파일 삭제
 			deleteFiles(attachList);

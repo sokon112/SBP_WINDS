@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter 
+@Getter
 @Setter
 @ToString
 @AllArgsConstructor
@@ -21,6 +21,10 @@ public class BoardVO { //게시판
 	private String password; //비번
 	private Date uploaddate; //날짜
 	private int views; //조회수
+	
+	
+	
+	
 	
 	
 }

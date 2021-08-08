@@ -20,5 +20,7 @@ public interface BoardHobbyMapper { //이벤트,동호회(스페셜) 게시글
 	public int bhupdateviews(int hno); //조회수
 	public BoardHobbyVO bhcheckpw(@Param("hno")int hno, @Param("hpassword")String hpassword); //비밀번호 체크
 	public int bhaddelete(int hno); // 관리자 삭제
+	public BoardHobbyVO bhsalt(int hno);// 암호화
+
 
 }

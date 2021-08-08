@@ -52,6 +52,12 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		return bcmapper.bcCountByBno(bno);
 	}
 
+	@Override
+	public BoardCommentVO bcsalt(int dno) {
+		return bcmapper.bcsalt(dno)
+				;
+	}
+
 	
 	
 	
