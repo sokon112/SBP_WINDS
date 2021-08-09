@@ -100,7 +100,7 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="inpassword" type="epassword"
+						<td><input class="form-control" id="inpassword" type="password"
 							name="epassword"></td>
 					</tr>
 				</table>
@@ -130,7 +130,7 @@
 				<table class="table">
 					<tr>
 						<td>비밀번호 입력</td>
-						<td><input class="form-control" id="delpassword" type="epassword"
+						<td><input class="form-control" id="delpassword" type="password"
 							name="epassword"></td>
 					</tr>
 				</table>
