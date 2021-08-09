@@ -74,7 +74,7 @@ public class BoardEventController {    //이벤트
 	      
 		if(beservice.beinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
-			rttr.addFlashAttribute("result", vo.getEno()+"번을 입력했습니다.");
+			rttr.addFlashAttribute("result","올리기 완료");
 			return "redirect:eventlist";    
 		}else {
 			return "redirect:eventregister"; 

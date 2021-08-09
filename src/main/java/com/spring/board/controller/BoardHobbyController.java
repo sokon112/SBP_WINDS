@@ -77,7 +77,7 @@ public class BoardHobbyController { //동호회
 	      
 		if(bhservice.bhinsert(vo)) {
 			//log.info("입력된 글 번호 "+vo.getBno());
-			rttr.addFlashAttribute("result", vo.getHno());
+			rttr.addFlashAttribute("result", "올리기 완료");
 			return "redirect:hobbylist";    
 		}else {
 			return "redirect:hobbyregister"; 

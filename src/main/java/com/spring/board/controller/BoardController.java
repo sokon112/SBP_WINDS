@@ -77,7 +77,7 @@ public class BoardController { //게시판
 		      
 		      if(service.boardinsert(vo)) {
 		         //log.info("입력된 글 번호 "+vo.getBno());
-		         rttr.addFlashAttribute("result", vo.getBno());
+		         rttr.addFlashAttribute("result", "올리기 완료");
 		         return "redirect:boardlist";    //   redirect:/board/list
 		      }else {
 		         return "redirect:boardregister"; //  redirect:/board/register
