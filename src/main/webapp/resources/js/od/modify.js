@@ -138,14 +138,30 @@ $(function(){
 	
 	
 	//X버튼 클릭시 동작
-	$(".uploadResult").on("click","button",function(){	
+	$(".uploadResult").on("click","button",function(){
+		//목록에 있는 첨부파일 삭제,서버 폴더 첨부파일 삭제
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
 		
-		if(confirm("정말로 파일을 삭제하시겠습니까?")){
-			//li 태그 가져오기
-			var targetLi = $(this).closest("li");		
-			
-			targetLi.remove();			
-		}
+		//li 태그 가져오기
+		var targetLi = $(this).closest("li");
+		
+		$.ajax({
+			url:'/deleteFile',
+			beforeSend:function(xhr){
+				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+			},
+			data:{
+				fileName:targetFile,
+				type:type
+			},
+			type:'post',
+			success:function(result){
+				console.log(result);
+				targetLi.remove();
+			}
+		})
+		
 	})
 	
 	$("input[type='file']").change(function(){
@@ -198,21 +214,22 @@ $(function(){
 				// 원본 이미지 경로
 				var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
 				originPath = originPath.replace(new RegExp(/\\/g),"/");
-			
+				$("#modalattach").val(obj.fileName);
 				str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
 				str+="<a href=\"javascript:showImage(\'"+originPath+"\')\">";
 				str+="<span>"+obj.fileName+"</span>";
-				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
+				str+=" <button type='button' class='btn btn-dark btn-square btn-sm' data-file='"+fileCallPath+"' data-type='image'>";
 				str+="<i class='fa fa-times'></i></button><br>";			
 				str+="<img src='/display?fileName="+fileCallPath+"'></a>";
 				str+="</li>";
 			}else{
+				$("#modalattach").val(obj.fileName);
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
 				str+="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
 				str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
 				str+="<span>"+obj.fileName+"</span>";
-				str+=" <button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
+				str+=" <button type='button' class='btn btn-dark btn-square btn-sm' data-file='"+fileCallPath+"' data-type='file'>";
 				str+="<i class='fa fa-times'></i></button><br>";
 				str+="<a href='/download?fileName="+fileCallPath+"'>";
 				str+="<img src='/resources/img/attach.png'></a>";

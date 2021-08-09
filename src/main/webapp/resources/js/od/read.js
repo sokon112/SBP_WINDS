@@ -33,7 +33,7 @@ $(function(){
 			destname = "이지은(대표이사)";
 		}
 		else {
-			destname = "알 수 없음";
+			destname = "반려 공문";
 		}
 		
 		$("#destinput").val(destname);
@@ -113,6 +113,7 @@ $(function(){
 		var str="";
 		
 		
+		
 		str+="<input type='hidden' name='dest' value='10030001'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
 		str+="<input type='hidden' name='state' value='반려'>";
@@ -136,11 +137,8 @@ $(function(){
 		checksubmit();
 		
 		uploadfile();
-		var nodest = $("#dest").val();
 		var str="";
 		
-		
-		str+="<input type='hidden' name='dest' value='"+nodest+"'>";
 		str+="<input type='hidden' name='storage' value='완결'>";
 		str+="<input type='hidden' name='state' value='반려'>";
 		

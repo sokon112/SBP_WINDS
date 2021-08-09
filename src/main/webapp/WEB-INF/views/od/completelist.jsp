@@ -107,6 +107,7 @@ overflow:hidden;
                                         <th>공문제목</th>
                                         <th>송신부처</th>
                                         <th>송신자명</th>
+                                        <th>공문상태</th>
                                         <th>최종수정일</th>
                                     </tr>									
                                 </thead>
@@ -121,6 +122,7 @@ overflow:hidden;
 										<td><a href="${vo.docNum}" class="move">${vo.title}</a></td>
 										<td>${vo.deptName}</td>
 										<td>${vo.name}</td>
+										<td>${vo.state}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regDate}"/></td>
 									</tr>
 								</c:if>

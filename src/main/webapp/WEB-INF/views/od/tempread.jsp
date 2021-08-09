@@ -73,7 +73,7 @@
 									<label class="input-group-text" for="dest">결재자</label>
 									<select class="form-select" id="dest">
 										<option selected>결재자 선택</option>
-										<option value="0">없음</option>
+										<option value="${vo.send}">없음</option>
 										<option value="10030001">이사장</option>
 									</select>
 									<p></p>
