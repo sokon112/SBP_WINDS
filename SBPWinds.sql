@@ -4,6 +4,8 @@ drop table auth_tab;
 drop table user_tab;
 drop table dm_tab;
 
+test for git
+
 -- 생성 
 CREATE TABLE USER_TAB(
     id varchar2(20) CONSTRAINT pk_id PRIMARY KEY,
